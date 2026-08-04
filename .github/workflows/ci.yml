@@ -1,0 +1,124 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # The registers describe a live network, so a green build on stale code is
+  # not evidence of anything. Re-run daily against the real chain.
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  typescript:
+    name: TypeScript — typecheck and unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 10 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm -r run typecheck
+      - run: pnpm -r run test
+
+  contracts:
+    name: Solidity — build and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: foundry-rs/foundry-toolchain@v1
+      - working-directory: contracts
+        run: forge build --sizes
+      - working-directory: contracts
+        run: forge test -vv
+      - name: Coverage
+        working-directory: contracts
+        run: forge coverage --report summary
+
+  e2e:
+    name: End-to-end against a Coston2 fork
+    runs-on: ubuntu-latest
+    needs: [typescript, contracts]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 10 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: foundry-rs/foundry-toolchain@v1
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build contracts
+        working-directory: contracts
+        run: forge build
+
+      # Forked so the REAL FlareTeeManager and AssetManagerFXRP are present at
+      # their real addresses. A mock chain would prove the code runs, not that
+      # it reads the system it claims to.
+      - name: Start anvil forked from Coston2
+        run: |
+          anvil --fork-url https://coston2-api.flare.network/ext/C/rpc \
+                --chain-id 114 --port 8545 --silent &
+          for i in $(seq 1 60); do
+            cast block-number --rpc-url http://127.0.0.1:8545 >/dev/null 2>&1 && break
+            sleep 1
+          done
+          cast block-number --rpc-url http://127.0.0.1:8545
+
+      - name: Covenant E2E
+        working-directory: packages/covenant
+        run: pnpm run e2e
+
+      - name: Procedure E2E
+        working-directory: packages/procedure
+        run: pnpm run e2e
+
+  live:
+    name: Live scans against Coston2
+    runs-on: ubuntu-latest
+    needs: [typescript]
+    # A network read can fail for reasons that are not our bug. It must be
+    # visible, but it must not gate a merge on someone else's RPC.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 10 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Reprod — scan the TEE register
+        working-directory: packages/reprod
+        run: pnpm run build
+
+      - name: Covenant — index redemptions
+        working-directory: packages/covenant
+        env:
+          SCAN_BLOCKS: "50000"
+        run: pnpm run build
+
+      - name: Procedure — run CV-1
+        working-directory: packages/procedure
+        run: pnpm run build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: registers
+          path: |
+            packages/*/out/*.json
+            packages/*/out/index.html
+          retention-days: 30
