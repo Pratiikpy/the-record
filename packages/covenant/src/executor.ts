@@ -50,7 +50,10 @@ export interface Obligation {
   requestId: string;
   agentVault: Address;
   redeemer: Address;
+  /** the redemption's face value — NOT what the agent pays */
   valueUBA: string;
+  /** the agent's fee, retained. See buildRequestBody. */
+  feeUBA: string;
   executor: Address;
   paymentAddress: string;
   firstUnderlyingBlock: string;
@@ -70,13 +73,35 @@ export interface RequestBody {
   sourceAddressesRoot: Hex;
 }
 
+/**
+ * The amount the agent is actually obliged to pay.
+ *
+ * ⚠ THIS ONE LINE VOIDED 93 "PROVEN DEFAULTS".
+ *
+ * The request originally asked about `valueUBA`. The agent pays
+ * `valueUBA − feeUBA` — it retains its fee. Verified against a real settled
+ * redemption: #43128188 has valueUBA 40,000,000 and feeUBA 200,000, and the
+ * XRPL payment (6EBBD5CE…9F88) delivered exactly 39,800,000 drops.
+ *
+ * So a request for `valueUBA` can never match ANY payment, paid or unpaid, and
+ * the verifier truthfully attests absence every single time. Ninety-three
+ * redemptions came back as consensus-proven defaults, and every one of them was
+ * an artefact of this subtraction.
+ *
+ * A clean sweep is not a strong result; it is a symptom. The control test in
+ * control.ts exists to catch exactly this and did.
+ */
+export function amountOwed(o: Obligation): bigint {
+  return BigInt(o.valueUBA) - BigInt(o.feeUBA);
+}
+
 export function buildRequestBody(o: Obligation): RequestBody {
   return {
     minimalBlockNumber: BigInt(o.firstUnderlyingBlock),
     deadlineBlockNumber: BigInt(o.lastUnderlyingBlock),
     deadlineTimestamp: BigInt(o.lastUnderlyingTimestamp),
     destinationAddressHash: standardAddressHash(o.paymentAddress),
-    amount: BigInt(o.valueUBA),
+    amount: amountOwed(o),
     standardPaymentReference: o.paymentReference as Hex,
     // The redeemer's payment may legitimately come from any of the agent's
     // addresses, so constraining the source would produce false nonexistence.

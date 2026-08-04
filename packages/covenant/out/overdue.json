@@ -1,90 +1,23 @@
 {
-  "generatedAt": "2026-08-04T09:23:17.000Z",
-  "now": 1785835397,
+  "generatedAt": "2026-08-04T11:49:33.000Z",
+  "now": 1785844173,
   "caveat": "Unresolved on Flare is not the same as unpaid. An agent may have paid on XRPL without submitting the proof that records RedemptionPerformed; only an FDC attestation settles which happened. No agent is named here as having failed.",
   "totals": {
-    "examined": 94,
+    "examined": 91,
     "resolvableByExecutor": 82,
     "resolvableByParty": 9,
     "unresolvable": 0,
-    "pending": 3,
+    "pending": 0,
     "valueUnresolvedUBA": "905000000",
-    "soonestWindowClose": 736609
+    "soonestWindowClose": 738608
   },
   "rows": [
-    {
-      "requestId": "41934742",
-      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
-      "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
-      "valueUBA": "10000000",
-      "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
-      "executorFeeNatWei": "100000000000",
-      "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
-      "firstUnderlyingBlock": "19473369",
-      "lastUnderlyingBlock": "19473915",
-      "lastUnderlyingTimestamp": "1785362406",
-      "paymentReference": "0x46425052664100020000000000000000000000000000000000000000027fdf96",
-      "block": "0x1fddc39",
-      "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 472991,
-      "windowRemainingSeconds": 736609
-    },
-    {
-      "requestId": "41935346",
-      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
-      "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
-      "valueUBA": "10000000",
-      "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
-      "executorFeeNatWei": "100000000000",
-      "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
-      "firstUnderlyingBlock": "19473401",
-      "lastUnderlyingBlock": "19473945",
-      "lastUnderlyingTimestamp": "1785362503",
-      "paymentReference": "0x46425052664100020000000000000000000000000000000000000000027fe1f2",
-      "block": "0x1fddc6f",
-      "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 472894,
-      "windowRemainingSeconds": 736706
-    },
-    {
-      "requestId": "41935952",
-      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
-      "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
-      "valueUBA": "10000000",
-      "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
-      "executorFeeNatWei": "100000000000",
-      "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
-      "firstUnderlyingBlock": "19473401",
-      "lastUnderlyingBlock": "19473960",
-      "lastUnderlyingTimestamp": "1785362533",
-      "paymentReference": "0x46425052664100020000000000000000000000000000000000000000027fe450",
-      "block": "0x1fddc71",
-      "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 472864,
-      "windowRemainingSeconds": 736736
-    },
-    {
-      "requestId": "41937114",
-      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
-      "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
-      "valueUBA": "10000000",
-      "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
-      "executorFeeNatWei": "100000000000",
-      "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
-      "firstUnderlyingBlock": "19473401",
-      "lastUnderlyingBlock": "19474001",
-      "lastUnderlyingTimestamp": "1785362614",
-      "paymentReference": "0x46425052664100020000000000000000000000000000000000000000027fe8da",
-      "block": "0x1fddc90",
-      "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 472783,
-      "windowRemainingSeconds": 736817
-    },
     {
       "requestId": "41998734",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -94,14 +27,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000280d98e",
       "block": "0x1fdf073",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 462216,
-      "windowRemainingSeconds": 747384
+      "overdueSeconds": 470992,
+      "windowRemainingSeconds": 738608
     },
     {
       "requestId": "41999870",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -111,14 +45,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000280ddfe",
       "block": "0x1fdf0dd",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 462067,
-      "windowRemainingSeconds": 747533
+      "overdueSeconds": 470843,
+      "windowRemainingSeconds": 738757
     },
     {
       "requestId": "42000458",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
@@ -128,14 +63,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000280e04a",
       "block": "0x1fdf125",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 461914,
-      "windowRemainingSeconds": 747686
+      "overdueSeconds": 470690,
+      "windowRemainingSeconds": 738910
     },
     {
       "requestId": "42002974",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -145,14 +81,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000280ea1e",
       "block": "0x1fdf1a8",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 461610,
-      "windowRemainingSeconds": 747990
+      "overdueSeconds": 470386,
+      "windowRemainingSeconds": 739214
     },
     {
       "requestId": "42034104",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
       "redeemer": "0x2a39289Be1920dBBEaC08B2f7550960015Fd337A",
       "valueUBA": "5000000",
+      "feeUBA": "25000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "0",
       "paymentAddress": "rQN9N2aCWjxbkJousSDXTudFc3fBQPUrmA",
@@ -162,14 +99,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028163b8",
       "block": "0x1fe1118",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 441253,
-      "windowRemainingSeconds": 768347
+      "overdueSeconds": 450029,
+      "windowRemainingSeconds": 759571
     },
     {
       "requestId": "42051860",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -179,14 +117,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000281a914",
       "block": "0x1fe2332",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 429274,
-      "windowRemainingSeconds": 780326
+      "overdueSeconds": 438050,
+      "windowRemainingSeconds": 771550
     },
     {
       "requestId": "42051996",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -196,14 +135,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000281a99c",
       "block": "0x1fe2333",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 429244,
-      "windowRemainingSeconds": 780356
+      "overdueSeconds": 438020,
+      "windowRemainingSeconds": 771580
     },
     {
       "requestId": "42052022",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
       "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
@@ -213,14 +153,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000281a9b6",
       "block": "0x1fe2362",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 429215,
-      "windowRemainingSeconds": 780385
+      "overdueSeconds": 437991,
+      "windowRemainingSeconds": 771609
     },
     {
       "requestId": "42052718",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -230,14 +171,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000281ac6e",
       "block": "0x1fe23fa",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 428871,
-      "windowRemainingSeconds": 780729
+      "overdueSeconds": 437647,
+      "windowRemainingSeconds": 771953
     },
     {
       "requestId": "42088568",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
@@ -247,14 +189,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002823878",
       "block": "0x1fe354c",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 419066,
-      "windowRemainingSeconds": 790534
+      "overdueSeconds": 427842,
+      "windowRemainingSeconds": 781758
     },
     {
       "requestId": "42089398",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -264,14 +207,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002823bb6",
       "block": "0x1fe3598",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 418846,
-      "windowRemainingSeconds": 790754
+      "overdueSeconds": 427622,
+      "windowRemainingSeconds": 781978
     },
     {
       "requestId": "42090408",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -281,14 +225,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002823fa8",
       "block": "0x1fe366c",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 418416,
-      "windowRemainingSeconds": 791184
+      "overdueSeconds": 427192,
+      "windowRemainingSeconds": 782408
     },
     {
       "requestId": "42091336",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -298,14 +243,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002824348",
       "block": "0x1fe36a1",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 418362,
-      "windowRemainingSeconds": 791238
+      "overdueSeconds": 427138,
+      "windowRemainingSeconds": 782462
     },
     {
       "requestId": "42182252",
       "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -315,14 +261,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000283a66c",
       "block": "0x1fe6d37",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 383996,
-      "windowRemainingSeconds": 825604
+      "overdueSeconds": 392772,
+      "windowRemainingSeconds": 816828
     },
     {
       "requestId": "42183214",
       "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
       "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
@@ -332,14 +279,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000283aa2e",
       "block": "0x1fe6d38",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 383914,
-      "windowRemainingSeconds": 825686
+      "overdueSeconds": 392690,
+      "windowRemainingSeconds": 816910
     },
     {
       "requestId": "42184176",
       "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -349,14 +297,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000283adf0",
       "block": "0x1fe6d39",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 383884,
-      "windowRemainingSeconds": 825716
+      "overdueSeconds": 392660,
+      "windowRemainingSeconds": 816940
     },
     {
       "requestId": "42185898",
       "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -366,14 +315,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000283b4aa",
       "block": "0x1fe6dca",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 383574,
-      "windowRemainingSeconds": 826026
+      "overdueSeconds": 392350,
+      "windowRemainingSeconds": 817250
     },
     {
       "requestId": "42245190",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -383,14 +333,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002849c46",
       "block": "0x1fe75b6",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 379676,
-      "windowRemainingSeconds": 829924
+      "overdueSeconds": 388452,
+      "windowRemainingSeconds": 821148
     },
     {
       "requestId": "42245852",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -400,14 +351,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002849edc",
       "block": "0x1fe75da",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 379557,
-      "windowRemainingSeconds": 830043
+      "overdueSeconds": 388333,
+      "windowRemainingSeconds": 821267
     },
     {
       "requestId": "42245856",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -417,14 +369,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002849ee0",
       "block": "0x1fe75db",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 379527,
-      "windowRemainingSeconds": 830073
+      "overdueSeconds": 388303,
+      "windowRemainingSeconds": 821297
     },
     {
       "requestId": "42246324",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
@@ -434,14 +387,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000284a0b4",
       "block": "0x1fe7692",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 379087,
-      "windowRemainingSeconds": 830513
+      "overdueSeconds": 387863,
+      "windowRemainingSeconds": 821737
     },
     {
       "requestId": "42298076",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -451,14 +405,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002856adc",
       "block": "0x1fe9ed0",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 354099,
-      "windowRemainingSeconds": 855501
+      "overdueSeconds": 362875,
+      "windowRemainingSeconds": 846725
     },
     {
       "requestId": "42298590",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -468,14 +423,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002856cde",
       "block": "0x1fe9f28",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 354013,
-      "windowRemainingSeconds": 855587
+      "overdueSeconds": 362789,
+      "windowRemainingSeconds": 846811
     },
     {
       "requestId": "42300010",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
       "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
@@ -485,14 +441,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000285726a",
       "block": "0x1fe9f82",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 353754,
-      "windowRemainingSeconds": 855846
+      "overdueSeconds": 362530,
+      "windowRemainingSeconds": 847070
     },
     {
       "requestId": "42300928",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -502,14 +459,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002857600",
       "block": "0x1fe9f83",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 353724,
-      "windowRemainingSeconds": 855876
+      "overdueSeconds": 362500,
+      "windowRemainingSeconds": 847100
     },
     {
       "requestId": "42327414",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
@@ -519,14 +477,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000285dd76",
       "block": "0x1feb242",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 343573,
-      "windowRemainingSeconds": 866027
+      "overdueSeconds": 352349,
+      "windowRemainingSeconds": 857251
     },
     {
       "requestId": "42329122",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -536,14 +495,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000285e422",
       "block": "0x1feb35c",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 342881,
-      "windowRemainingSeconds": 866719
+      "overdueSeconds": 351657,
+      "windowRemainingSeconds": 857943
     },
     {
       "requestId": "42330468",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -553,14 +513,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000285e964",
       "block": "0x1feb3a5",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 342788,
-      "windowRemainingSeconds": 866812
+      "overdueSeconds": 351564,
+      "windowRemainingSeconds": 858036
     },
     {
       "requestId": "42331092",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -570,14 +531,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000285ebd4",
       "block": "0x1feb3a6",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 342758,
-      "windowRemainingSeconds": 866842
+      "overdueSeconds": 351534,
+      "windowRemainingSeconds": 858066
     },
     {
       "requestId": "42385418",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -587,14 +549,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000286c00a",
       "block": "0x1fec7b9",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 331681,
-      "windowRemainingSeconds": 877919
+      "overdueSeconds": 340457,
+      "windowRemainingSeconds": 869143
     },
     {
       "requestId": "42386054",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -604,14 +567,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000286c286",
       "block": "0x1fec7ba",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 331651,
-      "windowRemainingSeconds": 877949
+      "overdueSeconds": 340427,
+      "windowRemainingSeconds": 869173
     },
     {
       "requestId": "42387156",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -621,14 +585,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000286c6d4",
       "block": "0x1fec818",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 331506,
-      "windowRemainingSeconds": 878094
+      "overdueSeconds": 340282,
+      "windowRemainingSeconds": 869318
     },
     {
       "requestId": "42387840",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
@@ -638,14 +603,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000286c980",
       "block": "0x1fec869",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 331277,
-      "windowRemainingSeconds": 878323
+      "overdueSeconds": 340053,
+      "windowRemainingSeconds": 869547
     },
     {
       "requestId": "42425638",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -655,14 +621,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002875d26",
       "block": "0x1fedc1d",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 319067,
-      "windowRemainingSeconds": 890533
+      "overdueSeconds": 327843,
+      "windowRemainingSeconds": 881757
     },
     {
       "requestId": "42493696",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -672,14 +639,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002886700",
       "block": "0x1ff2768",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 266586,
-      "windowRemainingSeconds": 943014
+      "overdueSeconds": 275362,
+      "windowRemainingSeconds": 934238
     },
     {
       "requestId": "42494206",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -689,14 +657,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028868fe",
       "block": "0x1ff2801",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 266184,
-      "windowRemainingSeconds": 943416
+      "overdueSeconds": 274960,
+      "windowRemainingSeconds": 934640
     },
     {
       "requestId": "42496230",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
       "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
@@ -706,14 +675,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028870e6",
       "block": "0x1ff2845",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 265964,
-      "windowRemainingSeconds": 943636
+      "overdueSeconds": 274740,
+      "windowRemainingSeconds": 934860
     },
     {
       "requestId": "42497540",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -723,14 +693,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002887604",
       "block": "0x1ff289c",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 265671,
-      "windowRemainingSeconds": 943929
+      "overdueSeconds": 274447,
+      "windowRemainingSeconds": 935153
     },
     {
       "requestId": "42540632",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -740,14 +711,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002891e58",
       "block": "0x1ff3a11",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 255512,
-      "windowRemainingSeconds": 954088
+      "overdueSeconds": 264288,
+      "windowRemainingSeconds": 945312
     },
     {
       "requestId": "42540754",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -757,14 +729,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002891ed2",
       "block": "0x1ff3a77",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 255298,
-      "windowRemainingSeconds": 954302
+      "overdueSeconds": 264074,
+      "windowRemainingSeconds": 945526
     },
     {
       "requestId": "42540782",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
@@ -774,14 +747,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002891eee",
       "block": "0x1ff3b19",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 254875,
-      "windowRemainingSeconds": 954725
+      "overdueSeconds": 263651,
+      "windowRemainingSeconds": 945949
     },
     {
       "requestId": "42541394",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -791,14 +765,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002892152",
       "block": "0x1ff3b50",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 254759,
-      "windowRemainingSeconds": 954841
+      "overdueSeconds": 263535,
+      "windowRemainingSeconds": 946065
     },
     {
       "requestId": "42576124",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -808,14 +783,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000289a8fc",
       "block": "0x1ff4c8a",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 244375,
-      "windowRemainingSeconds": 965225
+      "overdueSeconds": 253151,
+      "windowRemainingSeconds": 956449
     },
     {
       "requestId": "42576882",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -825,14 +801,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000289abf2",
       "block": "0x1ff4caf",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 244328,
-      "windowRemainingSeconds": 965272
+      "overdueSeconds": 253104,
+      "windowRemainingSeconds": 956496
     },
     {
       "requestId": "42579786",
       "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
       "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
@@ -842,14 +819,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000289b74a",
       "block": "0x1ff4d35",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 243998,
-      "windowRemainingSeconds": 965602
+      "overdueSeconds": 252774,
+      "windowRemainingSeconds": 956826
     },
     {
       "requestId": "42580684",
       "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -859,14 +837,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000289bacc",
       "block": "0x1ff4d36",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 243968,
-      "windowRemainingSeconds": 965632
+      "overdueSeconds": 252744,
+      "windowRemainingSeconds": 956856
     },
     {
       "requestId": "42615354",
       "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -876,14 +855,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028a423a",
       "block": "0x1ff6009",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 232822,
-      "windowRemainingSeconds": 976778
+      "overdueSeconds": 241598,
+      "windowRemainingSeconds": 968002
     },
     {
       "requestId": "42616886",
       "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -893,14 +873,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028a4836",
       "block": "0x1ff605e",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 232523,
-      "windowRemainingSeconds": 977077
+      "overdueSeconds": 241299,
+      "windowRemainingSeconds": 968301
     },
     {
       "requestId": "42618482",
       "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -910,14 +891,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028a4e72",
       "block": "0x1ff60e9",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 232119,
-      "windowRemainingSeconds": 977481
+      "overdueSeconds": 240895,
+      "windowRemainingSeconds": 968705
     },
     {
       "requestId": "42632406",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
       "redeemer": "0xDfC58C998d4fA3C8008Fc68fc9D3a5BC01fb6b11",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x0000000000000000000000000000000000000000",
       "executorFeeNatWei": "0",
       "paymentAddress": "r9oQTGAD1Wnuy5t8sPHA9LWTSdsho4AQ72",
@@ -927,14 +909,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028a84d6",
       "block": "0x1ff7eff",
       "status": "RESOLVABLE_BY_PARTY",
-      "overdueSeconds": 211227,
-      "windowRemainingSeconds": 998373
+      "overdueSeconds": 220003,
+      "windowRemainingSeconds": 989597
     },
     {
       "requestId": "42632572",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
       "redeemer": "0xDfC58C998d4fA3C8008Fc68fc9D3a5BC01fb6b11",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x0000000000000000000000000000000000000000",
       "executorFeeNatWei": "0",
       "paymentAddress": "r9oQTGAD1Wnuy5t8sPHA9LWTSdsho4AQ72",
@@ -944,14 +927,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028a857c",
       "block": "0x1ff7f02",
       "status": "RESOLVABLE_BY_PARTY",
-      "overdueSeconds": 211197,
-      "windowRemainingSeconds": 998403
+      "overdueSeconds": 219973,
+      "windowRemainingSeconds": 989627
     },
     {
       "requestId": "42654650",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -961,14 +945,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028adbba",
       "block": "0x1ffae90",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 178943,
-      "windowRemainingSeconds": 1030657
+      "overdueSeconds": 187719,
+      "windowRemainingSeconds": 1021881
     },
     {
       "requestId": "42655120",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -978,14 +963,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028add90",
       "block": "0x1ffae93",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 178913,
-      "windowRemainingSeconds": 1030687
+      "overdueSeconds": 187689,
+      "windowRemainingSeconds": 1021911
     },
     {
       "requestId": "42655914",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -995,14 +981,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028ae0aa",
       "block": "0x1ffaf02",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 178674,
-      "windowRemainingSeconds": 1030926
+      "overdueSeconds": 187450,
+      "windowRemainingSeconds": 1022150
     },
     {
       "requestId": "42687898",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -1012,14 +999,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028b5d9a",
       "block": "0x1ffbf00",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 168322,
-      "windowRemainingSeconds": 1041278
+      "overdueSeconds": 177098,
+      "windowRemainingSeconds": 1032502
     },
     {
       "requestId": "42688360",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -1029,14 +1017,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028b5f68",
       "block": "0x1ffbf01",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 168292,
-      "windowRemainingSeconds": 1041308
+      "overdueSeconds": 177068,
+      "windowRemainingSeconds": 1032532
     },
     {
       "requestId": "42689234",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -1046,14 +1035,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028b62d2",
       "block": "0x1ffbf6a",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 168134,
-      "windowRemainingSeconds": 1041466
+      "overdueSeconds": 176910,
+      "windowRemainingSeconds": 1032690
     },
     {
       "requestId": "42736140",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -1063,14 +1053,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028c1a0c",
       "block": "0x1ffd2ad",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 157724,
-      "windowRemainingSeconds": 1051876
+      "overdueSeconds": 166500,
+      "windowRemainingSeconds": 1043100
     },
     {
       "requestId": "42739062",
       "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -1080,14 +1071,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028c2576",
       "block": "0x1ffd3ed",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 157065,
-      "windowRemainingSeconds": 1052535
+      "overdueSeconds": 165841,
+      "windowRemainingSeconds": 1043759
     },
     {
       "requestId": "42792134",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -1097,14 +1089,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028cf4c6",
       "block": "0x1ffe878",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 146795,
-      "windowRemainingSeconds": 1062805
+      "overdueSeconds": 155571,
+      "windowRemainingSeconds": 1054029
     },
     {
       "requestId": "42839568",
       "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
       "redeemer": "0xDfC58C998d4fA3C8008Fc68fc9D3a5BC01fb6b11",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x0000000000000000000000000000000000000000",
       "executorFeeNatWei": "0",
       "paymentAddress": "r9oQTGAD1Wnuy5t8sPHA9LWTSdsho4AQ72",
@@ -1114,14 +1107,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028dae10",
       "block": "0x2000c1d",
       "status": "RESOLVABLE_BY_PARTY",
-      "overdueSeconds": 124371,
-      "windowRemainingSeconds": 1085229
+      "overdueSeconds": 133147,
+      "windowRemainingSeconds": 1076453
     },
     {
       "requestId": "42840560",
       "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
       "redeemer": "0xDfC58C998d4fA3C8008Fc68fc9D3a5BC01fb6b11",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x0000000000000000000000000000000000000000",
       "executorFeeNatWei": "0",
       "paymentAddress": "r9oQTGAD1Wnuy5t8sPHA9LWTSdsho4AQ72",
@@ -1131,14 +1125,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028db1f0",
       "block": "0x2000c1e",
       "status": "RESOLVABLE_BY_PARTY",
-      "overdueSeconds": 124341,
-      "windowRemainingSeconds": 1085259
+      "overdueSeconds": 133117,
+      "windowRemainingSeconds": 1076483
     },
     {
       "requestId": "42841554",
       "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
       "redeemer": "0xDfC58C998d4fA3C8008Fc68fc9D3a5BC01fb6b11",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x0000000000000000000000000000000000000000",
       "executorFeeNatWei": "0",
       "paymentAddress": "r9oQTGAD1Wnuy5t8sPHA9LWTSdsho4AQ72",
@@ -1148,14 +1143,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028db5d2",
       "block": "0x2000c20",
       "status": "RESOLVABLE_BY_PARTY",
-      "overdueSeconds": 124311,
-      "windowRemainingSeconds": 1085289
+      "overdueSeconds": 133087,
+      "windowRemainingSeconds": 1076513
     },
     {
       "requestId": "42862778",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -1165,14 +1161,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028e08ba",
       "block": "0x200363e",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 95216,
-      "windowRemainingSeconds": 1114384
+      "overdueSeconds": 103992,
+      "windowRemainingSeconds": 1105608
     },
     {
       "requestId": "42864366",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -1182,14 +1179,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028e0eee",
       "block": "0x200365f",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 95145,
-      "windowRemainingSeconds": 1114455
+      "overdueSeconds": 103921,
+      "windowRemainingSeconds": 1105679
     },
     {
       "requestId": "42865162",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
@@ -1199,14 +1197,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028e120a",
       "block": "0x2003660",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 95115,
-      "windowRemainingSeconds": 1114485
+      "overdueSeconds": 103891,
+      "windowRemainingSeconds": 1105709
     },
     {
       "requestId": "42866594",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -1216,14 +1215,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028e17a2",
       "block": "0x20036c9",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 94892,
-      "windowRemainingSeconds": 1114708
+      "overdueSeconds": 103668,
+      "windowRemainingSeconds": 1105932
     },
     {
       "requestId": "42908128",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
@@ -1233,14 +1233,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028eb9e0",
       "block": "0x2004980",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 84452,
-      "windowRemainingSeconds": 1125148
+      "overdueSeconds": 93228,
+      "windowRemainingSeconds": 1116372
     },
     {
       "requestId": "42905154",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -1250,14 +1251,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028eae42",
       "block": "0x200497d",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 84354,
-      "windowRemainingSeconds": 1125246
+      "overdueSeconds": 93130,
+      "windowRemainingSeconds": 1116470
     },
     {
       "requestId": "42908182",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -1267,14 +1269,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028eba16",
       "block": "0x2004a32",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 84271,
-      "windowRemainingSeconds": 1125329
+      "overdueSeconds": 93047,
+      "windowRemainingSeconds": 1116553
     },
     {
       "requestId": "42908238",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -1284,14 +1287,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028eba4e",
       "block": "0x2004a33",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 84241,
-      "windowRemainingSeconds": 1125359
+      "overdueSeconds": 93017,
+      "windowRemainingSeconds": 1116583
     },
     {
       "requestId": "42975550",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -1301,14 +1305,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028fc13e",
       "block": "0x20064c8",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 73627,
-      "windowRemainingSeconds": 1135973
+      "overdueSeconds": 82403,
+      "windowRemainingSeconds": 1127197
     },
     {
       "requestId": "42973572",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -1318,14 +1323,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028fb984",
       "block": "0x2006499",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 73623,
-      "windowRemainingSeconds": 1135977
+      "overdueSeconds": 82399,
+      "windowRemainingSeconds": 1127201
     },
     {
       "requestId": "42974564",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -1335,14 +1341,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028fbd64",
       "block": "0x200649a",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 73593,
-      "windowRemainingSeconds": 1136007
+      "overdueSeconds": 82369,
+      "windowRemainingSeconds": 1127231
     },
     {
       "requestId": "42975940",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
@@ -1352,14 +1359,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000028fc2c4",
       "block": "0x20064e7",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 73566,
-      "windowRemainingSeconds": 1136034
+      "overdueSeconds": 82342,
+      "windowRemainingSeconds": 1127258
     },
     {
       "requestId": "43049220",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -1369,14 +1377,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000290e104",
       "block": "0x2007937",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 62888,
-      "windowRemainingSeconds": 1146712
+      "overdueSeconds": 71664,
+      "windowRemainingSeconds": 1137936
     },
     {
       "requestId": "43049408",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -1386,14 +1395,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000290e1c0",
       "block": "0x2007938",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 62858,
-      "windowRemainingSeconds": 1146742
+      "overdueSeconds": 71634,
+      "windowRemainingSeconds": 1137966
     },
     {
       "requestId": "43050576",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -1403,14 +1413,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000290e650",
       "block": "0x200798c",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 62786,
-      "windowRemainingSeconds": 1146814
+      "overdueSeconds": 71562,
+      "windowRemainingSeconds": 1138038
     },
     {
       "requestId": "43051252",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
@@ -1420,14 +1431,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000290e8f4",
       "block": "0x20079cc",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 62684,
-      "windowRemainingSeconds": 1146916
+      "overdueSeconds": 71460,
+      "windowRemainingSeconds": 1138140
     },
     {
       "requestId": "43112932",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0xDfC58C998d4fA3C8008Fc68fc9D3a5BC01fb6b11",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x0000000000000000000000000000000000000000",
       "executorFeeNatWei": "0",
       "paymentAddress": "r9oQTGAD1Wnuy5t8sPHA9LWTSdsho4AQ72",
@@ -1437,14 +1449,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000291d9e4",
       "block": "0x2009fbc",
       "status": "RESOLVABLE_BY_PARTY",
-      "overdueSeconds": 38232,
-      "windowRemainingSeconds": 1171368
+      "overdueSeconds": 47008,
+      "windowRemainingSeconds": 1162592
     },
     {
       "requestId": "43113870",
       "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
       "redeemer": "0xDfC58C998d4fA3C8008Fc68fc9D3a5BC01fb6b11",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x0000000000000000000000000000000000000000",
       "executorFeeNatWei": "0",
       "paymentAddress": "r9oQTGAD1Wnuy5t8sPHA9LWTSdsho4AQ72",
@@ -1454,14 +1467,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000291dd8e",
       "block": "0x2009fbd",
       "status": "RESOLVABLE_BY_PARTY",
-      "overdueSeconds": 38228,
-      "windowRemainingSeconds": 1171372
+      "overdueSeconds": 47004,
+      "windowRemainingSeconds": 1162596
     },
     {
       "requestId": "43114810",
       "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
       "redeemer": "0xDfC58C998d4fA3C8008Fc68fc9D3a5BC01fb6b11",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x0000000000000000000000000000000000000000",
       "executorFeeNatWei": "0",
       "paymentAddress": "r9oQTGAD1Wnuy5t8sPHA9LWTSdsho4AQ72",
@@ -1471,14 +1485,15 @@
       "paymentReference": "0x464250526641000200000000000000000000000000000000000000000291e13a",
       "block": "0x2009fbf",
       "status": "RESOLVABLE_BY_PARTY",
-      "overdueSeconds": 38224,
-      "windowRemainingSeconds": 1171376
+      "overdueSeconds": 47000,
+      "windowRemainingSeconds": 1162600
     },
     {
       "requestId": "43123372",
       "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
       "redeemer": "0xDfC58C998d4fA3C8008Fc68fc9D3a5BC01fb6b11",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x0000000000000000000000000000000000000000",
       "executorFeeNatWei": "0",
       "paymentAddress": "r9oQTGAD1Wnuy5t8sPHA9LWTSdsho4AQ72",
@@ -1488,14 +1503,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000029202ac",
       "block": "0x2009fde",
       "status": "RESOLVABLE_BY_PARTY",
-      "overdueSeconds": 37954,
-      "windowRemainingSeconds": 1171646
+      "overdueSeconds": 46730,
+      "windowRemainingSeconds": 1162870
     },
     {
       "requestId": "43146632",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
@@ -1505,14 +1521,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002925d88",
       "block": "0x200ccd1",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 8871,
-      "windowRemainingSeconds": 1200729
+      "overdueSeconds": 17647,
+      "windowRemainingSeconds": 1191953
     },
     {
       "requestId": "43147686",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
@@ -1522,14 +1539,15 @@
       "paymentReference": "0x46425052664100020000000000000000000000000000000000000000029261a6",
       "block": "0x200ccf9",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 8796,
-      "windowRemainingSeconds": 1200804
+      "overdueSeconds": 17572,
+      "windowRemainingSeconds": 1192028
     },
     {
       "requestId": "43149398",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
@@ -1539,14 +1557,15 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002926856",
       "block": "0x200cd1e",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 8674,
-      "windowRemainingSeconds": 1200926
+      "overdueSeconds": 17450,
+      "windowRemainingSeconds": 1192150
     },
     {
       "requestId": "43150174",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
       "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
       "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
@@ -1556,59 +1575,80 @@
       "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002926b5e",
       "block": "0x200cd1f",
       "status": "RESOLVABLE_BY_EXECUTOR",
-      "overdueSeconds": 8644,
-      "windowRemainingSeconds": 1200956
+      "overdueSeconds": 17420,
+      "windowRemainingSeconds": 1192180
     },
     {
-      "requestId": "43181700",
+      "requestId": "43188232",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
-      "redeemer": "0xb574A51013038E81d736879c73BD7fbb681DcA00",
+      "redeemer": "0x7819683Fc44Ad466ccE246877EF4BbBa08589351",
       "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
-      "paymentAddress": "rfM7oELcXVqWS4fThU9UMhX7prAjGxVPZt",
-      "firstUnderlyingBlock": "19623367",
-      "lastUnderlyingBlock": "19623957",
-      "lastUnderlyingTimestamp": "1785836003",
-      "paymentReference": "0x464250526641000200000000000000000000000000000000000000000292e684",
-      "block": "0x200dd40",
-      "status": "PENDING",
-      "overdueSeconds": 0,
-      "windowRemainingSeconds": 1210206
+      "paymentAddress": "rpj1LVHUe2urVUPTqh5GPMab48U8E1m8Yo",
+      "firstUnderlyingBlock": "19623729",
+      "lastUnderlyingBlock": "19624332",
+      "lastUnderlyingTimestamp": "1785837228",
+      "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002930008",
+      "block": "0x200dfc1",
+      "status": "RESOLVABLE_BY_EXECUTOR",
+      "overdueSeconds": 6945,
+      "windowRemainingSeconds": 1202655
     },
     {
-      "requestId": "43181724",
+      "requestId": "43189618",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
-      "redeemer": "0x0955faE4436ffeccf7FeC071FAfd8aadbE402Ed4",
-      "valueUBA": "20000000",
+      "redeemer": "0x6F252754D2Dc8D9f1A83268967bB0140F1a812a5",
+      "valueUBA": "10000000",
+      "feeUBA": "50000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "100000000000",
-      "paymentAddress": "rLNaRDBw1ms6Ucic8uqsicHuB8Tfyy3YMN",
-      "firstUnderlyingBlock": "19623367",
-      "lastUnderlyingBlock": "19623972",
-      "lastUnderlyingTimestamp": "1785836033",
-      "paymentReference": "0x464250526641000200000000000000000000000000000000000000000292e69c",
-      "block": "0x200dd41",
-      "status": "PENDING",
-      "overdueSeconds": 0,
-      "windowRemainingSeconds": 1210236
+      "paymentAddress": "r4PBDuDjDDPveiJeBctDJdhze9VqFCYMAj",
+      "firstUnderlyingBlock": "19623827",
+      "lastUnderlyingBlock": "19624378",
+      "lastUnderlyingTimestamp": "1785837446",
+      "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002930572",
+      "block": "0x200e050",
+      "status": "RESOLVABLE_BY_EXECUTOR",
+      "overdueSeconds": 6727,
+      "windowRemainingSeconds": 1202873
     },
     {
-      "requestId": "43181676",
-      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
-      "redeemer": "0xfeC5BF0a64963E6b2EbA8153235E40f9e5a8c8Ae",
-      "valueUBA": "1320220928",
-      "executor": "0x0000000000000000000000000000000000000000",
-      "executorFeeNatWei": "0",
-      "paymentAddress": "rDhpmiPq4BVBDWMVdSrmkgt8thKyRzGV1p",
-      "firstUnderlyingBlock": "19623367",
-      "lastUnderlyingBlock": "19627506",
-      "lastUnderlyingTimestamp": "1785843102",
-      "paymentReference": "0x464250526641000200000000000000000000000000000000000000000292e66c",
-      "block": "0x200dd17",
-      "status": "PENDING",
-      "overdueSeconds": 0,
-      "windowRemainingSeconds": 1217305
+      "requestId": "43190598",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
+      "valueUBA": "10000000",
+      "feeUBA": "50000",
+      "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
+      "executorFeeNatWei": "100000000000",
+      "paymentAddress": "rfneeqGe5SSabKkShzEiEPMMmBmTksxF7h",
+      "firstUnderlyingBlock": "19623827",
+      "lastUnderlyingBlock": "19624393",
+      "lastUnderlyingTimestamp": "1785837476",
+      "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002930946",
+      "block": "0x200e051",
+      "status": "RESOLVABLE_BY_EXECUTOR",
+      "overdueSeconds": 6697,
+      "windowRemainingSeconds": 1202903
+    },
+    {
+      "requestId": "43191548",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "redeemer": "0x1D1b276388714C103A4118EF98f88FaA7e0c69E8",
+      "valueUBA": "10000000",
+      "feeUBA": "50000",
+      "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
+      "executorFeeNatWei": "100000000000",
+      "paymentAddress": "rA7nApscqBLTFaEpbbvwjknLBVWi1yyGN",
+      "firstUnderlyingBlock": "19624015",
+      "lastUnderlyingBlock": "19624592",
+      "lastUnderlyingTimestamp": "1785838106",
+      "paymentReference": "0x4642505266410002000000000000000000000000000000000000000002930cfc",
+      "block": "0x200e1a2",
+      "status": "RESOLVABLE_BY_EXECUTOR",
+      "overdueSeconds": 6067,
+      "windowRemainingSeconds": 1203533
     }
   ]
 }

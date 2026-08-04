@@ -34,6 +34,7 @@ interface Requested {
   agentVault: Address;
   redeemer: Address;
   valueUBA: string;
+  feeUBA: string;
   executor: Address;
   executorFeeNatWei: string;
   /** every field the ReferencedPaymentNonexistence request body needs */
@@ -96,6 +97,7 @@ async function main(): Promise<void> {
             agentVault: a.agentVault as Address,
             redeemer: a.redeemer as Address,
             valueUBA: String(a.valueUBA),
+            feeUBA: String(a.feeUBA),
             executor: a.executor as Address,
             executorFeeNatWei: String(a.executorFeeNatWei),
             paymentAddress: String(a.paymentAddress),
@@ -188,3 +190,4 @@ main().catch((e: unknown) => {
   log(`covenant scan failed: ${e instanceof Error ? e.stack : String(e)}`);
   process.exit(1);
 });
+

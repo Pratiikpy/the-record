@@ -106,11 +106,12 @@ function overdueSection(o: OverdueReport): string {
 
   return `
   <section>
-    <div class="eyebrow">§ 2.2 — Past deadline, unresolved</div>
-    <h2>A default does not record itself</h2>
-    <p class="lede"><code>redemptionPaymentDefault</code> has to be <em>called</em> — by the redeemer, the
-      agent, or an executor appointed up front. If nobody calls it, the obligation simply sits and the chain
-      stays silent. So zero recorded defaults is not evidence that nothing failed. It is the gap.</p>
+    <div class="eyebrow">§ 2.2 — Past deadline, and we asked</div>
+    <h2>Unresolved is not unpaid</h2>
+    <p class="lede">These redemptions passed their deadline with nothing recorded on Flare either way, because
+      <code>redemptionPaymentDefault</code> has to be <em>called</em> and nobody called it. So we asked the
+      Flare Data Connector directly. <strong>Every agent had paid.</strong> The gap is bookkeeping, not
+      money — and the only reason we can say that is that we asked instead of assuming.</p>
 
     <div class="stats">
       ${stat("Past deadline", String(t.examined - t.pending), "unresolved on Flare")}
@@ -124,7 +125,19 @@ function overdueSection(o: OverdueReport): string {
     </div>
 
     <div class="note">
-      <p><span class="tag">Read this precisely</span>${esc(o.caveat)}</p>
+      <p><span class="tag">We asked. They paid.</span>Every one of these was put to the Flare Data Connector:
+      <em>did the agent make this payment?</em> The verifier found the payment on XRPL in
+      <strong>all 91</strong> cases and refused to attest absence
+      (<code>INVALID: REFERENCED TRANSACTION EXISTS</code>). <strong>There are no defaults here.</strong>
+      The agents paid and never submitted the proof that records <code>RedemptionPerformed</code> on Flare —
+      unresolved bookkeeping, not theft.</p>
+      <p><span class="tag">A correction</span>An earlier run of this tool reported
+      <strong>93 proven defaults, 935 XRP</strong>. That was wrong and is retracted. The request asked about
+      <code>valueUBA</code>; the agent pays <code>valueUBA − feeUBA</code>, retaining its fee. A request for an
+      amount nobody ever paid can never match, so the verifier truthfully attested absence for every
+      redemption — settled or not — and produced a clean sweep of false accusations. A clean sweep is not a
+      strong result; it is a symptom. The control that caught it takes redemptions the chain says were
+      <em>settled</em> and requires the verifier to refuse them.</p>
       <p>FDC proofs of a missed payment can only be minted for <strong>14 days</strong> after the deadline.
       After that the question is permanently unanswerable — which is why the record's completeness is a
       running clock and not a backlog anyone can catch up on later.</p>

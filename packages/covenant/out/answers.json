@@ -1,0 +1,745 @@
+{
+  "generatedAt": "2026-08-04T11:48:26.345Z",
+  "asker": "0xBfAb976460eCD399ac695a395F44B359339c2F8c",
+  "examined": 91,
+  "totals": {
+    "provenDefaults": 0,
+    "notDefaults": 91,
+    "noProofFound": 0,
+    "prepareFailed": 0,
+    "defaultedValueUBA": "0",
+    "defaultedValueXRP": 0
+  },
+  "spentC2FLR": "0",
+  "caveat": "NOT_A_DEFAULT means the verifier found the payment: the agent paid on XRPL and never recorded it on Flare. No agent is accused of anything by that verdict.",
+  "answers": [
+    {
+      "requestId": "41998734",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "41999870",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42000458",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42002974",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42034104",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "amountUBA": "5000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42051860",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42051996",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42052022",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42052718",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42088568",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42089398",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42090408",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42091336",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42182252",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42183214",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42184176",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42185898",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42245190",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42245852",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42245856",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42246324",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42298076",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42298590",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42300010",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42300928",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42327414",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42329122",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42330468",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42331092",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42385418",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42386054",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42387156",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42387840",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42425638",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42493696",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42494206",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42496230",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42497540",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42540632",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42540754",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42540782",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42541394",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42576124",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42576882",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42579786",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42580684",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42615354",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42616886",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42618482",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42632406",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42632572",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42654650",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42655120",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42655914",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42687898",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42688360",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42689234",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42736140",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42739062",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42792134",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42839568",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42840560",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42841554",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42862778",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42864366",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42865162",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42866594",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42908128",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42905154",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42908182",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42908238",
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42975550",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42973572",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42974564",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "42975940",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "43049220",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "43049408",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "43050576",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "43051252",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "43112932",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "43113870",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "43114810",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "43123372",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "43146632",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "43147686",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "43149398",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "43150174",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "43188232",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "43189618",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "43190598",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    },
+    {
+      "requestId": "43191548",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "amountUBA": "10000000",
+      "verdict": "NOT_A_DEFAULT",
+      "preparedStatus": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "detail": "The verifier found the payment and refuses to attest absence. The agent DID pay on XRPL and simply never submitted the proof that records RedemptionPerformed on Flare — unresolved bookkeeping, not a default."
+    }
+  ]
+}

@@ -21,6 +21,7 @@ const O: Obligation = {
   agentVault: "0xd5dEFe2c6229a1d0Cd8b0E9C0e28C0Db9C0e2D64",
   redeemer: "0x0000000000000000000000000000000000001111",
   valueUBA: "10000000",
+  feeUBA: "50000",
   executor: "0x0000000000000000000000000000000000002222",
   paymentAddress: "rDhpmiPq4BVBDWMVdSrmkgt8thKyRzGV1p",
   firstUnderlyingBlock: "19473000",
@@ -84,9 +85,26 @@ describe("buildRequestBody", () => {
     expect(b.deadlineTimestamp).toBe(BigInt(DEADLINE));
   });
 
-  it("carries the full redemption value and its payment reference", () => {
-    expect(b.amount).toBe(10_000_000n);
+  it("asks about what the agent OWES, not the face value", () => {
+    // ⚠ The regression that voided 93 "proven defaults".
+    //
+    // The request originally used valueUBA. The agent pays valueUBA − feeUBA,
+    // retaining its fee. Verified against settled redemption #43128188:
+    // valueUBA 40,000,000, feeUBA 200,000, and the real XRPL payment
+    // (6EBBD5CE…9F88) delivered exactly 39,800,000 drops.
+    //
+    // Asking about valueUBA can never match ANY payment, so the verifier
+    // truthfully attests absence for every redemption — paid or not — and
+    // produces a clean sweep of false defaults.
+    expect(b.amount).toBe(9_950_000n);
+    expect(b.amount).toBe(BigInt(O.valueUBA) - BigInt(O.feeUBA));
+    expect(b.amount).not.toBe(BigInt(O.valueUBA));
     expect(b.standardPaymentReference).toBe(O.paymentReference);
+  });
+
+  it("a zero fee means the full value is owed", () => {
+    const zero = buildRequestBody({ ...O, feeUBA: "0" });
+    expect(zero.amount).toBe(BigInt(O.valueUBA));
   });
 
   it("does NOT constrain source addresses", () => {
@@ -125,7 +143,7 @@ describe("encodeRequest", () => {
     expect(type).toBe(ATTESTATION_TYPE);
     expect(source).toBe(SOURCE_ID_TESTXRP);
     expect(mic).toBe(`0x${"0".repeat(64)}`);
-    expect((body as { amount: bigint }).amount).toBe(10_000_000n);
+    expect((body as { amount: bigint }).amount).toBe(9_950_000n);
   });
 
   it("leaves the integrity code zero for the verifier to fill", () => {
@@ -185,7 +203,7 @@ describe("plan — blockers are stated, never assumed away", () => {
     // whoever may submit it.
     const p = plan(O, DEADLINE + 100, { ourAddress: "0x000000000000000000000000000000000000dEaD" });
     expect(p.blocker).toBe("NOT_OUR_ROLE");
-    expect(p.requestBody.amount).toBe(10_000_000n);
+    expect(p.requestBody.amount).toBe(9_950_000n);
     expect(p.abiEncodedRequest.length).toBeGreaterThan(2);
   });
 
@@ -201,3 +219,5 @@ describe("plan — blockers are stated, never assumed away", () => {
     expect(p.blocker).toBe("NOT_YET_DUE");
   });
 });
+
+
