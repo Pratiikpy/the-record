@@ -1,0 +1,12 @@
+{
+  "name": "the-record",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "pnpm -r run typecheck",
+    "test": "pnpm -r run test && pnpm run test:contracts",
+    "test:contracts": "cd contracts && forge test",
+    "build": "pnpm -r run build"
+  },
+  "devDependencies": { "typescript": "^5.9.3" }
+}

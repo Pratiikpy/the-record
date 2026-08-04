@@ -210,6 +210,83 @@ client with `Unexpected token 'Y'`.
 
 ---
 
+# Evidence log — first independent rebuild
+
+**`flare-foundation/tee-node@v0.0.24` (`adc67a29…`) · 2026-08-04**
+
+Rebuilt from source on a machine with no relationship to Flare, using their own
+published recipe, **twice**, with `--no-cache`:
+
+```
+docker buildx build --builder moby-buildkit --platform linux/amd64 --no-cache \
+  --build-arg SOURCE_DATE_EPOCH=$(git log -1 --format=%ct) \
+  --output type=docker,rewrite-timestamp=true
+```
+
+Both builds produced an identical OCI image config digest in 232s:
+
+```
+0x7b096a01a1974dbcb0598b51b9de67f35b36c201e2ff65bbf5078b0785dc35bb
+```
+
+**The core mechanism works.** Layer 3's load-bearing risk — "if builds don't
+actually reproduce, DIVERGED becomes noise and the register is worse than
+nothing" — does not fire on the Go path.
+
+## The verdict is DETERMINISTIC, not REPRODUCED
+
+Recorded honestly, and the vocabulary was corrected mid-build to enforce it:
+
+- **DETERMINISTIC** — the source builds to the same digest twice. That is all
+  this run establishes.
+- **REPRODUCED** — the digest additionally *matches a codeHash a machine is
+  actually registered with on chain*.
+
+Only the second is evidence about a running machine. The type now makes
+`REPRODUCED` impossible to construct without the on-chain hash it matched
+(`test/rebuild.test.ts`), so the register cannot claim verification it never
+performed.
+
+## Two mechanics that are easy to get silently wrong
+
+**The default Docker driver does not honour `rewrite-timestamp`**
+([moby/buildkit#4230](https://github.com/moby/buildkit/issues/4230)). Building
+with it yields a digest that differs run to run, which reads as DIVERGED and is
+pure noise. The runner asserts the `docker-container` driver and refuses
+otherwise.
+
+**The identifier is the OCI image *config* digest** — the value Confidential
+Space reports as `submods.container.image_id`. `docker inspect .Id` returns it
+under the docker driver, but its meaning shifts with the storage backend.
+
+## Flare states the limitation themselves
+
+From `fce-extension-scaffold/REPRODUCIBILITY.md`, which is the strongest
+possible corroboration of why this layer needs to exist:
+
+| Language | Guarantee |
+|---|---|
+| **Go** | **Bit-for-bit across machines** |
+| Python | Same-machine only |
+| TypeScript | Same-machine only |
+
+> "For Python and TypeScript … it does **not** mean an auditor on different
+> hardware can independently reproduce your hash."
+>
+> "If independent third-party verification of the code hash matters for your
+> deployment, use the Go path."
+
+They also flag an outstanding action item: the Python and TypeScript runtime
+base images are still pinned by tag rather than `sha256` digest, marked `NOTE:`
+in their Dockerfiles — "required before cutting a testnet release."
+
+So a Python or TypeScript extension registered today **cannot** be independently
+verified by anyone, by Flare's own account. Reprod reports that as
+`UNREPRODUCIBLE`, which is precisely the verdict that must not be collapsed
+into `DIVERGED`.
+
+---
+
 ## Reproduce this
 
 ```bash

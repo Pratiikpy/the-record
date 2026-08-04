@@ -116,6 +116,31 @@ async function main(): Promise<void> {
   const defaulted = all.filter((r) => terminal.get(r.requestId) === "RedemptionDefault");
   const performed = all.filter((r) => terminal.get(r.requestId) === "RedemptionPerformed");
 
+  // Per-agent standing. This is what a redeemer actually wants before choosing
+  // a counterparty, and it is the denominator that makes a fail rate mean
+  // anything — an agent with 0 defaults and 0 redemptions is UNKNOWN, not good.
+  const agents = [...new Set(all.map((r) => r.agentVault))].map((agentVault) => {
+    const mine = all.filter((r) => r.agentVault === agentVault);
+    const nPerformed = mine.filter((r) => terminal.get(r.requestId) === "RedemptionPerformed").length;
+    const nDefaulted = mine.filter((r) => terminal.get(r.requestId) === "RedemptionDefault").length;
+    const nOpen = mine.filter((r) => !terminal.has(r.requestId)).length;
+    const adjudicated = nPerformed + nDefaulted;
+    const valueUBA = mine.reduce((s, r) => s + BigInt(r.valueUBA), 0n);
+    return {
+      agentVault,
+      requested: mine.length,
+      performed: nPerformed,
+      defaulted: nDefaulted,
+      open: nOpen,
+      adjudicated,
+      /** null when nothing has been adjudicated — UNKNOWN, never "clean". */
+      failRateBps: adjudicated === 0 ? null : Math.floor((nDefaulted * 10_000) / adjudicated),
+      withExecutor: mine.filter((r) => r.executor.toLowerCase() !== ZERO_ADDRESS).length,
+      valueUBA: valueUBA.toString(),
+    };
+  });
+  agents.sort((a, b) => b.requested - a.requested);
+
   const result = {
     scannedAt: new Date().toISOString(),
     chainId: 114,
@@ -135,6 +160,7 @@ async function main(): Promise<void> {
       distinctAgents: new Set(all.map((r) => r.agentVault)).size,
       distinctRedeemers: new Set(all.map((r) => r.redeemer)).size,
     },
+    agents,
     openRedemptions: openNow.slice(0, 200),
     defaults: defaulted.slice(0, 200),
     executorsNamed: [...new Set(withExecutor.map((r) => r.executor))],

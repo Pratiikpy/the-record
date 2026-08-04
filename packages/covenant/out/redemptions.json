@@ -1,5 +1,5 @@
 {
-  "scannedAt": "2026-08-04T07:39:32.917Z",
+  "scannedAt": "2026-08-04T07:50:45.679Z",
   "chainId": 114,
   "assetManager": "0xc1Ca88b937d0b528842F95d5731ffB586f4fbDFA",
   "rpcEndpoints": [
@@ -12,22 +12,68 @@
       "maxLogRange": 100
     }
   ],
-  "fromBlock": "33408363",
-  "toBlock": "33608363",
+  "fromBlock": "33408682",
+  "toBlock": "33608682",
   "eventCounts": {
-    "RedemptionRequested": 2363,
-    "RedemptionPerformed": 2291
+    "RedemptionRequested": 2367,
+    "RedemptionPerformed": 2300
   },
   "totals": {
-    "redemptionsRequested": 2363,
-    "performed": 2265,
+    "redemptionsRequested": 2367,
+    "performed": 2274,
     "defaulted": 0,
-    "openNow": 98,
-    "withNamedExecutor": 2017,
-    "withNamedExecutorPct": 85.36,
+    "openNow": 93,
+    "withNamedExecutor": 2021,
+    "withNamedExecutorPct": 85.38,
     "distinctAgents": 4,
     "distinctRedeemers": 78
   },
+  "agents": [
+    {
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028",
+      "requested": 850,
+      "performed": 818,
+      "defaulted": 0,
+      "open": 32,
+      "adjudicated": 818,
+      "failRateBps": 0,
+      "withExecutor": 782,
+      "valueUBA": "53299745514"
+    },
+    {
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "requested": 723,
+      "performed": 700,
+      "defaulted": 0,
+      "open": 23,
+      "adjudicated": 700,
+      "failRateBps": 0,
+      "withExecutor": 612,
+      "valueUBA": "47357474759"
+    },
+    {
+      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
+      "requested": 617,
+      "performed": 595,
+      "defaulted": 0,
+      "open": 22,
+      "adjudicated": 595,
+      "failRateBps": 0,
+      "withExecutor": 547,
+      "valueUBA": "43587790000"
+    },
+    {
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+      "requested": 177,
+      "performed": 161,
+      "defaulted": 0,
+      "open": 16,
+      "adjudicated": 161,
+      "failRateBps": 0,
+      "withExecutor": 80,
+      "valueUBA": "92136498777"
+    }
+  ],
   "openRedemptions": [
     {
       "requestId": "41934742",
@@ -1122,88 +1168,28 @@
       "block": "0x200cd1f"
     },
     {
-      "requestId": "43168374",
-      "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5",
-      "redeemer": "0x7b411ac408743b14a1392E437Dfa0251698C8bc6",
-      "valueUBA": "60000000",
-      "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
-      "executorFeeNatWei": "50000000000",
-      "lastUnderlyingBlock": "19622122",
-      "lastUnderlyingTimestamp": "1785829689",
-      "paymentReference": "0x464250526641000200000000000000000000000000000000000000000292b276",
-      "block": "0x200d283"
-    },
-    {
-      "requestId": "43168586",
+      "requestId": "43171188",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
-      "redeemer": "0x7b411ac408743b14a1392E437Dfa0251698C8bc6",
-      "valueUBA": "190000000",
-      "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
-      "executorFeeNatWei": "50000000000",
-      "lastUnderlyingBlock": "19622122",
-      "lastUnderlyingTimestamp": "1785829689",
-      "paymentReference": "0x464250526641000200000000000000000000000000000000000000000292b34a",
-      "block": "0x200d283"
-    },
-    {
-      "requestId": "43168798",
-      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
-      "redeemer": "0x30995332Fa29A9528F3a047ea5Be4d19f1569C43",
-      "valueUBA": "260000000",
-      "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
-      "executorFeeNatWei": "100000000000",
-      "lastUnderlyingBlock": "19622137",
-      "lastUnderlyingTimestamp": "1785829719",
-      "paymentReference": "0x464250526641000200000000000000000000000000000000000000000292b41e",
-      "block": "0x200d284"
-    },
-    {
-      "requestId": "43169012",
-      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
-      "redeemer": "0x4029eAf24Ce1A922c82A74A0AE80cB203ed8A930",
-      "valueUBA": "630000000",
-      "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
-      "executorFeeNatWei": "100000000000",
-      "lastUnderlyingBlock": "19622152",
-      "lastUnderlyingTimestamp": "1785829749",
-      "paymentReference": "0x464250526641000200000000000000000000000000000000000000000292b4f4",
-      "block": "0x200d285"
-    },
-    {
-      "requestId": "43169226",
-      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
-      "redeemer": "0xe9126E5d648761691D01E072BdD49365b496C1Ca",
-      "valueUBA": "660000000",
-      "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
-      "executorFeeNatWei": "100000000000",
-      "lastUnderlyingBlock": "19622167",
-      "lastUnderlyingTimestamp": "1785829779",
-      "paymentReference": "0x464250526641000200000000000000000000000000000000000000000292b5ca",
-      "block": "0x200d286"
-    },
-    {
-      "requestId": "43169442",
-      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
-      "redeemer": "0xE9c239CFE5Ecc3a471327189D7DE7e4582F1E50b",
-      "valueUBA": "250000000",
-      "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
-      "executorFeeNatWei": "100000000000",
-      "lastUnderlyingBlock": "19622182",
-      "lastUnderlyingTimestamp": "1785829809",
-      "paymentReference": "0x464250526641000200000000000000000000000000000000000000000292b6a2",
-      "block": "0x200d287"
-    },
-    {
-      "requestId": "43169658",
-      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
-      "redeemer": "0xfa6dd62AaE78aA04a78dAf56d222897bc0a587d3",
+      "redeemer": "0x54Aef87a62047FfDf5414eF0ceAD069eF3e32B56",
       "valueUBA": "20000000",
       "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
       "executorFeeNatWei": "0",
-      "lastUnderlyingBlock": "19622197",
-      "lastUnderlyingTimestamp": "1785829839",
-      "paymentReference": "0x464250526641000200000000000000000000000000000000000000000292b77a",
-      "block": "0x200d287"
+      "lastUnderlyingBlock": "19622355",
+      "lastUnderlyingTimestamp": "1785830461",
+      "paymentReference": "0x464250526641000200000000000000000000000000000000000000000292bd74",
+      "block": "0x200d3c2"
+    },
+    {
+      "requestId": "43171696",
+      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+      "redeemer": "0x2ab7F7feD9030E19a69aFE9db90083AE407C9673",
+      "valueUBA": "10000000",
+      "executor": "0x103b384064ae85577127097A7cCadfd6fb13f437",
+      "executorFeeNatWei": "0",
+      "lastUnderlyingBlock": "19622348",
+      "lastUnderlyingTimestamp": "1785830473",
+      "paymentReference": "0x464250526641000200000000000000000000000000000000000000000292bf70",
+      "block": "0x200d3d4"
     }
   ],
   "defaults": [],

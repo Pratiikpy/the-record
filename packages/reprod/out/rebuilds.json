@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-08-04T07:52:11.624Z",
+  "summary": {
+    "DETERMINISTIC": 1
+  },
+  "rebuilds": [
+    {
+      "repo": "flare-foundation/tee-node",
+      "ref": "v0.0.24",
+      "dockerfile": "Dockerfile",
+      "lang": "unknown",
+      "outcome": {
+        "status": "DETERMINISTIC",
+        "digest": "0x7b096a01a1974dbcb0598b51b9de67f35b36c201e2ff65bbf5078b0785dc35bb"
+      },
+      "startedAt": "2026-08-04T07:48:19.731Z",
+      "seconds": 231.9
+    }
+  ]
+}
+
+
