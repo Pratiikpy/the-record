@@ -1,6 +1,6 @@
 {
-  "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-  "reproRegistry": "0x54c53FB74C17a2a1B28377C2C2b11D0351367eE0",
   "rpc": "http://127.0.0.1:8545",
-  "failRecord": "0xa6Ca882f693f7c613cE1bAe28B91A06eaAcA8DD9"
+  "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+  "reproRegistry": "0x0f9ad2d34a3c2943375185437ef53b2bbda76cbb",
+  "failRecord": "0x353b4fd4eaac445c1183f9ee0bb5192acc24a61e"
 }

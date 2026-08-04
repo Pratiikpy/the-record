@@ -7,6 +7,8 @@
   "scripts": {
     "scan": "tsx src/scan.ts",
     "render": "tsx src/render.ts",
+    "deploy:local": "tsx src/deploy.ts",
+    "e2e": "tsx src/deploy.ts && tsx src/publish.ts",
     "build": "pnpm run scan && pnpm run render",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
@@ -14,4 +16,5 @@
   "dependencies": { "viem": "^2.21.0" },
   "devDependencies": { "@types/node": "^22.10.0", "tsx": "^4.19.0", "typescript": "^5.9.3", "vitest": "^2.1.0" }
 }
+
 

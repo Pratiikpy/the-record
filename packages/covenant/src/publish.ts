@@ -18,6 +18,8 @@ import {
   createWalletClient,
   http,
   defineChain,
+  keccak256,
+  toHex,
   type Address,
   type Hex,
 } from "viem";
@@ -140,16 +142,19 @@ async function main(): Promise<void> {
   // denominator a fail rate needs. Bounded, and the bound is stated rather than
   // silently truncating.
   const SAMPLE = 40;
-  const settled = scan.openRedemptions.length > 0 ? [] : [];
-  void settled;
 
   // Reconstruct settled adjudications from the per-agent counts we verified.
   // Each agent gets `min(performed, SAMPLE)` PERFORMED rows.
+  //
+  // The id must be a hash of the whole (agent, index) pair. Slicing the first
+  // bytes of the string produced the SAME id for every index, and the contract
+  // correctly rejected the second write with AlreadyAdjudicated — the
+  // append-only guard doing its job rather than a contract bug.
   let written = 0;
   for (const a of scan.agents) {
     const n = Math.min(a.performed, SAMPLE);
     for (let i = 0; i < n; i++) {
-      const obligationId = BigInt(`0x${Buffer.from(`${a.agentVault}:${i}`).toString("hex").slice(0, 16)}`);
+      const obligationId = BigInt(keccak256(toHex(`${a.agentVault}:${i}`))) % (1n << 64n);
       const hash = await wallet.writeContract({
         address: deployed.failRecord,
         abi: failRecordAbi,
