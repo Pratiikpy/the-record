@@ -15,3 +15,4 @@ contracts/broadcast/
 
 # Local reference clones of upstream Flare repos
 .reference/
+contracts/lib/
