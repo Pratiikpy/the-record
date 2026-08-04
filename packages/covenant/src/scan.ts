@@ -36,6 +36,9 @@ interface Requested {
   valueUBA: string;
   executor: Address;
   executorFeeNatWei: string;
+  /** every field the ReferencedPaymentNonexistence request body needs */
+  paymentAddress: string;
+  firstUnderlyingBlock: string;
   lastUnderlyingBlock: string;
   lastUnderlyingTimestamp: string;
   paymentReference: string;
@@ -95,6 +98,8 @@ async function main(): Promise<void> {
             valueUBA: String(a.valueUBA),
             executor: a.executor as Address,
             executorFeeNatWei: String(a.executorFeeNatWei),
+            paymentAddress: String(a.paymentAddress),
+            firstUnderlyingBlock: String(a.firstUnderlyingBlock),
             lastUnderlyingBlock: String(a.lastUnderlyingBlock),
             lastUnderlyingTimestamp: String(a.lastUnderlyingTimestamp),
             paymentReference: String(a.paymentReference),

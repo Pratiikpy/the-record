@@ -127,12 +127,30 @@ pnpm -C packages/procedure e2e
 |---|---|
 | reprod | 81 |
 | contracts | 70 — **100% lines, statements, branches, functions** |
+| covenant | 44 |
 | design | 29 |
 | procedure | 29 |
-| covenant | 9 |
-| **Total** | **218** |
+| **Total** | **253** |
 
 Plus 1,536 Solidity fuzz runs across six fuzzed properties.
+
+## The executor
+
+`packages/covenant/src/executor.ts` builds the complete claim for an unresolved
+obligation: the `ReferencedPaymentNonexistence` request body from real chain
+data, the ABI-encoded request, the target FDC round, and the
+`redemptionPaymentDefault` call that follows.
+
+Against the live chain right now: **94 obligations planned, 82 blocked on
+nothing but a funded key.** Every plan states its own blocker rather than
+assuming one away — `NOT_YET_DUE`, `PROOF_WINDOW_CLOSED`, `NOT_OUR_ROLE`,
+`NO_FUNDED_KEY` — and a plan is still built when blocked, because a proof we may
+not submit can be handed to whoever may.
+
+```bash
+pnpm -C packages/covenant exec tsx src/plan-claims.ts   # prepares, sends nothing
+PRIVATE_KEY=0x… pnpm -C packages/covenant exec tsx src/plan-claims.ts
+```
 
 ## Not done yet
 
