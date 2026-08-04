@@ -11,6 +11,7 @@ import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { page, marker, stat, esc, short } from "../../design/src/index.js";
+import { navFor } from "../../design/src/nav.js";
 import type { OverdueReport, OverdueRow } from "./overdue.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -242,11 +243,7 @@ ${overdue ? overdueSection(overdue) : ""}`;
         "Every FXRP redemption on Flare Coston2 joined to its terminal event, with per-agent standing and executor adoption. Re-derivable from public RPC.",
       section: "covenant",
       meta: `chain 114 · blocks ${d.fromBlock}–${d.toBlock} · ${scanned}Z`,
-      nav: [
-        { label: "Covenant", href: "#", current: true },
-        { label: "Procedure", href: "#" },
-        { label: "Reprod", href: "../../reprod/out/index.html" },
-      ],
+      nav: navFor("covenant"),
       body,
     }),
     "utf8",
@@ -255,3 +252,4 @@ ${overdue ? overdueSection(overdue) : ""}`;
 }
 
 main();
+

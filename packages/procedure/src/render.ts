@@ -9,6 +9,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { page, marker, stat, esc, short } from "../../design/src/index.js";
+import { navFor } from "../../design/src/nav.js";
 import type { Cv1Report, ControlResult } from "./cv1.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -154,11 +155,7 @@ ${s.allowedDestinations.map((a) => `          <tr><th scope="row"><code>${esc(a)
         "Continuous control testing of the FAssets Core Vault on Flare, from entirely public data. CLEAN, EXCEPTION or DISCLAIMER.",
       section: "procedure",
       meta: `CV-1 · period ${r.period} · evidence ${r.evidence.evidenceDigest}`,
-      nav: [
-        { label: "Covenant", href: "../../covenant/out/index.html" },
-        { label: "Procedure", href: "#", current: true },
-        { label: "Reprod", href: "../../reprod/out/index.html" },
-      ],
+      nav: navFor("procedure"),
       body,
       extraCss:
         ".assertion{max-width:52ch}.ex,.dis,.obs{font-size:11px;margin-top:6px;line-height:1.5}" +
@@ -170,3 +167,4 @@ ${s.allowedDestinations.map((a) => `          <tr><th scope="row"><code>${esc(a)
 }
 
 main();
+

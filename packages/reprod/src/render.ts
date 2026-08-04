@@ -11,6 +11,7 @@ import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { page, marker, stat, esc, short } from "../../design/src/index.js";
+import { navFor } from "../../design/src/nav.js";
 import type { ScanResult, MachineRow } from "./scan.js";
 import type { RebuildOutcome, Scoped } from "./rebuild.js";
 
@@ -237,11 +238,7 @@ ${m.map(machineRow).join("\n")}
         "Every confidential-compute machine registered on Flare Coston2, with attestation verdict and live reachability. Re-derivable from public RPC.",
       section: "reprod",
       meta: `chain 114 · block ${d.blockNumber} · ${scanned}Z`,
-      nav: [
-        { label: "Covenant", href: "../../covenant/out/index.html" },
-        { label: "Procedure", href: "#" },
-        { label: "Reprod", href: "#", current: true },
-      ],
+      nav: navFor("reprod"),
       body,
       extraCss: ".host{max-width:280px;overflow-wrap:anywhere}",
     }),
@@ -251,3 +248,4 @@ ${m.map(machineRow).join("\n")}
 }
 
 main();
+
