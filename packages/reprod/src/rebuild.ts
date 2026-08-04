@@ -54,6 +54,114 @@ export type RebuildOutcome =
   | { status: "UNREPRODUCIBLE"; reason: string; digests?: string[] }
   | { status: "ERROR"; reason: string };
 
+/**
+ * What the SOURCE claims about its own reproducibility, and therefore the
+ * strongest conclusion a verifier is entitled to draw.
+ *
+ * This axis exists because of a structural limit that is easy to paper over:
+ * **one machine cannot detect cross-machine nondeterminism.** Building twice
+ * on this host proves same-host determinism and nothing more. Flare documents
+ * that their Python and TypeScript images are "same-machine only" — those will
+ * pass a double-build here and still be unverifiable by an auditor elsewhere.
+ *
+ * So a single rebuilder can never, alone, establish that an image is
+ * independently verifiable. That requires agreement between rebuilders on
+ * different hardware, which is exactly why ReproRegistry counts distinct
+ * rebuilders rather than storing a boolean.
+ */
+export type Guarantee =
+  /** source asserts bit-for-bit reproducibility on any machine */
+  | "CROSS_MACHINE"
+  /** source asserts determinism only on the same host — not independently verifiable */
+  | "SAME_MACHINE_ONLY"
+  /** the source makes no reproducibility claim at all */
+  | "UNDECLARED";
+
+/** Scope of what a single verifier's result can support. */
+export interface Scoped {
+  guarantee: Guarantee;
+  /**
+   * True only when the declared guarantee permits a third party on different
+   * hardware to reach the same digest. False for SAME_MACHINE_ONLY, whatever
+   * this host observed.
+   */
+  independentlyVerifiable: boolean;
+  /** Plain-language caveat carried into the register alongside the verdict. */
+  caveat?: string;
+}
+
+export function scopeOf(guarantee: Guarantee): Scoped {
+  switch (guarantee) {
+    case "CROSS_MACHINE":
+      return { guarantee, independentlyVerifiable: true };
+    case "SAME_MACHINE_ONLY":
+      return {
+        guarantee,
+        independentlyVerifiable: false,
+        caveat:
+          "source declares same-machine determinism only; a matching digest here says nothing about whether an auditor on other hardware could reproduce it",
+      };
+    case "UNDECLARED":
+      return {
+        guarantee,
+        independentlyVerifiable: false,
+        caveat: "source makes no reproducibility claim; scope of any match is unknown",
+      };
+  }
+}
+
+/**
+ * Map a repo's declared reproducibility claim to a guarantee.
+ *
+ * Flare states this two different ways and both must be read, or a repo that
+ * makes a strong claim gets scored UNDECLARED and the register understates it:
+ *
+ *   - fce-extension-scaffold publishes a per-language TABLE
+ *     (`| **Go** | **Bit-for-bit across machines** |`)
+ *   - tee-node states it in PROSE, with no table at all
+ *     ("builds produce bit-for-bit identical image layers regardless of when
+ *      or where they are built")
+ *
+ * The table wins when present, because it is per-language and therefore more
+ * specific than a repo-wide sentence.
+ */
+export function guaranteeFor(reproducibilityMd: string, language: string): Guarantee {
+  if (!reproducibilityMd.trim()) return "UNDECLARED";
+
+  // 1. per-language table row — most specific
+  const row = new RegExp(`\\|\\s*\\*\\*${language}\\*\\*\\s*\\|\\s*\\*\\*([^*|]+)\\*\\*`, "iu").exec(
+    reproducibilityMd,
+  );
+  if (row) {
+    const claim = row[1]!.toLowerCase();
+    if (/bit-for-bit across machines/u.test(claim)) return "CROSS_MACHINE";
+    if (/same-machine/u.test(claim)) return "SAME_MACHINE_ONLY";
+  }
+
+  // If the document publishes a per-language table at all, that table is the
+  // authority. A language missing from it is UNDECLARED — falling through to
+  // prose here would hand it a NEIGHBOURING language's guarantee, which is how
+  // an unlisted runtime would silently inherit Python's caveat (or worse, Go's
+  // promise). Absence of a row is absence of a claim.
+  const hasLanguageTable = /\|\s*\*\*(Go|Python|TypeScript|Rust|Java|C\+\+)\*\*\s*\|/iu.test(
+    reproducibilityMd,
+  );
+  if (hasLanguageTable) return "UNDECLARED";
+
+  // 2. repo-wide prose claim, only when there is no table to consult
+  const prose = reproducibilityMd.replace(/\s+/gu, " ").toLowerCase();
+  if (/same-machine (determinism )?only/u.test(prose)) return "SAME_MACHINE_ONLY";
+  if (
+    /bit-for-bit identical[^.]*regardless of (when or )?where/u.test(prose) ||
+    /bit-for-bit across machines/u.test(prose) ||
+    /(identical|reproducible)[^.]*regardless of (when or )?where they are built/u.test(prose)
+  ) {
+    return "CROSS_MACHINE";
+  }
+
+  return "UNDECLARED";
+}
+
 export interface RebuildRequest {
   repo: string;
   /** tag or commit sha — resolved to an immutable sha before building */
