@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+
+# Generated artefacts — regenerate with `pnpm run build`.
+# scan.json IS committed: it is the dated evidence record, not a build product.
+packages/*/out/index.html
+
+# Foundry
+contracts/out/
+contracts/cache/
+contracts/broadcast/
+
+# Local reference clones of upstream Flare repos
+.reference/
