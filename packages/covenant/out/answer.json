@@ -1,0 +1,23 @@
+{
+  "requestId": "41934742",
+  "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64",
+  "redeemer": "0x76A302dc39D5BFEc280f8325fE67af74Bce57dd8",
+  "amountUBA": "10000000",
+  "amountXRP": 10.0,
+  "verdict": "NON_PAYMENT_ATTESTED",
+  "meaning": "Flare's data providers reached consensus that no qualifying payment exists in the block range. This obligation genuinely was not settled, and the appointed executor can claim the default with this proof.",
+  "computedRound": 1415664,
+  "provenInRound": 1415663,
+  "txHash": "0x2169191e6c84e6e7e0733739fe370ae43fd8da575c3606c5883125a325e5be16",
+  "deadlineBlock": 19473915,
+  "firstOverflowBlock": 19473916,
+  "paymentReference": "0x46425052664100020000000000000000000000000000000000000000027fdf96",
+  "merkleProof": [
+    "0xa1c06a6c29f5abc40c4521602273eb8ab25910a4f67ae91124c55bc43d9fd459",
+    "0x3f072c682f2833048a1dabb947e0a7e220b6c7755b84d6b21c6da7e582f411f6",
+    "0xba880c47b24eb984ae5b5e0dc0c4ec8d3ec58ff27b0b86f3b800d5d898e36700"
+  ],
+  "askedAt": "2026-08-04T10:46:00Z",
+  "correction": "A first run reported NO_PROOF_PRODUCED. That was an off-by-one in the round derivation, not an FDC failure \u2014 the proof was in round 1415663 while the tool looked only in 1415664.",
+  "whatWeMayNotDo": "We are not the appointed executor, the redeemer or the agent, so we may not submit redemptionPaymentDefault. This proof is public and can be used by whoever may."
+}
