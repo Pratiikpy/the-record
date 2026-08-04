@@ -7,13 +7,15 @@
  * blank table. What it does carry is the standing of every agent, and the
  * executor-adoption number that decides whether the layer has a market at all.
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { page, marker, stat, esc, short } from "../../design/src/index.js";
+import type { OverdueReport, OverdueRow } from "./overdue.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const IN = join(HERE, "..", "out", "redemptions.json");
+const OVERDUE = join(HERE, "..", "out", "overdue.json");
 const OUT = join(HERE, "..", "out", "index.html");
 
 interface Agent {
@@ -75,9 +77,88 @@ function agentRow(a: Agent): string {
   </tr>`;
 }
 
+const STATUS_CHIP: Record<string, [string, string]> = {
+  RESOLVABLE_BY_EXECUTOR: ["bad", "!"],
+  RESOLVABLE_BY_PARTY: ["unknown", "?"],
+  UNRESOLVABLE: ["sim", "×"],
+  PENDING: ["none", "·"],
+};
+
+const days = (s: number): string => `${(s / 86400).toFixed(1)}d`;
+
+function overdueRow(r: OverdueRow): string {
+  const [cls, glyph] = STATUS_CHIP[r.status] ?? ["none", "·"];
+  return `<tr>
+    <th scope="row">${esc(r.requestId)}<small>${short(r.agentVault, 12)}</small></th>
+    <td class="l"><span class="verdict ${cls}">[ ${glyph} ] ${esc(r.status.replace(/_/gu, " "))}</span></td>
+    <td>${(Number(BigInt(r.valueUBA) / 1000n) / 1000).toLocaleString("en-US", { maximumFractionDigits: 2 })}</td>
+    <td>${days(r.overdueSeconds)}</td>
+    <td>${r.windowRemainingSeconds > 0 ? days(r.windowRemainingSeconds) : "closed"}</td>
+  </tr>`;
+}
+
+function overdueSection(o: OverdueReport): string {
+  const t = o.totals;
+  const xrpUnresolved = (Number(BigInt(t.valueUnresolvedUBA) / 1000n) / 1000).toLocaleString("en-US", {
+    maximumFractionDigits: 2,
+  });
+
+  return `
+  <section>
+    <div class="eyebrow">§ 2.2 — Past deadline, unresolved</div>
+    <h2>A default does not record itself</h2>
+    <p class="lede"><code>redemptionPaymentDefault</code> has to be <em>called</em> — by the redeemer, the
+      agent, or an executor appointed up front. If nobody calls it, the obligation simply sits and the chain
+      stays silent. So zero recorded defaults is not evidence that nothing failed. It is the gap.</p>
+
+    <div class="stats">
+      ${stat("Past deadline", String(t.examined - t.pending), "unresolved on Flare")}
+      ${stat("A guardian could act", String(t.resolvableByExecutor), `${t.resolvableByParty} need the party`)}
+      ${stat("Value unresolved", xrpUnresolved, "XRP")}
+      ${stat(
+        "Soonest window closes",
+        t.soonestWindowClose === null ? "—" : days(t.soonestWindowClose),
+        "then unprovable forever",
+      )}
+    </div>
+
+    <div class="note">
+      <p><span class="tag">Read this precisely</span>${esc(o.caveat)}</p>
+      <p>FDC proofs of a missed payment can only be minted for <strong>14 days</strong> after the deadline.
+      After that the question is permanently unanswerable — which is why the record's completeness is a
+      running clock and not a backlog anyone can catch up on later.</p>
+    </div>
+
+    <div class="tablewrap">
+      <table style="min-width:680px">
+        <caption>Obligations past their deadline with no terminal event recorded, ordered by how soon their proof window closes.</caption>
+        <thead><tr>
+          <th class="l" scope="col">Request</th>
+          <th class="l" scope="col">Who can resolve it</th>
+          <th scope="col">Value (XRP)</th>
+          <th scope="col">Overdue</th>
+          <th scope="col">Window left</th>
+        </tr></thead>
+        <tbody>
+${o.rows.slice(0, 25).map(overdueRow).join("\n")}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="cap" style="margin-top:18px">
+      Fig. 3 — First 25 of ${t.examined - t.pending}, soonest window first. Generated
+      ${esc(o.generatedAt.slice(0, 16))}Z against real wall-clock time; no fork and no time travel — these
+      deadlines have genuinely passed.
+    </p>
+  </section>`;
+}
+
 function main(): void {
   const d = JSON.parse(readFileSync(IN, "utf8")) as Scan;
   const t = d.totals;
+  const overdue: OverdueReport | null = existsSync(OVERDUE)
+    ? (JSON.parse(readFileSync(OVERDUE, "utf8")) as OverdueReport)
+    : null;
   const scanned = new Date(d.scannedAt).toISOString().replace("T", " ").slice(0, 16);
   const blocks = (BigInt(d.toBlock) - BigInt(d.fromBlock)).toLocaleString("en-US");
 
@@ -103,12 +184,10 @@ function main(): void {
     </p>
 
     <div class="note">
-      <p><span class="tag">The record is empty</span><strong>Zero proven defaults in this window, and that is the
-      finding — not a gap.</strong> Agents on Coston2 are settling: ${t.performed.toLocaleString("en-US")} of
-      ${t.redemptionsRequested.toLocaleString("en-US")} redemptions performed, none defaulted. A recovery
-      product whose demo depends on organic failure therefore has no demo here, which is why the failure
-      modes must be manufactured deliberately on testnet and the historical replay must run against
-      Songbird and mainnet where real defaults exist.</p>
+      <p><span class="tag">Zero recorded defaults</span><strong>and that is not the same as nothing failing.</strong>
+      ${t.performed.toLocaleString("en-US")} of ${t.redemptionsRequested.toLocaleString("en-US")} redemptions
+      recorded a settlement, and none recorded a default — but a default only appears on chain when somebody
+      calls for it. ${overdue ? `${overdue.totals.examined - overdue.totals.pending} obligations are past their deadline with nothing recorded either way. See §2.2.` : ""}</p>
       <p><strong>Why the executor number decides everything:</strong>
       <code>redemptionPaymentDefault</code> is permissioned — only the redeemer, the agent, or the executor
       appointed at <code>redeem()</code> time may call it. An unaffiliated relay cannot claim a stranger's
@@ -152,7 +231,8 @@ ${d.agents.map(agentRow).join("\n")}
       Fig. 2 — Executor adoption varies sharply between agents (${Math.min(...d.agents.map((a) => Math.round((a.withExecutor / a.requested) * 100)))}%–${Math.max(...d.agents.map((a) => Math.round((a.withExecutor / a.requested) * 100)))}%),
       which is the spread a guardian service would compete into.
     </p>
-  </section>`;
+  </section>
+${overdue ? overdueSection(overdue) : ""}`;
 
   writeFileSync(
     OUT,
