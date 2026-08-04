@@ -125,6 +125,91 @@ and no breakpoint fired. Fixed and verified at 390×844.
 
 ---
 
+---
+
+# Evidence log — Covenant scan #1
+
+**Coston2 · AssetManagerFXRP `0xc1Ca88b937d0b528842F95d5731ffB586f4fbDFA`**
+**Blocks 33,408,308 → 33,608,308 (200,000 blocks) · 26,075 logs**
+
+## The load-bearing question, answered
+
+`redemptionPaymentDefault` is permissioned to the redeemer, the agent, or **the
+executor appointed at `redeem()` time**. So Layer 1 hinges on one number: how
+many real redemptions actually name an executor?
+
+| | |
+|---|---|
+| Redemptions requested | 2,363 |
+| Performed | 2,265 (95.9%) |
+| Defaulted | **0** |
+| Still open | 98 |
+| **Named an executor** | **2,017 — 85.36%** |
+| Distinct agents | 4 |
+
+**85% already delegate.** The executor role is not theoretical and not
+unused — it is the norm, and there is a live fee market to enter. Layer 1 does
+not have to create the behaviour, only serve it better.
+
+## The other half of that answer, which is bad news
+
+**Zero defaults in 200,000 blocks.** Agents on Coston2 are performing. So the
+auto-claim relay has, right now, nothing whatsoever to claim.
+
+This confirms empirically the "quiet testnet" trap flagged during planning: a
+recovery product whose demo depends on organic failure has no demo. The
+adversarial fixture generator — deliberately manufacturing each documented
+failure mode on Coston2 — is therefore **required**, not a nice-to-have, and
+the historical replay must run against Songbird and mainnet where real defaults
+exist.
+
+## ⚠ Documentation bug found in Flare's published reference
+
+`docs/fassets/reference/IAssetManagerEvents.mdx` declares:
+
+```solidity
+event RedemptionPerformed(
+    address indexed agentVault,
+    address indexed redeemer,
+    uint64 indexed requestId,   // ← uint256 on chain
+    ...
+```
+
+The deployed contract emits `uint256`. Because an event selector is a hash of
+its canonical signature, the documented form yields a topic0 that matches
+nothing. **An indexer built faithfully from the published reference decodes zero
+completions and reports every redemption as permanently open** — which is
+exactly what happened here on the first run: 2,352 requested, 0 performed.
+
+Confirmed by counting topic0 frequency over 60,000 blocks (`src/topics.ts`):
+
+| topic0 | signature | count |
+|---|---|---|
+| `0xd5150395…ccc3331` | `RedemptionPerformed(address,address,uint256,bytes32,uint256,int256)` | **626** |
+| — | `…uint64…` variant | **0** |
+
+Both selectors are now locked behind a regression test (`test/events.test.ts`).
+Worth an upstream PR to `flare-foundation/developer-hub`.
+
+## Infrastructure constraint worth publishing
+
+Every public Coston2 RPC caps `eth_getLogs`, and they disagree by 33×:
+
+| Endpoint | Max blocks per request |
+|---|---|
+| `flare-testnet-coston2.rpc.thirdweb.com` | **1,000** |
+| `coston2.enosys.global` | 350 (100 under load) |
+| `coston2-api.flare.network` | **30** |
+| `rpc.ankr.com/flare_coston2` | refuses, no number given |
+
+The official endpoint's 30-block cap means a 200k-block scan needs ~6,700
+requests. The scanner therefore probes each endpoint at runtime, adopts the
+widest window, and fails over mid-sweep when one starts throttling — thirdweb
+returns a plain-text rate-limit body rather than JSON-RPC, which crashes a naive
+client with `Unexpected token 'Y'`.
+
+---
+
 ## Reproduce this
 
 ```bash
