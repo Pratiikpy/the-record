@@ -1,0 +1,63 @@
+{
+  "procedureId": "CV-1",
+  "period": "2026-08-04",
+  "state": {
+    "coreVaultAddress": "rDhpmiPq4BVBDWMVdSrmkgt8thKyRzGV1p",
+    "custodianAddress": "r3GhxcaM4f9BJXEu1JLRgDXZpHJw6ugkH4",
+    "allowedDestinations": [
+      "r4uKJRy9mjxGHw1yzS1SrtaKCUwT66MCcP",
+      "rDEXUmuYAe9MCxVfoWArptSZNQPjKpRCXd",
+      "rDYeqGVc8M3Se9wowvRDbURGYGZ5i5VF6r",
+      "r4GHJwGSaGmJy9BBXS9osFXqRjqdSm7v83"
+    ],
+    "availableFundsUBA": "3628907217317",
+    "escrowedFundsUBA": "500000000000",
+    "immediatelyAvailableUBA": "3628907216917",
+    "reportedTotalUBA": "4128907216917"
+  },
+  "controls": [
+    {
+      "id": "C2",
+      "title": "Control preconditions",
+      "assertion": "The allowlist is populated, deduplicated, and the custodian and vault addresses are set.",
+      "opinion": "CLEAN",
+      "tested": 4,
+      "exceptions": []
+    },
+    {
+      "id": "C1",
+      "title": "Outflow destination allowlist",
+      "assertion": "Every payment sent by the Core Vault lands on an allowlisted address or the custodian.",
+      "opinion": "CLEAN",
+      "tested": 12,
+      "exceptions": []
+    },
+    {
+      "id": "C3",
+      "title": "Escrow reconciliation",
+      "assertion": "Escrowed funds equal total minus immediately available, and the raw balance is never below what is advertised.",
+      "opinion": "CLEAN",
+      "tested": 2,
+      "exceptions": []
+    },
+    {
+      "id": "C4",
+      "title": "Available-funds wedge",
+      "assertion": "The difference between the raw and advertised available balances is disclosed.",
+      "opinion": "CLEAN",
+      "tested": 1,
+      "exceptions": [],
+      "observation": "raw availableFunds exceeds advertised immediatelyAvailable by 400 UBA (expected: the asset manager nets a fee)"
+    }
+  ],
+  "opinion": "CLEAN",
+  "evidence": {
+    "xrplTransactions": 200,
+    "outflows": 12,
+    "ledgerRange": [
+      19601763,
+      19622638
+    ],
+    "evidenceDigest": "0x3276a32a"
+  }
+}
