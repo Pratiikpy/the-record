@@ -259,6 +259,52 @@ otherwise.
 Space reports as `submods.container.image_id`. `docker inspect .Id` returns it
 under the docker driver, but its meaning shifts with the storage backend.
 
+## Full corpus — 5 of 5 rebuilt deterministically
+
+Every target built twice, `--no-cache`, digests identical both times.
+
+| Repo | Lang | Outcome | Declared scope | Independently verifiable | Digest |
+|---|---|---|---|---|---|
+| tee-node v0.0.24 | Go | DETERMINISTIC | cross-machine | **yes** | `0x7b096a01…35bb` |
+| tee-proxy v0.0.21 | Go | DETERMINISTIC | undeclared | no | `0xf432a841…c014` |
+| scaffold `go/` | Go | DETERMINISTIC | cross-machine | **yes** | `0x0cec73db…d743` |
+| scaffold `python/` | Python | DETERMINISTIC | same-machine only | no | `0x2b0a5111…3702` |
+| scaffold `typescript/` | TypeScript | DETERMINISTIC | same-machine only | no | `0x816fdd5a…3d95` |
+
+**All five build deterministically here. Only two can be independently verified
+by anyone else** — and that gap is the entire product. `tee-proxy` ships no
+`REPRODUCIBILITY.md` at all, so it is scored `UNDECLARED` rather than assumed
+good.
+
+## The documented recipe cannot rebuild Flare's own extension images
+
+Two requirements in Flare's own repos are mutually exclusive as written:
+
+1. `REPRODUCIBILITY.md` requires the **docker-container** driver, because the
+   default driver silently ignores `rewrite-timestamp`
+   ([moby/buildkit#4230](https://github.com/moby/buildkit/issues/4230)).
+2. Every language Dockerfile begins `FROM local/tee-node-base:${TEE_NODE_REF}`,
+   an image built separately by `scripts/build-node-base.sh`.
+
+The container driver runs BuildKit with its **own image store**, so it cannot
+see an image built into the host's store. The build dies with
+`pull access denied, repository does not exist`.
+
+Their CI does not hit this only because `build-node-base.sh` uses a plain
+`docker build` on the default driver — **the very driver whose output is not
+timestamp-normalised**. So the base every extension image is layered on is not
+built under the reproducibility recipe at all.
+
+**Consequence:** following the published docs, a third party cannot rebuild any
+FCE extension image. Resolved here by pushing the prerequisite to a throwaway
+local registry the builder can pull from, redirecting the `FROM` with
+`--build-context`, and building the prerequisite under the *same* full recipe as
+the target so its own determinism is part of what gets verified.
+
+`TEE_NODE_REF` is derived from the tee-node pseudo-version pinned in
+`go/go.mod` (`v0.0.21-0.20260619120252-31fc839ae6d2` → `31fc839ae6d2`, which is
+tag v0.0.21), so a bumped dependency is followed rather than contradicted.
+
 ## Flare states the limitation themselves
 
 From `fce-extension-scaffold/REPRODUCIBILITY.md`, which is the strongest

@@ -1,0 +1,91 @@
+{
+  "generatedAt": "2026-08-04T08:46:49.551Z",
+  "summary": {
+    "DETERMINISTIC": 5
+  },
+  "rebuilds": [
+    {
+      "repo": "flare-foundation/tee-node",
+      "ref": "v0.0.24",
+      "dockerfile": "Dockerfile",
+      "lang": "Go",
+      "outcome": {
+        "status": "DETERMINISTIC",
+        "digest": "0x7b096a01a1974dbcb0598b51b9de67f35b36c201e2ff65bbf5078b0785dc35bb"
+      },
+      "scope": {
+        "guarantee": "CROSS_MACHINE",
+        "independentlyVerifiable": true
+      },
+      "startedAt": "2026-08-04T08:32:21.525Z",
+      "seconds": 144.4
+    },
+    {
+      "repo": "flare-foundation/tee-proxy",
+      "ref": "v0.0.21",
+      "dockerfile": "Dockerfile",
+      "lang": "Go",
+      "outcome": {
+        "status": "DETERMINISTIC",
+        "digest": "0xf432a841c3bc0c0d0b5107167d5356b2285ec5a6dcd56a8ec5a2071a4ca0c014"
+      },
+      "scope": {
+        "guarantee": "UNDECLARED",
+        "independentlyVerifiable": false,
+        "caveat": "source makes no reproducibility claim; scope of any match is unknown"
+      },
+      "startedAt": "2026-08-04T08:34:45.954Z",
+      "seconds": 176.9
+    },
+    {
+      "repo": "flare-foundation/fce-extension-scaffold",
+      "ref": "HEAD",
+      "dockerfile": "go/Dockerfile",
+      "lang": "Go",
+      "outcome": {
+        "status": "DETERMINISTIC",
+        "digest": "0x0cec73dbdf7d40e2ed5d29e2a41a81a18de4fd08c0c0da59e6e462e5a011d743"
+      },
+      "scope": {
+        "guarantee": "CROSS_MACHINE",
+        "independentlyVerifiable": true
+      },
+      "startedAt": "2026-08-04T08:37:42.806Z",
+      "seconds": 170.6
+    },
+    {
+      "repo": "flare-foundation/fce-extension-scaffold",
+      "ref": "HEAD",
+      "dockerfile": "python/Dockerfile",
+      "lang": "Python",
+      "outcome": {
+        "status": "DETERMINISTIC",
+        "digest": "0x2b0a5111dc27091311dab94a81ed4d877a5756c15017f79a6ab0ef7db5743702"
+      },
+      "scope": {
+        "guarantee": "SAME_MACHINE_ONLY",
+        "independentlyVerifiable": false,
+        "caveat": "source declares same-machine determinism only; a matching digest here says nothing about whether an auditor on other hardware could reproduce it"
+      },
+      "startedAt": "2026-08-04T08:40:33.453Z",
+      "seconds": 125.5
+    },
+    {
+      "repo": "flare-foundation/fce-extension-scaffold",
+      "ref": "HEAD",
+      "dockerfile": "typescript/Dockerfile",
+      "lang": "TypeScript",
+      "outcome": {
+        "status": "DETERMINISTIC",
+        "digest": "0x816fdd5a30f7221b00c5bc11a31860f47eab3deb51973770e8297797c7873d95"
+      },
+      "scope": {
+        "guarantee": "SAME_MACHINE_ONLY",
+        "independentlyVerifiable": false,
+        "caveat": "source declares same-machine determinism only; a matching digest here says nothing about whether an auditor on other hardware could reproduce it"
+      },
+      "startedAt": "2026-08-04T08:42:38.979Z",
+      "seconds": 250.6
+    }
+  ]
+}
