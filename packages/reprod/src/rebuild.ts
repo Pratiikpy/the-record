@@ -182,6 +182,58 @@ export interface Prerequisite {
   buildArgs?: Record<string, string>;
 }
 
+/**
+ * A throwaway registry on localhost, needed for an unobvious reason.
+ *
+ * The docker-container driver — which Flare's own REPRODUCIBILITY.md requires,
+ * because the default driver silently ignores `rewrite-timestamp` — runs
+ * BuildKit inside a container with its own image store. It therefore cannot see
+ * an image built into the host's store, so a Dockerfile that does
+ * `FROM local/tee-node-base:...` fails with "pull access denied".
+ *
+ * Flare's CI does not hit this because it builds the base with a plain
+ * `docker build` on the default driver, where the host store IS visible — but
+ * that is precisely the driver that does not honour rewrite-timestamp. So the
+ * documented recipe and the actual image layout are mutually exclusive as
+ * written, and a third party following the docs cannot reproduce any FCE
+ * extension image.
+ *
+ * The fix: push the prerequisite to a local registry the builder can pull from,
+ * and redirect the FROM with `--build-context`.
+ */
+const REGISTRY_PORT = 5000;
+const REGISTRY_NAME = "reprod-registry";
+
+async function ensureLocalRegistry(): Promise<string> {
+  const host = `localhost:${REGISTRY_PORT}`;
+  try {
+    const { stdout } = await run("docker", [
+      "ps",
+      "--filter",
+      `name=${REGISTRY_NAME}`,
+      "--format",
+      "{{.Names}}",
+    ]);
+    if (stdout.trim() === REGISTRY_NAME) return host;
+  } catch {
+    // fall through and start it
+  }
+  try {
+    await run("docker", ["rm", "-f", REGISTRY_NAME], undefined, 60_000);
+  } catch {
+    // nothing to remove
+  }
+  await run(
+    "docker",
+    ["run", "-d", "--rm", "--name", REGISTRY_NAME, "-p", `${REGISTRY_PORT}:5000`, "registry:2"],
+    undefined,
+    300_000,
+  );
+  // give it a moment to accept connections
+  await new Promise((r) => setTimeout(r, 2_000));
+  return host;
+}
+
 export interface RebuildRequest {
   repo: string;
   /** tag or commit sha — resolved to an immutable sha before building */
@@ -259,6 +311,7 @@ async function buildOnce(
   tag: string,
   context = ".",
   buildArgs?: Record<string, string>,
+  extraFlags: string[] = [],
 ): Promise<string> {
   await run(
     "docker",
@@ -273,6 +326,7 @@ async function buildOnce(
       "--build-arg",
       `SOURCE_DATE_EPOCH=${epoch}`,
       ...buildArgFlags(buildArgs),
+      ...extraFlags,
       "--output",
       "type=docker,rewrite-timestamp=true",
       "-f",
@@ -310,17 +364,54 @@ export async function rebuild(req: RebuildRequest): Promise<RebuildOutcome> {
     // is not deterministic, nothing layered on it can be, whatever the language
     // table promises. Building it here under the full recipe is the only way the
     // question is even answerable.
+    //
+    // They are pushed to a local registry rather than the host store because the
+    // docker-container driver cannot read the host store — see ensureLocalRegistry.
+    const contextOverrides: string[] = [];
     for (const p of req.prereqs ?? []) {
-      await buildOnce(dir, p.dockerfile, epoch, p.tag, p.context, p.buildArgs);
+      const host = await ensureLocalRegistry();
+      const pushed = `${host}/${p.tag.replace(/^[^/]*\//u, "").replace(/:/gu, "_")}:base`;
+      await run(
+        "docker",
+        [
+          "buildx",
+          "build",
+          "--builder",
+          BUILDER,
+          "--platform",
+          "linux/amd64",
+          "--no-cache",
+          "--build-arg",
+          `SOURCE_DATE_EPOCH=${epoch}`,
+          ...buildArgFlags(p.buildArgs),
+          "--output",
+          `type=registry,rewrite-timestamp=true,registry.insecure=true,name=${pushed}`,
+          "-f",
+          p.dockerfile,
+          "-t",
+          pushed,
+          p.context,
+        ],
+        dir,
+      );
+      contextOverrides.push("--build-context", `${p.tag}=docker-image://${pushed}`);
     }
 
     const tag = `reprod/${req.repo.replace("/", "-")}:${sha.slice(0, 12)}`;
-    const first = await buildOnce(dir, req.dockerfile, epoch, tag, ".", req.buildArgs);
+    const first = await buildOnce(dir, req.dockerfile, epoch, tag, ".", req.buildArgs, contextOverrides);
 
     // Determinism is a claim about repeatability, so verify it rather than
     // assume it. Flare documents that only the Go path holds across machines.
     if (req.double) {
-      const second = await buildOnce(dir, req.dockerfile, epoch, `${tag}-b`, ".", req.buildArgs);
+      const second = await buildOnce(
+        dir,
+        req.dockerfile,
+        epoch,
+        `${tag}-b`,
+        ".",
+        req.buildArgs,
+        contextOverrides,
+      );
       if (second !== first) {
         return {
           status: "UNREPRODUCIBLE",
