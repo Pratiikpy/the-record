@@ -13,6 +13,7 @@ import {
   assertContainerDriver,
   guaranteeFor,
   scopeOf,
+  teeNodeRefFromGoMod,
   type RebuildOutcome,
   type Scoped,
 } from "./rebuild.js";
@@ -43,8 +44,8 @@ export const TARGETS = [
   { repo: "flare-foundation/tee-proxy", ref: "v0.0.21", dockerfile: "Dockerfile", lang: "Go" },
   {
     repo: "flare-foundation/fce-extension-scaffold",
-    ref: "v0.20",
-    dockerfile: "Dockerfile",
+    ref: "HEAD",
+    dockerfile: "go/Dockerfile",
     lang: "Go",
   },
   // Per-language images exist only on the default branch. Python and TypeScript
@@ -99,6 +100,50 @@ function fetchReproducibilityMd(repo: string, ref: string): string {
   return "";
 }
 
+function fetchRaw(repo: string, ref: string, path: string): string {
+  const refs = ref === "HEAD" ? ["main", "master"] : [ref];
+  for (const r of refs) {
+    try {
+      const body = execFileSync(
+        "curl",
+        ["-sfL", `https://raw.githubusercontent.com/${repo}/${r}/${path}`],
+        { encoding: "utf8", timeout: 30_000 },
+      );
+      if (body.trim()) return body;
+    } catch {
+      // fall through
+    }
+  }
+  return "";
+}
+
+/**
+ * Every fce-extension-scaffold language image starts FROM a base image the
+ * repo builds separately. Its tag embeds the tee-node ref taken from go.mod, so
+ * it is derived here rather than pinned — a bumped dependency must be followed.
+ */
+function prereqsFor(t: { repo: string; ref: string; dockerfile: string }) {
+  if (!t.repo.endsWith("fce-extension-scaffold")) return {};
+  if (!/^(go|python|typescript)\//u.test(t.dockerfile)) return {};
+
+  const goMod = fetchRaw(t.repo, t.ref, "go/go.mod");
+  const teeRef = teeNodeRefFromGoMod(goMod);
+  if (!teeRef) return {};
+
+  return {
+    prereqs: [
+      {
+        dockerfile: "docker/node-base.Dockerfile",
+        context: "docker",
+        tag: `local/tee-node-base:${teeRef}`,
+        buildArgs: { TEE_NODE_REF: teeRef },
+      },
+    ],
+    buildArgs: { TEE_NODE_REF: teeRef },
+    teeNodeRef: teeRef,
+  };
+}
+
 async function one(
   t: { repo: string; ref: string; dockerfile: string; lang: string },
   expected?: string,
@@ -107,14 +152,18 @@ async function one(
   const t0 = Date.now();
 
   const scope = scopeOf(guaranteeFor(fetchReproducibilityMd(t.repo, t.ref), t.lang));
+  const pre = prereqsFor(t);
   log(`\n── ${t.repo}@${t.ref} · ${t.dockerfile} (${t.lang}) ──`);
   log(`   declared: ${scope.guarantee}${scope.independentlyVerifiable ? "" : " — NOT independently verifiable"}`);
+  if (pre.teeNodeRef) log(`   prereq:   local/tee-node-base:${pre.teeNodeRef} (from go/go.mod)`);
 
   const outcome = await rebuild({
     repo: t.repo,
     ref: t.ref,
     dockerfile: t.dockerfile,
     double: true,
+    ...(pre.prereqs ? { prereqs: pre.prereqs } : {}),
+    ...(pre.buildArgs ? { buildArgs: pre.buildArgs } : {}),
     ...(expected ? { expected } : {}),
   });
   const seconds = +((Date.now() - t0) / 1000).toFixed(1);

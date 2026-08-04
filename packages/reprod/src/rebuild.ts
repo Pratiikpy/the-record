@@ -162,6 +162,26 @@ export function guaranteeFor(reproducibilityMd: string, language: string): Guara
   return "UNDECLARED";
 }
 
+/**
+ * A prerequisite image the target build FROMs but does not itself produce.
+ *
+ * Found the hard way: every fce-extension-scaffold language image starts
+ * `FROM local/tee-node-base:${TEE_NODE_REF}`, an image built separately by
+ * `scripts/build-node-base.sh` from `docker/node-base.Dockerfile`, whose ref is
+ * derived from the tee-node pseudo-version pinned in `go/go.mod`. A verifier
+ * that runs a plain `docker build` on the language Dockerfile fails outright —
+ * so without this, NO FCE extension image is reproducible by a third party,
+ * whatever the language table promises.
+ */
+export interface Prerequisite {
+  dockerfile: string;
+  /** build context directory, relative to the repo root */
+  context: string;
+  /** fully-qualified local tag the target Dockerfile expects to find */
+  tag: string;
+  buildArgs?: Record<string, string>;
+}
+
 export interface RebuildRequest {
   repo: string;
   /** tag or commit sha — resolved to an immutable sha before building */
@@ -171,6 +191,26 @@ export interface RebuildRequest {
   expected?: string;
   /** build twice and require agreement before claiming determinism */
   double?: boolean;
+  /** images that must exist locally before the target build can run */
+  prereqs?: Prerequisite[];
+  /** extra --build-arg pairs for the target build */
+  buildArgs?: Record<string, string>;
+}
+
+/**
+ * Derive the tee-node ref the scaffold expects, from its own go.mod pin.
+ *
+ * `github.com/flare-foundation/tee-node v0.0.21-0.20260619120252-31fc839ae6d2`
+ * is a Go pseudo-version; the trailing 12 hex chars are the commit. Reading it
+ * from source rather than hardcoding means a bumped pin is followed, not
+ * silently contradicted.
+ */
+export function teeNodeRefFromGoMod(goMod: string): string | null {
+  const m = /flare-foundation\/tee-node\s+(\S+)/u.exec(goMod);
+  if (!m) return null;
+  const version = m[1]!;
+  const pseudo = /-([0-9a-f]{12})$/u.exec(version);
+  return pseudo ? pseudo[1]! : version;
 }
 
 async function run(cmd: string, args: string[], cwd?: string, timeoutMs = 1_800_000) {
@@ -208,25 +248,41 @@ async function imageConfigDigest(tag: string): Promise<string> {
   return `0x${id.slice("sha256:".length)}`;
 }
 
-async function buildOnce(dir: string, dockerfile: string, epoch: string, tag: string): Promise<string> {
-  await run("docker", [
-    "buildx",
-    "build",
-    "--builder",
-    BUILDER,
-    "--platform",
-    "linux/amd64",
-    "--no-cache",
-    "--build-arg",
-    `SOURCE_DATE_EPOCH=${epoch}`,
-    "--output",
-    "type=docker,rewrite-timestamp=true",
-    "-f",
-    dockerfile,
-    "-t",
-    tag,
-    ".",
-  ], dir);
+function buildArgFlags(args?: Record<string, string>): string[] {
+  return Object.entries(args ?? {}).flatMap(([k, v]) => ["--build-arg", `${k}=${v}`]);
+}
+
+async function buildOnce(
+  dir: string,
+  dockerfile: string,
+  epoch: string,
+  tag: string,
+  context = ".",
+  buildArgs?: Record<string, string>,
+): Promise<string> {
+  await run(
+    "docker",
+    [
+      "buildx",
+      "build",
+      "--builder",
+      BUILDER,
+      "--platform",
+      "linux/amd64",
+      "--no-cache",
+      "--build-arg",
+      `SOURCE_DATE_EPOCH=${epoch}`,
+      ...buildArgFlags(buildArgs),
+      "--output",
+      "type=docker,rewrite-timestamp=true",
+      "-f",
+      dockerfile,
+      "-t",
+      tag,
+      context,
+    ],
+    dir,
+  );
   return imageConfigDigest(tag);
 }
 
@@ -248,13 +304,23 @@ export async function rebuild(req: RebuildRequest): Promise<RebuildOutcome> {
     const { stdout: epochOut } = await run("git", ["log", "-1", "--format=%ct"], dir);
     const epoch = epochOut.trim();
 
+    // Prerequisites first, and built with the SAME reproducibility flags as the
+    // target. Flare's own build-node-base.sh uses a plain `docker build`, so the
+    // base image it produces is not built under rewrite-timestamp — if that base
+    // is not deterministic, nothing layered on it can be, whatever the language
+    // table promises. Building it here under the full recipe is the only way the
+    // question is even answerable.
+    for (const p of req.prereqs ?? []) {
+      await buildOnce(dir, p.dockerfile, epoch, p.tag, p.context, p.buildArgs);
+    }
+
     const tag = `reprod/${req.repo.replace("/", "-")}:${sha.slice(0, 12)}`;
-    const first = await buildOnce(dir, req.dockerfile, epoch, tag);
+    const first = await buildOnce(dir, req.dockerfile, epoch, tag, ".", req.buildArgs);
 
     // Determinism is a claim about repeatability, so verify it rather than
     // assume it. Flare documents that only the Go path holds across machines.
     if (req.double) {
-      const second = await buildOnce(dir, req.dockerfile, epoch, `${tag}-b`);
+      const second = await buildOnce(dir, req.dockerfile, epoch, `${tag}-b`, ".", req.buildArgs);
       if (second !== first) {
         return {
           status: "UNREPRODUCIBLE",
