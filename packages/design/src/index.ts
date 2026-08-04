@@ -35,6 +35,12 @@ export const TOKENS = `
 
 export const BASE_CSS = `
 *{box-sizing:border-box}
+/* Keyboard users should not have to tab the whole register nav on every page.
+   Off-screen until focused, then it lands in the flow rather than over it. */
+.skip{position:absolute;left:-9999px;top:0;font-family:var(--mono);font-size:13px;
+  background:var(--ink);color:var(--paper);padding:10px 16px;z-index:10;text-decoration:none}
+.skip:focus{left:8px;top:8px}
+main{display:block}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
 .shell{max-width:1180px;margin-inline:auto;padding-inline:24px}
 .masthead{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px}
@@ -146,15 +152,18 @@ export function page(o: PageOpts): string {
 <style>${TOKENS}${BASE_CSS}${o.extraCss ?? ""}</style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="shell">
   <header class="masthead">
     <div class="brand">
       <div class="mark" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
       <span class="wordmark">the record · ${esc(o.section)}</span>
     </div>
-    <nav class="top">${nav}</nav>
+    <nav class="top" aria-label="Registers">${nav}</nav>
   </header>
+  <main id="main">
 ${o.body}
+  </main>
   <footer>The Record · Covenant — Procedure — Reprod &nbsp;·&nbsp; ${esc(o.meta)} &nbsp;·&nbsp; every figure re-derivable from public RPC</footer>
 </div>
 </body>
