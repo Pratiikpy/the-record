@@ -111,7 +111,7 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
   .stat .k{min-height:3.4em}
 }
 @media print{body{background:#fff;color:#000}.tablewrap{overflow:visible;border:0}table{font-size:9px}}
-@media(prefers-reduced-motion:reduce){*,::before,::after{transition-duration:.001ms!important;animation-duration:.001ms!important;animation-iteration-count:1!important}}.erratum{border-top:1px solid var(--rule);padding:22px 0}.erratum-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}.erratum-head h3{margin:0;font-family:var(--mono);font-size:13px;letter-spacing:.06em}.fate{font-family:var(--mono);font-size:10px;letter-spacing:.07em;padding:2px 7px;border:1px solid var(--rule-strong)}.fate.pub{color:var(--v-bad);border-color:var(--v-bad)}.fate.caught{color:var(--v-sim);border-style:dashed}.err{display:grid;grid-template-columns:minmax(120px,150px) 1fr;gap:8px 18px;margin:0}.err dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}.err dd{margin:0;font-size:14px;line-height:1.65;max-width:62ch}.err s{color:var(--faint)}@media (max-width:640px){.err{grid-template-columns:1fr;gap:2px 0}.err dd{margin-bottom:10px}}</style>
+@media(prefers-reduced-motion:reduce){*,::before,::after{transition-duration:.001ms!important;animation-duration:.001ms!important;animation-iteration-count:1!important}}.erratum{border-top:1px solid var(--rule);padding:22px 0}.erratum-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}.erratum-head h3{margin:0;font-family:var(--mono);font-size:13px;letter-spacing:.06em}.fate{font-family:var(--mono);font-size:10px;letter-spacing:.07em;padding:2px 7px;border:1px solid var(--rule-strong)}.fate.pub{color:var(--v-bad);border-color:var(--v-bad)}.fate.caught{color:var(--v-sim);border-style:dashed}.disc{color:var(--faint)}.err{display:grid;grid-template-columns:minmax(120px,150px) 1fr;gap:8px 18px;margin:0}.err dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}.err dd{margin:0;font-size:14px;line-height:1.65;max-width:62ch}.err s{color:var(--faint)}@media (max-width:640px){.err{grid-template-columns:1fr;gap:2px 0}.err dd{margin-bottom:10px}}</style>
 <script>(function(){try{var t=localStorage.getItem("record-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}})()</script>
 </head>
 <body>
@@ -134,10 +134,10 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
       same care as the findings, and never quietly edited away.</p>
 
     <div class="stats">
-      <div class="stat"><div class="k">Errata</div><div class="v">6</div><div class="n">append-only; nothing is deleted</div></div>
+      <div class="stat"><div class="k">Errata</div><div class="v">7</div><div class="n">append-only; nothing is deleted</div></div>
       <div class="stat"><div class="k">Reached the public</div><div class="v">3</div><div class="n">published, then withdrawn</div></div>
-      <div class="stat"><div class="k">Caught first</div><div class="v">3</div><div class="n">disclosed anyway, but not the same thing</div></div>
-      <div class="stat"><div class="k">Found by our own tests</div><div class="v">2</div><div class="n">rather than by re-reading</div></div>
+      <div class="stat"><div class="k">Caught first</div><div class="v">4</div><div class="n">disclosed anyway, but not the same thing</div></div>
+      <div class="stat"><div class="k">Found by machinery</div><div class="v">4</div><div class="n">2 by a control or fault injection, 2 by a written test</div></div>
     </div>
 
     <div class="note">
@@ -158,6 +158,7 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
       <h3>E-001</h3>
       <span class="fate pub">PUBLISHED, THEN WITHDRAWN</span>
       <span class="cap">2026-08-04</span>
+      <span class="cap disc">found by our own machinery</span>
     </div>
     <dl class="err">
       <dt>Claimed</dt><dd><s>93 FXRP redemptions were proven defaults — agents that took a fee and never delivered XRP.</s></dd>
@@ -172,6 +173,7 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
       <h3>E-002</h3>
       <span class="fate pub">PUBLISHED, THEN WITHDRAWN</span>
       <span class="cap">2026-08-04</span>
+      <span class="cap disc">found by re-reading the evidence</span>
     </div>
     <dl class="err">
       <dt>Claimed</dt><dd><s>Control C3 reported a 400 UBA exception against Flare, asserting availableFunds + escrowedFunds ≤ totalAvailableUBA.</s></dd>
@@ -186,6 +188,7 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
       <h3>E-003</h3>
       <span class="fate pub">PUBLISHED, THEN WITHDRAWN</span>
       <span class="cap">2026-08-04</span>
+      <span class="cap disc">found by our own machinery</span>
     </div>
     <dl class="err">
       <dt>Claimed</dt><dd><s>Control C3 asserted escrowedFunds = totalAvailable − immediatelyAvailable, and reported CLEAN every period.</s></dd>
@@ -200,6 +203,7 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
       <h3>E-004</h3>
       <span class="fate caught">CAUGHT BEFORE PUBLICATION</span>
       <span class="cap">2026-08-04</span>
+      <span class="cap disc">found by re-reading the evidence</span>
     </div>
     <dl class="err">
       <dt>Claimed</dt><dd><s>A draft of C3 asserted availableFunds + escrowedFunds ≤ account balance, producing a 497,844,875,522 drop shortfall against Flare.</s></dd>
@@ -214,6 +218,7 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
       <h3>E-005</h3>
       <span class="fate caught">CAUGHT BEFORE PUBLICATION</span>
       <span class="cap">2026-08-05</span>
+      <span class="cap disc">found by re-reading the evidence</span>
     </div>
     <dl class="err">
       <dt>Claimed</dt><dd><s>The status badge reported a verdict as fresh.</s></dd>
@@ -228,6 +233,7 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
       <h3>E-006</h3>
       <span class="fate caught">CAUGHT BEFORE PUBLICATION</span>
       <span class="cap">2026-08-05</span>
+      <span class="cap disc">found by a test written for it</span>
     </div>
     <dl class="err">
       <dt>Claimed</dt><dd><s>The red run forked Coston2 and reconciled it against the Coston2 XRPL testnet vault.</s></dd>
@@ -235,6 +241,21 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
       <dt>Mechanism</dt><dd>xrpl.ts chose its XRPL cluster at module load. ESM hoists imports above the importing module&#39;s statements, so the red run setting NETWORK at the top of its own file ran too late.</dd>
       <dt>Caught by</dt><dd>Grading the subjects, which forced the question of what evidence V3 actually rests on. The hoisting behaviour was then reproduced in a five-line test rather than assumed.</dd>
       <dt>Now prevented by</dt><dd>Endpoints resolve per call, so the caller&#39;s network selection is honoured.</dd>
+    </dl>
+  </article>
+<article class="erratum">
+    <div class="erratum-head">
+      <h3>E-007</h3>
+      <span class="fate caught">CAUGHT BEFORE PUBLICATION</span>
+      <span class="cap">2026-08-05</span>
+      <span class="cap disc">found by a test written for it</span>
+    </div>
+    <dl class="err">
+      <dt>Claimed</dt><dd><s>Evidence packs were anchored to a Flare block, an XRPL ledger and a cross-chain skew of 0 seconds.</s></dd>
+      <dt>Actually</dt><dd><strong>None of the three anchors described the state in the pack. The block was read AFTER the contract reads, so it named a later height. The XRPL ledger was the newest of the last 200 transactions, not the ledger the balance and escrows were read at. The skew was hardcoded, never measured.</strong></dd>
+      <dt>Mechanism</dt><dd>Each anchor was taken from whatever value was conveniently to hand rather than from the read itself. A replayer at the stated Flare block could legitimately compute a different opinion, and the stated XRPL ledger was simply unrelated to the balances beside it.</dd>
+      <dt>Caught by</dt><dd>Writing a regression test that asserted the anchor equals the height the state was read at. The first version of that test failed twice, and the second failure exposed a deeper form of the same bug: the recorded XRPL evidence did not carry its own ledger, so a replayer could not confirm the anchor from the pack at all.</dd>
+      <dt>Now prevented by</dt><dd>Reads are pinned to a block number obtained first; accountLedgerState returns the ledger and close time it used; skew is computed from them and reports -1 when it cannot be established. The pack is self-describing, and tests assert the anchor matches the recorded evidence.</dd>
     </dl>
   </article>
   </section>
@@ -251,7 +272,7 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
     </div>
   </section>
   </main>
-  <footer>The Record · Covenant — Procedure — Reprod &nbsp;·&nbsp; 6 errata · 3 reached the public &nbsp;·&nbsp; every figure re-derivable from public RPC</footer>
+  <footer>The Record · Covenant — Procedure — Reprod &nbsp;·&nbsp; 7 errata · 3 reached the public &nbsp;·&nbsp; every figure re-derivable from public RPC</footer>
 </div>
 <script>(function(){var b=document.querySelector("[data-toggle-theme]");if(!b)return;
 b.addEventListener("click",function(){var r=document.documentElement;

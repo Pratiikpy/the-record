@@ -30,10 +30,31 @@ export type Fate =
   /** caught before anyone saw it — disclosed anyway, but not the same thing */
   | "CAUGHT_BEFORE_PUBLICATION";
 
+/**
+ * HOW an error surfaced, declared rather than inferred.
+ *
+ * This was a regex over the prose in `caughtBy`, searching for phrases like
+ * "fault injection". A published statistic derived by keyword-matching free
+ * text changes silently the moment someone rewords a sentence — a number that
+ * looks measured and is actually a rendering. Exactly the defect this project
+ * exists to find, sitting on its own errata page.
+ */
+export type Discovery =
+  /** our own machinery surfaced it: a control test, fault injection, the red run */
+  | "OWN_MACHINERY"
+  /** a test written deliberately to check this property surfaced it */
+  | "WRITTEN_TEST"
+  /** a human re-read the evidence or the counterparty's accounting */
+  | "REVIEW"
+  /** somebody outside the project reported it */
+  | "EXTERNAL";
+
 export interface Erratum {
   id: string;
   date: string;
   fate: Fate;
+  /** declared, never parsed out of the prose below */
+  discovery: Discovery;
   /** the claim, as it was made */
   claimed: string;
   /** what was actually true */
@@ -49,6 +70,7 @@ export interface Erratum {
 export const ERRATA: readonly Erratum[] = [
   {
     id: "E-001",
+    discovery: "OWN_MACHINERY",
     date: "2026-08-04",
     fate: "PUBLISHED",
     claimed: "93 FXRP redemptions were proven defaults — agents that took a fee and never delivered XRP.",
@@ -66,6 +88,7 @@ export const ERRATA: readonly Erratum[] = [
   },
   {
     id: "E-002",
+    discovery: "REVIEW",
     date: "2026-08-04",
     fate: "PUBLISHED",
     claimed:
@@ -81,6 +104,7 @@ export const ERRATA: readonly Erratum[] = [
   },
   {
     id: "E-003",
+    discovery: "OWN_MACHINERY",
     date: "2026-08-04",
     fate: "PUBLISHED",
     claimed:
@@ -97,6 +121,7 @@ export const ERRATA: readonly Erratum[] = [
   },
   {
     id: "E-004",
+    discovery: "REVIEW",
     date: "2026-08-04",
     fate: "CAUGHT_BEFORE_PUBLICATION",
     claimed:
@@ -112,6 +137,7 @@ export const ERRATA: readonly Erratum[] = [
   },
   {
     id: "E-005",
+    discovery: "REVIEW",
     date: "2026-08-05",
     fate: "CAUGHT_BEFORE_PUBLICATION",
     claimed: "The status badge reported a verdict as fresh.",
@@ -127,6 +153,7 @@ export const ERRATA: readonly Erratum[] = [
   },
   {
     id: "E-006",
+    discovery: "WRITTEN_TEST",
     date: "2026-08-05",
     fate: "CAUGHT_BEFORE_PUBLICATION",
     claimed: "The red run forked Coston2 and reconciled it against the Coston2 XRPL testnet vault.",
@@ -143,6 +170,7 @@ export const ERRATA: readonly Erratum[] = [
   },
   {
     id: "E-007",
+    discovery: "WRITTEN_TEST",
     date: "2026-08-05",
     fate: "CAUGHT_BEFORE_PUBLICATION",
     claimed:
@@ -171,15 +199,25 @@ export interface ErrataSummary {
   total: number;
   published: number;
   caughtBeforePublication: number;
-  /** how many were surfaced by our own machinery rather than by reading */
-  caughtByOwnControls: number;
+  /** surfaced by a control test, fault injection or the red run */
+  byOwnMachinery: number;
+  /** surfaced by a test written to check the property */
+  byWrittenTest: number;
+  /** surfaced by a human re-reading evidence */
+  byReview: number;
+  /** reported from outside the project */
+  byExternal: number;
 }
 
 export function summariseErrata(errata: readonly Erratum[] = ERRATA): ErrataSummary {
+  const count = (d: Discovery): number => errata.filter((e) => e.discovery === d).length;
   return {
     total: errata.length,
     published: errata.filter((e) => e.fate === "PUBLISHED").length,
     caughtBeforePublication: errata.filter((e) => e.fate === "CAUGHT_BEFORE_PUBLICATION").length,
-    caughtByOwnControls: errata.filter((e) => /control test|fault injection|red run/iu.test(e.caughtBy)).length,
+    byOwnMachinery: count("OWN_MACHINERY"),
+    byWrittenTest: count("WRITTEN_TEST"),
+    byReview: count("REVIEW"),
+    byExternal: count("EXTERNAL"),
   };
 }

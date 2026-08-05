@@ -17,6 +17,13 @@ const ROOT = join(HERE, "..", "..", "..");
 const OUTDIR = join(ROOT, "site");
 const OUT = join(OUTDIR, "errata.html");
 
+const DISCOVERY_LABEL: Record<Erratum["discovery"], string> = {
+  OWN_MACHINERY: "our own machinery",
+  WRITTEN_TEST: "a test written for it",
+  REVIEW: "re-reading the evidence",
+  EXTERNAL: "someone outside the project",
+};
+
 const FATE_LABEL: Record<Erratum["fate"], string> = {
   PUBLISHED: "PUBLISHED, THEN WITHDRAWN",
   CAUGHT_BEFORE_PUBLICATION: "CAUGHT BEFORE PUBLICATION",
@@ -29,6 +36,7 @@ function entry(e: Erratum): string {
       <h3>${esc(e.id)}</h3>
       <span class="fate ${published ? "pub" : "caught"}">${esc(FATE_LABEL[e.fate])}</span>
       <span class="cap">${esc(e.date)}</span>
+      <span class="cap disc">found by ${esc(DISCOVERY_LABEL[e.discovery])}</span>
     </div>
     <dl class="err">
       <dt>Claimed</dt><dd><s>${esc(e.claimed)}</s></dd>
@@ -56,7 +64,7 @@ function main(): void {
       ${stat("Errata", String(s.total), "append-only; nothing is deleted")}
       ${stat("Reached the public", String(s.published), "published, then withdrawn")}
       ${stat("Caught first", String(s.caughtBeforePublication), "disclosed anyway, but not the same thing")}
-      ${stat("Found by our own tests", String(s.caughtByOwnControls), "rather than by re-reading")}
+      ${stat("Found by machinery", String(s.byOwnMachinery + s.byWrittenTest), `${s.byOwnMachinery} by a control or fault injection, ${s.byWrittenTest} by a written test`)}
     </div>
 
     <div class="note">
@@ -104,6 +112,7 @@ ${ERRATA.map(entry).join("\n")}
         ".fate{font-family:var(--mono);font-size:10px;letter-spacing:.07em;padding:2px 7px;border:1px solid var(--rule-strong)}" +
         ".fate.pub{color:var(--v-bad);border-color:var(--v-bad)}" +
         ".fate.caught{color:var(--v-sim);border-style:dashed}" +
+        ".disc{color:var(--faint)}" +
         ".err{display:grid;grid-template-columns:minmax(120px,150px) 1fr;gap:8px 18px;margin:0}" +
         ".err dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}" +
         ".err dd{margin:0;font-size:14px;line-height:1.65;max-width:62ch}" +
