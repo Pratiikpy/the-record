@@ -74,13 +74,13 @@ So we measured how much a hash actually identifies:
 ```console
 $ pnpm --filter @therecord/reprod provenance --registry
 
-  machines                 223
-  distinct code hashes     8
-  mean identification      0.32 bits   (a unique hash here would carry 7.80)
+  machines                 250
+  distinct code hashes     12
+  mean identification      0.29 bits   (a unique hash here would carry 7.97)
 
   most-shared hash
   0x194844cf417dde867073e5ab7199fa4d21fd82b5dbe2bdea8b3d7fc18d10fdc2
-  carried by 215 machines (96.4%) under 44 independent owners → 0.05 bits
+  carried by 238 machines (95.2%) under 46 independent owners → 0.07 bits
 
   rebuilds we performed       5
   that match an on-chain hash 0
@@ -180,7 +180,7 @@ the hardest thing to fake *precisely*.
 | **FDC** `ReferencedPaymentNonexistence` | Covenant proves a payment *did not happen*, then requires the verifier to **refuse** redemptions the chain already recorded as performed. That refusal test caught our own false accusation. |
 | **FAssets / Core Vault** | CV-1 reconciles `escrowedFunds` against the vault's actual XRPL Escrow objects — two chains that cannot move each other. |
 | **Contract Registry** | Nothing hardcoded but the registry. Registry → `AssetManagerController` → `getAssetManagers()` → `getCoreVaultManager()`, resolved at run time; asset picked by the token's own symbol, so a new FAsset is discovered rather than missed. |
-| **FlareTeeManager** | Reprod enumerates all 223 registered TEE machines and measures what each code hash establishes. |
+| **FlareTeeManager** | Reprod enumerates every registered TEE machine and measures what each code hash establishes. |
 | **Reproducible builds** | Rebuilt 5 of Flare's own OCI images as a third party — and fixed the published recipe when it didn't work. |
 
 ### Fixes sent upstream to Flare

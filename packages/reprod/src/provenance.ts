@@ -14,8 +14,8 @@
  *
  *   bits = −log₂( machines carrying this hash ÷ machines in the registry )
  *
- * A hash unique in a 223-machine registry carries 7.80 bits. A hash carried by
- * 215 of those 223 carries 0.05 bits. That is not an accusation about anybody —
+ * A hash unique in a 250-machine registry carries 7.97 bits. A hash carried by
+ * 238 of those 250 carries 0.07 bits. That is not an accusation about anybody —
  * it is a property of the registry, computed from the registry, and it is the
  * number the instruction "check the hash" silently assumes is large.
  *
@@ -258,7 +258,7 @@ export interface RegistryProvenanceSummary {
  * The registry-level view.
  *
  * Deliberately the headline artifact rather than per-machine cards: a
- * statistic about 223 machines is a property of the ecosystem, whereas a wall
+ * registry-level statistic is a property of the ecosystem, whereas a wall
  * of individual verdicts reads as a list of accusations even when every entry
  * is accurate.
  */

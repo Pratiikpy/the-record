@@ -32,6 +32,9 @@ PAGES=(
 
 say() { printf '%s\n' "$*" >&2; }
 
+say "── drift: does the snapshot still describe the chain? ──"
+pnpm --filter @therecord/reprod run drift
+
 say "── render ──"
 cd "$ROOT"
 pnpm --filter @therecord/covenant  run render        >/dev/null

@@ -112,7 +112,7 @@ function rebuildRow(r: RebuildRecord): string {
  *
  * The section is deliberately registry-level. Per-machine cards would be
  * equally accurate and would read as a list of accusations; a statistic over
- * 223 machines is a property of the ecosystem. No operator is named anywhere
+ * registry is a property of the ecosystem. No operator is named anywhere
  * on this page, and simulated attestation is stated as permitted every time it
  * appears, because it is.
  */

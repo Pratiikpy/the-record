@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Reprod — proves a running TEE machine is the source code it claims to be.",
+  "description": "Reprod \u00e2\u20ac\u201d proves a running TEE machine is the source code it claims to be.",
   "scripts": {
     "scan": "tsx src/scan.ts",
     "render": "tsx src/render.ts",
     "build": "pnpm run scan && pnpm run render",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "provenance": "tsx src/provenance-cli.ts"
+    "provenance": "tsx src/provenance-cli.ts",
+    "drift": "tsx src/drift-check.ts"
   },
   "dependencies": {
     "viem": "^2.21.0"

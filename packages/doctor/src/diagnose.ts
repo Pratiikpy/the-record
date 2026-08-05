@@ -1,7 +1,7 @@
 /**
  * doctor — why is this TEE machine not working?
  *
- * 191 of 223 registered machines on Coston2 are unreachable, and FCC's failure
+ * most registered machines on Coston2 are unreachable, and FCC's failure
  * modes are documented as silent: a machine sits at INITIALIZED forever, or
  * instructions simply never arrive, with no error surface anywhere.
  *
