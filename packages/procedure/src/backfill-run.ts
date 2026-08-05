@@ -24,7 +24,7 @@
 import { writeFileSync, mkdirSync, readFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { type PublicClient } from "viem";
+import { type PublicClient, type Address } from "viem";
 
 import {
   buildManifest,
@@ -35,9 +35,10 @@ import {
   type HeightRow,
 } from "./backfill.js";
 import { runCv1, type CoreVaultState, type Cv1Report, type Opinion } from "./cv1.js";
-import { CORE_VAULT_MANAGER, ASSET_MANAGER_FXRP } from "./addresses.js";
+import { selectNetwork, clientFor, resolveAddresses } from "./network.js";
 import type { XrplTx } from "./xrpl.js";
 import { adjudicateSkew } from "./faults.js";
+import type { ResolvedAddresses } from "./network.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const OUTDIR = join(HERE, "..", "out");
@@ -81,9 +82,14 @@ const amAbi = [
 async function flareStateAt(
   client: PublicClient,
   block: number,
+  CORE_VAULT_MANAGER: Address,
+  ASSET_MANAGER_FXRP: Address,
 ): Promise<Omit<CoreVaultState, "onLedger"> | null> {
   const b = BigInt(block);
   try {
+    // Mainnet public RPC rate-limits; a short pause between rows keeps a long
+    // backfill inside the budget instead of dying two-thirds of the way in.
+    await new Promise((r) => setTimeout(r, Number(process.env.BACKFILL_PACE_MS ?? 150)));
     const [coreVaultAddress, custodianAddress, availableFunds, escrowedFunds, allowed, amounts] =
       await Promise.all([
         client.readContract({ address: CORE_VAULT_MANAGER, abi: cvmAbi, functionName: "coreVaultAddress", blockNumber: b }),
@@ -109,7 +115,12 @@ async function flareStateAt(
   }
 }
 
-const XRPL_ENDPOINTS = ["https://s.altnet.rippletest.net:51234", "https://testnet.xrpl-labs.com"] as const;
+// Must follow the network. Reconciling Flare mainnet against XRPL testnet
+// would compare a real vault to an unrelated ledger and report it confidently.
+const XRPL_ENDPOINTS: readonly string[] =
+  (process.env.NETWORK ?? "flare").toLowerCase() === "coston2"
+    ? ["https://s.altnet.rippletest.net:51234", "https://testnet.xrpl-labs.com"]
+    : ["https://xrplcluster.com", "https://s2.ripple.com:51234"];
 
 async function xrplAt(
   account: string,
@@ -220,7 +231,7 @@ function rollUpScoped(controls: ReadonlyArray<{ id: string; opinion: Opinion }>)
  * outcome: this series is evidence about backing, not about outflows, and
  * pretending otherwise would be the quiet kind of overclaim.
  */
-async function evaluateRow(client: PublicClient, h: HeightRow): Promise<BackfillRow> {
+async function evaluateRow(client: PublicClient, h: HeightRow, addrs: ResolvedAddresses): Promise<BackfillRow> {
   const base: BackfillRow = {
     utc: h.utc,
     derivation: "retrospective",
@@ -231,7 +242,7 @@ async function evaluateRow(client: PublicClient, h: HeightRow): Promise<Backfill
     controls: [],
   };
 
-  const flare = await flareStateAt(client, h.flareBlock);
+  const flare = await flareStateAt(client, h.flareBlock, addrs.coreVaultManager, addrs.assetManager);
   if (!flare) {
     return { ...base, disclaimer: "CoreVaultManager had no code at this Flare block" };
   }
@@ -340,10 +351,13 @@ async function main(): Promise<void> {
     log(`→ ${MANIFEST}  (${manifest.length} slots)`);
   }
 
-  const client = makeClient();
+  const net = selectNetwork();
+  const client = clientFor(net);
+  const addrs = await resolveAddresses(client, net);
+  log(`network ${net.label} · ${addrs.symbol} · core vault ${addrs.coreVaultManager}`);
   const rows: BackfillRow[] = [];
   for (const [i, h] of manifest.entries()) {
-    const row = await evaluateRow(client, h);
+    const row = await evaluateRow(client, h, addrs);
     rows.push(row);
     if (i % 20 === 0 || i === manifest.length - 1) {
       log(`  ${i + 1}/${manifest.length}  ${row.utc}  ${row.opinion}${row.skewNote ? "  (skew)" : ""}`);

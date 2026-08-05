@@ -1,35 +1,26 @@
 /**
- * Run procedure CV-1 against live Coston2 + XRPL testnet.
+ * Run procedure CV-1 against a live Flare network and its XRP Ledger.
  *
- * Reads only. No credentials, no client, nobody's permission.
+ * Reads only. No credentials, no client, nobody's permission -- which is also
+ * why this can point at MAINNET without capital or risk. The subject of an
+ * assurance register should be the system real value settles on; Coston2 is
+ * where faults are injected deliberately, and has to be asked for by name.
+ *
+ *   pnpm run run                 # Flare mainnet
+ *   NETWORK=coston2 pnpm run run # the fault laboratory
  */
 import { writeFileSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { createPublicClient, http, defineChain, type Address } from "viem";
+import { type Address } from "viem";
 
 import { accountTx, accountLedgerState, totalEscrowedDrops } from "./xrpl.js";
 import { runCv1, type CoreVaultState } from "./cv1.js";
-import { CORE_VAULT_MANAGER, ASSET_MANAGER_FXRP } from "./addresses.js";
+import { selectNetwork, clientFor, resolveAddresses } from "./network.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const OUTDIR = join(HERE, "..", "out");
 const OUT = join(OUTDIR, process.env.CV1_OUT ?? "cv1.json");
-
-/**
- * RPC_URL is overridable so the identical procedure can be pointed at a forked
- * chain with a deliberately corrupted Core Vault. A control that has only ever
- * printed CLEAN is indistinguishable from a control that cannot fail, and there
- * is no sentence that fixes that — only a red run.
- */
-const RPC = process.env.RPC_URL ?? "https://coston2-api.flare.network/ext/C/rpc";
-
-const coston2 = defineChain({
-  id: 114,
-  name: "Flare Coston2",
-  nativeCurrency: { name: "C2FLR", symbol: "C2FLR", decimals: 18 },
-  rpcUrls: { default: { http: [RPC] } },
-});
 
 const cvmAbi = [
   { type: "function", name: "coreVaultAddress", stateMutability: "view", inputs: [], outputs: [{ type: "string" }] },
@@ -62,9 +53,22 @@ const log = (m: string): void => void process.stderr.write(`${m}\n`);
 
 async function main(): Promise<void> {
   mkdirSync(OUTDIR, { recursive: true });
-  const client = createPublicClient({ chain: coston2, transport: http(RPC, { batch: true }) });
 
-  log("reading Core Vault state from Coston2…");
+  // Resolved through Flare's own contract registry rather than hardcoded, so
+  // the identical procedure runs against mainnet and Coston2 and cannot read a
+  // stale address after an upgrade.
+  const net = selectNetwork();
+  const client = clientFor(net);
+  const at = await resolveAddresses(client, net);
+  const CORE_VAULT_MANAGER: Address = at.coreVaultManager;
+  const ASSET_MANAGER_FXRP: Address = at.assetManager;
+
+  log(`network    ${net.label} (chain ${net.chainId})`);
+  log(`asset      ${at.symbol}  ·  ${at.allAssetManagers.length} asset manager(s) registered`);
+  log(`manager    ${ASSET_MANAGER_FXRP}`);
+  log(`core vault ${CORE_VAULT_MANAGER}`);
+  log("");
+  log(`reading Core Vault state from ${net.label}…`);
   const [coreVaultAddress, custodianAddress, availableFunds, escrowedFunds, allowedDestinations, amounts] =
     await Promise.all([
       client.readContract({ address: CORE_VAULT_MANAGER, abi: cvmAbi, functionName: "coreVaultAddress" }),
@@ -99,7 +103,7 @@ async function main(): Promise<void> {
   log(`  available  ${state.availableFundsUBA} UBA`);
   log(`  escrowed   ${state.escrowedFundsUBA} UBA`);
 
-  log("reading Core Vault payments and ledger state from XRPL testnet…");
+  log(`reading Core Vault payments and ledger state from ${net.isMainnet ? "the XRP Ledger" : "XRPL testnet"}…`);
   const [txs, ledger] = await Promise.all([
     accountTx(state.coreVaultAddress, 200),
     accountLedgerState(state.coreVaultAddress),

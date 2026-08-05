@@ -19,10 +19,20 @@ export interface XrplTx {
   successful: boolean;
 }
 
-const ENDPOINTS = [
-  "https://s.altnet.rippletest.net:51234",
-  "https://testnet.xrpl-labs.com",
-] as const;
+/**
+ * Which XRPL cluster backs the Flare network under test.
+ *
+ * FAssets on Flare mainnet are backed by real XRP on the XRP Ledger mainnet;
+ * on Coston2 they are backed by testnet XRP. Reading the wrong cluster would
+ * reconcile Flare's accounting against a completely unrelated ledger and
+ * produce a confident, meaningless verdict -- so the endpoints follow the
+ * network rather than being fixed.
+ */
+const MAINNET_ENDPOINTS = ["https://xrplcluster.com", "https://s2.ripple.com:51234"] as const;
+const TESTNET_ENDPOINTS = ["https://s.altnet.rippletest.net:51234", "https://testnet.xrpl-labs.com"] as const;
+
+const ENDPOINTS: readonly string[] =
+  (process.env.NETWORK ?? "flare").toLowerCase() === "coston2" ? TESTNET_ENDPOINTS : MAINNET_ENDPOINTS;
 
 /** XRPL epoch is 2000-01-01T00:00:00Z, 946684800s after the Unix epoch. */
 export const XRPL_EPOCH_OFFSET = 946_684_800;

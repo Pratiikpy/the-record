@@ -31,10 +31,20 @@
  * be a lie of exactly the kind this project exists not to tell.
  */
 import { createPublicClient, http, defineChain, type PublicClient } from "viem";
+import { NETWORKS, type NetworkName } from "./network.js";
 
-/** Verified 2026-08-04: the oldest XRPL testnet ledger the public cluster served. */
-export const XRPL_RETENTION_FLOOR = 13_078_125;
-export const XRPL_FLOOR_ISO = "2025-12-10T07:28:52Z";
+/**
+ * The oldest ledger a public cluster will serve, per network.
+ *
+ * Measured by binary search, not assumed: the testnet floor was verified at
+ * 13,078,125 on 2026-08-04, and an earlier guess of 12,929,081 turned out to
+ * return lgrNotFound. Mainnet full-history servers reach genesis, but the
+ * Core Vault account itself does not exist before it was funded, so the
+ * effective floor there is the account's own first ledger.
+ */
+const IS_TESTNET = (process.env.NETWORK ?? "flare").toLowerCase() === "coston2";
+export const XRPL_RETENTION_FLOOR = IS_TESTNET ? 13_078_125 : 32_570;
+export const XRPL_FLOOR_ISO = IS_TESTNET ? "2025-12-10T07:28:52Z" : "2013-01-01T03:21:10Z";
 
 /** XRPL ledgers close about every 4 seconds; used only to seed a search. */
 const XRPL_LEDGER_SECONDS = 4;
@@ -60,16 +70,25 @@ export interface HeightRow {
   skewSeconds: number;
 }
 
-export const coston2 = defineChain({
-  id: 114,
-  name: "Flare Coston2",
-  nativeCurrency: { name: "C2FLR", symbol: "C2FLR", decimals: 18 },
-  rpcUrls: { default: { http: ["https://coston2-api.flare.network/ext/C/rpc"] } },
-});
-
+/**
+ * The chain the manifest is resolved against.
+ *
+ * This used to be pinned to Coston2. Once the register moved to mainnet that
+ * would have resolved mainnet timestamps against testnet block numbers and
+ * produced a manifest that looked perfectly well-formed and was entirely
+ * wrong -- the worst possible failure, because nothing about it would look
+ * broken.
+ */
 export function makeClient(rpc?: string): PublicClient {
-  const url = rpc ?? "https://coston2-api.flare.network/ext/C/rpc";
-  return createPublicClient({ chain: coston2, transport: http(url) }) as PublicClient;
+  const spec = NETWORKS[((process.env.NETWORK ?? "flare").toLowerCase() as NetworkName)] ?? NETWORKS.flare;
+  const url = rpc ?? process.env.RPC_URL ?? spec.rpc;
+  const chain = defineChain({
+    id: spec.chainId,
+    name: spec.label,
+    nativeCurrency: { name: spec.isMainnet ? "FLR" : "C2FLR", symbol: spec.isMainnet ? "FLR" : "C2FLR", decimals: 18 },
+    rpcUrls: { default: { http: [url] } },
+  });
+  return createPublicClient({ chain, transport: http(url) }) as PublicClient;
 }
 
 /**
@@ -79,16 +98,54 @@ export function makeClient(rpc?: string): PublicClient {
  * seeded guess that is merely close would silently sample the wrong side of a
  * state transition — which is exactly how a backfill manufactures findings.
  */
+/**
+ * Block timestamps, remembered.
+ *
+ * Each slot's binary search costs ~log2(chain height) lookups, and consecutive
+ * slots search heavily overlapping ranges — so the same few thousand blocks get
+ * asked for over and over. Coston2 tolerated that; Flare mainnet answered 429
+ * and killed the run. Memoising turns thousands of requests into hundreds.
+ */
+const tsCache = new Map<number, number>();
+
+/**
+ * Public RPCs rate-limit, and a rate limit is not an error — it is a request to
+ * slow down. Retrying with a widening delay is the difference between a
+ * backfill that completes and one that dies a third of the way through.
+ */
+async function withBackoff<T>(fn: () => Promise<T>, what: string): Promise<T> {
+  let delay = 400;
+  for (let attempt = 0; attempt < 7; attempt++) {
+    try {
+      return await fn();
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      const throttled = msg.includes("429") || /too many requests/iu.test(msg);
+      if (!throttled || attempt === 6) throw e;
+      await new Promise((r) => setTimeout(r, delay));
+      delay = Math.min(delay * 2, 10_000);
+    }
+  }
+  throw new Error(`unreachable backoff for ${what}`);
+}
+
 export async function flareBlockAtTime(
   client: PublicClient,
   unix: number,
   hint?: { lo: number; hi: number },
 ): Promise<{ block: number; unix: number }> {
   let lo = hint?.lo ?? 1;
-  let hi = hint?.hi ?? Number(await client.getBlockNumber());
+  let hi = hint?.hi ?? Number(await withBackoff(() => client.getBlockNumber(), "block number"));
 
-  const tsAt = async (n: number): Promise<number> =>
-    Number((await client.getBlock({ blockNumber: BigInt(n) })).timestamp);
+  const tsAt = async (n: number): Promise<number> => {
+    const hit = tsCache.get(n);
+    if (hit !== undefined) return hit;
+    const t = Number(
+      (await withBackoff(() => client.getBlock({ blockNumber: BigInt(n) }), `block ${n}`)).timestamp,
+    );
+    tsCache.set(n, t);
+    return t;
+  };
 
   if ((await tsAt(lo)) > unix) throw new Error(`no Flare block at or before ${new Date(unix * 1000).toISOString()}`);
 
@@ -100,7 +157,10 @@ export async function flareBlockAtTime(
   return { block: lo, unix: await tsAt(lo) };
 }
 
-const XRPL_ENDPOINTS = ["https://s.altnet.rippletest.net:51234", "https://testnet.xrpl-labs.com"] as const;
+const XRPL_ENDPOINTS: readonly string[] =
+  (process.env.NETWORK ?? "flare").toLowerCase() === "coston2"
+    ? ["https://s.altnet.rippletest.net:51234", "https://testnet.xrpl-labs.com"]
+    : ["https://xrplcluster.com", "https://s2.ripple.com:51234"];
 
 async function xrplRpc(body: unknown, attempts = 3): Promise<Record<string, unknown>> {
   let last: unknown;
