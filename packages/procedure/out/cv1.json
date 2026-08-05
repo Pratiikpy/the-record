@@ -1,7 +1,7 @@
 {
   "procedureId": "CV-1",
   "period": "2026-08-05",
-  "generatedAt": "2026-08-05T02:46:07.028Z",
+  "generatedAt": "2026-08-05T10:49:19.773Z",
   "network": {
     "name": "flare",
     "label": "Flare mainnet",
@@ -19,12 +19,12 @@
       "rU3KcE1fqgn7Qm8dA3DSnefNoUnsYF31Wr",
       "rGK7w4oK5x4ncCZyjYEH4QpCZSkKSMrUV2"
     ],
-    "availableFundsUBA": "7509181091361",
+    "availableFundsUBA": "7526733384234",
     "escrowedFundsUBA": "140000000000000",
-    "immediatelyAvailableUBA": "7509181090961",
-    "reportedTotalUBA": "147509181090961",
+    "immediatelyAvailableUBA": "7526733383834",
+    "reportedTotalUBA": "147526733383834",
     "onLedger": {
-      "balanceDrops": "7509569501623",
+      "balanceDrops": "7527121794528",
       "escrowedDrops": "140000000000000",
       "escrowCount": 14,
       "reserveDrops": "4000000",
@@ -37,7 +37,7 @@
       "title": "Outflow destination allowlist",
       "assertion": "Every payment sent by the Core Vault lands on an allowlisted address or the custodian.",
       "opinion": "CLEAN",
-      "tested": 2,
+      "tested": 1,
       "exceptions": []
     },
     {
@@ -64,7 +64,7 @@
       "opinion": "CLEAN",
       "tested": 1,
       "exceptions": [],
-      "observation": "7509565501623 drops spendable covers Flare's 7509181091361 UBA with 384410262 to spare (reserve 4000000 over 15 owned objects)"
+      "observation": "7527117794528 drops spendable covers Flare's 7526733384234 UBA with 384410294 to spare (reserve 4000000 over 15 owned objects)"
     },
     {
       "id": "C5",
@@ -79,11 +79,11 @@
   "opinion": "CLEAN",
   "evidence": {
     "xrplTransactions": 200,
-    "outflows": 2,
+    "outflows": 1,
     "ledgerRange": [
-      106052742,
-      106078458
+      106058559,
+      106085499
     ],
-    "evidenceDigest": "0x77377318"
+    "evidenceDigest": "0x2d712cea"
   }
 }

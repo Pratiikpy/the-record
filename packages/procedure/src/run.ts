@@ -17,6 +17,7 @@ import { type Address } from "viem";
 import { accountTx, accountLedgerState, totalEscrowedDrops } from "./xrpl.js";
 import { runCv1, type CoreVaultState } from "./cv1.js";
 import { selectNetwork, clientFor, resolveAddresses } from "./network.js";
+import { PackRecorder, packHash, envelope } from "./pack.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const OUTDIR = join(HERE, "..", "out");
@@ -119,6 +120,37 @@ async function main(): Promise<void> {
   log(`  liquid     ${state.onLedger.balanceDrops} drops (reserve ${state.onLedger.reserveDrops})`);
   log(`  escrowed   ${state.onLedger.escrowedDrops} drops in ${state.onLedger.escrowCount} objects`);
 
+  // Freeze the exact evidence this opinion was derived from, so the finding
+  // outlives the endpoints it came from and a stranger can replay it offline.
+  const rec = new PackRecorder();
+  rec.record("flare.coreVaultAddress", { at: CORE_VAULT_MANAGER }, state.coreVaultAddress);
+  rec.record("flare.custodianAddress", { at: CORE_VAULT_MANAGER }, state.custodianAddress);
+  rec.record("flare.availableFunds", { at: CORE_VAULT_MANAGER }, state.availableFundsUBA);
+  rec.record("flare.escrowedFunds", { at: CORE_VAULT_MANAGER }, state.escrowedFundsUBA);
+  rec.record("flare.getAllowedDestinationAddresses", { at: CORE_VAULT_MANAGER }, state.allowedDestinations);
+  rec.record("flare.coreVaultAvailableAmount", { at: ASSET_MANAGER_FXRP }, [
+    state.immediatelyAvailableUBA,
+    state.reportedTotalUBA,
+  ]);
+  rec.record("xrpl.accountLedgerState", { account: state.coreVaultAddress }, state.onLedger);
+  rec.record("xrpl.accountTx", { account: state.coreVaultAddress, limit: 200 }, txs);
+
+  const blockNumber = Number(await client.getBlockNumber());
+  const pack = rec.build({
+    procedureId: "CV-1",
+    network: { name: net.name, chainId: net.chainId },
+    anchors: {
+      flareBlock: blockNumber,
+      xrplLedger: txs.length > 0 ? Math.max(...txs.map((t) => t.ledgerIndex)) : 0,
+      skewSeconds: 0,
+    },
+  });
+  const env = envelope(pack);
+  mkdirSync(join(OUTDIR, "packs"), { recursive: true });
+  writeFileSync(join(OUTDIR, "packs", `${env.packHash.slice(2, 18)}.json`), `${JSON.stringify(env, null, 2)}
+`, "utf8");
+  log(`  evidence pack ${env.packHash.slice(0, 18)}… (${pack.reads.length} reads)`);
+
   const period = new Date().toISOString().slice(0, 10);
   const report = runCv1(txs, state, period, {
     name: net.name,
@@ -138,6 +170,7 @@ async function main(): Promise<void> {
   }
   log(`\n  OPINION: ${report.opinion}`);
   log(`  evidence: ${report.evidence.xrplTransactions} txs, ${report.evidence.outflows} outflows, digest ${report.evidence.evidenceDigest}`);
+  log(`  pack:     ${env.packHash}`);
   log(`→ ${OUT}`);
 }
 
