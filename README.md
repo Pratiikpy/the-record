@@ -296,12 +296,16 @@ pnpm -C packages/procedure e2e
 
 | Suite | Tests |
 |---|---|
-| design | 156 |
-| reprod | 105 |
-| procedure | 68 |
+| design | 208 |
+| reprod | 129 |
+| procedure | 116 |
 | covenant | 45 |
-| doctor | 21 |
+| doctor | 26 |
 | contracts | 70 — **100% lines, statements, branches, functions** |
+
+**594 in total**, and the figures above are measured by `scripts/record-suite.sh` into [`/api/suite.json`](https://the-record.vercel.app/api/suite.json)
+rather than typed — a README that hand-counts its own suite goes stale on the next commit,
+and this one did.
 
 Plus 1,536 Solidity fuzz runs across six fuzzed properties. CI re-runs daily
 against the real chain, because a green build on stale code is not evidence.
