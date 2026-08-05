@@ -1,9 +1,9 @@
 {
   "schema": "therecord.suite/v1",
-  "recordedAt": "2026-08-05T16:39:42.839Z",
-  "typescript": 497,
+  "recordedAt": "2026-08-05T17:10:41.479Z",
+  "typescript": 501,
   "solidity": 70,
-  "total": 567,
+  "total": 571,
   "packages": [
     {
       "package": "covenant",
@@ -19,7 +19,7 @@
     },
     {
       "package": "procedure",
-      "passed": 112
+      "passed": 116
     },
     {
       "package": "reprod",

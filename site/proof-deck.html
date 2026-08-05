@@ -138,7 +138,7 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
 
     <div class="stats">
       <div class="stat"><div class="k">Surfaces</div><div class="v">17</div><div class="n">6 pages, 7 JSON endpoints, 3 badges, 1 spec</div></div>
-      <div class="stat"><div class="k">Tests</div><div class="v">567</div><div class="n">497 TypeScript + 70 Solidity, clean clone</div></div>
+      <div class="stat"><div class="k">Tests</div><div class="v">571</div><div class="n">501 TypeScript + 70 Solidity, clean clone</div></div>
       <div class="stat"><div class="k">Errata</div><div class="v">8</div><div class="n">4 reached the public</div></div>
       <div class="stat"><div class="k">Upstream PRs</div><div class="v">2</div><div class="n">into Flare's own repositories</div></div>
     </div>
@@ -445,14 +445,14 @@ CV-1 registered and concluded:
     <div class="step-head">
       <span class="num">14</span>
       <h3>Reproduce all of it from a clean clone</h3>
-      <span class="kind">567 assertions</span>
+      <span class="kind">571 assertions</span>
     </div>
     <p class="lead">Nothing above needs our server, our keys, or our permission. The evidence is committed,
         the commands are in the README, and the suite carries its own preconditions.</p>
     
     <pre class="term"><code><span class="dim">$</span> <b class="ok">git clone https://github.com/Pratiikpy/the-record &amp;&amp; cd the-record</b>
 <span class="dim">$</span> <b class="ok">pnpm install &amp;&amp; pnpm -r run test</b>
-  <b class="ok">497 passed</b> - <b class="hi">0 skipped</b> - exit 0
+  <b class="ok">501 passed</b> - <b class="hi">0 skipped</b> - exit 0
 
 <span class="dim">$</span> <b class="ok">cd contracts &amp;&amp; forge test</b>
   <b class="ok">70 tests passed</b>, 0 failed, 0 skipped</code></pre>

@@ -79,12 +79,27 @@ function findingSection(s: Series): string {
     '<span class="dimline">[]</span></code></pre>',
   ].join("\n");
 
+  // A DISCLAIMER is not a pass, and a headline that folds it into one is the
+  // exact error this project files against other people. An earlier version of
+  // this section read "No exception across 46 sampled heights" above 45 CLEAN
+  // rows and one height where the evidence was never established.
+  const disclaimers = s.rows.filter((r) => r.opinion === "DISCLAIMER").length;
+  const clean = s.rows.filter((r) => r.opinion === "CLEAN").length;
+  const heldPhrase =
+    disclaimers === 0
+      ? `Every backing control held at every height sampled here.`
+      : `Every backing control held at the ${clean} heights where the evidence could be established, ` +
+        `and ${disclaimers === 1 ? "one height" : `${disclaimers} heights`} produced a DISCLAIMER rather ` +
+        `than a verdict — recorded as unknown, never rounded up to a pass.`;
+
   if (exceptions.length === 0) {
     return [
       "  <section>",
       '    <div class="eyebrow">§ 2.4 — What this series shows</div>',
-      `    <h2>No exception across ${s.rows.length} sampled heights on ${esc(label)}</h2>`,
-      '    <p class="lede">Every backing control held at every height sampled here. That is a finding about',
+      `    <h2>No exception across ${s.rows.length} sampled heights on ${esc(label)}${
+        disclaimers > 0 ? `, and ${disclaimers} height${disclaimers === 1 ? "" : "s"} we could not establish` : ""
+      }</h2>`,
+      `    <p class="lede">${heldPhrase} That is a finding about`,
       `      ${esc(label)} and nothing more — the same procedure run backwards over <strong>Coston2</strong>`,
       "      reports 42 exceptions, because the Core Vault's destination allowlist was empty for its first",
       "      three months and the outflow control had nothing to check against.</p>",
