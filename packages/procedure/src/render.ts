@@ -164,14 +164,14 @@ function main(): void {
       needing no client, no credentials and nobody's permission.</p>
 
     <div class="stats">
-      ${stat("Opinion", r.opinion, `${r.controls.length} controls, period ${r.period}`)}
+      ${stat("Opinion", r.opinion, `${r.controls.length} controls · ${esc(r.network?.label ?? "Flare")}`)}
       ${stat("Outflows tested", String(r.evidence.outflows), `of ${r.evidence.xrplTransactions} XRPL txs`)}
-      ${stat("Vault holdings", xrp(s.availableFundsUBA), `XRP available · ${xrp(s.escrowedFundsUBA)} escrowed`)}
+      ${stat("Under test", `${xrp(s.escrowedFundsUBA)} XRP`, `escrowed · ${xrp(s.availableFundsUBA)} available${r.network?.isMainnet ? " · real value on mainnet" : ""}`)}
       ${stat("Allowlist", String(s.allowedDestinations.length), "permitted destinations")}
     </div>
 
     <p class="cap" style="margin-top:14px">
-      Fig. 1 — CV-1 at ${esc(r.period)}. Vault <code>${esc(s.coreVaultAddress)}</code>,
+      Fig. 1 — CV-1 at ${esc(r.period)} on <strong>${esc(r.network?.label ?? "Flare")}</strong>${r.network ? ` (chain ${r.network.chainId})` : ""}. Vault <code>${esc(s.coreVaultAddress)}</code>,
       custodian <code>${esc(s.custodianAddress)}</code>. Evidence digest
       <code>${esc(r.evidence.evidenceDigest)}</code>${r.evidence.ledgerRange ? ` · XRPL ledgers ${r.evidence.ledgerRange[0]}–${r.evidence.ledgerRange[1]}` : ""}.
     </p>

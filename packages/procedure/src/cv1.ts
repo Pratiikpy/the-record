@@ -67,6 +67,13 @@ export interface Cv1Report {
   procedureId: "CV-1";
   /** the day under test, UTC */
   period: string;
+  /**
+   * Which chain this opinion is about.
+   *
+   * Not decoration. A register that reads mainnet one day and a fault-injected
+   * fork the next, without saying which, is worse than one that reads neither.
+   */
+  network?: { name: string; label: string; chainId: number; isMainnet: boolean };
   state: CoreVaultState;
   controls: ControlResult[];
   opinion: Opinion;
@@ -384,7 +391,12 @@ export function evidenceDigest(txs: readonly XrplTx[], s: CoreVaultState): strin
   return `0x${h.toString(16).padStart(8, "0")}`;
 }
 
-export function runCv1(txs: readonly XrplTx[], s: CoreVaultState, period: string): Cv1Report {
+export function runCv1(
+  txs: readonly XrplTx[],
+  s: CoreVaultState,
+  period: string,
+  network?: Cv1Report["network"],
+): Cv1Report {
   const outflows = outflowsOf(txs, s.coreVaultAddress);
   const controls = [
     controlAllowlist(outflows, s),
@@ -398,6 +410,7 @@ export function runCv1(txs: readonly XrplTx[], s: CoreVaultState, period: string
   return {
     procedureId: "CV-1",
     period,
+    ...(network ? { network } : {}),
     state: s,
     controls,
     opinion: rollUp(controls),

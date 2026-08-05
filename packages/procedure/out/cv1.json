@@ -1,24 +1,32 @@
 {
   "procedureId": "CV-1",
-  "period": "2026-08-04",
+  "period": "2026-08-05",
+  "network": {
+    "name": "flare",
+    "label": "Flare mainnet",
+    "chainId": 14,
+    "isMainnet": true
+  },
   "state": {
-    "coreVaultAddress": "rDhpmiPq4BVBDWMVdSrmkgt8thKyRzGV1p",
-    "custodianAddress": "r3GhxcaM4f9BJXEu1JLRgDXZpHJw6ugkH4",
+    "coreVaultAddress": "rfkXSaCZKTg1EZzec2rLDyrWHxRVJdtVXj",
+    "custodianAddress": "rMLNvZR9dascY5jtCfCv3whAp8HdUSZAQ",
     "allowedDestinations": [
-      "r4uKJRy9mjxGHw1yzS1SrtaKCUwT66MCcP",
-      "rDEXUmuYAe9MCxVfoWArptSZNQPjKpRCXd",
-      "rDYeqGVc8M3Se9wowvRDbURGYGZ5i5VF6r",
-      "r4GHJwGSaGmJy9BBXS9osFXqRjqdSm7v83"
+      "rs6q5K4RrVbrymieYjx9TFzTW24Rv9BekL",
+      "rGWGTbxqmpLJ3TYGjoCFDqY9mPQ4T1GTGb",
+      "raDZBXEKsBtgcRsWjq6bg2DVRkCXknJ4Kq",
+      "rEUvL6uJ1NYqa81tGxjH6BnLCQRzqT1aR7",
+      "rU3KcE1fqgn7Qm8dA3DSnefNoUnsYF31Wr",
+      "rGK7w4oK5x4ncCZyjYEH4QpCZSkKSMrUV2"
     ],
-    "availableFundsUBA": "3629372261854",
-    "escrowedFundsUBA": "500000000000",
-    "immediatelyAvailableUBA": "3629372261454",
-    "reportedTotalUBA": "4129372261454",
+    "availableFundsUBA": "7509132791361",
+    "escrowedFundsUBA": "140000000000000",
+    "immediatelyAvailableUBA": "7509132790961",
+    "reportedTotalUBA": "147509132790961",
     "onLedger": {
-      "balanceDrops": "3631083941795",
-      "escrowedDrops": "500000000000",
-      "escrowCount": 50,
-      "reserveDrops": "11200000",
+      "balanceDrops": "7509521201621",
+      "escrowedDrops": "140000000000000",
+      "escrowCount": 14,
+      "reserveDrops": "4000000",
       "nonXrpEscrows": 0
     }
   },
@@ -28,7 +36,7 @@
       "title": "Outflow destination allowlist",
       "assertion": "Every payment sent by the Core Vault lands on an allowlisted address or the custodian.",
       "opinion": "CLEAN",
-      "tested": 11,
+      "tested": 2,
       "exceptions": []
     },
     {
@@ -36,7 +44,7 @@
       "title": "Control preconditions",
       "assertion": "The allowlist is populated, deduplicated, and the custodian and vault addresses are set.",
       "opinion": "CLEAN",
-      "tested": 4,
+      "tested": 6,
       "exceptions": []
     },
     {
@@ -44,9 +52,9 @@
       "title": "Escrow backing",
       "assertion": "Every UBA Flare records as escrowed is matched by XRP sitting in an Escrow object on the XRP Ledger.",
       "opinion": "CLEAN",
-      "tested": 50,
+      "tested": 14,
       "exceptions": [],
-      "observation": "50 escrow objects totalling 500000000000 drops match Flare's escrowedFunds exactly"
+      "observation": "14 escrow objects totalling 140000000000000 drops match Flare's escrowedFunds exactly"
     },
     {
       "id": "C4",
@@ -55,7 +63,7 @@
       "opinion": "CLEAN",
       "tested": 1,
       "exceptions": [],
-      "observation": "3631072741795 drops spendable covers Flare's 3629372261854 UBA with 1700479941 to spare (reserve 11200000 over 51 owned objects)"
+      "observation": "7509517201621 drops spendable covers Flare's 7509132791361 UBA with 384410260 to spare (reserve 4000000 over 15 owned objects)"
     },
     {
       "id": "C5",
@@ -70,11 +78,11 @@
   "opinion": "CLEAN",
   "evidence": {
     "xrplTransactions": 200,
-    "outflows": 11,
+    "outflows": 2,
     "ledgerRange": [
-      19608031,
-      19627365
+      106052655,
+      106078190
     ],
-    "evidenceDigest": "0x521c5023"
+    "evidenceDigest": "0x5f1cb61f"
   }
 }

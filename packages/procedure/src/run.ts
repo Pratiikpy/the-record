@@ -120,7 +120,12 @@ async function main(): Promise<void> {
   log(`  escrowed   ${state.onLedger.escrowedDrops} drops in ${state.onLedger.escrowCount} objects`);
 
   const period = new Date().toISOString().slice(0, 10);
-  const report = runCv1(txs, state, period);
+  const report = runCv1(txs, state, period, {
+    name: net.name,
+    label: net.label,
+    chainId: net.chainId,
+    isMainnet: net.isMainnet,
+  });
 
   writeFileSync(OUT, `${JSON.stringify(report, null, 2)}\n`, "utf8");
 
