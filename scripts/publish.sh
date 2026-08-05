@@ -25,6 +25,8 @@ PAGES=(
   "errata"
   "api/status.json"
   "badge/core-vault.svg"
+  "api/redemptions.json"
+  "badge/redemptions.svg"
   "spec/faults.json"
 )
 

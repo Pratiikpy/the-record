@@ -58,6 +58,7 @@ function buildCards(): Card[] {
   return [
     {
       name: "Covenant",
+      slug: "redemptions",
       proves: "the promises were kept — or provably were not",
       href: hrefFromIndex("covenant"),
       contract: "FailRecord.sol",

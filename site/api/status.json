@@ -1,6 +1,6 @@
 {
   "schema": "therecord.status-index/v1",
-  "generatedAt": "2026-08-05T10:58:21.206Z",
+  "generatedAt": "2026-08-05T12:16:32.090Z",
   "site": "https://the-record.vercel.app",
   "scaleDisclaimer": "A tier measures how much an outsider can check, not whether the system is safe, solvent or well-run. V3 means the check has been proven able to fail — not that nothing will.",
   "subjects": [
@@ -9,12 +9,12 @@
       "subject": "FXRP core vault",
       "state": "CLEAN",
       "reportedState": "CLEAN",
-      "generatedAt": "2026-08-05T10:49:19.773Z",
-      "ageHours": 0.15,
+      "generatedAt": "2026-08-05T12:03:51.268Z",
+      "ageHours": 0.21,
       "stale": false,
       "freshnessHours": 36,
       "href": "https://the-record.vercel.app/procedure/",
-      "evidenceDigest": "0x2d712cea",
+      "evidenceDigest": "0xf8313802",
       "grade": {
         "tier": 3,
         "name": "FALSIFIED",
@@ -27,7 +27,7 @@
       "state": "DISCLAIMER",
       "reportedState": "DISCLAIMER",
       "generatedAt": "2026-08-04T07:17:33.562Z",
-      "ageHours": 27.68,
+      "ageHours": 28.98,
       "stale": false,
       "freshnessHours": 36,
       "href": "https://the-record.vercel.app/reprod/",
@@ -35,6 +35,22 @@
         "tier": 1,
         "name": "OBSERVABLE",
         "short": "V1 OBSERVABLE"
+      }
+    },
+    {
+      "schema": "therecord.status/v1",
+      "subject": "FXRP redemptions",
+      "state": "DISCLAIMER",
+      "reportedState": "DISCLAIMER",
+      "generatedAt": "2026-08-05T12:15:10.206Z",
+      "ageHours": 0.02,
+      "stale": false,
+      "freshnessHours": 36,
+      "href": "https://the-record.vercel.app/covenant/",
+      "grade": {
+        "tier": 2,
+        "name": "RECONCILED",
+        "short": "V2 RECONCILED"
       }
     }
   ]

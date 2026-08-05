@@ -1,71 +1,71 @@
 {
-  "generatedAt": "2026-08-04T11:43:48.923Z",
+  "generatedAt": "2026-08-05T12:15:10.206Z",
   "hypothesis": "If the request builder is correct, a redemption the chain says was PERFORMED must NOT be attestable as non-payment.",
   "tested": 12,
   "refusedAsExpected": 12,
   "wronglyAttestableAsAbsent": 0,
   "passed": true,
-  "conclusion": "The builder finds real payments. It refused every settled redemption, so the 93 non-payment attestations are not an artefact of a broken request — they are real defaults.",
+  "conclusion": "The request builder distinguishes paid from unpaid: it refused every settled redemption offered to it. That is a precondition for any default finding and is NOT itself evidence that any particular redemption defaulted — the obligation amount must also be right, which is where this layer was previously wrong (see erratum E-001).",
   "results": [
     {
-      "requestId": "42941280",
+      "requestId": "43245516",
+      "status": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028"
+    },
+    {
+      "requestId": "43245848",
+      "status": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028"
+    },
+    {
+      "requestId": "43246434",
+      "status": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028"
+    },
+    {
+      "requestId": "43247366",
+      "status": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC"
+    },
+    {
+      "requestId": "43251300",
+      "status": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC"
+    },
+    {
+      "requestId": "43252298",
       "status": "INVALID: REFERENCED TRANSACTION EXISTS",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5"
     },
     {
-      "requestId": "42941532",
+      "requestId": "43250302",
       "status": "INVALID: REFERENCED TRANSACTION EXISTS",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64"
     },
     {
-      "requestId": "42942222",
-      "status": "INVALID: REFERENCED TRANSACTION EXISTS",
-      "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64"
-    },
-    {
-      "requestId": "42942912",
+      "requestId": "43249304",
       "status": "INVALID: REFERENCED TRANSACTION EXISTS",
       "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028"
     },
     {
-      "requestId": "42944322",
+      "requestId": "43254182",
+      "status": "INVALID: REFERENCED TRANSACTION EXISTS",
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC"
+    },
+    {
+      "requestId": "43253240",
       "status": "INVALID: REFERENCED TRANSACTION EXISTS",
       "agentVault": "0xd5dEFe2c62D48788BB3889534FBFe7Aea0602D64"
     },
     {
-      "requestId": "42943616",
+      "requestId": "43254918",
       "status": "INVALID: REFERENCED TRANSACTION EXISTS",
-      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028"
+      "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC"
     },
     {
-      "requestId": "42945028",
+      "requestId": "43255656",
       "status": "INVALID: REFERENCED TRANSACTION EXISTS",
       "agentVault": "0x5b89514d1F060AdbEA8B7294AFf81ed8dbAa7fC5"
-    },
-    {
-      "requestId": "42945282",
-      "status": "INVALID: REFERENCED TRANSACTION EXISTS",
-      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028"
-    },
-    {
-      "requestId": "42945950",
-      "status": "INVALID: REFERENCED TRANSACTION EXISTS",
-      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028"
-    },
-    {
-      "requestId": "42946618",
-      "status": "INVALID: REFERENCED TRANSACTION EXISTS",
-      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028"
-    },
-    {
-      "requestId": "42947350",
-      "status": "INVALID: REFERENCED TRANSACTION EXISTS",
-      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028"
-    },
-    {
-      "requestId": "42948092",
-      "status": "INVALID: REFERENCED TRANSACTION EXISTS",
-      "agentVault": "0x165c62b4531D28E34c68a8b2aCBF4D0421e4E028"
     }
   ]
 }

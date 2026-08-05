@@ -1,0 +1,16 @@
+{
+  "schema": "therecord.status/v1",
+  "subject": "FXRP redemptions",
+  "state": "DISCLAIMER",
+  "reportedState": "DISCLAIMER",
+  "generatedAt": "2026-08-05T12:15:10.206Z",
+  "ageHours": 0.02,
+  "stale": false,
+  "freshnessHours": 36,
+  "href": "https://the-record.vercel.app/covenant/",
+  "grade": {
+    "tier": 2,
+    "name": "RECONCILED",
+    "short": "V2 RECONCILED"
+  }
+}

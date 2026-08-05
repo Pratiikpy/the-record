@@ -138,9 +138,16 @@ async function main(): Promise<void> {
     refusedAsExpected: refused,
     wronglyAttestableAsAbsent: attestableAsAbsent,
     passed,
+    // The passing text once concluded "therefore the 93 defaults are real".
+    // That inference was wrong and was retracted as E-001: this control proves
+    // the builder can DISTINGUISH paid from unpaid, which is necessary for a
+    // default finding and nowhere near sufficient. The amount being asked
+    // about was the actual bug, and no amount of refusing settled redemptions
+    // would have caught it. A control must not narrate a conclusion wider than
+    // the thing it tested.
     conclusion: passed
-      ? "The builder finds real payments. It refused every settled redemption, so the 93 non-payment attestations are not an artefact of a broken request — they are real defaults."
-      : "FAILED. Settled redemptions are attestable as non-payment, which means the builder matches nothing and every one of the 93 'defaults' is void. Do not publish them.",
+      ? "The request builder distinguishes paid from unpaid: it refused every settled redemption offered to it. That is a precondition for any default finding and is NOT itself evidence that any particular redemption defaulted — the obligation amount must also be right, which is where this layer was previously wrong (see erratum E-001)."
+      : "FAILED. Settled redemptions are attestable as non-payment, which means the builder matches nothing and no non-payment attestation it produces can be trusted. Publish none of them.",
     results,
   };
 

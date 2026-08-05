@@ -133,6 +133,44 @@ const SUBJECTS: Subject[] = [
       });
     },
   },
+  {
+    slug: "redemptions",
+    label: "FXRP redemptions",
+    source: join(ROOT, "packages", "covenant", "out", "control.json"),
+    href: `${SITE_URL}/covenant/`,
+    read: (raw) => {
+      const r = raw as { generatedAt?: string; passed?: boolean };
+      if (!r.generatedAt) return null;
+      // The control tests whether the request builder can distinguish paid
+      // from unpaid. A pass is a precondition for any default finding, not a
+      // statement that the redemptions are healthy -- so the badge reports
+      // DISCLAIMER rather than CLEAN, because zero recorded defaults is a gap
+      // in the record and not evidence against one.
+      return { state: r.passed === true ? "DISCLAIMER" : "EXCEPTION", generatedAt: r.generatedAt };
+    },
+    gradeOf: (now) => {
+      const ctl = readJson(join(ROOT, "packages", "covenant", "out", "control.json")) as
+        | { generatedAt?: string; passed?: boolean; tested?: number }
+        | null;
+      return grade({
+        subject: "FXRP redemptions",
+        publiclyReadable: true,
+        publicEvidence:
+          "redemption requests and completions are public on Flare; the underlying payments are public on the XRP Ledger",
+        independentSources: 2,
+        independentEvidence:
+          "Flare's own redemption record and the XRP Ledger's payment record, the latter reached through the Flare Data Connector; neither determines what the other says",
+        disagreementDetectable: ctl?.passed === true,
+        disagreementEvidence:
+          ctl?.passed === true
+            ? `the control offered ${ctl.tested ?? 0} settled redemptions to the verifier and it refused every one, so a paid redemption cannot be attested as unpaid`
+            : "the control has not established that a paid redemption would be refused",
+        // No dated fault injection for this layer yet. V3 is not claimed, and
+        // the next step the grade prints is exactly what would earn it.
+        now,
+      });
+    },
+  },
 ];
 
 function readJson(path: string): unknown {
