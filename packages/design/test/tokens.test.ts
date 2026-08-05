@@ -80,8 +80,8 @@ describe("page shell", () => {
     expect(html).toContain('content="width=device-width,initial-scale=1"');
   });
 
-  it("declares support for both colour schemes", () => {
-    expect(html).toContain('name="color-scheme" content="light dark"');
+  it("declares the paper scheme", () => {
+    expect(html).toContain('name="color-scheme" content="light"');
   });
 
   it("marks the current nav item for assistive tech", () => {

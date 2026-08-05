@@ -130,8 +130,21 @@ describe.each(PAGES.map(([n]) => n))("%s", (name) => {
     expect(html[name]).toMatch(/\.tablewrap\{overflow-x:auto/u);
   });
 
-  it("declares support for both colour schemes", () => {
-    expect(html[name]).toMatch(/name="color-scheme" content="light dark"/u);
+  it("declares the paper scheme, so form controls and scrollbars match the page", () => {
+    // Light is the design, not a preference. Advertising "light dark" made the
+    // browser render native chrome dark against a paper page.
+    expect(html[name]).toMatch(/name="color-scheme" content="light"/u);
+  });
+
+  it("does not let the operating system pick the palette", () => {
+    // The pages are proportioned, contrast-checked and printed as paper. A
+    // viewer whose OS is dark used to be shown a different product by accident.
+    expect(html[name]).not.toMatch(/prefers-color-scheme/u);
+  });
+
+  it("still offers dark as a deliberate choice", () => {
+    expect(html[name]).toMatch(/data-toggle-theme/u);
+    expect(html[name]).toMatch(/\[data-theme="dark"\]|data-theme="dark"/u);
   });
 
   it("sets a viewport so mobile breakpoints actually fire", () => {

@@ -23,9 +23,6 @@ export const TOKENS = `
 --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
 --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
 --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-@media(prefers-color-scheme:dark){:root{--ink:#EDEAE3;--ink-soft:#D9D5CC;--paper:#161512;--muted:#B3AEA3;--graphite:#918B80;--faint:#8C867A;
---rule:rgb(237 234 227/.15);--rule-strong:rgb(237 234 227/.26);--rule-dashed:rgb(237 234 227/.32);--wash:rgb(237 234 227/.05);
---v-ok:#7FA98A;--v-bad:#CE8272;--v-unknown:#8C867A;--v-sim:#B7A06A}}
 :root[data-theme="dark"]{--ink:#EDEAE3;--ink-soft:#D9D5CC;--paper:#161512;--muted:#B3AEA3;--graphite:#918B80;--faint:#8C867A;
 --rule:rgb(237 234 227/.15);--rule-strong:rgb(237 234 227/.26);--rule-dashed:rgb(237 234 227/.32);--wash:rgb(237 234 227/.05);
 --v-ok:#7FA98A;--v-bad:#CE8272;--v-unknown:#8C867A;--v-sim:#B7A06A}
@@ -53,6 +50,12 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);f
 nav.top{display:flex;gap:20px;font-family:var(--mono);font-size:13px}
 nav.top a{color:var(--ink);text-decoration:none;transition:color .2s}
 nav.top a:hover,nav.top a[aria-current]{color:var(--faint)}
+/* A choice, not an accident of the viewer's operating system. The paper
+   palette is the design — it is what the pages were proportioned and
+   contrast-checked for, and what they print as. */
+.themetoggle{font-family:var(--mono);font-size:13px;color:var(--ink);background:none;border:0;
+padding:0;cursor:pointer;transition:color .2s}
+.themetoggle:hover{color:var(--faint)}
 section{border-top:1px solid var(--rule);padding-block:64px}section:first-of-type{border-top:0}
 .marker{position:relative;display:inline-block;border:1px solid var(--rule-strong);padding:7px 16px}
 .marker b{position:absolute;font-family:var(--mono);font-size:12px;line-height:1;font-weight:400}
@@ -147,9 +150,10 @@ export function page(o: PageOpts): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="${esc(o.description)}">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="light">
 <title>${esc(o.title)}</title>
 <style>${TOKENS}${BASE_CSS}${o.extraCss ?? ""}</style>
+<script>(function(){try{var t=localStorage.getItem("record-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}})()</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -159,13 +163,17 @@ export function page(o: PageOpts): string {
       <div class="mark" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
       <span class="wordmark">the record · ${esc(o.section)}</span>
     </div>
-    <nav class="top" aria-label="Registers">${nav}</nav>
+    <nav class="top" aria-label="Registers">${nav}<button class="themetoggle" type="button" data-toggle-theme aria-label="Toggle light or dark">[◐]</button></nav>
   </header>
   <main id="main">
 ${o.body}
   </main>
   <footer>The Record · Covenant — Procedure — Reprod &nbsp;·&nbsp; ${esc(o.meta)} &nbsp;·&nbsp; every figure re-derivable from public RPC</footer>
 </div>
+<script>(function(){var b=document.querySelector("[data-toggle-theme]");if(!b)return;
+b.addEventListener("click",function(){var r=document.documentElement;
+var next=r.getAttribute("data-theme")==="dark"?"light":"dark";
+r.setAttribute("data-theme",next);try{localStorage.setItem("record-theme",next)}catch(e){}})})()</script>
 </body>
 </html>
 `;
