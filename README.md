@@ -75,17 +75,24 @@ So we measured how much a hash actually identifies:
 ```console
 $ pnpm --filter @therecord/reprod provenance --registry
 
-  machines                 250
-  distinct code hashes     12
-  mean identification      0.44 bits  (a unique hash here would carry 7.97)
+  Flare TEE registry  chain 114 · block 33658305 · 2026-08-05
+
+  machines                 256
+  distinct code hashes     13
+  mean identification      0.47 bits  (a unique hash here would carry 8.00)
 
   most-shared hash
   0x194844cf417dde867073e5ab7199fa4d21fd82b5dbe2bdea8b3d7fc18d10fdc2
-  carried by 238 machines (95.2%) under 46 independent owners → 0.07 bits
+  carried by 243 machines (94.9%) under 46 independent owners → 0.08 bits
 
   rebuilds we performed       5
   that match an on-chain hash 0
 ```
+
+The registry grows daily, so the block above is a **dated observation** and the
+command is the claim. Run it and you will get today's figures; the finding — that
+almost the whole fleet shares one value, and that no on-chain hash is traceable to
+source — is what has held across every scan.
 
 **Not one machine** in the registry carries a hash traceable to source. We
 rebuilt **5 of Flare's own images** deterministically and **none of those digests
