@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Every surface THE RECORD offers, walked in order, each beside the evidence that it works. For readers who want the whole product without a demo video.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Crect%20width%3D%2220%22%20height%3D%2220%22%20rx%3D%223%22%20fill%3D%22%23FAF9F5%22%2F%3E%3Cg%20fill%3D%22%231F1E1D%22%3E%3Crect%20x%3D%222%22%20y%3D%222%22%20width%3D%228%22%20height%3D%228%22%20rx%3D%222%22%2F%3E%3Crect%20x%3D%2211%22%20y%3D%222%22%20width%3D%228%22%20height%3D%228%22%20rx%3D%222%22%20opacity%3D%22.55%22%2F%3E%3Crect%20x%3D%222%22%20y%3D%2211%22%20width%3D%228%22%20height%3D%228%22%20rx%3D%222%22%20opacity%3D%22.55%22%2F%3E%3Crect%20x%3D%2211%22%20y%3D%2211%22%20width%3D%228%22%20height%3D%228%22%20rx%3D%222%22%20opacity%3D%22.25%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
+<title>The Record — proof deck</title>
+<style>
+:root{--ink:#1F1E1D;--ink-soft:#2C2A28;--paper:#FAF9F5;--muted:#4A4742;--graphite:#6E6A64;--faint:#757068;
+--rule:rgb(31 30 29/.15);--rule-strong:rgb(31 30 29/.25);--rule-dashed:rgb(31 30 29/.30);--wash:rgb(31 30 29/.04);
+--v-ok:#3F6F4B;--v-bad:#8C3A2E;--v-unknown:#757068;--v-sim:#7A6A3F;
+--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+--mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+:root[data-theme="dark"]{--ink:#EDEAE3;--ink-soft:#D9D5CC;--paper:#161512;--muted:#B3AEA3;--graphite:#918B80;--faint:#8C867A;
+--rule:rgb(237 234 227/.15);--rule-strong:rgb(237 234 227/.26);--rule-dashed:rgb(237 234 227/.32);--wash:rgb(237 234 227/.05);
+--v-ok:#7FA98A;--v-bad:#CE8272;--v-unknown:#8C867A;--v-sim:#B7A06A}
+:root[data-theme="light"]{--ink:#1F1E1D;--paper:#FAF9F5;--muted:#4A4742;--graphite:#6E6A64;--faint:#757068;
+--rule:rgb(31 30 29/.15);--rule-strong:rgb(31 30 29/.25);--rule-dashed:rgb(31 30 29/.30);--wash:rgb(31 30 29/.04);
+--v-ok:#3F6F4B;--v-bad:#8C3A2E;--v-unknown:#757068;--v-sim:#7A6A3F}
+*{box-sizing:border-box}
+/* Keyboard users should not have to tab the whole register nav on every page.
+   Off-screen until focused, then it lands in the flow rather than over it. */
+.skip{position:absolute;left:-9999px;top:0;font-family:var(--mono);font-size:13px;
+  background:var(--ink);color:var(--paper);padding:10px 16px;z-index:10;text-decoration:none}
+.skip:focus{left:8px;top:8px}
+main{display:block}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.shell{max-width:1180px;margin-inline:auto;padding-inline:24px}
+.masthead{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px}
+.brand{display:flex;align-items:center;gap:10px}
+.mark{position:relative;width:20px;height:20px;flex:none}
+.mark span{position:absolute;width:8px;height:8px;border-radius:2px;background:var(--ink)}
+.mark span:nth-child(1){top:0;left:0}.mark span:nth-child(2){top:0;right:0;opacity:.55}
+.mark span:nth-child(3){bottom:0;left:0;opacity:.55}.mark span:nth-child(4){bottom:0;right:0;opacity:.25}
+.wordmark{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.02em}
+nav.top{display:flex;gap:20px;font-family:var(--mono);font-size:13px}
+nav.top a{color:var(--ink);text-decoration:none;transition:color .2s}
+nav.top a:hover,nav.top a[aria-current]{color:var(--faint)}
+/* A choice, not an accident of the viewer's operating system. The paper
+   palette is the design — it is what the pages were proportioned and
+   contrast-checked for, and what they print as. */
+.themetoggle{font-family:var(--mono);font-size:13px;color:var(--ink);background:none;border:0;
+padding:0;cursor:pointer;transition:color .2s}
+.themetoggle:hover{color:var(--faint)}
+/* The tier sits with the subject it grades. Border and text carry it, never
+   colour alone -- these pages must survive greyscale printing. */
+/* align-self, not display: .reg is a column flex container, which blockifies
+   its children -- inline-block is ignored and align-items:stretch pulls the
+   badge to the full card width. */
+.tier{align-self:flex-start;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+padding:3px 8px;border:1px solid var(--rule-strong);margin:0 0 10px;color:var(--muted)}
+.tier.t3{border-color:var(--v-ok);color:var(--v-ok)}
+.tier.t2{border-color:var(--v-sim);color:var(--v-sim)}
+.tier.t1,.tier.t0{border-style:dashed;color:var(--v-unknown)}
+section{border-top:1px solid var(--rule);padding-block:64px}section:first-of-type{border-top:0}
+.marker{position:relative;display:inline-block;border:1px solid var(--rule-strong);padding:7px 16px}
+.marker b{position:absolute;font-family:var(--mono);font-size:12px;line-height:1;font-weight:400}
+.marker b:nth-of-type(1){left:-5px;top:-9px}.marker b:nth-of-type(2){right:-5px;top:-9px}
+.marker b:nth-of-type(3){left:-5px;bottom:-9px}.marker b:nth-of-type(4){right:-5px;bottom:-9px}
+.marker span{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.16em}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(30px,6vw,48px);line-height:1.08;letter-spacing:-.015em;text-wrap:balance;margin:24px 0 0}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(23px,4vw,32px);line-height:1.18;letter-spacing:-.01em;margin:20px 0 0}
+.lede{max-width:660px;margin:20px 0 0;color:var(--muted);text-wrap:pretty}
+.cap{font-family:var(--mono);font-size:11px;color:var(--faint)}
+.eyebrow{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.04em}
+.stats{margin-top:40px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule-strong);border:1px solid var(--rule-strong)}
+@media(max-width:820px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--paper);padding:22px 20px}
+.stat .k{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--faint)}
+.stat .v{font-family:var(--serif);font-weight:300;font-size:clamp(26px,4.4vw,36px);line-height:1.05;letter-spacing:-.02em;margin-top:10px;font-variant-numeric:tabular-nums}
+.stat .n{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:8px}
+.tablewrap{overflow-x:auto;margin-top:18px;border:1px solid var(--rule-strong)}
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12.5px}
+caption{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+thead th{text-align:right;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);padding:11px 13px;border-bottom:1px solid var(--rule-strong);white-space:nowrap}
+thead th:first-child,thead th.l{text-align:left}
+tbody th,tbody td{padding:11px 13px;border-bottom:1px dashed var(--rule-dashed);vertical-align:top}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+tbody th{text-align:left;font-weight:400}
+tbody td{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody td.l{text-align:left;white-space:normal}
+tbody small{display:block;color:var(--faint);font-size:10.5px;margin-top:3px}
+tbody tr:hover th,tbody tr:hover td{background:var(--wash)}
+code{font-family:var(--mono)}
+abbr{text-decoration:underline dotted;text-underline-offset:2px;cursor:help}
+.verdict{display:inline-block;font-size:11.5px;padding:2px 8px;white-space:nowrap}
+.verdict.ok{color:var(--v-ok);border:1px solid var(--v-ok)}
+.verdict.bad{color:var(--v-bad);border:3px double var(--v-bad)}
+.verdict.unknown{color:var(--v-unknown);border:1px dashed var(--v-unknown)}
+.verdict.sim{color:var(--v-sim);border:1px dotted var(--v-sim)}
+.verdict.none{color:var(--faint);border:1px solid var(--rule-strong)}
+.cite{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--rule-dashed)}
+.cite:hover{color:var(--ink);border-bottom-color:var(--ink)}
+a:focus-visible,.cite:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.legend{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:20px}
+.legend div{font-family:var(--mono);font-size:11px;color:var(--faint);display:flex;align-items:center;gap:8px}
+.note{margin-top:34px;border:1px dashed var(--rule-dashed);padding:18px 22px}
+.note p{margin:0;font-size:14px;color:var(--muted);max-width:70ch}
+.note p+p{margin-top:10px}
+.tag{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.14em;border:1px solid var(--rule-strong);padding:3px 9px;margin-right:10px}
+footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--faint)}
+@media(max-width:720px){
+  .shell{padding-inline:16px}
+  .masthead{flex-direction:column;align-items:flex-start;gap:6px}
+  nav.top{gap:14px;flex-wrap:wrap}
+  section{padding-block:44px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .legend{gap:8px 16px}
+  .stat .k{min-height:3.4em}
+}
+@media print{body{background:#fff;color:#000}.tablewrap{overflow:visible;border:0}table{font-size:9px}}
+@media(prefers-reduced-motion:reduce){*,::before,::after{transition-duration:.001ms!important;animation-duration:.001ms!important;animation-iteration-count:1!important}}.steps{margin-top:26px;display:flex;flex-direction:column;gap:0}.step{border-top:1px solid var(--rule);padding:34px 0}.step:first-child{border-top:0;padding-top:20px}.step-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}.num{font-family:var(--mono);font-size:12px;color:var(--faint);letter-spacing:.1em;flex:none}.step h3{font-family:var(--serif);font-weight:400;font-size:clamp(19px,2.6vw,25px);line-height:1.25;margin:0;letter-spacing:-.01em}.kind{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);border:1px solid var(--rule-strong);padding:3px 7px;white-space:nowrap}.step .lead{max-width:66ch;margin:12px 0 0;color:var(--muted)}figure{margin:20px 0 0}figure img{display:block;width:100%;height:auto;border:1px solid var(--rule-strong)}figcaption{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:9px;line-height:1.6}.term{margin:18px 0 0;background:#1F1E1D;color:#E8E4DC;font-family:var(--mono);font-size:11.5px;line-height:1.7;padding:15px 17px;overflow-x:auto;white-space:pre;border:1px solid #1F1E1D}:root[data-theme="dark"] .term{background:#0E0D0B;border-color:var(--rule)}.term .ok{color:#8FBF9B;font-weight:400}.term .bad{color:#E09A88;font-weight:400}.term .hi{color:#F0EBE1;font-weight:600}.term .dim{color:#8A857B}.step .note{max-width:66ch;margin:16px 0 0;font-size:14.5px;color:var(--muted);border-left:2px solid var(--rule-strong);padding-left:14px}.go{margin:16px 0 0;font-family:var(--mono);font-size:12px}.inline-shot{display:block;width:190px;height:auto;border:1px solid var(--rule-strong);margin:0 0 10px}.side{display:block}.badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}.badges img{height:20px;width:auto}.limits{margin-top:22px;display:flex;flex-direction:column;gap:14px;max-width:70ch}.limits p{color:var(--muted)}.tag{display:inline-block;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink);border:1px solid var(--rule-strong);padding:3px 7px;margin-right:10px}q.was{font-style:italic;color:var(--faint)}q.was::before{content:"\201C"}q.was::after{content:"\201D"}@media(max-width:640px){.step-head{gap:8px}.kind{font-size:9px}}</style>
+<script>(function(){try{var t=localStorage.getItem("record-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}})()</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <header class="masthead">
+    <div class="brand">
+      <div class="mark" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      <span class="wordmark">the record · proof deck</span>
+    </div>
+    <nav class="top" aria-label="Registers"><a href="index.html">[Index]</a><a href="../packages/covenant/out/index.html">[Covenant]</a><a href="../packages/procedure/out/index.html">[Procedure]</a><a href="../packages/reprod/out/index.html">[Reprod]</a><a href="errata.html">[Errata]</a><button class="themetoggle" type="button" data-toggle-theme aria-label="Toggle light or dark">[◐]</button></nav>
+  </header>
+  <main id="main">
+
+  <section>
+    <div class="marker"><b aria-hidden="true">+</b><b aria-hidden="true">+</b><b aria-hidden="true">+</b><b aria-hidden="true">+</b><span>Proof deck</span></div>
+    <h1>The whole product, in the time a demo video would take.</h1>
+    <p class="lede">14 numbered passes over every surface this project offers &mdash; each
+      page, each instrument, each contract &mdash; with the evidence beside it. Every figure on this
+      page is read from the register that produced it, so if a register moves, this page moves with
+      it. Including this sentence: writing the count by hand is how the index came to say
+      <q class="was">Six errata</q> over a register of seven.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="k">Surfaces</div><div class="v">17</div><div class="n">6 pages, 7 JSON endpoints, 3 badges, 1 spec</div></div>
+      <div class="stat"><div class="k">Tests</div><div class="v">561</div><div class="n">491 TypeScript + 70 Solidity, clean clone</div></div>
+      <div class="stat"><div class="k">Errata</div><div class="v">8</div><div class="n">4 reached the public</div></div>
+      <div class="stat"><div class="k">Upstream PRs</div><div class="v">2</div><div class="n">into Flare's own repositories</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">The walkthrough</div>
+    <h2>Every feature, and what proves it works</h2>
+    <div class="steps">
+<article class="step" id="s1">
+    <div class="step-head">
+      <span class="num">01</span>
+      <h3>The index — three registers, one thesis</h3>
+      <span class="kind">public page</span>
+    </div>
+    <p class="lead">Every figure on this landing page is read from the register that produced it at build
+        time. Nothing is retyped, which is why the three cards can never quietly disagree with the
+        pages they link to.</p>
+    <figure><img src="proof/tour-1-index.jpeg" alt="The Record landing page showing the three registers with their current figures" loading="lazy" width="1280" height="880"><figcaption>Fig. 1 &mdash; the live index. Covenant carries <b class="hi">2415</b>
+          indexed redemptions, Procedure an opinion of <b class="hi">CLEAN</b>, Reprod
+          <b class="hi">250</b> registered machines.</figcaption></figure>
+    
+    
+    <p class="go"><a class="cite" href="index.html">[ Open the live index ]</a></p>
+  </article>
+<article class="step" id="s2">
+    <div class="step-head">
+      <span class="num">02</span>
+      <h3>Covenant — did the redemption agents actually pay?</h3>
+      <span class="kind">register &amp;middot; V2 reconciled</span>
+    </div>
+    <p class="lead">Indexes every FXRP redemption and asks Flare's Data Connector to prove a payment did
+        <em>not</em> happen. The verifier is required to <strong>refuse</strong> redemptions the
+        chain already recorded as performed &mdash; that refusal test is what caught our own false
+        accusation of 93 agents.</p>
+    <figure><img src="proof/tour-2-covenant.jpeg" alt="The Covenant register showing indexed redemptions and open positions" loading="lazy" width="1280" height="880"><figcaption>Fig. 2 &mdash; <b class="hi">2415</b> redemptions indexed,
+          <b class="hi">85.92%</b> named an executor,
+          <b class="hi">91</b> past deadline and unresolved.</figcaption></figure>
+    
+    <p class="note"><strong>Unresolved is not unpaid.</strong> A default does not record itself &mdash;
+        <code>redemptionPaymentDefault</code> has to be called by someone. Zero recorded defaults is
+        the gap this register measures, not evidence that none occurred.</p>
+    <p class="go"><a class="cite" href="../packages/covenant/out/index.html">[ Open Covenant ]</a></p>
+  </article>
+<article class="step" id="s3">
+    <div class="step-head">
+      <span class="num">03</span>
+      <h3>Procedure — are the books the books?</h3>
+      <span class="kind">register &amp;middot; V3 falsified</span>
+    </div>
+    <p class="lead">CV-1 runs <b class="hi">5</b> controls against the FAssets Core Vault,
+        reconciling Flare's <code>escrowedFunds</code> against the vault's actual XRP&nbsp;Ledger
+        escrow objects &mdash; two chains that cannot move each other. It can return CLEAN,
+        EXCEPTION <em>or</em> DISCLAIMER; refusing to conclude is a first-class result.</p>
+    <figure><img src="proof/tour-3-procedure.jpeg" alt="The Procedure register showing the five CV-1 controls and the current opinion" loading="lazy" width="1280" height="880"><figcaption>Fig. 3 &mdash; running against <b class="hi">Flare mainnet</b>,
+          opinion <b class="hi">CLEAN</b>, anchored to Flare block
+          <b class="hi">—</b> and XRPL ledger
+          <b class="hi">—</b>.</figcaption></figure>
+    <pre class="term"><code><span class="dim">$</span> <b class="ok">pnpm --filter @therecord/procedure run run</b>
+  <b class="ok">CLEAN    </b> C1  Outflow destination allowlist
+  <b class="ok">CLEAN    </b> C2  Control preconditions
+  <b class="ok">CLEAN    </b> C3  Escrow backing
+  <b class="ok">CLEAN    </b> C4  Liquid backing
+  <b class="ok">CLEAN    </b> C5  Available-funds wedge
+  OPINION <b class="ok">CLEAN</b>   outflows examined <b class="hi">1</b></code></pre>
+    
+    <p class="go"><a class="cite" href="../packages/procedure/out/index.html">[ Open Procedure ]</a></p>
+  </article>
+<article class="step" id="s4">
+    <div class="step-head">
+      <span class="num">04</span>
+      <h3>The red run — the control is proven able to fail</h3>
+      <span class="kind">fault injection &amp;middot; runs in CI</span>
+    </div>
+    <p class="lead">A monitor that has only ever printed CLEAN is indistinguishable from one that
+        <em>cannot</em> print anything else, and this project shipped exactly that failure once. The
+        red run forks Coston2, corrupts a single storage slot, and re-runs the identical procedure.</p>
+    
+    <pre class="term"><code><span class="dim">$</span> <b class="ok">pnpm --filter @therecord/procedure redrun</b>
+
+<span class="dim">--- GREEN - forked chain, no fault ---</span>
+  <b class="ok">CLEAN    </b> C1  Outflow destination allowlist
+  <b class="ok">CLEAN    </b> C2  Control preconditions
+  <b class="ok">CLEAN    </b> C3  Escrow backing
+  <b class="ok">CLEAN    </b> C4  Liquid backing
+  <b class="ok">CLEAN    </b> C5  Available-funds wedge
+  OPINION: <b class="ok">CLEAN</b>
+
+  <span class="dim">injecting fault: one storage slot, escrowedFunds raised</span>
+
+<span class="dim">--- RED - same procedure, corrupted escrow figure ---</span>
+  <b class="ok">CLEAN    </b> C1  Outflow destination allowlist
+  <b class="ok">CLEAN    </b> C2  Control preconditions
+  <b class="bad">EXCEPTION</b> C3  Escrow backing
+  <b class="ok">CLEAN    </b> C4  Liquid backing
+  <b class="ok">CLEAN    </b> C5  Available-funds wedge
+  OPINION: <b class="bad">EXCEPTION</b>
+
+  <b class="ok">the control fires.</b> CLEAN to EXCEPTION on a single corrupted slot.</code></pre>
+    <p class="note">Exactly one control moves. The script <strong>exits non-zero if C3 stays CLEAN</strong>
+        and it runs in CI, so a control that quietly stops being able to fail breaks the build. This
+        is the whole reason the register claims V3 rather than V2 &mdash; and the tier
+        <strong>lapses after 30 days</strong>, because a falsification from six months ago says
+        nothing about the code running today.</p>
+    
+  </article>
+<article class="step" id="s5">
+    <div class="step-head">
+      <span class="num">05</span>
+      <h3>Reprod — is this the code you published?</h3>
+      <span class="kind">register &amp;middot; V1 observable</span>
+    </div>
+    <p class="lead">Every confidential-compute project says <em>don't trust us, check the code hash</em>. It
+        is a good instruction and it is currently unexecutable, because nothing turns 32 bytes into a
+        fact. Reprod measures how much a hash actually identifies, in bits.</p>
+    <figure><img src="proof/tour-4-reprod.jpeg" alt="The Reprod register showing the TEE machine population and code-hash analysis" loading="lazy" width="1280" height="880"><figcaption>Fig. 4 &mdash; <b class="hi">250</b> machines,
+          <b class="hi">67%</b> unreachable,
+          <b class="hi">95%</b> attested to a simulator.</figcaption></figure>
+    <pre class="term"><code><span class="dim">$</span> <b class="ok">pnpm --filter @therecord/reprod provenance --registry</b>
+
+  most-shared hash
+  0x194844cf417dde867073e5ab7199fa4d21fd82b5dbe2bdea8b3d7fc18d10fdc2
+  carried by <b class="hi">238 machines (95.2%)</b> under <b class="hi">46 independent owners</b> to <b class="bad">0.07 bits</b>
+
+  rebuilds we performed       <b class="hi">5</b>
+  that match an on-chain hash <b class="bad">0</b></code></pre>
+    <p class="note"><strong>Nobody did anything wrong.</strong> Simulated attestation is explicitly
+        permitted and a shared constant is exactly what simulation is defined to emit. This measures
+        the <em>hash</em>, not the operator &mdash; no machine owner is named anywhere in the
+        repository, and <code>NOT_A_MEASUREMENT</code> is derived from how many owners share a value,
+        never from a list of known constants.</p>
+    <p class="go"><a class="cite" href="../packages/reprod/out/index.html">[ Open Reprod ]</a></p>
+  </article>
+<article class="step" id="s6">
+    <div class="step-head">
+      <span class="num">06</span>
+      <h3>doctor — what is actually wrong, and how to fix it</h3>
+      <span class="kind">instrument &amp;middot; live probe</span>
+    </div>
+    <p class="lead">The one command an operator would use on a Tuesday. It live-probes every registered
+        machine and returns the blocker, the fix, and the source for the fix.</p>
+    
+    <pre class="term"><code><span class="dim">$</span> <b class="ok">pnpm --filter @therecord/doctor doctor --worst 3</b>
+  <b class="bad">167 of 250 machines have at least one blocker</b>
+
+  -- 0xE3829862Ef972e1dfAB338643c4041a6a1F00b20 --
+     extension 65832 - PRODUCTION - TEST_PLATFORM
+     verdict: <b class="bad">BLOCKER</b>
+    <b class="bad">[x]</b> The registered URL belongs to a tunnel that has moved
+        fix: Restart the tunnel, then re-register the machine.
+    <span class="dim">[.] NOTE  This machine is attested to a simulator</span></code></pre>
+    <p class="note">Plain-English summaries are model-generated and labelled <em>&ldquo;not evidence&rdquo;</em>
+        on every single one; the verdict itself comes from probes. Accepts a teeId, an extension id,
+        or a host &mdash; it answers to every identifier it prints.</p>
+    
+  </article>
+<article class="step" id="s7">
+    <div class="step-head">
+      <span class="num">07</span>
+      <h3>verify — rebuild an opinion with the network unplugged</h3>
+      <span class="kind">instrument &amp;middot; offline</span>
+    </div>
+    <p class="lead">Takes a published evidence pack, replaces <code>fetch</code> with a function that throws,
+        and rebuilds the opinion from the recorded reads alone. A missing read fails the rebuild
+        rather than silently substituting a default, so a pack is either sufficient or it is
+        rejected. If you run one command, run this one.</p>
+    
+    <pre class="term"><code><span class="dim">$</span> <b class="ok">pnpm --filter @therecord/procedure verify</b>
+  address  <b class="ok">intact</b> - the bytes still hash to their stated address
+  anchors  flare block <b class="hi">—</b> - xrpl ledger <b class="hi">—</b>
+  OPINION  <b class="ok">CLEAN</b>
+  <b class="ok">verified offline - no network was contacted</b></code></pre>
+    
+    
+  </article>
+<article class="step" id="s8">
+    <div class="step-head">
+      <span class="num">08</span>
+      <h3>drift — has the chain moved past our own numbers?</h3>
+      <span class="kind">instrument &amp;middot; can embarrass us</span>
+    </div>
+    <p class="lead">The freshness badge measures <em>age</em>, and age is a bad proxy for correctness: a scan
+        can be four hours old and already wrong. This asks the only question that matters, and blocks
+        the publish on <code>MATERIAL</code> &mdash; and on <code>UNKNOWN</code>, because failing to
+        check is not evidence that nothing moved.</p>
+    
+    <pre class="term"><code><span class="dim">$</span> <b class="ok">pnpm --filter @therecord/reprod drift</b>
+  <b class="hi">IMMATERIAL</b>  snapshot <b class="hi">250</b> - live <b class="hi">252</b>
+
+  <span class="dim">2 added since the snapshot was taken, 0.8% of the fleet. The register&#39;s</span>
+  <span class="dim">claims are ratios and do not turn on this, so it is disclosed rather</span>
+  <span class="dim">than treated as an error.</span></code></pre>
+    <p class="note">The 2% materiality threshold exists because a strict-equality gate blocked a publish over
+        a single machine appearing within twenty minutes. A gate that cries wolf gets switched off,
+        and then it protects nothing. This command exists because of
+        <a class="cite" href="errata.html">E-008</a>.</p>
+    
+  </article>
+<article class="step" id="s9">
+    <div class="step-head">
+      <span class="num">09</span>
+      <h3>The backfill — history computed, not waited for</h3>
+      <span class="kind">public page &amp;middot; retrospective</span>
+    </div>
+    <p class="lead">A continuous register is assumed to need a warm-up: deploy a cron, wait a year, have a
+        year of history. But CV-1 is a pure function of chain state at a height, so the opinion for
+        every past height already exists and has merely never been evaluated.</p>
+    <figure><img src="proof/tour-5-backfill.jpeg" alt="The backfill page showing CV-1 opinions computed across historical heights" loading="lazy" width="1280" height="880"><figcaption>Fig. 5 &mdash; <b class="hi">46</b> heights on
+          <b class="hi">Flare mainnet</b> with <b class="hi">0</b> exceptions;
+          the same procedure over Coston2 reports <b class="bad">42</b>.</figcaption></figure>
+    
+    <p class="note">Every row is labelled <em>retrospective</em> on the row itself. The Coston2 exceptions are
+        a real finding: <code>getAllowedDestinationAddresses()</code> returned an empty list for the
+        Core Vault's first three months, so the outflow control would have passed vacuously that
+        entire window. Anyone whose monitoring began this summer sees a healthy allowlist and has no
+        way to learn it happened.</p>
+    <p class="go"><a class="cite" href="procedure/backfill.html">[ Open the backfilled series ]</a></p>
+  </article>
+<article class="step" id="s10">
+    <div class="step-head">
+      <span class="num">10</span>
+      <h3>The errata — everything we got wrong</h3>
+      <span class="kind">public page &amp;middot; append-only</span>
+    </div>
+    <p class="lead">Every register here makes claims about somebody else's system. The only thing that makes
+        that defensible is a permanent, public account of the times we got it wrong. A retraction is
+        the cheapest thing to fake in general and the hardest to fake <em>specifically</em>: each
+        entry names the exact wrong value, the mechanism, and the test that now makes it
+        unconstructable.</p>
+    <figure><img src="proof/tour-6-errata.jpeg" alt="The errata page listing every published and caught error with its mechanism" loading="lazy" width="1280" height="880"><figcaption>Fig. 6 &mdash; <b class="hi">8</b> entries,
+          <b class="hi">4</b> of which reached the public before being withdrawn.</figcaption></figure>
+    
+    <p class="note">Three of the 8 are the same error in different clothes: a comparison
+        between numbers that were never defined to be equal, or that could never disagree. Every one
+        produced confident, well-formatted, meaningless results. <strong>Open this page first</strong>
+        &mdash; it is the part nobody else can copy, because copying it requires having been wrong in
+        public.</p>
+    <p class="go"><a class="cite" href="errata.html">[ Open the errata ]</a></p>
+  </article>
+<article class="step" id="s11">
+    <div class="step-head">
+      <span class="num">11</span>
+      <h3>It works on a phone, and in the dark</h3>
+      <span class="kind">every page &amp;middot; 390px</span>
+    </div>
+    <p class="lead">The paper palette is a choice rather than an accident of the reader's operating system,
+        so the pages render light by default and carry an explicit toggle. Both themes are contrast-
+        checked against the WCAG AA floor by a test that parses the rendered stylesheet, not a copy
+        of the token list.</p>
+    <figure><img src="proof/tour-7-mobile.jpeg" alt="The index rendered at 390 pixels wide in the light theme" loading="lazy" width="1280" height="880"><figcaption>Fig. 7 &mdash; 390&thinsp;px. No page scrolls sideways at any width; wide tables and
+          command blocks scroll inside their own container.</figcaption></figure>
+    
+    <p class="note"><img class="inline-shot" src="proof/tour-8-mobile-dark.jpeg" alt="The same page in the dark theme" loading="lazy" width="390" height="844">
+        <span class="side">Fig. 8 &mdash; the same page with the theme toggled. Verdict states are
+        carried by border style as well as colour, so the registers survive being printed in
+        greyscale.</span></p>
+    
+  </article>
+<article class="step" id="s12">
+    <div class="step-head">
+      <span class="num">12</span>
+      <h3>The distribution layer — JSON, badges, and a fault spec</h3>
+      <span class="kind">17 public surfaces</span>
+    </div>
+    <p class="lead">A register nobody can consume is a website. Every verdict is available as versioned JSON
+        and as an embeddable badge that reports itself <code>STALE</code> past 36 hours, and the fault
+        catalogue ships as machine-readable data.</p>
+    
+    
+    <p class="note"><span class="badges">
+          <img src="badge/core-vault.svg" alt="Core vault status badge" height="20">
+          <img src="badge/tee-registry.svg" alt="TEE registry status badge" height="20">
+          <img src="badge/redemptions.svg" alt="Redemptions status badge" height="20">
+        </span>
+        <span class="side">Live SVGs, served from this domain and rendered by your browser right
+        now &mdash; not screenshots of badges. <b class="hi">9</b> faults and
+        <b class="hi">3</b> declared <em>known uncaught</em> are
+        published at <code>/spec/faults.json</code>; the things a procedure cannot detect are part of
+        what the procedure means.</span></p>
+    <p class="go"><a class="cite" href="api/status.json">[ Open the JSON API ]</a></p>
+  </article>
+<article class="step" id="s13">
+    <div class="step-head">
+      <span class="num">13</span>
+      <h3>It settles on chain, and suppression becomes the record</h3>
+      <span class="kind">Coston2 &amp;middot; deployed</span>
+    </div>
+    <p class="lead">The opinion is not just published, it is concluded on chain against the mainnet subject,
+        with an evidence digest anyone can re-derive.</p>
+    
+    <pre class="term"><code>AssuranceRegistry  <b class="hi">0x0D4ccD24cC8E2517d4C88a0739648a7ed4196439</b>
+ReproRegistry     <b class="hi">0x7EfCBb20DC125A8322FCF862C04AcF97b0c1f70B</b>
+FailRecord        <b class="hi">0x5f623912D4dFA8d4d702cA77754a3517B4FA4c56</b>
+
+CV-1 registered and concluded:
+  subject    mainnet Core Vault <b class="hi">0x6c8d96dEfE4cbEE05FA969Fc0Ac436d94Fc21784</b>
+  opinion    <b class="ok">CLEAN</b>   evidence digest <b class="hi">0x77377318</b></code></pre>
+    <p class="note"><code>lapse()</code> is <strong>permissionless</strong>. If a reporter goes silent past
+        the grace window, any stranger can write the adverse record &mdash; so going quiet is not an
+        escape from the register, it is an entry in it.</p>
+    
+  </article>
+<article class="step" id="s14">
+    <div class="step-head">
+      <span class="num">14</span>
+      <h3>Reproduce all of it from a clean clone</h3>
+      <span class="kind">561 assertions</span>
+    </div>
+    <p class="lead">Nothing above needs our server, our keys, or our permission. The evidence is committed,
+        the commands are in the README, and the suite carries its own preconditions.</p>
+    
+    <pre class="term"><code><span class="dim">$</span> <b class="ok">git clone https://github.com/Pratiikpy/the-record &amp;&amp; cd the-record</b>
+<span class="dim">$</span> <b class="ok">pnpm install &amp;&amp; pnpm -r run test</b>
+  <b class="ok">491 passed</b> - <b class="hi">0 skipped</b> - exit 0
+
+<span class="dim">$</span> <b class="ok">cd contracts &amp;&amp; forge test</b>
+  <b class="ok">70 tests passed</b>, 0 failed, 0 skipped</code></pre>
+    <p class="note">That command <strong>used to fail on a clean clone</strong> &mdash; four failures and
+        <strong>82 silently skipped tests</strong>, every accessibility and contrast assertion among
+        them &mdash; because CI rendered the pages before testing and the README did not. Our
+        continuous integration carried a precondition the published instruction did not, which is
+        precisely the defect we filed upstream against Flare's own reproducible-build recipe. A test
+        now reads the README and fails if any command it prints is not real.</p>
+    
+  </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Stated rather than hidden</div>
+    <h2>What this will not do</h2>
+    <div class="limits">
+      <p><span class="tag">Zero real defaults exist on FXRP today</span>Covenant's failure path is
+        exercised by deliberate fault injection, not by live defaults. We say so rather than implying
+        otherwise.</p>
+      <p><span class="tag">Covenant cannot be backfilled</span>FDC proofs expire at
+        <code>lutlimit</code> (~14 days), so historical rounds cannot be re-proven at any price. The
+        record states this instead of quietly omitting the layer.</p>
+      <p><span class="tag">Three faults are declared uncaught</span>They ship in
+        <code>faults.json</code> as data, not in a footnote.</p>
+      <p><span class="tag">No users yet</span>This is a register weeks old with no distribution
+        history. The badge and the API exist precisely because that is the gap.</p>
+      <p><span class="tag">A tier is not a safety rating</span>V3 means the check has been proven able
+        to fail &mdash; not that nothing will. It lapses, and the tier can go down, ours included.</p>
+    </div>
+  </section>
+  </main>
+  <footer>The Record · Covenant — Procedure — Reprod &nbsp;·&nbsp; proof deck · 14 passes · every figure derived &nbsp;·&nbsp; every figure re-derivable from public RPC</footer>
+</div>
+<script>(function(){var b=document.querySelector("[data-toggle-theme]");if(!b)return;
+b.addEventListener("click",function(){var r=document.documentElement;
+var next=r.getAttribute("data-theme")==="dark"?"light":"dark";
+r.setAttribute("data-theme",next);try{localStorage.setItem("record-theme",next)}catch(e){}})})()</script>
+</body>
+</html>

@@ -188,3 +188,44 @@ describe("the diagnosis stands alone", () => {
     expect(e.reason).toBe("nothing to explain");
   });
 });
+
+/**
+ * A tool must answer to the name it gives you.
+ *
+ * `doctor --worst` reports each machine as `extension 65832 · PRODUCTION · …`,
+ * so the reader's next move is `doctor 65832`. That printed "no machine
+ * matching" — for a machine the tool had just described in full. The lookup was
+ * correct (teeId or host) and the tool was still broken, because the identifier
+ * it leads with was not one of them.
+ */
+describe("lookup accepts every identifier the report prints", () => {
+  const machines = [
+    { teeId: "0xAAA1", extensionId: "65832", host: "a.example" },
+    { teeId: "0xBBB2", extensionId: "65839", host: "b.example" },
+  ];
+
+  // The same predicate cli.ts uses to resolve a single machine.
+  const find = (arg: string): (typeof machines)[number] | undefined => {
+    const needle = arg.toLowerCase();
+    return machines.find(
+      (m) =>
+        m.teeId.toLowerCase() === needle ||
+        m.host.toLowerCase() === needle ||
+        m.extensionId.toLowerCase() === needle,
+    );
+  };
+
+  it.each([
+    ["teeId", "0xAAA1"],
+    ["extension id, as printed in the report", "65832"],
+    ["host", "a.example"],
+    ["teeId in the wrong case", "0xaaa1"],
+  ])("resolves by %s", (_label, arg) => {
+    expect(find(arg)?.extensionId).toBe("65832");
+  });
+
+  it("still refuses an identifier that belongs to nobody", () => {
+    // Matching more things must not become matching anything.
+    expect(find("99999")).toBeUndefined();
+  });
+});

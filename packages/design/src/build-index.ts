@@ -207,6 +207,12 @@ ${tierRows}
     </div>
 
     <div class="note">
+      <p><span class="tag">No time for a demo</span>The proof deck walks every surface this project
+      offers — each page, each instrument, each contract — with the evidence beside it, in the time a
+      demo video would take. <a class="cite" href="proof-deck.html">[ Open the proof deck → ]</a></p>
+    </div>
+
+    <div class="note">
       <p><span class="tag">Flare Summer Signal</span>This is a submission to both bounties —
       Interoperable Asset Products and Confidential Compute Apps. The full write-up covers how each Flare
       primitive is used, what was newly built, the deployed contract addresses, and the limitations we

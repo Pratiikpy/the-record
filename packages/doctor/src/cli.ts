@@ -66,7 +66,7 @@ async function main(): Promise<void> {
   const arg = process.argv[2];
 
   if (!arg) {
-    log("usage: doctor <teeId|host> | --worst [n]");
+    log("usage: doctor <teeId|extensionId|host> | --worst [n]");
     process.exit(2);
   }
 
@@ -87,12 +87,20 @@ async function main(): Promise<void> {
     return;
   }
 
+  // Accept every identifier this tool itself prints. Its own report leads with
+  // `extension 65832`, so a reader's next move is `doctor 65832` — which used to
+  // answer "no machine matching", for a machine it had just described. A tool
+  // that will not answer to the name it gave you is broken, however correct its
+  // lookup is.
   const needle = arg.toLowerCase();
   const hit = scan.machines.find(
-    (m) => m.teeId.toLowerCase() === needle || m.host.toLowerCase() === needle,
+    (m) =>
+      m.teeId.toLowerCase() === needle ||
+      m.host.toLowerCase() === needle ||
+      m.extensionId.toLowerCase() === needle,
   );
   if (!hit) {
-    log(`no machine matching "${arg}" in the register`);
+    log(`no machine matching "${arg}" in the register — try a teeId, an extension id, or a host`);
     process.exit(1);
   }
   await report(hit);

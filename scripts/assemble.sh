@@ -19,6 +19,8 @@ mkdir -p "$OUT/covenant" "$OUT/procedure" "$OUT/reprod"
 
 cp "$ROOT/site/index.html"                      "$OUT/index.html"
 cp "$ROOT/site/errata.html"                     "$OUT/errata.html"
+cp "$ROOT/site/proof-deck.html"                 "$OUT/proof-deck.html"
+cp -r "$ROOT/site/proof"                        "$OUT/proof"
 cp -r "$ROOT/site/api"                          "$OUT/api"
 cp -r "$ROOT/site/badge"                        "$OUT/badge"
 cp -r "$ROOT/site/spec"                         "$OUT/spec"
@@ -45,9 +47,9 @@ printf '{"cleanUrls":true}' > "$OUT/vercel.json"
 
 # Required files, checked before anything downstream trusts the tree.
 missing=0
-for f in index.html errata.html covenant/index.html procedure/index.html \
+for f in index.html errata.html proof-deck.html covenant/index.html procedure/index.html \
          procedure/backfill.html reprod/index.html api/status.json badge/core-vault.svg \
-         spec/faults.json vercel.json; do
+         spec/faults.json vercel.json proof/tour-1-index.jpeg; do
   [ -s "$OUT/$f" ] || { printf '  MISSING %s\n' "$f" >&2; missing=1; }
 done
 [ "$missing" -eq 0 ] || { printf 'assembled tree is incomplete\n' >&2; exit 1; }

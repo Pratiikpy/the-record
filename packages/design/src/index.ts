@@ -150,6 +150,30 @@ export interface PageOpts {
   extraCss?: string;
 }
 
+/**
+ * The masthead mark, as a favicon.
+ *
+ * With no `<link rel="icon">` a browser silently requests /favicon.ico, and
+ * ours answered 404 on every single page view -- a console error on the landing
+ * page and a blank tab in every bookmark. Inlined as a data URI so it cannot
+ * 404, cannot drift from the mark it copies, and costs no request.
+ *
+ * The four squares carry the same descending opacity as `.mark`: the register
+ * is one thing observed at four decreasing degrees of certainty.
+ */
+const FAVICON =
+  "data:image/svg+xml," +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">' +
+      '<rect width="20" height="20" rx="3" fill="#FAF9F5"/>' +
+      '<g fill="#1F1E1D">' +
+      '<rect x="2" y="2" width="8" height="8" rx="2"/>' +
+      '<rect x="11" y="2" width="8" height="8" rx="2" opacity=".55"/>' +
+      '<rect x="2" y="11" width="8" height="8" rx="2" opacity=".55"/>' +
+      '<rect x="11" y="11" width="8" height="8" rx="2" opacity=".25"/>' +
+      "</g></svg>",
+  );
+
 export function page(o: PageOpts): string {
   const nav = o.nav
     .map((n) => `<a href="${esc(n.href)}"${n.current ? ' aria-current="page"' : ""}>[${esc(n.label)}]</a>`)
@@ -161,6 +185,7 @@ export function page(o: PageOpts): string {
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="${esc(o.description)}">
 <meta name="color-scheme" content="light">
+<link rel="icon" href="${FAVICON}">
 <title>${esc(o.title)}</title>
 <style>${TOKENS}${BASE_CSS}${o.extraCss ?? ""}</style>
 <script>(function(){try{var t=localStorage.getItem("record-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}})()</script>

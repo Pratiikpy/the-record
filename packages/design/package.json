@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit",
     "pretest": "pnpm -w run render:all",
     "test": "vitest run",
-    "build": "tsx src/build-index.ts && tsx src/build-errata.ts && tsx src/build-api.ts",
+    "build": "tsx src/build-index.ts && tsx src/build-errata.ts && tsx src/build-proof.ts && tsx src/build-api.ts",
     "build:api": "tsx src/build-api.ts"
   },
   "devDependencies": {

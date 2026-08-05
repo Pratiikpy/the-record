@@ -15,6 +15,7 @@ is not allowed to answer about itself.
 [![tee registry](https://the-record.vercel.app/badge/tee-registry.svg)](https://the-record.vercel.app/reprod/)
 
 **[Live site](https://the-record.vercel.app)** ·
+**[Proof deck](https://the-record.vercel.app/proof-deck)** ·
 **[Errata](https://the-record.vercel.app/errata)** ·
 **[API](https://the-record.vercel.app/api/status.json)** ·
 **[Submission](https://comfortable-goal-205.notion.site/THE-RECORD-Flare-Summer-Signal-submission-3b39c0ce787681518236e914f2decc49)**
@@ -76,7 +77,7 @@ $ pnpm --filter @therecord/reprod provenance --registry
 
   machines                 250
   distinct code hashes     12
-  mean identification      0.29 bits   (a unique hash here would carry 7.97)
+  mean identification      0.44 bits  (a unique hash here would carry 7.97)
 
   most-shared hash
   0x194844cf417dde867073e5ab7199fa4d21fd82b5dbe2bdea8b3d7fc18d10fdc2
@@ -125,7 +126,7 @@ to learn this happened.
 $ pnpm --filter @therecord/procedure redrun
 
   injecting fault: slot 26 [escrowed:high][available:low]
-    escrowedFunds 500000000000 → 999999999999
+    escrowedFunds 480000000000 → 999999999999
 
   ─── RED — same procedure, corrupted escrow figure ───
     CLEAN      C1  Outflow destination allowlist
@@ -146,7 +147,7 @@ The script **exits non-zero if C3 stays CLEAN**, so a control that stops being
 able to fail breaks the build. `FAULT_ESCROW_UBA=<true value>` makes the fault a
 no-op and the guard itself trips — verified.
 
-`packages/procedure/src/faults.ts` generalises this into a catalogue: 8 faults,
+`packages/procedure/src/faults.ts` generalises this into a catalogue: 9 faults,
 each declaring `mustFire` **and** `mustNotMove`, plus a published list of faults
 we inject and **do not** catch — because a suite that catches everything is
 measuring its own imagination.
@@ -157,7 +158,7 @@ measuring its own imagination.
 
 **[Read the errata →](https://the-record.vercel.app/errata)**
 
-Six entries, **three of which reached the public** before being withdrawn —
+Eight entries, **four of which reached the public** before being withdrawn —
 including a claim that 93 redemption agents had defaulted when every one of them
 had paid, in full and on time.
 
@@ -165,7 +166,7 @@ Each names the exact wrong value, the mechanism, how it was caught, and the test
 that now makes it unconstructable. A retraction is the cheapest thing to fake and
 the hardest thing to fake *precisely*.
 
-> Three of the six are the same error in different clothes: a comparison between
+> Three of the eight are the same error in different clothes: a comparison between
 > two numbers that were never defined to be equal, or that could never disagree.
 > That is the failure mode of assurance work, and it is invisible from the inside
 > — every one produced confident, well-formatted output that happened to be
@@ -246,8 +247,8 @@ URL, and a proxy serves one `/info`. Those comparisons are recorded as
 ```sh
 git clone https://github.com/Pratiikpy/the-record && cd the-record && pnpm install
 
-pnpm -r run test                                       # 474 tests, all packages
-cd contracts && forge test                             # 70 Solidity tests
+pnpm -r run test                                       # 491 tests, all packages
+cd contracts && forge test                             # 70 Solidity tests (561 in total)
 
 pnpm --filter @therecord/procedure run run             # CV-1 against Flare MAINNET
 pnpm --filter @therecord/procedure redrun              # the red run: CLEAN → EXCEPTION
