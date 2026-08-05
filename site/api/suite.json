@@ -1,9 +1,9 @@
 {
   "schema": "therecord.suite/v1",
-  "recordedAt": "2026-08-05T17:25:14.944Z",
-  "typescript": 524,
+  "recordedAt": "2026-08-05T17:47:14.087Z",
+  "typescript": 527,
   "solidity": 70,
-  "total": 594,
+  "total": 597,
   "packages": [
     {
       "package": "covenant",
@@ -11,7 +11,7 @@
     },
     {
       "package": "design",
-      "passed": 208
+      "passed": 211
     },
     {
       "package": "doctor",

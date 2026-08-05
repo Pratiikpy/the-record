@@ -254,8 +254,8 @@ URL, and a proxy serves one `/info`. Those comparisons are recorded as
 ```sh
 git clone https://github.com/Pratiikpy/the-record && cd the-record && pnpm install
 
-pnpm -r run test                                       # 501 tests, all packages
-cd contracts && forge test                             # 70 Solidity tests (571 in total)
+pnpm -r run test                                       # 527 tests, all packages
+cd contracts && forge test                             # 70 Solidity tests (597 in total)
 
 pnpm --filter @therecord/procedure run run             # CV-1 against Flare MAINNET
 pnpm --filter @therecord/procedure redrun              # the red run: CLEAN → EXCEPTION
@@ -296,14 +296,14 @@ pnpm -C packages/procedure e2e
 
 | Suite | Tests |
 |---|---|
-| design | 208 |
+| design | 211 |
 | reprod | 129 |
 | procedure | 116 |
 | covenant | 45 |
 | doctor | 26 |
 | contracts | 70 — **100% lines, statements, branches, functions** |
 
-**594 in total**, and the figures above are measured by `scripts/record-suite.sh` into [`/api/suite.json`](https://the-record.vercel.app/api/suite.json)
+**597 in total**, and the figures above are measured by `scripts/record-suite.sh` into [`/api/suite.json`](https://the-record.vercel.app/api/suite.json)
 rather than typed — a README that hand-counts its own suite goes stale on the next commit,
 and this one did.
 

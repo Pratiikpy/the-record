@@ -15,7 +15,7 @@
  * own preconditions rather than assuming a warm tree.
  */
 import { describe, it, expect } from "vitest";
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join, resolve } from "node:path";
 
@@ -98,5 +98,45 @@ describe("the README's own numbers", () => {
     const m = /([0-9]{3,}) tests, all packages/u.exec(README);
     expect(m, 'README should state "<n> tests, all packages"').toBeTruthy();
     expect(Number(m![1])).toBeGreaterThan(400);
+  });
+});
+
+/**
+ * The README's test count must equal the measured one.
+ *
+ * Three separate places stated a suite size — the run-it-yourself block, the
+ * per-suite table, and the proof deck — and all three were hand-typed and all
+ * three were stale within a commit. `scripts/record-suite.sh` measures it into
+ * site/api/suite.json; everything else has to agree with that file.
+ */
+describe("the README agrees with the measured suite", () => {
+  const SUITE = join(ROOT, "site", "api", "suite.json");
+
+  it("states the TypeScript count that was actually measured", () => {
+    if (!existsSync(SUITE)) throw new Error("run scripts/record-suite.sh first");
+    const s = JSON.parse(readFileSync(SUITE, "utf8")) as { typescript: number; total: number };
+    const m = /# (\d+) tests, all packages/u.exec(README);
+    expect(m, 'README should state "# <n> tests, all packages"').toBeTruthy();
+    expect(Number(m![1]), "README disagrees with site/api/suite.json").toBe(s.typescript);
+  });
+
+  it("states the combined total that was actually measured", () => {
+    const s = JSON.parse(readFileSync(SUITE, "utf8")) as { total: number };
+    const m = /\((\d+) in total\)/u.exec(README);
+    expect(m, 'README should state "(<n> in total)"').toBeTruthy();
+    expect(Number(m![1])).toBe(s.total);
+  });
+
+  it("the per-suite table adds up to the measured total", () => {
+    const s = JSON.parse(readFileSync(SUITE, "utf8")) as {
+      total: number;
+      packages: Array<{ package: string; passed: number }>;
+    };
+    for (const p of s.packages) {
+      expect(README, `README's table is missing or wrong for ${p.package}`).toContain(
+        `| ${p.package} | ${p.passed} |`,
+      );
+    }
+    expect(README).toContain(`**${s.total} in total**`);
   });
 });
