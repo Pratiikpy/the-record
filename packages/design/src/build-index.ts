@@ -201,6 +201,14 @@ ${tierRows}
     </div>
 
     <div class="note">
+      <p><span class="tag">Flare Summer Signal</span>This is a submission to both bounties —
+      Interoperable Asset Products and Confidential Compute Apps. The full write-up covers how each Flare
+      primitive is used, what was newly built, the deployed contract addresses, and the limitations we
+      state rather than hide.
+      <a class="cite" href="https://comfortable-goal-205.notion.site/THE-RECORD-Flare-Summer-Signal-submission-3b39c0ce787681518236e914f2decc49" target="_blank" rel="noopener">[ Read the submission → ]</a></p>
+    </div>
+
+    <div class="note">
       <p><span class="tag">Everything we got wrong</span>Six errata, three of which reached the public
       before being withdrawn — including a claim that 93 redemption agents had defaulted when every one of
       them had paid. Each entry names the exact wrong value, the mechanism, and the test that now makes it

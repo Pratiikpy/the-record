@@ -16,7 +16,8 @@ is not allowed to answer about itself.
 
 **[Live site](https://the-record.vercel.app)** ·
 **[Errata](https://the-record.vercel.app/errata)** ·
-**[API](https://the-record.vercel.app/api/status.json)**
+**[API](https://the-record.vercel.app/api/status.json)** ·
+**[Submission](https://comfortable-goal-205.notion.site/THE-RECORD-Flare-Summer-Signal-submission-3b39c0ce787681518236e914f2decc49)**
 
 </div>
 

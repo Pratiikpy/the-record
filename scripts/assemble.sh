@@ -36,10 +36,17 @@ find "$OUT" -name '*.html' -exec sed -i \
   -e 's|\.\./packages/procedure/out/index\.html|procedure/index.html|g' \
   -e 's|\.\./packages/reprod/out/index\.html|reprod/index.html|g' {} +
 
+# cleanUrls serves /errata and /procedure/backfill without the .html suffix.
+# This was dropped when assembly moved out of publish.sh, and the two
+# extensionless pages 404'd on the next deploy -- caught by the pre-alias check,
+# which is exactly why that check exists.
+printf '{"cleanUrls":true}' > "$OUT/vercel.json"
+
 # Required files, checked before anything downstream trusts the tree.
 missing=0
 for f in index.html errata.html covenant/index.html procedure/index.html \
-         procedure/backfill.html reprod/index.html api/status.json badge/core-vault.svg; do
+         procedure/backfill.html reprod/index.html api/status.json badge/core-vault.svg \
+         vercel.json; do
   [ -s "$OUT/$f" ] || { printf '  MISSING %s\n' "$f" >&2; missing=1; }
 done
 [ "$missing" -eq 0 ] || { printf 'assembled tree is incomplete\n' >&2; exit 1; }
