@@ -11,6 +11,19 @@ no float, seeds no liquidity and underwrites nothing.
 | **Procedure** | the books are the books | `packages/procedure` | `AssuranceRegistry.sol` |
 | **Reprod** | the code is the code | `packages/reprod` | `ReproRegistry.sol` |
 
+**Live:** [the-record.vercel.app](https://the-record.vercel.app) ·
+**Errata:** [everything we got wrong](https://the-record.vercel.app/errata) ·
+**API:** [`/api/status.json`](https://the-record.vercel.app/api/status.json)
+
+### Fixes sent upstream to Flare
+
+| PR | What |
+|---|---|
+| [developer-hub#1455](https://github.com/flare-foundation/developer-hub/pull/1455) | `RedemptionPerformed.requestId` documented as `uint64`, emitted as `uint256`. Different `topic0`, so an indexer written from the docs matches nothing and every redemption looks permanently open. |
+| [fce-extension-scaffold#3](https://github.com/flare-foundation/fce-extension-scaffold/pull/3) | The reproducible-build verification procedure cannot be followed: the clone step 404s, `-f Dockerfile` has no matching file, and Python/TypeScript cannot resolve `local/tee-node-base` under the `docker-container` driver the doc requires. |
+
+Both were found by using Flare's own documentation as a third party and having it fail.
+
 Plan: [`PRD-MASTER.md`](../PRD-MASTER.md) · Design: [`DESIGN.md`](../DESIGN.md) ·
 Findings: [`docs/EVIDENCE.md`](docs/EVIDENCE.md)
 
