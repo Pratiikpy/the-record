@@ -1,7 +1,7 @@
 {
   "procedureId": "CV-1",
   "period": "fork-red",
-  "generatedAt": "2026-08-05T03:02:50.634Z",
+  "generatedAt": "2026-08-05T13:22:15.091Z",
   "state": {
     "coreVaultAddress": "rDhpmiPq4BVBDWMVdSrmkgt8thKyRzGV1p",
     "custodianAddress": "r3GhxcaM4f9BJXEu1JLRgDXZpHJw6ugkH4",
@@ -11,15 +11,15 @@
       "rDYeqGVc8M3Se9wowvRDbURGYGZ5i5VF6r",
       "r4GHJwGSaGmJy9BBXS9osFXqRjqdSm7v83"
     ],
-    "availableFundsUBA": "3641237422468",
+    "availableFundsUBA": "3662462263741",
     "escrowedFundsUBA": "999999999999",
-    "immediatelyAvailableUBA": "3641237422068",
-    "reportedTotalUBA": "4641237422067",
+    "immediatelyAvailableUBA": "3656662262141",
+    "reportedTotalUBA": "4656662262140",
     "onLedger": {
-      "balanceDrops": "3642928902409",
-      "escrowedDrops": "490000000000",
-      "escrowCount": 49,
-      "reserveDrops": "11000000",
+      "balanceDrops": "3665104744082",
+      "escrowedDrops": "480000000000",
+      "escrowCount": 48,
+      "reserveDrops": "10800000",
       "nonXrpEscrows": 0
     }
   },
@@ -29,7 +29,7 @@
       "title": "Outflow destination allowlist",
       "assertion": "Every payment sent by the Core Vault lands on an allowlisted address or the custodian.",
       "opinion": "CLEAN",
-      "tested": 12,
+      "tested": 10,
       "exceptions": []
     },
     {
@@ -45,9 +45,9 @@
       "title": "Escrow backing",
       "assertion": "Every UBA Flare records as escrowed is matched by XRP sitting in an Escrow object on the XRP Ledger.",
       "opinion": "EXCEPTION",
-      "tested": 49,
+      "tested": 48,
       "exceptions": [
-        "Flare records 999999999999 UBA escrowed but the XRP Ledger holds only 490000000000 drops across 49 escrow objects at rDhpmiPq4BVBDWMVdSrmkgt8thKyRzGV1p — 509999999999 unbacked"
+        "Flare records 999999999999 UBA escrowed but the XRP Ledger holds only 480000000000 drops across 48 escrow objects at rDhpmiPq4BVBDWMVdSrmkgt8thKyRzGV1p — 519999999999 unbacked"
       ]
     },
     {
@@ -57,7 +57,7 @@
       "opinion": "CLEAN",
       "tested": 1,
       "exceptions": [],
-      "observation": "3642917902409 drops spendable covers Flare's 3641237422468 UBA with 1680479941 to spare (reserve 11000000 over 50 owned objects)"
+      "observation": "3665093944082 drops spendable covers Flare's 3662462263741 UBA with 2631680341 to spare (reserve 10800000 over 49 owned objects)"
     },
     {
       "id": "C5",
@@ -66,17 +66,17 @@
       "opinion": "CLEAN",
       "tested": 1,
       "exceptions": [],
-      "observation": "raw availableFunds exceeds advertised immediatelyAvailable by 400 UBA (expected: the asset manager nets a fee)"
+      "observation": "raw availableFunds exceeds advertised immediatelyAvailable by 5800001600 UBA (expected: the asset manager nets a fee)"
     }
   ],
   "opinion": "EXCEPTION",
   "evidence": {
     "xrplTransactions": 200,
-    "outflows": 12,
+    "outflows": 10,
     "ledgerRange": [
-      19626254,
-      19642767
+      19635478,
+      19655332
     ],
-    "evidenceDigest": "0xc9157a02"
+    "evidenceDigest": "0x886e4dee"
   }
 }
