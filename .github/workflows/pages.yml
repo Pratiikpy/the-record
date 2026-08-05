@@ -1,0 +1,97 @@
+name: Pages
+
+# The registers describe a live network, so a page built once and left alone
+# is not evidence of anything. This rebuilds every register from the committed
+# evidence snapshots on every push, and republishes.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 10 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      # Renderers only. `pnpm run build` would also re-scan the chain, which
+      # needs live RPC and would make a publish fail for reasons that have
+      # nothing to do with the page.
+      - name: Render registers from committed evidence
+        run: |
+          pnpm --filter @therecord/covenant run render
+          pnpm --filter @therecord/procedure run render
+          pnpm --filter @therecord/procedure run render:backfill
+          pnpm --filter @therecord/reprod run render
+          pnpm --filter @therecord/design run build
+
+      - name: Assemble the site
+        run: |
+          mkdir -p _site/covenant _site/procedure _site/reprod
+          cp site/index.html _site/index.html
+          cp packages/covenant/out/index.html  _site/covenant/index.html
+          cp packages/procedure/out/index.html _site/procedure/index.html
+          cp packages/procedure/out/backfill.html _site/procedure/backfill.html
+          cp packages/reprod/out/index.html    _site/reprod/index.html
+
+      # Cross-register links are written relative to each package's out/
+      # directory. The published tree is flatter, so they are rewritten once
+      # here rather than teaching the renderers about two layouts.
+      - name: Rewrite cross-register links for the published layout
+        run: |
+          find _site -name '*.html' -exec sed -i \
+            -e 's|\.\./\.\./covenant/out/index\.html|../covenant/index.html|g' \
+            -e 's|\.\./\.\./procedure/out/index\.html|../procedure/index.html|g' \
+            -e 's|\.\./\.\./reprod/out/index\.html|../reprod/index.html|g' \
+            -e 's|\.\./packages/covenant/out/index\.html|covenant/index.html|g' \
+            -e 's|\.\./packages/procedure/out/index\.html|procedure/index.html|g' \
+            -e 's|\.\./packages/reprod/out/index\.html|reprod/index.html|g' {} +
+
+      - name: Fail if any internal link is dead
+        run: |
+          python3 - <<'PY'
+          import pathlib, re, sys
+          root = pathlib.Path("_site")
+          bad = []
+          for page in root.rglob("*.html"):
+              for href in re.findall(r'href="([^"#]+)"', page.read_text(encoding="utf8")):
+                  if href.startswith(("http://", "https://", "mailto:", "#")):
+                      continue
+                  if not (page.parent / href).resolve().exists():
+                      bad.append(f"{page.relative_to(root)} -> {href}")
+          if bad:
+              print("dead internal links:")
+              for b in bad:
+                  print(" ", b)
+              sys.exit(1)
+          print("every internal link resolves")
+          PY
+
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: _site }
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
