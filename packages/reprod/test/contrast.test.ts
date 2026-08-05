@@ -92,6 +92,63 @@ describe("colour contrast — dark theme", () => {
   }
 });
 
+/**
+ * Tinted grounds, which the token-vs-paper checks above are blind to.
+ *
+ * `--wash` is laid over the paper for highlighted table rows and stat panels,
+ * so text on those rows sits on a DARKER ground than `--paper` and scores
+ * lower than any assertion above measures. An axe-core audit of the live site
+ * found exactly that: `--faint` cleared 4.66:1 on paper and scored 4.31:1 on a
+ * `.changed` row, failing AA on a page this suite reported as passing.
+ *
+ * Checking a token against the lightest background it is ever placed on is the
+ * same mistake as a control that compares a number with itself: it passes by
+ * construction. Every ground the design actually uses has to be measured.
+ */
+function over(fg: string, bg: string, overlay: string, alpha: number): number {
+  // Composite the wash onto the ground, then measure against the result.
+  const px = (h: string): [number, number, number] => {
+    const v = h.replace("#", "");
+    return [0, 2, 4].map((i) => parseInt(v.slice(i, i + 2), 16)) as [number, number, number];
+  };
+  const [br, bgn, bb] = px(bg);
+  const [orr, og, ob] = px(overlay);
+  const mix = (a: number, b: number): number => Math.round(a * (1 - alpha) + b * alpha);
+  const composited =
+    "#" +
+    [mix(br, orr), mix(bgn, og), mix(bb, ob)]
+      .map((n) => n.toString(16).padStart(2, "0"))
+      .join("");
+  return contrast(fg, composited);
+}
+
+describe("colour contrast on tinted rows, not just bare paper", () => {
+  // --wash is the ink colour at 4% in light, and the paper colour at 5% in dark.
+  const CASES = [
+    { theme: "light", get t() { return light; }, overlay: () => light.ink!, alpha: 0.04 },
+    { theme: "dark", get t() { return dark; }, overlay: () => dark.ink!, alpha: 0.05 },
+  ];
+
+  for (const c of CASES) {
+    for (const tok of SMALL_TEXT_TOKENS) {
+      it(`${c.theme}: --${tok} clears AA on a washed row`, () => {
+        const ratio = over(c.t[tok]!, c.t.paper!, c.overlay(), c.alpha);
+        expect(
+          ratio,
+          `--${tok} = ${c.t[tok]} scored ${ratio.toFixed(2)}:1 over --wash`,
+        ).toBeGreaterThanOrEqual(4.5);
+      });
+    }
+  }
+
+  it("REGRESSION: the exact pair axe caught on the live site", () => {
+    // #757068 on #f1f0ec measured 4.31 in a real browser. Whatever --faint
+    // becomes, it must never score below AA on that ground again.
+    expect(contrast("#757068", "#f1f0ec")).toBeLessThan(4.5);
+    expect(contrast(light.faint!, "#f1f0ec")).toBeGreaterThanOrEqual(4.5);
+  });
+});
+
 describe("verdict encoding is not colour-alone", () => {
   let html: string;
   beforeAll(() => {

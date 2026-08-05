@@ -11,24 +11,24 @@
 export const CONTRAST: Record<string, { light: number; dark: number }> = {
   ink: { light: 15.8, dark: 14.9 },
   muted: { light: 8.78, dark: 8.1 },
-  faint: { light: 4.72, dark: 5.13 },
+  faint: { light: 5.34, dark: 5.13 },
   "v-ok": { light: 5.56, dark: 6.2 },
   "v-bad": { light: 7.22, dark: 5.4 },
 };
 
 export const TOKENS = `
-:root{--ink:#1F1E1D;--ink-soft:#2C2A28;--paper:#FAF9F5;--muted:#4A4742;--graphite:#6E6A64;--faint:#757068;
+:root{--ink:#1F1E1D;--ink-soft:#2C2A28;--paper:#FAF9F5;--muted:#4A4742;--graphite:#6E6A64;--faint:#6B6760;
 --rule:rgb(31 30 29/.15);--rule-strong:rgb(31 30 29/.25);--rule-dashed:rgb(31 30 29/.30);--wash:rgb(31 30 29/.04);
---v-ok:#3F6F4B;--v-bad:#8C3A2E;--v-unknown:#757068;--v-sim:#7A6A3F;
+--v-ok:#3F6F4B;--v-bad:#8C3A2E;--v-unknown:#6B6760;--v-sim:#7A6A3F;
 --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
 --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
 --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 :root[data-theme="dark"]{--ink:#EDEAE3;--ink-soft:#D9D5CC;--paper:#161512;--muted:#B3AEA3;--graphite:#918B80;--faint:#8C867A;
 --rule:rgb(237 234 227/.15);--rule-strong:rgb(237 234 227/.26);--rule-dashed:rgb(237 234 227/.32);--wash:rgb(237 234 227/.05);
 --v-ok:#7FA98A;--v-bad:#CE8272;--v-unknown:#8C867A;--v-sim:#B7A06A}
-:root[data-theme="light"]{--ink:#1F1E1D;--paper:#FAF9F5;--muted:#4A4742;--graphite:#6E6A64;--faint:#757068;
+:root[data-theme="light"]{--ink:#1F1E1D;--paper:#FAF9F5;--muted:#4A4742;--graphite:#6E6A64;--faint:#6B6760;
 --rule:rgb(31 30 29/.15);--rule-strong:rgb(31 30 29/.25);--rule-dashed:rgb(31 30 29/.30);--wash:rgb(31 30 29/.04);
---v-ok:#3F6F4B;--v-bad:#8C3A2E;--v-unknown:#757068;--v-sim:#7A6A3F}`;
+--v-ok:#3F6F4B;--v-bad:#8C3A2E;--v-unknown:#6B6760;--v-sim:#7A6A3F}`;
 
 export const BASE_CSS = `
 *{box-sizing:border-box}

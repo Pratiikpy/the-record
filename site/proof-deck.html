@@ -8,18 +8,18 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Crect%20width%3D%2220%22%20height%3D%2220%22%20rx%3D%223%22%20fill%3D%22%23FAF9F5%22%2F%3E%3Cg%20fill%3D%22%231F1E1D%22%3E%3Crect%20x%3D%222%22%20y%3D%222%22%20width%3D%228%22%20height%3D%228%22%20rx%3D%222%22%2F%3E%3Crect%20x%3D%2211%22%20y%3D%222%22%20width%3D%228%22%20height%3D%228%22%20rx%3D%222%22%20opacity%3D%22.55%22%2F%3E%3Crect%20x%3D%222%22%20y%3D%2211%22%20width%3D%228%22%20height%3D%228%22%20rx%3D%222%22%20opacity%3D%22.55%22%2F%3E%3Crect%20x%3D%2211%22%20y%3D%2211%22%20width%3D%228%22%20height%3D%228%22%20rx%3D%222%22%20opacity%3D%22.25%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
 <title>The Record — proof deck</title>
 <style>
-:root{--ink:#1F1E1D;--ink-soft:#2C2A28;--paper:#FAF9F5;--muted:#4A4742;--graphite:#6E6A64;--faint:#757068;
+:root{--ink:#1F1E1D;--ink-soft:#2C2A28;--paper:#FAF9F5;--muted:#4A4742;--graphite:#6E6A64;--faint:#6B6760;
 --rule:rgb(31 30 29/.15);--rule-strong:rgb(31 30 29/.25);--rule-dashed:rgb(31 30 29/.30);--wash:rgb(31 30 29/.04);
---v-ok:#3F6F4B;--v-bad:#8C3A2E;--v-unknown:#757068;--v-sim:#7A6A3F;
+--v-ok:#3F6F4B;--v-bad:#8C3A2E;--v-unknown:#6B6760;--v-sim:#7A6A3F;
 --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
 --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
 --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 :root[data-theme="dark"]{--ink:#EDEAE3;--ink-soft:#D9D5CC;--paper:#161512;--muted:#B3AEA3;--graphite:#918B80;--faint:#8C867A;
 --rule:rgb(237 234 227/.15);--rule-strong:rgb(237 234 227/.26);--rule-dashed:rgb(237 234 227/.32);--wash:rgb(237 234 227/.05);
 --v-ok:#7FA98A;--v-bad:#CE8272;--v-unknown:#8C867A;--v-sim:#B7A06A}
-:root[data-theme="light"]{--ink:#1F1E1D;--paper:#FAF9F5;--muted:#4A4742;--graphite:#6E6A64;--faint:#757068;
+:root[data-theme="light"]{--ink:#1F1E1D;--paper:#FAF9F5;--muted:#4A4742;--graphite:#6E6A64;--faint:#6B6760;
 --rule:rgb(31 30 29/.15);--rule-strong:rgb(31 30 29/.25);--rule-dashed:rgb(31 30 29/.30);--wash:rgb(31 30 29/.04);
---v-ok:#3F6F4B;--v-bad:#8C3A2E;--v-unknown:#757068;--v-sim:#7A6A3F}
+--v-ok:#3F6F4B;--v-bad:#8C3A2E;--v-unknown:#6B6760;--v-sim:#7A6A3F}
 *{box-sizing:border-box}
 /* Keyboard users should not have to tab the whole register nav on every page.
    Off-screen until focused, then it lands in the flow rather than over it. */
@@ -138,7 +138,7 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
 
     <div class="stats">
       <div class="stat"><div class="k">Surfaces</div><div class="v">17</div><div class="n">6 pages, 7 JSON endpoints, 3 badges, 1 spec</div></div>
-      <div class="stat"><div class="k">Tests</div><div class="v">571</div><div class="n">501 TypeScript + 70 Solidity, clean clone</div></div>
+      <div class="stat"><div class="k">Tests</div><div class="v">586</div><div class="n">516 TypeScript + 70 Solidity, clean clone</div></div>
       <div class="stat"><div class="k">Errata</div><div class="v">8</div><div class="n">4 reached the public</div></div>
       <div class="stat"><div class="k">Upstream PRs</div><div class="v">2</div><div class="n">into Flare's own repositories</div></div>
     </div>
@@ -445,14 +445,14 @@ CV-1 registered and concluded:
     <div class="step-head">
       <span class="num">14</span>
       <h3>Reproduce all of it from a clean clone</h3>
-      <span class="kind">571 assertions</span>
+      <span class="kind">586 assertions</span>
     </div>
     <p class="lead">Nothing above needs our server, our keys, or our permission. The evidence is committed,
         the commands are in the README, and the suite carries its own preconditions.</p>
     
     <pre class="term"><code><span class="dim">$</span> <b class="ok">git clone https://github.com/Pratiikpy/the-record &amp;&amp; cd the-record</b>
 <span class="dim">$</span> <b class="ok">pnpm install &amp;&amp; pnpm -r run test</b>
-  <b class="ok">501 passed</b> - <b class="hi">0 skipped</b> - exit 0
+  <b class="ok">516 passed</b> - <b class="hi">0 skipped</b> - exit 0
 
 <span class="dim">$</span> <b class="ok">cd contracts &amp;&amp; forge test</b>
   <b class="ok">70 tests passed</b>, 0 failed, 0 skipped</code></pre>
