@@ -138,3 +138,41 @@ describe("it still refuses to overclaim", () => {
     expect(html).toContain("82 silently skipped tests");
   });
 });
+
+/**
+ * A declared image size is a promise to the browser about layout.
+ *
+ * The mobile capture is 390x844 and was declared 1280x880, so the browser
+ * reserved a box with the wrong aspect ratio and the page jumped as the image
+ * arrived. Every <img> here now declares what the file actually is.
+ */
+describe("declared image dimensions match the files on disk", () => {
+  /** JPEG SOF marker carries the real pixel dimensions. */
+  function jpegSize(buf: Buffer): { w: number; h: number } | null {
+    let i = 2;
+    while (i < buf.length) {
+      if (buf[i] !== 0xff) return null;
+      const marker = buf[i + 1]!;
+      const len = buf.readUInt16BE(i + 2);
+      // SOF0..SOF3 and SOF5..SOF15, excluding DHT/JPG/DAC
+      if (marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker)) {
+        return { h: buf.readUInt16BE(i + 5), w: buf.readUInt16BE(i + 7) };
+      }
+      i += 2 + len;
+    }
+    return null;
+  }
+
+  it("every embedded screenshot declares its true size", () => {
+    const imgs = [...html.matchAll(/<img[^>]*src="(proof\/[^"]+)"[^>]*width="(\d+)"[^>]*height="(\d+)"/gu)];
+    expect(imgs.length, "expected embedded screenshots with dimensions").toBeGreaterThanOrEqual(6);
+    for (const [, src, w, h] of imgs) {
+      const size = jpegSize(readFileSync(join(ROOT, "site", src!)));
+      expect(size, `could not read dimensions from ${src}`).toBeTruthy();
+      expect(
+        `${size!.w}x${size!.h}`,
+        `${src} is ${size!.w}x${size!.h} but the page declares ${w}x${h}`,
+      ).toBe(`${w}x${h}`);
+    }
+  });
+});

@@ -118,7 +118,7 @@ function step(n: number, o: {
   title: string;
   kind: string;
   lead: string;
-  shot?: { src: string; alt: string; caption: string };
+  shot?: { src: string; alt: string; caption: string; w?: number; h?: number };
   term?: string;
   note?: string;
   link?: { href: string; label: string };
@@ -130,7 +130,7 @@ function step(n: number, o: {
       <span class="kind">${esc(o.kind)}</span>
     </div>
     <p class="lead">${o.lead}</p>
-    ${o.shot ? `<figure><img src="${esc(o.shot.src)}" alt="${esc(o.shot.alt)}" loading="lazy" width="1280" height="880"><figcaption>${o.shot.caption}</figcaption></figure>` : ""}
+    ${o.shot ? `<figure class="${(o.shot.w ?? 1280) < 800 ? "portrait" : ""}"><img src="${esc(o.shot.src)}" alt="${esc(o.shot.alt)}" loading="lazy" width="${o.shot.w ?? 1280}" height="${o.shot.h ?? 880}"><figcaption>${o.shot.caption}</figcaption></figure>` : ""}
     ${o.term ? `<pre class="term"><code>${o.term}</code></pre>` : ""}
     ${o.note ? `<p class="note">${o.note}</p>` : ""}
     ${o.link ? `<p class="go"><a class="cite" href="${esc(o.link.href)}">[ ${esc(o.link.label)} ]</a></p>` : ""}
@@ -404,6 +404,8 @@ ${controlLines(red)}
         of the token list.`,
       shot: {
         src: "proof/tour-7-mobile.jpeg",
+        w: 390,
+        h: 844,
         alt: "The index rendered at 390 pixels wide in the light theme",
         caption: `Fig. 7 &mdash; 390&thinsp;px. No page scrolls sideways at any width; wide tables and
           command blocks scroll inside their own container.`,
@@ -552,7 +554,7 @@ ${steps.join("\n")}
         ".step h3{font-family:var(--serif);font-weight:400;font-size:clamp(19px,2.6vw,25px);line-height:1.25;margin:0;letter-spacing:-.01em}" +
         ".kind{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);border:1px solid var(--rule-strong);padding:3px 7px;white-space:nowrap}" +
         ".step .lead{max-width:66ch;margin:12px 0 0;color:var(--muted)}" +
-        "figure{margin:20px 0 0}" +
+        "figure{margin:20px 0 0}figure.portrait{display:flex;flex-direction:column;align-items:flex-start}figure.portrait img{width:auto;max-width:300px;max-height:640px}" +
         "figure img{display:block;width:100%;height:auto;border:1px solid var(--rule-strong)}" +
         "figcaption{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:9px;line-height:1.6}" +
         ".term{margin:18px 0 0;background:#1F1E1D;color:#E8E4DC;font-family:var(--mono);font-size:11.5px;line-height:1.7;padding:15px 17px;overflow-x:auto;white-space:pre;border:1px solid #1F1E1D}" +
