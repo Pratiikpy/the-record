@@ -29,7 +29,7 @@ Findings: [`docs/EVIDENCE.md`](docs/EVIDENCE.md)
 
 ---
 
-## What each layer found, running against live Coston2
+## What each layer found, running against live Flare mainnet
 
 ### Reprod — the code is the code
 
@@ -97,9 +97,22 @@ Runs against a committed snapshot — no network, no server, no trust in us.
 - **CV-1** tests five Core Vault controls every period, from entirely public
   data — the allowlist, custodian and balances from Flare, the payments and
   escrow objects from XRPL. No client, no credentials, nobody's permission.
-- Live result: **CLEAN**, 11 outflows tested out of 200 transactions. C3
-  reconciles Flare's `escrowedFunds` against the sum of the vault's XRPL Escrow
-  objects — on live data, **500,000,000,000 on both sides, to the drop**.
+- Live result on **Flare mainnet**: **CLEAN**, all five controls. C3 reconciles
+  Flare's `escrowedFunds` against the sum of the vault's XRPL Escrow objects —
+  **140,000,000 XRP on both sides, to the drop**, across 14 escrow objects.
+  Nothing is hardcoded but the contract registry; the asset manager and core
+  vault are resolved through it at run time, so a new FAsset is discovered
+  rather than missed.
+
+Coston2 is not the subject — it is the **fault laboratory**, and it has to be
+asked for by name (`NETWORK=coston2`) so a fault-injection run can never be
+mistaken for a reading of production.
+
+**History is a property of the chain, not of when you started.** CV-1 is a pure
+function of state at a height, so the register did not wait — it computed. 119
+Coston2 heights across 238 days and 23 mainnet heights, every row labelled
+`retrospective`, every candidate exception confirmed across a cross-chain skew
+bracket before being claimed.
 
 **The control has gone red, on purpose.** A monitor that has only ever printed
 CLEAN is indistinguishable from one that *cannot* print anything else — and this
@@ -132,7 +145,29 @@ catches everything is measuring its own imagination.
 > *(iii)* It asserted `availableFunds + escrowedFunds ≤ Balance` and produced a
 > 497,844,875,522 drop shortfall — **caught before publication**: XRPL escrow
 > *removes* XRP from the account balance, so that arithmetic double-counts every
-> escrow. All three are pinned by regression tests.
+> escrow. All three are pinned by regression tests, and all six errata we have
+> are published in full at [/errata](https://the-record.vercel.app/errata).
+
+## How much can a stranger check?
+
+A verdict says what a check found today. It does not say how much of the system
+you could establish yourself — so there is a scale for that, and it is
+deliberately **not** a safety rating.
+
+| Tier | Means |
+|---|---|
+| **V0** ASSERTED | the system states facts about itself; you take its word |
+| **V1** OBSERVABLE | the facts are public, a stranger can read them |
+| **V2** RECONCILED | two independent sources agree, and disagreement would show |
+| **V3** FALSIFIED | the check is proven able to fail, on the record, recently |
+
+**FXRP core vault: V3.** **Flare TEE registry: V1** — public, but nothing
+cross-checks the code hash, so there is no second source that could disagree.
+
+V3 exists because a reconciliation nobody has seen fail is indistinguishable
+from one that *cannot* fail, and V2 is exactly where the tautology we shipped
+lived comfortably. It **lapses after 30 days**. The tier can go down, ours
+included.
 
 ---
 
