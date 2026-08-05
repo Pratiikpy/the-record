@@ -20,10 +20,39 @@ Findings: [`docs/EVIDENCE.md`](docs/EVIDENCE.md)
 
 ### Reprod — the code is the code
 
-- **223** active TEE machines. **86% unreachable right now.** **96% simulated**,
-  carrying one shared code hash that binds to no source at all.
-- **8** machines on real confidential hardware — and **not one** runs code any
-  third party has independently reproduced.
+Every confidential-compute project tells its users the same thing: *you do not
+have to trust us, check the code hash.* It is a good instruction, and it is
+currently unexecutable — because nothing turns 32 bytes into a fact. So we
+measured how much a code hash actually identifies:
+
+> **bits = −log₂( machines carrying this hash ÷ machines in the registry )**
+
+- **223** machines carry **8** distinct code hashes between them.
+- One value is carried by **215 machines under 44 independent owners** — it
+  identifies **0.05 bits**. A unique hash in this registry would carry **7.80**.
+  Checking it returns the same answer for every one of them.
+- **Not one machine** in the registry carries a hash that can be traced to
+  source today: the shared value identifies nothing, and every distinctive hash
+  has no claimed source revision. We rebuilt **5 of Flare's own images**
+  deterministically and **none of those digests appears on chain**.
+
+Nobody did anything wrong. Simulated attestation is **explicitly permitted** by
+Flare, and a shared constant is exactly what simulation is defined to emit. This
+measures the *hash*, not the operator — no machine owner is named anywhere in
+this repo, and `NOT_A_MEASUREMENT` is derived from how many owners share a
+value, never from a list of known constants. It would flag a shared hash nobody
+has ever seen, and it would clear the simulator's own constant the moment a
+single owner used it. The finding is about a registry three weeks into its life,
+not about anyone in it.
+
+```
+pnpm --filter @therecord/reprod provenance --registry
+pnpm --filter @therecord/reprod provenance <hash | extensionId | address | url>
+```
+
+Runs against a committed snapshot — no network, no server, no trust in us.
+
+- **86% of machines are unreachable right now.**
 - **5 of 5** Flare images rebuilt from source here, twice each, identical
   digests. Only **2 of 5** are independently verifiable by anyone else.
 
@@ -52,18 +81,45 @@ Findings: [`docs/EVIDENCE.md`](docs/EVIDENCE.md)
 
 ### Procedure — the books are the books
 
-- **CV-1** tests four Core Vault controls every period, from entirely public
-  data — the allowlist, custodian and balances from Flare, the payments from
-  XRPL. No client, no credentials, nobody's permission.
-- Live result: **CLEAN**, 12 outflows tested out of 200 transactions.
+- **CV-1** tests five Core Vault controls every period, from entirely public
+  data — the allowlist, custodian and balances from Flare, the payments and
+  escrow objects from XRPL. No client, no credentials, nobody's permission.
+- Live result: **CLEAN**, 11 outflows tested out of 200 transactions. C3
+  reconciles Flare's `escrowedFunds` against the sum of the vault's XRPL Escrow
+  objects — on live data, **500,000,000,000 on both sides, to the drop**.
 
-> **A correction we made to ourselves.** C3 first asserted
-> `availableFunds + escrowedFunds ≤ totalAvailable` across two contracts and
-> reported a 400 UBA **exception against Flare**. Those figures were never
-> defined to relate. Escrow reconciles exactly against
-> `total − immediatelyAvailable`; the 400 UBA is a fee. A false accusation is
-> far more damaging to an assurance register than a missed finding, so that
-> regression is pinned by a test.
+**The control has gone red, on purpose.** A monitor that has only ever printed
+CLEAN is indistinguishable from one that *cannot* print anything else — and this
+project shipped exactly that failure once. So the controls are tested the only
+way a control can be:
+
+```
+pnpm --filter @therecord/procedure redrun
+```
+
+Coston2 is forked, one storage slot is overwritten, and the identical procedure
+runs again. The XRP Ledger is left untouched and real — that asymmetry is the
+point. C3 flips **CLEAN → EXCEPTION**; the other four controls correctly do not
+move. The script **exits non-zero if C3 stays CLEAN**, so a control that stops
+being able to fail breaks the build. `FAULT_ESCROW_UBA=<true value>` makes the
+fault a no-op and the guard itself trips — verified.
+
+`packages/procedure/src/faults.ts` generalises this into a catalogue: each fault
+declares both `mustFire` **and** `mustNotMove`, because a check that fires on
+everything is no more informative than one that fires on nothing. It ships a
+published list of faults we inject and **do not** catch, because a suite that
+catches everything is measuring its own imagination.
+
+> **Three corrections we made to ourselves.** The cross-chain reconciliation has
+> been wrong three times. *(i)* It asserted `availableFunds + escrowedFunds ≤
+> totalAvailable` across two contracts and reported a 400 UBA **exception
+> against Flare** — figures never defined to relate. *(ii)* It asserted
+> `escrowedFunds = totalAvailable − immediatelyAvailable`, which held exactly
+> and **could never fail**, because both sides derive from one storage slot.
+> *(iii)* It asserted `availableFunds + escrowedFunds ≤ Balance` and produced a
+> 497,844,875,522 drop shortfall — **caught before publication**: XRPL escrow
+> *removes* XRP from the account balance, so that arithmetic double-counts every
+> escrow. All three are pinned by regression tests.
 
 ---
 

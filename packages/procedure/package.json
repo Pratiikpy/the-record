@@ -10,9 +10,18 @@
     "e2e": "tsx src/publish.ts",
     "build": "pnpm run run && pnpm run render",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "redrun": "tsx src/redrun.ts",
+    "backfill": "tsx src/backfill-run.ts",
+    "render:backfill": "tsx src/render-backfill.ts"
   },
-  "dependencies": { "viem": "^2.21.0" },
-  "devDependencies": { "@types/node": "^22.10.0", "tsx": "^4.19.0", "typescript": "^5.9.3", "vitest": "^2.1.0" }
+  "dependencies": {
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.9.3",
+    "vitest": "^2.1.0"
+  }
 }
-

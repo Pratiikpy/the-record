@@ -5,7 +5,7 @@
  * DISCLAIMER are three different things, and a DISCLAIMER must never be styled
  * to read like a pass. That is the whole reason the layer exists.
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { page, marker, stat, esc, short } from "../../design/src/index.js";
@@ -14,6 +14,8 @@ import type { Cv1Report, ControlResult } from "./cv1.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const IN = join(HERE, "..", "out", "cv1.json");
+const FORK_GREEN = join(HERE, "..", "out", "cv1-fork-green.json");
+const FORK_RED = join(HERE, "..", "out", "cv1-fork-red.json");
 const OUT = join(HERE, "..", "out", "index.html");
 
 const OPINION_CLASS: Record<string, string> = {
@@ -52,6 +54,102 @@ function controlRow(c: ControlResult): string {
 const xrp = (uba: string): string =>
   (Number(BigInt(uba) / 1000n) / 1000).toLocaleString("en-US", { maximumFractionDigits: 2 });
 
+/**
+ * § 3.3 — the red run.
+ *
+ * The single question this layer could not previously answer: *has your control
+ * ever gone red?* A monitor that has only ever printed CLEAN is
+ * indistinguishable from one that CANNOT print anything else — and this
+ * procedure has already shipped exactly that failure once, an identity between
+ * two figures that both derived from the same storage slot.
+ *
+ * So the section is not a claim. It is a before and after, from a run anyone
+ * can repeat with one command.
+ */
+function redRunSection(green: Cv1Report, red: Cv1Report): string {
+  const pair = (id: string): [ControlResult | undefined, ControlResult | undefined] => [
+    green.controls.find((c) => c.id === id),
+    red.controls.find((c) => c.id === id),
+  ];
+  const ids = green.controls.map((c) => c.id);
+  const c3red = red.controls.find((c) => c.id === "C3");
+
+  // Three columns, not four. A "behaviour" column would only restate what the
+  // two chips already show, and it pushed the RED column — the entire point of
+  // the table — off the right edge of a phone screen.
+  const rows = ids
+    .map((id) => {
+      const [g, r] = pair(id);
+      const changed = g?.opinion !== r?.opinion;
+      const note = changed ? "fired on the injected fault" : "not in the fault's scope";
+      return `<tr${changed ? ' class="changed"' : ""}>
+        <th scope="row">${esc(id)}<small>${esc(g?.title ?? "")}</small><small>${note}</small></th>
+        <td class="l">${opinionChip(g?.opinion ?? "—")}</td>
+        <td class="l">${opinionChip(r?.opinion ?? "—")}</td>
+      </tr>`;
+    })
+    .join("\n");
+
+  return `
+  <section>
+    <div class="eyebrow">§ 3.3 — Falsification</div>
+    <h2>The control has gone red, on purpose</h2>
+    <p class="lede">Coston2 is forked locally, one storage slot in
+      <code>CoreVaultManager</code> is overwritten, and the identical procedure runs again. The XRP Ledger
+      is left completely untouched and real — that asymmetry is the point, because a cross-chain fault only
+      surfaces when the two sources are genuinely independent.</p>
+
+    <div class="stats">
+      ${stat("Injected fault", "1 slot", "escrowedFunds 500,000,000,000 → 999,999,999,999")}
+      ${stat("Opinion under fault", red.opinion, `was ${green.opinion} — same code, same XRPL evidence`)}
+      ${stat("Evidence digest", `${esc(green.evidence.evidenceDigest)}`, `→ ${esc(red.evidence.evidenceDigest)}`)}
+      ${stat("Controls moved", "1 of 5", "the other four correctly did not")}
+    </div>
+
+    <div class="tablewrap" style="margin-top:20px">
+      <table class="cmp" style="min-width:320px">
+        <caption>Every control before and after the injected fault. Only the control whose scope contains the fault moves.</caption>
+        <thead><tr>
+          <th class="l" scope="col">Control</th>
+          <th class="l" scope="col">Before</th>
+          <th class="l" scope="col">After</th>
+        </tr></thead>
+        <tbody>
+${rows}
+        </tbody>
+      </table>
+    </div>
+
+    ${
+      c3red && c3red.exceptions.length > 0
+        ? `<div class="finding">
+      <div class="finding-label">The exception it wrote, verbatim</div>
+      <p class="finding-body">${esc(c3red.exceptions[0]!)}</p>
+    </div>`
+        : ""
+    }
+
+    <div class="note">
+      <p><span class="tag">Why this section exists</span>An earlier version of C3 asserted
+      <code>escrowedFunds = totalAvailable − immediatelyAvailable</code>. It held exactly, every period. It
+      also <strong>could not fail</strong>: <code>coreVaultAvailableAmount()</code> derives both of its
+      outputs from that same <code>escrowedFunds</code>, so this very fault injection moved both sides of
+      the identity together and the control stayed green. It had been printing CLEAN for reasons having
+      nothing to do with the vault's health.</p>
+      <p>Four controls do not move under this fault. That matters as much as the one that does — a check
+      that fires on everything is no more informative than one that fires on nothing.</p>
+      <p><strong>Reproduce it:</strong> <code>pnpm --filter @therecord/procedure redrun</code>. The script
+      exits non-zero if C3 stays CLEAN, so a control that stops being able to fail breaks the build.</p>
+    </div>
+
+    <p class="cap" style="margin-top:22px">
+      The same procedure has also been run backwards, across 119 historical heights on both chains —
+      where it reports exceptions this register was not running to see.
+      <a class="cite" href="backfill.html">[ The backfilled series → ]</a>
+    </p>
+  </section>`;
+}
+
 function main(): void {
   const r = JSON.parse(readFileSync(IN, "utf8")) as Cv1Report;
   const s = r.state;
@@ -83,13 +181,21 @@ function main(): void {
       <strong>EXCEPTION</strong> means it was tested and did not. <strong>DISCLAIMER</strong> means there was not
       enough evidence to conclude — and it is never rolled up as a pass. A procedure that can only produce good
       news is marketing, so refusing to conclude is a first-class result.</p>
-      <p><strong>A correction we made to ourselves.</strong> C3 originally asserted that
-      <code>availableFunds + escrowedFunds ≤ totalAvailable</code> across two contracts, and reported a
-      400&nbsp;UBA <em>exception against Flare</em>. Those figures were never defined to relate: escrow reconciles
-      exactly against <code>total − immediatelyAvailable</code>, and the 400 UBA is a fee the asset manager nets
-      off. The control now tests only the identity that actually holds, and the wedge is <em>disclosed</em> as
-      C4 rather than judged. A false accusation is far more damaging to an assurance register than a missed
-      finding.</p>
+      <p><strong>Three corrections we made to ourselves.</strong> The cross-chain reconciliation has been
+      wrong three times, and the wrongness was instructive each time.
+      <em>(i)</em> It asserted <code>availableFunds + escrowedFunds ≤ totalAvailable</code> across two
+      contracts and reported a 400&nbsp;UBA <em>exception against Flare</em> — figures never defined to relate;
+      the 400&nbsp;UBA is a fee the asset manager nets off, now <em>disclosed</em> as C5 rather than judged.
+      <em>(ii)</em> It asserted <code>escrowedFunds = totalAvailable − immediatelyAvailable</code>, which held
+      exactly and could never fail, because both sides derive from one storage slot (§&nbsp;3.3).
+      <em>(iii)</em> It asserted <code>availableFunds + escrowedFunds ≤ Balance</code> and produced a
+      497,844,875,522&nbsp;drop shortfall — <strong>caught before publication</strong>: XRPL escrow
+      <em>removes</em> XRP from the account balance and holds it in Escrow objects, so adding Flare's escrowed
+      figure to a balance that already excludes it double-counts every escrow.</p>
+      <p>C3 now reconciles the two things that genuinely must agree — Flare's <code>escrowedFunds</code>
+      against the sum of the vault's Escrow objects on XRPL, which on live data match to the drop — and C4
+      compares Flare's spendable claim against the liquid balance after the ledger's own reserve. A false
+      accusation is far more damaging to an assurance register than a missed finding.</p>
     </div>
   </section>
 
@@ -145,7 +251,15 @@ ${s.allowedDestinations.map((a) => `          <tr><th scope="row"><code>${esc(a)
       Fig. 3 — The custodian is permitted by construction and is deliberately not in the destination
       allowlist; C2 tests that both are actually set, so C1 cannot pass for the wrong reason.
     </p>
-  </section>`;
+  </section>
+${
+  existsSync(FORK_GREEN) && existsSync(FORK_RED)
+    ? redRunSection(
+        JSON.parse(readFileSync(FORK_GREEN, "utf8")) as Cv1Report,
+        JSON.parse(readFileSync(FORK_RED, "utf8")) as Cv1Report,
+      )
+    : ""
+}`;
 
   writeFileSync(
     OUT,
@@ -159,7 +273,17 @@ ${s.allowedDestinations.map((a) => `          <tr><th scope="row"><code>${esc(a)
       body,
       extraCss:
         ".assertion{max-width:52ch}.ex,.dis,.obs{font-size:11px;margin-top:6px;line-height:1.5}" +
-        ".ex{color:var(--v-bad)}.dis{color:var(--v-unknown)}.obs{color:var(--faint)}",
+        ".ex{color:var(--v-bad)}.dis{color:var(--v-unknown)}.obs{color:var(--faint)}" +
+        "tr.changed th,tr.changed td{background:var(--wash)}" +
+        // The one sentence that proves the control works should not be set as a
+        // full-bleed 11px caption. It gets the width of a paragraph and a rule.
+        ".finding{margin-top:20px;border-left:2px solid var(--v-bad);padding:2px 0 2px 16px;max-width:62ch}" +
+        ".finding-label{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}" +
+        ".finding-body{font-family:var(--mono);font-size:12px;line-height:1.7;color:var(--v-bad);margin:6px 0 0;overflow-wrap:anywhere}" +
+        // The comparison table is the one table that must fit a phone without
+        // sideways scrolling: a reader who sees only the BEFORE column reads
+        // five CLEANs and concludes the opposite of what the section proves.
+        "@media (max-width:480px){.cmp th,.cmp td{padding-left:9px;padding-right:9px}.cmp .verdict{font-size:10px;padding:2px 5px}}",
     }),
     "utf8",
   );
@@ -167,4 +291,6 @@ ${s.allowedDestinations.map((a) => `          <tr><th scope="row"><code>${esc(a)
 }
 
 main();
+
+
 

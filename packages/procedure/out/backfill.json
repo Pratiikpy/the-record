@@ -1,0 +1,4309 @@
+{
+  "generatedAt": "2026-08-04T17:32:43.674Z",
+  "derivation": "retrospective",
+  "scope": [
+    "C2",
+    "C3",
+    "C4",
+    "C5"
+  ],
+  "scopeNote": "A BACKING series. C1 (outflow destination allowlist) needs a reconstructed transaction window and is not evaluated here, so it is excluded from the rolled-up opinion rather than dragging every row to DISCLAIMER. The claim is narrower than a full CV-1 period opinion, deliberately.",
+  "method": "CV-1 re-evaluated at historical heights. Every row is computed in retrospect and labelled as such. Candidate exceptions are confirmed across a cross-chain skew bracket before being claimed.",
+  "xrplRetentionFloor": {
+    "ledger": 13078125,
+    "iso": "2025-12-10T07:28:52Z"
+  },
+  "covenantBackfillable": false,
+  "covenantReason": "FDC attestation proofs expire at lutlimit (~14 days), so historical rounds cannot be re-proven at any price",
+  "slots": 119,
+  "tally": {
+    "EXCEPTION": 42,
+    "CLEAN": 77
+  },
+  "rows": [
+    {
+      "utc": "2025-12-11T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 24904075,
+      "xrplLedger": 13097546,
+      "skewSeconds": 1,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "15809993200",
+      "escrowedFundsUBA": "30000000000",
+      "onLedgerEscrowedDrops": "0",
+      "escrowCount": 0,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x63491285"
+    },
+    {
+      "utc": "2025-12-13T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 24971343,
+      "xrplLedger": 13154214,
+      "skewSeconds": 2,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "15809992400",
+      "escrowedFundsUBA": "30000000000",
+      "onLedgerEscrowedDrops": "0",
+      "escrowCount": 0,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xc804fb26"
+    },
+    {
+      "utc": "2025-12-15T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 25038663,
+      "xrplLedger": 13211386,
+      "skewSeconds": 2,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "15809991600",
+      "escrowedFundsUBA": "30000000000",
+      "onLedgerEscrowedDrops": "0",
+      "escrowCount": 0,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x7afb8923"
+    },
+    {
+      "utc": "2025-12-17T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 25107144,
+      "xrplLedger": 13266500,
+      "skewSeconds": 0,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "15809990800",
+      "escrowedFundsUBA": "30000000000",
+      "onLedgerEscrowedDrops": "0",
+      "escrowCount": 0,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x2b417898"
+    },
+    {
+      "utc": "2025-12-19T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 25178069,
+      "xrplLedger": 13321595,
+      "skewSeconds": 2,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "15809990000",
+      "escrowedFundsUBA": "30000000000",
+      "onLedgerEscrowedDrops": "0",
+      "escrowCount": 0,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x2ad90850"
+    },
+    {
+      "utc": "2025-12-21T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 25253251,
+      "xrplLedger": 13378118,
+      "skewSeconds": 0,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "18649989200",
+      "escrowedFundsUBA": "30000000000",
+      "onLedgerEscrowedDrops": "0",
+      "escrowCount": 0,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xbb486654"
+    },
+    {
+      "utc": "2025-12-23T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 25327441,
+      "xrplLedger": 13434995,
+      "skewSeconds": 1,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "18649988400",
+      "escrowedFundsUBA": "30000000000",
+      "onLedgerEscrowedDrops": "0",
+      "escrowCount": 0,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x37524333"
+    },
+    {
+      "utc": "2025-12-25T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 25407491,
+      "xrplLedger": 13490215,
+      "skewSeconds": 1,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "21409987600",
+      "escrowedFundsUBA": "30000000000",
+      "onLedgerEscrowedDrops": "10000000000",
+      "escrowCount": 1,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x22b7964b"
+    },
+    {
+      "utc": "2025-12-27T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 25483892,
+      "xrplLedger": 13545470,
+      "skewSeconds": 0,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "21409986800",
+      "escrowedFundsUBA": "30000000000",
+      "onLedgerEscrowedDrops": "0",
+      "escrowCount": 0,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x6d6c1f7f"
+    },
+    {
+      "utc": "2025-12-29T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 25557189,
+      "xrplLedger": 13598466,
+      "skewSeconds": 0,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "21409986000",
+      "escrowedFundsUBA": "30000000000",
+      "onLedgerEscrowedDrops": "0",
+      "escrowCount": 0,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x59723cc7"
+    },
+    {
+      "utc": "2025-12-31T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 25627612,
+      "xrplLedger": 13651206,
+      "skewSeconds": 0,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "21409985200",
+      "escrowedFundsUBA": "30000000000",
+      "onLedgerEscrowedDrops": "0",
+      "escrowCount": 0,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x892835e6"
+    },
+    {
+      "utc": "2026-01-02T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 25695834,
+      "xrplLedger": 13704170,
+      "skewSeconds": 0,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "21409984400",
+      "escrowedFundsUBA": "30000000000",
+      "onLedgerEscrowedDrops": "0",
+      "escrowCount": 0,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x1432efc1"
+    },
+    {
+      "utc": "2026-01-04T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 25762919,
+      "xrplLedger": 13757604,
+      "skewSeconds": 4,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "21409983600",
+      "escrowedFundsUBA": "30000000000",
+      "onLedgerEscrowedDrops": "0",
+      "escrowCount": 0,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x2f89f41c"
+    },
+    {
+      "utc": "2026-01-06T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 25830334,
+      "xrplLedger": 13811130,
+      "skewSeconds": 1,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "18569982000",
+      "escrowedFundsUBA": "50000000000",
+      "onLedgerEscrowedDrops": "50000000000",
+      "escrowCount": 5,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x29381d7f"
+    },
+    {
+      "utc": "2026-01-08T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 25902422,
+      "xrplLedger": 13864832,
+      "skewSeconds": 2,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "18569981200",
+      "escrowedFundsUBA": "50000000000",
+      "onLedgerEscrowedDrops": "30000000000",
+      "escrowCount": 3,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xd4490974"
+    },
+    {
+      "utc": "2026-01-10T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 25977989,
+      "xrplLedger": 13917770,
+      "skewSeconds": 1,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "15869980000",
+      "escrowedFundsUBA": "60000000000",
+      "onLedgerEscrowedDrops": "10000000000",
+      "escrowCount": 1,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x807e02b9"
+    },
+    {
+      "utc": "2026-01-12T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 26053157,
+      "xrplLedger": 13971526,
+      "skewSeconds": 2,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "15869979200",
+      "escrowedFundsUBA": "60000000000",
+      "onLedgerEscrowedDrops": "0",
+      "escrowCount": 0,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x9c1c99a0"
+    },
+    {
+      "utc": "2026-01-14T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 26125883,
+      "xrplLedger": 14025172,
+      "skewSeconds": 3,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "15869978400",
+      "escrowedFundsUBA": "60000000000",
+      "onLedgerEscrowedDrops": "60000000000",
+      "escrowCount": 6,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x4715383f"
+    },
+    {
+      "utc": "2026-01-16T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 26194418,
+      "xrplLedger": 14079521,
+      "skewSeconds": 0,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "15869977600",
+      "escrowedFundsUBA": "60000000000",
+      "onLedgerEscrowedDrops": "60000000000",
+      "escrowCount": 6,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x022926db"
+    },
+    {
+      "utc": "2026-01-18T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 26261942,
+      "xrplLedger": 14134364,
+      "skewSeconds": 1,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "17429976800",
+      "escrowedFundsUBA": "60000000000",
+      "onLedgerEscrowedDrops": "60000000000",
+      "escrowCount": 6,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x5043056f"
+    },
+    {
+      "utc": "2026-01-20T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 26330293,
+      "xrplLedger": 14188632,
+      "skewSeconds": 2,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "19569976000",
+      "escrowedFundsUBA": "60000000000",
+      "onLedgerEscrowedDrops": "60000000000",
+      "escrowCount": 6,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xb211c016"
+    },
+    {
+      "utc": "2026-01-22T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 26399602,
+      "xrplLedger": 14242809,
+      "skewSeconds": 2,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "24009975200",
+      "escrowedFundsUBA": "60000000000",
+      "onLedgerEscrowedDrops": "60000000000",
+      "escrowCount": 6,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x09fb4de4"
+    },
+    {
+      "utc": "2026-01-24T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 26469009,
+      "xrplLedger": 14299120,
+      "skewSeconds": 3,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "20829974000",
+      "escrowedFundsUBA": "70000000000",
+      "onLedgerEscrowedDrops": "70000000000",
+      "escrowCount": 7,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x1232e4c1"
+    },
+    {
+      "utc": "2026-01-26T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 26538355,
+      "xrplLedger": 14355460,
+      "skewSeconds": 1,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "23119973200",
+      "escrowedFundsUBA": "70000000000",
+      "onLedgerEscrowedDrops": "70000000000",
+      "escrowCount": 7,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xb49e0b2b"
+    },
+    {
+      "utc": "2026-01-28T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 26607936,
+      "xrplLedger": 14411111,
+      "skewSeconds": 1,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "23119972400",
+      "escrowedFundsUBA": "70000000000",
+      "onLedgerEscrowedDrops": "70000000000",
+      "escrowCount": 7,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x1c7ed7e0"
+    },
+    {
+      "utc": "2026-01-30T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 26680350,
+      "xrplLedger": 14465532,
+      "skewSeconds": 2,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "17479971200",
+      "escrowedFundsUBA": "80000000000",
+      "onLedgerEscrowedDrops": "80000000000",
+      "escrowCount": 8,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x0728d972"
+    },
+    {
+      "utc": "2026-02-01T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 26750069,
+      "xrplLedger": 14520661,
+      "skewSeconds": 0,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "19809970400",
+      "escrowedFundsUBA": "80000000000",
+      "onLedgerEscrowedDrops": "80000000000",
+      "escrowCount": 8,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xa2c3dd45"
+    },
+    {
+      "utc": "2026-02-03T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 26818606,
+      "xrplLedger": 14575705,
+      "skewSeconds": 0,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "19809969600",
+      "escrowedFundsUBA": "80000000000",
+      "onLedgerEscrowedDrops": "80000000000",
+      "escrowCount": 8,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x9a244691"
+    },
+    {
+      "utc": "2026-02-05T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 26889203,
+      "xrplLedger": 14629648,
+      "skewSeconds": 0,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "22499968800",
+      "escrowedFundsUBA": "80000000000",
+      "onLedgerEscrowedDrops": "80000000000",
+      "escrowCount": 8,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x1c123e28"
+    },
+    {
+      "utc": "2026-02-07T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 26960926,
+      "xrplLedger": 14683805,
+      "skewSeconds": 0,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "15799967600",
+      "escrowedFundsUBA": "90000000000",
+      "onLedgerEscrowedDrops": "90000000000",
+      "escrowCount": 9,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x7d5fb331"
+    },
+    {
+      "utc": "2026-02-09T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 27034169,
+      "xrplLedger": 14738551,
+      "skewSeconds": 0,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "21689966800",
+      "escrowedFundsUBA": "90000000000",
+      "onLedgerEscrowedDrops": "90000000000",
+      "escrowCount": 9,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xe3a11b6b"
+    },
+    {
+      "utc": "2026-02-11T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 27104696,
+      "xrplLedger": 14792780,
+      "skewSeconds": 0,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "24749966000",
+      "escrowedFundsUBA": "90000000000",
+      "onLedgerEscrowedDrops": "90000000000",
+      "escrowCount": 9,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x200271eb"
+    },
+    {
+      "utc": "2026-02-13T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 27176388,
+      "xrplLedger": 14848097,
+      "skewSeconds": 1,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "19749964400",
+      "escrowedFundsUBA": "110000000000",
+      "onLedgerEscrowedDrops": "110000000000",
+      "escrowCount": 11,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xa9ab390b"
+    },
+    {
+      "utc": "2026-02-15T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 27247900,
+      "xrplLedger": 14902565,
+      "skewSeconds": 0,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "19749963600",
+      "escrowedFundsUBA": "110000000000",
+      "onLedgerEscrowedDrops": "110000000000",
+      "escrowCount": 11,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x06a20471"
+    },
+    {
+      "utc": "2026-02-17T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 27319138,
+      "xrplLedger": 14956394,
+      "skewSeconds": 3,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "22629962800",
+      "escrowedFundsUBA": "110000000000",
+      "onLedgerEscrowedDrops": "110000000000",
+      "escrowCount": 11,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xdf4e3fbd"
+    },
+    {
+      "utc": "2026-02-19T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 27390775,
+      "xrplLedger": 15011777,
+      "skewSeconds": 0,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "15649960800",
+      "escrowedFundsUBA": "140000000000",
+      "onLedgerEscrowedDrops": "140000000000",
+      "escrowCount": 14,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xb834d3cc"
+    },
+    {
+      "utc": "2026-02-21T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 27462946,
+      "xrplLedger": 15067090,
+      "skewSeconds": 0,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "20489960000",
+      "escrowedFundsUBA": "140000000000",
+      "onLedgerEscrowedDrops": "140000000000",
+      "escrowCount": 14,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xd8dc1b43"
+    },
+    {
+      "utc": "2026-02-23T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 27534807,
+      "xrplLedger": 15121522,
+      "skewSeconds": 1,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "23269959200",
+      "escrowedFundsUBA": "140000000000",
+      "onLedgerEscrowedDrops": "140000000000",
+      "escrowCount": 14,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x0a3ba285"
+    },
+    {
+      "utc": "2026-02-25T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 27607080,
+      "xrplLedger": 15176512,
+      "skewSeconds": 1,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "23269958400",
+      "escrowedFundsUBA": "140000000000",
+      "onLedgerEscrowedDrops": "140000000000",
+      "escrowCount": 14,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xe766591c"
+    },
+    {
+      "utc": "2026-02-27T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 27676553,
+      "xrplLedger": 15231899,
+      "skewSeconds": 3,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "16329957200",
+      "escrowedFundsUBA": "150000000000",
+      "onLedgerEscrowedDrops": "150000000000",
+      "escrowCount": 15,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xbb0ae422"
+    },
+    {
+      "utc": "2026-03-01T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 27759217,
+      "xrplLedger": 15287505,
+      "skewSeconds": 6,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "22059956400",
+      "escrowedFundsUBA": "150000000000",
+      "onLedgerEscrowedDrops": "150000000000",
+      "escrowCount": 15,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x3f5f3399"
+    },
+    {
+      "utc": "2026-03-03T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 27826426,
+      "xrplLedger": 15343358,
+      "skewSeconds": 1,
+      "opinion": "EXCEPTION",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "EXCEPTION"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "15019955200",
+      "escrowedFundsUBA": "160000000000",
+      "onLedgerEscrowedDrops": "160000000000",
+      "escrowCount": 16,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x22219ab7"
+    },
+    {
+      "utc": "2026-03-05T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 27889828,
+      "xrplLedger": 15399054,
+      "skewSeconds": 4,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "12229954000",
+      "escrowedFundsUBA": "160000000000",
+      "onLedgerEscrowedDrops": "160000000000",
+      "escrowCount": 16,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x5f94a60e"
+    },
+    {
+      "utc": "2026-03-07T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 27959186,
+      "xrplLedger": 15454420,
+      "skewSeconds": 1,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "22229953600",
+      "escrowedFundsUBA": "150000000000",
+      "onLedgerEscrowedDrops": "150000000000",
+      "escrowCount": 15,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xbeb8d198"
+    },
+    {
+      "utc": "2026-03-09T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 28027411,
+      "xrplLedger": 15510577,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "15179952400",
+      "escrowedFundsUBA": "160000000000",
+      "onLedgerEscrowedDrops": "160000000000",
+      "escrowCount": 16,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xc8b62c15"
+    },
+    {
+      "utc": "2026-03-11T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 28097854,
+      "xrplLedger": 15566198,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "16249951200",
+      "escrowedFundsUBA": "160000000000",
+      "onLedgerEscrowedDrops": "160000000000",
+      "escrowCount": 16,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xa700f61e"
+    },
+    {
+      "utc": "2026-03-13T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 28166994,
+      "xrplLedger": 15621422,
+      "skewSeconds": 2,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "22349950400",
+      "escrowedFundsUBA": "160000000000",
+      "onLedgerEscrowedDrops": "160000000000",
+      "escrowCount": 16,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x5f3f3cbf"
+    },
+    {
+      "utc": "2026-03-15T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 28235032,
+      "xrplLedger": 15677417,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "15209949200",
+      "escrowedFundsUBA": "170000000000",
+      "onLedgerEscrowedDrops": "170000000000",
+      "escrowCount": 17,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x87aa8537"
+    },
+    {
+      "utc": "2026-03-17T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 28303168,
+      "xrplLedger": 15733096,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "20809948400",
+      "escrowedFundsUBA": "170000000000",
+      "onLedgerEscrowedDrops": "170000000000",
+      "escrowCount": 17,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xeb104902"
+    },
+    {
+      "utc": "2026-03-19T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 28369908,
+      "xrplLedger": 15789330,
+      "skewSeconds": 1,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "12329947200",
+      "escrowedFundsUBA": "180000000000",
+      "onLedgerEscrowedDrops": "180000000000",
+      "escrowCount": 18,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x66431c30"
+    },
+    {
+      "utc": "2026-03-21T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 28437665,
+      "xrplLedger": 15845563,
+      "skewSeconds": 1,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "15089946000",
+      "escrowedFundsUBA": "180000000000",
+      "onLedgerEscrowedDrops": "180000000000",
+      "escrowCount": 18,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x6a48bf09"
+    },
+    {
+      "utc": "2026-03-23T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 28504519,
+      "xrplLedger": 15901389,
+      "skewSeconds": 1,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "14849945200",
+      "escrowedFundsUBA": "180000000000",
+      "onLedgerEscrowedDrops": "180000000000",
+      "escrowCount": 18,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xd64114a6"
+    },
+    {
+      "utc": "2026-03-25T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 28575321,
+      "xrplLedger": 15956390,
+      "skewSeconds": 5,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "17639944000",
+      "escrowedFundsUBA": "180000000000",
+      "onLedgerEscrowedDrops": "180000000000",
+      "escrowCount": 18,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xf6a0f46e"
+    },
+    {
+      "utc": "2026-03-27T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 28649700,
+      "xrplLedger": 16011690,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "16079942800",
+      "escrowedFundsUBA": "180000000000",
+      "onLedgerEscrowedDrops": "180000000000",
+      "escrowCount": 18,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xef8afe31"
+    },
+    {
+      "utc": "2026-03-29T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 28724851,
+      "xrplLedger": 16067672,
+      "skewSeconds": 4,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "23439942000",
+      "escrowedFundsUBA": "180000000000",
+      "onLedgerEscrowedDrops": "180000000000",
+      "escrowCount": 18,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x9e001110"
+    },
+    {
+      "utc": "2026-03-31T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 28798722,
+      "xrplLedger": 16124134,
+      "skewSeconds": 1,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "16549940800",
+      "escrowedFundsUBA": "190000000000",
+      "onLedgerEscrowedDrops": "190000000000",
+      "escrowCount": 19,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xa3863a7c"
+    },
+    {
+      "utc": "2026-04-02T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 28875100,
+      "xrplLedger": 16180281,
+      "skewSeconds": 1,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "19629940000",
+      "escrowedFundsUBA": "190000000000",
+      "onLedgerEscrowedDrops": "190000000000",
+      "escrowCount": 19,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xee8290ea"
+    },
+    {
+      "utc": "2026-04-04T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 28962554,
+      "xrplLedger": 16236176,
+      "skewSeconds": 10,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "22809939200",
+      "escrowedFundsUBA": "190000000000",
+      "onLedgerEscrowedDrops": "190000000000",
+      "escrowCount": 19,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xa8cf1d13"
+    },
+    {
+      "utc": "2026-04-06T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 29037512,
+      "xrplLedger": 16292724,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "22809938400",
+      "escrowedFundsUBA": "190000000000",
+      "onLedgerEscrowedDrops": "190000000000",
+      "escrowCount": 19,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xeb6d3b62"
+    },
+    {
+      "utc": "2026-04-08T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 29113098,
+      "xrplLedger": 16348932,
+      "skewSeconds": 2,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "12559937200",
+      "escrowedFundsUBA": "200000000000",
+      "onLedgerEscrowedDrops": "200000000000",
+      "escrowCount": 20,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xcb4be51d"
+    },
+    {
+      "utc": "2026-04-10T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 29191929,
+      "xrplLedger": 16404936,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "15619936000",
+      "escrowedFundsUBA": "200000000000",
+      "onLedgerEscrowedDrops": "200000000000",
+      "escrowCount": 20,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xf1887c15"
+    },
+    {
+      "utc": "2026-04-12T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 29267868,
+      "xrplLedger": 16461492,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "15619935200",
+      "escrowedFundsUBA": "200000000000",
+      "onLedgerEscrowedDrops": "200000000000",
+      "escrowCount": 20,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xe00cdb91"
+    },
+    {
+      "utc": "2026-04-14T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 29343196,
+      "xrplLedger": 16517442,
+      "skewSeconds": 8,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "18449934400",
+      "escrowedFundsUBA": "200000000000",
+      "onLedgerEscrowedDrops": "200000000000",
+      "escrowCount": 20,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x1ff446f0"
+    },
+    {
+      "utc": "2026-04-16T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 29419517,
+      "xrplLedger": 16572477,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "2938091519",
+      "escrowedFundsUBA": "380000000000",
+      "onLedgerEscrowedDrops": "380000000000",
+      "escrowCount": 38,
+      "wedgeUBA": "2938091519",
+      "evidenceDigest": "0x60bf770c"
+    },
+    {
+      "utc": "2026-04-18T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 29498167,
+      "xrplLedger": 16627715,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "605102866",
+      "escrowedFundsUBA": "460000000000",
+      "onLedgerEscrowedDrops": "460000000000",
+      "escrowCount": 46,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x7adb18a2"
+    },
+    {
+      "utc": "2026-04-20T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 29574344,
+      "xrplLedger": 16683364,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "23495102466",
+      "escrowedFundsUBA": "440000000000",
+      "onLedgerEscrowedDrops": "440000000000",
+      "escrowCount": 44,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x4bbd7db0"
+    },
+    {
+      "utc": "2026-04-22T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 29650405,
+      "xrplLedger": 16738641,
+      "skewSeconds": 3,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "16165301266",
+      "escrowedFundsUBA": "450000000000",
+      "onLedgerEscrowedDrops": "450000000000",
+      "escrowCount": 45,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x3679ef5f"
+    },
+    {
+      "utc": "2026-04-24T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 29728222,
+      "xrplLedger": 16794249,
+      "skewSeconds": 7,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "13599001820",
+      "escrowedFundsUBA": "450000000000",
+      "onLedgerEscrowedDrops": "450000000000",
+      "escrowCount": 45,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x88921749"
+    },
+    {
+      "utc": "2026-04-26T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 29805890,
+      "xrplLedger": 16850419,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "16576001020",
+      "escrowedFundsUBA": "450000000000",
+      "onLedgerEscrowedDrops": "450000000000",
+      "escrowCount": 45,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x16905568"
+    },
+    {
+      "utc": "2026-04-28T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 29883746,
+      "xrplLedger": 16906387,
+      "skewSeconds": 1,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "16621000220",
+      "escrowedFundsUBA": "450000000000",
+      "onLedgerEscrowedDrops": "450000000000",
+      "escrowCount": 45,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x03335f2d"
+    },
+    {
+      "utc": "2026-04-30T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 29961435,
+      "xrplLedger": 16961214,
+      "skewSeconds": 1,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "17876759020",
+      "escrowedFundsUBA": "450000000000",
+      "onLedgerEscrowedDrops": "450000000000",
+      "escrowCount": 45,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x728f7c83"
+    },
+    {
+      "utc": "2026-05-02T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 30040122,
+      "xrplLedger": 17016818,
+      "skewSeconds": 3,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "21082158220",
+      "escrowedFundsUBA": "450000000000",
+      "onLedgerEscrowedDrops": "450000000000",
+      "escrowCount": 45,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xcc3f4179"
+    },
+    {
+      "utc": "2026-05-04T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 30115032,
+      "xrplLedger": 17073123,
+      "skewSeconds": 11,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "21082157420",
+      "escrowedFundsUBA": "450000000000",
+      "onLedgerEscrowedDrops": "450000000000",
+      "escrowCount": 45,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x4405d947"
+    },
+    {
+      "utc": "2026-05-06T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 30190730,
+      "xrplLedger": 17128448,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "18118555820",
+      "escrowedFundsUBA": "450000000000",
+      "onLedgerEscrowedDrops": "450000000000",
+      "escrowCount": 45,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xf0f599f0"
+    },
+    {
+      "utc": "2026-05-08T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 30267875,
+      "xrplLedger": 17183629,
+      "skewSeconds": 10,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "10548304620",
+      "escrowedFundsUBA": "460000000000",
+      "onLedgerEscrowedDrops": "460000000000",
+      "escrowCount": 46,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xe83710b9"
+    },
+    {
+      "utc": "2026-05-10T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 30343815,
+      "xrplLedger": 17239636,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "22750303420",
+      "escrowedFundsUBA": "450000000000",
+      "onLedgerEscrowedDrops": "450000000000",
+      "escrowCount": 45,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xc4a5958f"
+    },
+    {
+      "utc": "2026-05-12T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 30423120,
+      "xrplLedger": 17295654,
+      "skewSeconds": 12,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "7246595820",
+      "escrowedFundsUBA": "560000000000",
+      "onLedgerEscrowedDrops": "560000000000",
+      "escrowCount": 56,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x6930fb60"
+    },
+    {
+      "utc": "2026-05-14T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 30500322,
+      "xrplLedger": 17351149,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "23156036022",
+      "escrowedFundsUBA": "550000000000",
+      "onLedgerEscrowedDrops": "550000000000",
+      "escrowCount": 55,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x504934bc"
+    },
+    {
+      "utc": "2026-05-16T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 30577547,
+      "xrplLedger": 17406938,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "1607633622",
+      "escrowedFundsUBA": "560000000000",
+      "onLedgerEscrowedDrops": "560000000000",
+      "escrowCount": 56,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xe6b4b2e6"
+    },
+    {
+      "utc": "2026-05-18T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 30652922,
+      "xrplLedger": 17463109,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "17347833222",
+      "escrowedFundsUBA": "550000000000",
+      "onLedgerEscrowedDrops": "550000000000",
+      "escrowCount": 55,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x49aa7b8e"
+    },
+    {
+      "utc": "2026-05-20T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 30728177,
+      "xrplLedger": 17518654,
+      "skewSeconds": 6,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "23242171397",
+      "escrowedFundsUBA": "550000000000",
+      "onLedgerEscrowedDrops": "550000000000",
+      "escrowCount": 55,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x80f2c536"
+    },
+    {
+      "utc": "2026-05-22T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 30806552,
+      "xrplLedger": 17574837,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "16645696375",
+      "escrowedFundsUBA": "560000000000",
+      "onLedgerEscrowedDrops": "560000000000",
+      "escrowCount": 56,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xfc0146c4"
+    },
+    {
+      "utc": "2026-05-24T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 30882798,
+      "xrplLedger": 17630767,
+      "skewSeconds": 9,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "20030074604",
+      "escrowedFundsUBA": "560000000000",
+      "onLedgerEscrowedDrops": "560000000000",
+      "escrowCount": 56,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xa3545708"
+    },
+    {
+      "utc": "2026-05-26T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 30959433,
+      "xrplLedger": 17686489,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "14294968289",
+      "escrowedFundsUBA": "570000000000",
+      "onLedgerEscrowedDrops": "570000000000",
+      "escrowCount": 57,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xf546ebb1"
+    },
+    {
+      "utc": "2026-05-28T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 31057520,
+      "xrplLedger": 17741507,
+      "skewSeconds": 7,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "20921551324",
+      "escrowedFundsUBA": "570000000000",
+      "onLedgerEscrowedDrops": "570000000000",
+      "escrowCount": 57,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xfd75f763"
+    },
+    {
+      "utc": "2026-05-30T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 31144927,
+      "xrplLedger": 17796643,
+      "skewSeconds": 3,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "13416213464",
+      "escrowedFundsUBA": "580000000000",
+      "onLedgerEscrowedDrops": "580000000000",
+      "escrowCount": 58,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x5ce414e5"
+    },
+    {
+      "utc": "2026-06-01T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 31222848,
+      "xrplLedger": 17852533,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "21638615462",
+      "escrowedFundsUBA": "580000000000",
+      "onLedgerEscrowedDrops": "580000000000",
+      "escrowCount": 58,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xfa6725e6"
+    },
+    {
+      "utc": "2026-06-03T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 31305168,
+      "xrplLedger": 17907850,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "16186633204",
+      "escrowedFundsUBA": "590000000000",
+      "onLedgerEscrowedDrops": "590000000000",
+      "escrowCount": 59,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xdd47e709"
+    },
+    {
+      "utc": "2026-06-05T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 31386064,
+      "xrplLedger": 17962313,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "17485819334",
+      "escrowedFundsUBA": "590000000000",
+      "onLedgerEscrowedDrops": "590000000000",
+      "escrowCount": 59,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x4f420e32"
+    },
+    {
+      "utc": "2026-06-07T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 31465015,
+      "xrplLedger": 18017632,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "16864345609",
+      "escrowedFundsUBA": "610000000000",
+      "onLedgerEscrowedDrops": "610000000000",
+      "escrowCount": 61,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x86361a8e"
+    },
+    {
+      "utc": "2026-06-09T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 31543676,
+      "xrplLedger": 18073686,
+      "skewSeconds": 2,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "13451945802",
+      "escrowedFundsUBA": "620000000000",
+      "onLedgerEscrowedDrops": "620000000000",
+      "escrowCount": 62,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xab2fbabf"
+    },
+    {
+      "utc": "2026-06-11T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 31624721,
+      "xrplLedger": 18128069,
+      "skewSeconds": 15,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "19361375854",
+      "escrowedFundsUBA": "620000000000",
+      "onLedgerEscrowedDrops": "620000000000",
+      "escrowCount": 62,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xd136d911"
+    },
+    {
+      "utc": "2026-06-13T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 31721309,
+      "xrplLedger": 18182245,
+      "skewSeconds": 1,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "12188225305",
+      "escrowedFundsUBA": "620000000000",
+      "onLedgerEscrowedDrops": "620000000000",
+      "escrowCount": 62,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x0ec2d6ca"
+    },
+    {
+      "utc": "2026-06-15T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 31813800,
+      "xrplLedger": 18236747,
+      "skewSeconds": 11,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "24179569277",
+      "escrowedFundsUBA": "610000000000",
+      "onLedgerEscrowedDrops": "610000000000",
+      "escrowCount": 61,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x1babc051"
+    },
+    {
+      "utc": "2026-06-17T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 31908099,
+      "xrplLedger": 18291181,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "4131845753",
+      "escrowedFundsUBA": "670000000000",
+      "onLedgerEscrowedDrops": "670000000000",
+      "escrowCount": 67,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x8da1afb5"
+    },
+    {
+      "utc": "2026-06-19T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 31993583,
+      "xrplLedger": 18346839,
+      "skewSeconds": 5,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "32828718",
+      "escrowedFundsUBA": "740000000000",
+      "onLedgerEscrowedDrops": "740000000000",
+      "escrowCount": 74,
+      "wedgeUBA": "32828718",
+      "evidenceDigest": "0x8c602b65"
+    },
+    {
+      "utc": "2026-06-21T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 32055846,
+      "xrplLedger": 18402905,
+      "skewSeconds": 7,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "18741256095",
+      "escrowedFundsUBA": "800000000000",
+      "onLedgerEscrowedDrops": "800000000000",
+      "escrowCount": 80,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x38d1741a"
+    },
+    {
+      "utc": "2026-06-23T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 32123081,
+      "xrplLedger": 18459161,
+      "skewSeconds": 4,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "20138892169",
+      "escrowedFundsUBA": "800000000000",
+      "onLedgerEscrowedDrops": "800000000000",
+      "escrowCount": 80,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x6a105479"
+    },
+    {
+      "utc": "2026-06-25T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 32193749,
+      "xrplLedger": 18515097,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "13522680420",
+      "escrowedFundsUBA": "810000000000",
+      "onLedgerEscrowedDrops": "810000000000",
+      "escrowCount": 81,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x0a9edde5"
+    },
+    {
+      "utc": "2026-06-27T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 32261384,
+      "xrplLedger": 18570990,
+      "skewSeconds": 11,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "8640140002",
+      "escrowedFundsUBA": "820000000000",
+      "onLedgerEscrowedDrops": "820000000000",
+      "escrowCount": 82,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x8c1d1edc"
+    },
+    {
+      "utc": "2026-06-29T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 32324487,
+      "xrplLedger": 18626519,
+      "skewSeconds": 8,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "19312438852",
+      "escrowedFundsUBA": "810000000000",
+      "onLedgerEscrowedDrops": "810000000000",
+      "escrowCount": 81,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xff3a3fec"
+    },
+    {
+      "utc": "2026-07-01T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 32389642,
+      "xrplLedger": 18681979,
+      "skewSeconds": 7,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "10251350682",
+      "escrowedFundsUBA": "830000000000",
+      "onLedgerEscrowedDrops": "830000000000",
+      "escrowCount": 83,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xd53b1654"
+    },
+    {
+      "utc": "2026-07-03T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 32456399,
+      "xrplLedger": 18736854,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "23857802192",
+      "escrowedFundsUBA": "820000000000",
+      "onLedgerEscrowedDrops": "820000000000",
+      "escrowCount": 82,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xef872ae3"
+    },
+    {
+      "utc": "2026-07-05T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 32519270,
+      "xrplLedger": 18792952,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "42712252438",
+      "escrowedFundsUBA": "800000000000",
+      "onLedgerEscrowedDrops": "800000000000",
+      "escrowCount": 80,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xac2e43da"
+    },
+    {
+      "utc": "2026-07-07T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 32585389,
+      "xrplLedger": 18849146,
+      "skewSeconds": 6,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "64295244314",
+      "escrowedFundsUBA": "780000000000",
+      "onLedgerEscrowedDrops": "780000000000",
+      "escrowCount": 78,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xbf19a255"
+    },
+    {
+      "utc": "2026-07-09T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 32653698,
+      "xrplLedger": 18905047,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "837795324243",
+      "escrowedFundsUBA": "760000000000",
+      "onLedgerEscrowedDrops": "760000000000",
+      "escrowCount": 76,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x5fd97587"
+    },
+    {
+      "utc": "2026-07-11T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 32719943,
+      "xrplLedger": 18960870,
+      "skewSeconds": 2,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "1835875145603",
+      "escrowedFundsUBA": "740000000000",
+      "onLedgerEscrowedDrops": "740000000000",
+      "escrowCount": 74,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x758e5021"
+    },
+    {
+      "utc": "2026-07-13T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 32786227,
+      "xrplLedger": 19017096,
+      "skewSeconds": 8,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "1856209511613",
+      "escrowedFundsUBA": "720000000000",
+      "onLedgerEscrowedDrops": "720000000000",
+      "escrowCount": 72,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x3c006815"
+    },
+    {
+      "utc": "2026-07-15T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 32867093,
+      "xrplLedger": 19072087,
+      "skewSeconds": 13,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "2368276656693",
+      "escrowedFundsUBA": "700000000000",
+      "onLedgerEscrowedDrops": "700000000000",
+      "escrowCount": 70,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x377d117a"
+    },
+    {
+      "utc": "2026-07-17T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 32938804,
+      "xrplLedger": 19127617,
+      "skewSeconds": 2,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "2388314120523",
+      "escrowedFundsUBA": "680000000000",
+      "onLedgerEscrowedDrops": "680000000000",
+      "escrowCount": 68,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xc26484b8"
+    },
+    {
+      "utc": "2026-07-19T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 33006202,
+      "xrplLedger": 19182187,
+      "skewSeconds": 10,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "2409528884367",
+      "escrowedFundsUBA": "660000000000",
+      "onLedgerEscrowedDrops": "660000000000",
+      "escrowCount": 66,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x953dda26"
+    },
+    {
+      "utc": "2026-07-21T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 33075724,
+      "xrplLedger": 19235407,
+      "skewSeconds": 9,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "2430976608943",
+      "escrowedFundsUBA": "640000000000",
+      "onLedgerEscrowedDrops": "640000000000",
+      "escrowCount": 64,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xf42450cb"
+    },
+    {
+      "utc": "2026-07-23T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 33147301,
+      "xrplLedger": 19287850,
+      "skewSeconds": 11,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "2452133214291",
+      "escrowedFundsUBA": "620000000000",
+      "onLedgerEscrowedDrops": "620000000000",
+      "escrowCount": 62,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x1bec7656"
+    },
+    {
+      "utc": "2026-07-25T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 33217122,
+      "xrplLedger": 19340522,
+      "skewSeconds": 14,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "2499306079172",
+      "escrowedFundsUBA": "600000000000",
+      "onLedgerEscrowedDrops": "600000000000",
+      "escrowCount": 60,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x5c54ef78"
+    },
+    {
+      "utc": "2026-07-27T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 33283493,
+      "xrplLedger": 19394855,
+      "skewSeconds": 7,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "3525022743998",
+      "escrowedFundsUBA": "580000000000",
+      "onLedgerEscrowedDrops": "580000000000",
+      "escrowCount": 58,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x3c288b2f"
+    },
+    {
+      "utc": "2026-07-29T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 33381782,
+      "xrplLedger": 19448912,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "3544658586233",
+      "escrowedFundsUBA": "560000000000",
+      "onLedgerEscrowedDrops": "560000000000",
+      "escrowCount": 56,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x8cd981bd"
+    },
+    {
+      "utc": "2026-07-31T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 33453899,
+      "xrplLedger": 19503246,
+      "skewSeconds": 0,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "3588913901664",
+      "escrowedFundsUBA": "540000000000",
+      "onLedgerEscrowedDrops": "540000000000",
+      "escrowCount": 54,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xdda79da1"
+    },
+    {
+      "utc": "2026-08-02T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 33523515,
+      "xrplLedger": 19557825,
+      "skewSeconds": 11,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "3611698874914",
+      "escrowedFundsUBA": "520000000000",
+      "onLedgerEscrowedDrops": "520000000000",
+      "escrowCount": 52,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x7ecdc347"
+    },
+    {
+      "utc": "2026-08-04T00:00:00.000Z",
+      "derivation": "retrospective",
+      "flareBlock": 33597352,
+      "xrplLedger": 19612733,
+      "skewSeconds": 6,
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "3631828937551",
+      "escrowedFundsUBA": "500000000000",
+      "onLedgerEscrowedDrops": "500000000000",
+      "escrowCount": 50,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0xa4396d6a"
+    }
+  ]
+}
