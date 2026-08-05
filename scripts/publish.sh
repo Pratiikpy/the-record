@@ -38,39 +38,7 @@ pnpm --filter @therecord/reprod    run render        >/dev/null
 pnpm --filter @therecord/design    run build         >/dev/null
 
 say "── assemble ──"
-# Never `cd` into $OUT anywhere in this script: a shell whose working directory
-# is inside it makes the directory busy and the removal silently fails.
-rm -rf "$OUT"
-mkdir -p "$OUT/covenant" "$OUT/procedure" "$OUT/reprod"
-
-cp "$ROOT/site/index.html"                        "$OUT/index.html"
-cp "$ROOT/site/errata.html"                       "$OUT/errata.html"
-cp -r "$ROOT/site/api"                            "$OUT/api"
-cp -r "$ROOT/site/badge"                          "$OUT/badge"
-cp "$ROOT/packages/covenant/out/index.html"       "$OUT/covenant/index.html"
-cp "$ROOT/packages/procedure/out/index.html"      "$OUT/procedure/index.html"
-cp "$ROOT/packages/procedure/out/backfill.html"   "$OUT/procedure/backfill.html"
-cp "$ROOT/packages/reprod/out/index.html"         "$OUT/reprod/index.html"
-
-# Cross-register links are relative to each package's out/ directory; the
-# published tree is flatter.
-find "$OUT" -name '*.html' -exec sed -i \
-  -e 's|\.\./\.\./covenant/out/index\.html|../covenant/index.html|g' \
-  -e 's|\.\./\.\./procedure/out/index\.html|../procedure/index.html|g' \
-  -e 's|\.\./\.\./reprod/out/index\.html|../reprod/index.html|g' \
-  -e 's|\.\./packages/covenant/out/index\.html|covenant/index.html|g' \
-  -e 's|\.\./packages/procedure/out/index\.html|procedure/index.html|g' \
-  -e 's|\.\./packages/reprod/out/index\.html|reprod/index.html|g' {} +
-
-printf '{"cleanUrls":true}' > "$OUT/vercel.json"
-
-say "── verify the tree before uploading ──"
-missing=0
-for f in index.html errata.html covenant/index.html procedure/index.html \
-         procedure/backfill.html reprod/index.html api/status.json badge/core-vault.svg; do
-  if [ ! -s "$OUT/$f" ]; then say "  MISSING $f"; missing=1; else say "  ok $f"; fi
-done
-[ "$missing" -eq 0 ] || { say "refusing to deploy an incomplete tree"; exit 1; }
+bash "$ROOT/scripts/assemble.sh" "$OUT"
 
 python "$ROOT/scripts/linkcheck.py" "$OUT"
 
