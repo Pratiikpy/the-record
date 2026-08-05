@@ -68,6 +68,14 @@ export interface Cv1Report {
   /** the day under test, UTC */
   period: string;
   /**
+   * When this report was actually produced.
+   *
+   * `period` is the day under test, not a timestamp. Deriving freshness from it
+   * meant a report dated today looked like it came from the future, and a badge
+   * built on that could never go stale.
+   */
+  generatedAt?: string;
+  /**
    * Which chain this opinion is about.
    *
    * Not decoration. A register that reads mainnet one day and a fault-injected
@@ -410,6 +418,7 @@ export function runCv1(
   return {
     procedureId: "CV-1",
     period,
+    generatedAt: new Date().toISOString(),
     ...(network ? { network } : {}),
     state: s,
     controls,

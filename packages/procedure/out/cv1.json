@@ -1,6 +1,7 @@
 {
   "procedureId": "CV-1",
   "period": "2026-08-05",
+  "generatedAt": "2026-08-05T02:46:07.028Z",
   "network": {
     "name": "flare",
     "label": "Flare mainnet",
@@ -18,12 +19,12 @@
       "rU3KcE1fqgn7Qm8dA3DSnefNoUnsYF31Wr",
       "rGK7w4oK5x4ncCZyjYEH4QpCZSkKSMrUV2"
     ],
-    "availableFundsUBA": "7509132791361",
+    "availableFundsUBA": "7509181091361",
     "escrowedFundsUBA": "140000000000000",
-    "immediatelyAvailableUBA": "7509132790961",
-    "reportedTotalUBA": "147509132790961",
+    "immediatelyAvailableUBA": "7509181090961",
+    "reportedTotalUBA": "147509181090961",
     "onLedger": {
-      "balanceDrops": "7509521201621",
+      "balanceDrops": "7509569501623",
       "escrowedDrops": "140000000000000",
       "escrowCount": 14,
       "reserveDrops": "4000000",
@@ -63,7 +64,7 @@
       "opinion": "CLEAN",
       "tested": 1,
       "exceptions": [],
-      "observation": "7509517201621 drops spendable covers Flare's 7509132791361 UBA with 384410260 to spare (reserve 4000000 over 15 owned objects)"
+      "observation": "7509565501623 drops spendable covers Flare's 7509181091361 UBA with 384410262 to spare (reserve 4000000 over 15 owned objects)"
     },
     {
       "id": "C5",
@@ -80,9 +81,9 @@
     "xrplTransactions": 200,
     "outflows": 2,
     "ledgerRange": [
-      106052655,
-      106078190
+      106052742,
+      106078458
     ],
-    "evidenceDigest": "0x5f1cb61f"
+    "evidenceDigest": "0x77377318"
   }
 }

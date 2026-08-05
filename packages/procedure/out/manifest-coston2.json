@@ -1,0 +1,1073 @@
+[
+  {
+    "utc": "2025-12-11T00:00:00.000Z",
+    "unix": 1765411200,
+    "flareBlock": 24904075,
+    "flareUnix": 1765411199,
+    "xrplLedger": 13097546,
+    "xrplUnix": 1765411200,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2025-12-13T00:00:00.000Z",
+    "unix": 1765584000,
+    "flareBlock": 24971343,
+    "flareUnix": 1765583998,
+    "xrplLedger": 13154214,
+    "xrplUnix": 1765584000,
+    "skewSeconds": 2
+  },
+  {
+    "utc": "2025-12-15T00:00:00.000Z",
+    "unix": 1765756800,
+    "flareBlock": 25038663,
+    "flareUnix": 1765756798,
+    "xrplLedger": 13211386,
+    "xrplUnix": 1765756800,
+    "skewSeconds": 2
+  },
+  {
+    "utc": "2025-12-17T00:00:00.000Z",
+    "unix": 1765929600,
+    "flareBlock": 25107144,
+    "flareUnix": 1765929600,
+    "xrplLedger": 13266500,
+    "xrplUnix": 1765929600,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2025-12-19T00:00:00.000Z",
+    "unix": 1766102400,
+    "flareBlock": 25178069,
+    "flareUnix": 1766102398,
+    "xrplLedger": 13321595,
+    "xrplUnix": 1766102400,
+    "skewSeconds": 2
+  },
+  {
+    "utc": "2025-12-21T00:00:00.000Z",
+    "unix": 1766275200,
+    "flareBlock": 25253251,
+    "flareUnix": 1766275200,
+    "xrplLedger": 13378118,
+    "xrplUnix": 1766275200,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2025-12-23T00:00:00.000Z",
+    "unix": 1766448000,
+    "flareBlock": 25327441,
+    "flareUnix": 1766447999,
+    "xrplLedger": 13434995,
+    "xrplUnix": 1766448000,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2025-12-25T00:00:00.000Z",
+    "unix": 1766620800,
+    "flareBlock": 25407491,
+    "flareUnix": 1766620799,
+    "xrplLedger": 13490215,
+    "xrplUnix": 1766620800,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2025-12-27T00:00:00.000Z",
+    "unix": 1766793600,
+    "flareBlock": 25483892,
+    "flareUnix": 1766793600,
+    "xrplLedger": 13545470,
+    "xrplUnix": 1766793600,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2025-12-29T00:00:00.000Z",
+    "unix": 1766966400,
+    "flareBlock": 25557189,
+    "flareUnix": 1766966400,
+    "xrplLedger": 13598466,
+    "xrplUnix": 1766966400,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2025-12-31T00:00:00.000Z",
+    "unix": 1767139200,
+    "flareBlock": 25627612,
+    "flareUnix": 1767139200,
+    "xrplLedger": 13651206,
+    "xrplUnix": 1767139200,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-01-02T00:00:00.000Z",
+    "unix": 1767312000,
+    "flareBlock": 25695834,
+    "flareUnix": 1767312000,
+    "xrplLedger": 13704170,
+    "xrplUnix": 1767312000,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-01-04T00:00:00.000Z",
+    "unix": 1767484800,
+    "flareBlock": 25762919,
+    "flareUnix": 1767484796,
+    "xrplLedger": 13757604,
+    "xrplUnix": 1767484800,
+    "skewSeconds": 4
+  },
+  {
+    "utc": "2026-01-06T00:00:00.000Z",
+    "unix": 1767657600,
+    "flareBlock": 25830334,
+    "flareUnix": 1767657599,
+    "xrplLedger": 13811130,
+    "xrplUnix": 1767657600,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-01-08T00:00:00.000Z",
+    "unix": 1767830400,
+    "flareBlock": 25902422,
+    "flareUnix": 1767830398,
+    "xrplLedger": 13864832,
+    "xrplUnix": 1767830400,
+    "skewSeconds": 2
+  },
+  {
+    "utc": "2026-01-10T00:00:00.000Z",
+    "unix": 1768003200,
+    "flareBlock": 25977989,
+    "flareUnix": 1768003199,
+    "xrplLedger": 13917770,
+    "xrplUnix": 1768003200,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-01-12T00:00:00.000Z",
+    "unix": 1768176000,
+    "flareBlock": 26053157,
+    "flareUnix": 1768175998,
+    "xrplLedger": 13971526,
+    "xrplUnix": 1768176000,
+    "skewSeconds": 2
+  },
+  {
+    "utc": "2026-01-14T00:00:00.000Z",
+    "unix": 1768348800,
+    "flareBlock": 26125883,
+    "flareUnix": 1768348797,
+    "xrplLedger": 14025172,
+    "xrplUnix": 1768348800,
+    "skewSeconds": 3
+  },
+  {
+    "utc": "2026-01-16T00:00:00.000Z",
+    "unix": 1768521600,
+    "flareBlock": 26194418,
+    "flareUnix": 1768521600,
+    "xrplLedger": 14079521,
+    "xrplUnix": 1768521600,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-01-18T00:00:00.000Z",
+    "unix": 1768694400,
+    "flareBlock": 26261942,
+    "flareUnix": 1768694399,
+    "xrplLedger": 14134364,
+    "xrplUnix": 1768694400,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-01-20T00:00:00.000Z",
+    "unix": 1768867200,
+    "flareBlock": 26330293,
+    "flareUnix": 1768867198,
+    "xrplLedger": 14188632,
+    "xrplUnix": 1768867200,
+    "skewSeconds": 2
+  },
+  {
+    "utc": "2026-01-22T00:00:00.000Z",
+    "unix": 1769040000,
+    "flareBlock": 26399602,
+    "flareUnix": 1769039998,
+    "xrplLedger": 14242809,
+    "xrplUnix": 1769040000,
+    "skewSeconds": 2
+  },
+  {
+    "utc": "2026-01-24T00:00:00.000Z",
+    "unix": 1769212800,
+    "flareBlock": 26469009,
+    "flareUnix": 1769212797,
+    "xrplLedger": 14299120,
+    "xrplUnix": 1769212800,
+    "skewSeconds": 3
+  },
+  {
+    "utc": "2026-01-26T00:00:00.000Z",
+    "unix": 1769385600,
+    "flareBlock": 26538355,
+    "flareUnix": 1769385599,
+    "xrplLedger": 14355460,
+    "xrplUnix": 1769385600,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-01-28T00:00:00.000Z",
+    "unix": 1769558400,
+    "flareBlock": 26607936,
+    "flareUnix": 1769558399,
+    "xrplLedger": 14411111,
+    "xrplUnix": 1769558400,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-01-30T00:00:00.000Z",
+    "unix": 1769731200,
+    "flareBlock": 26680350,
+    "flareUnix": 1769731198,
+    "xrplLedger": 14465532,
+    "xrplUnix": 1769731200,
+    "skewSeconds": 2
+  },
+  {
+    "utc": "2026-02-01T00:00:00.000Z",
+    "unix": 1769904000,
+    "flareBlock": 26750069,
+    "flareUnix": 1769904000,
+    "xrplLedger": 14520661,
+    "xrplUnix": 1769904000,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-02-03T00:00:00.000Z",
+    "unix": 1770076800,
+    "flareBlock": 26818606,
+    "flareUnix": 1770076800,
+    "xrplLedger": 14575705,
+    "xrplUnix": 1770076800,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-02-05T00:00:00.000Z",
+    "unix": 1770249600,
+    "flareBlock": 26889203,
+    "flareUnix": 1770249600,
+    "xrplLedger": 14629648,
+    "xrplUnix": 1770249600,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-02-07T00:00:00.000Z",
+    "unix": 1770422400,
+    "flareBlock": 26960926,
+    "flareUnix": 1770422400,
+    "xrplLedger": 14683805,
+    "xrplUnix": 1770422400,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-02-09T00:00:00.000Z",
+    "unix": 1770595200,
+    "flareBlock": 27034169,
+    "flareUnix": 1770595200,
+    "xrplLedger": 14738551,
+    "xrplUnix": 1770595200,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-02-11T00:00:00.000Z",
+    "unix": 1770768000,
+    "flareBlock": 27104696,
+    "flareUnix": 1770768000,
+    "xrplLedger": 14792780,
+    "xrplUnix": 1770768000,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-02-13T00:00:00.000Z",
+    "unix": 1770940800,
+    "flareBlock": 27176388,
+    "flareUnix": 1770940799,
+    "xrplLedger": 14848097,
+    "xrplUnix": 1770940800,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-02-15T00:00:00.000Z",
+    "unix": 1771113600,
+    "flareBlock": 27247900,
+    "flareUnix": 1771113600,
+    "xrplLedger": 14902565,
+    "xrplUnix": 1771113600,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-02-17T00:00:00.000Z",
+    "unix": 1771286400,
+    "flareBlock": 27319138,
+    "flareUnix": 1771286397,
+    "xrplLedger": 14956394,
+    "xrplUnix": 1771286400,
+    "skewSeconds": 3
+  },
+  {
+    "utc": "2026-02-19T00:00:00.000Z",
+    "unix": 1771459200,
+    "flareBlock": 27390775,
+    "flareUnix": 1771459200,
+    "xrplLedger": 15011777,
+    "xrplUnix": 1771459200,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-02-21T00:00:00.000Z",
+    "unix": 1771632000,
+    "flareBlock": 27462946,
+    "flareUnix": 1771632000,
+    "xrplLedger": 15067090,
+    "xrplUnix": 1771632000,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-02-23T00:00:00.000Z",
+    "unix": 1771804800,
+    "flareBlock": 27534807,
+    "flareUnix": 1771804799,
+    "xrplLedger": 15121522,
+    "xrplUnix": 1771804800,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-02-25T00:00:00.000Z",
+    "unix": 1771977600,
+    "flareBlock": 27607080,
+    "flareUnix": 1771977599,
+    "xrplLedger": 15176512,
+    "xrplUnix": 1771977600,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-02-27T00:00:00.000Z",
+    "unix": 1772150400,
+    "flareBlock": 27676553,
+    "flareUnix": 1772150397,
+    "xrplLedger": 15231899,
+    "xrplUnix": 1772150400,
+    "skewSeconds": 3
+  },
+  {
+    "utc": "2026-03-01T00:00:00.000Z",
+    "unix": 1772323200,
+    "flareBlock": 27759217,
+    "flareUnix": 1772323194,
+    "xrplLedger": 15287505,
+    "xrplUnix": 1772323200,
+    "skewSeconds": 6
+  },
+  {
+    "utc": "2026-03-03T00:00:00.000Z",
+    "unix": 1772496000,
+    "flareBlock": 27826426,
+    "flareUnix": 1772495999,
+    "xrplLedger": 15343358,
+    "xrplUnix": 1772496000,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-03-05T00:00:00.000Z",
+    "unix": 1772668800,
+    "flareBlock": 27889828,
+    "flareUnix": 1772668796,
+    "xrplLedger": 15399054,
+    "xrplUnix": 1772668800,
+    "skewSeconds": 4
+  },
+  {
+    "utc": "2026-03-07T00:00:00.000Z",
+    "unix": 1772841600,
+    "flareBlock": 27959186,
+    "flareUnix": 1772841599,
+    "xrplLedger": 15454420,
+    "xrplUnix": 1772841600,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-03-09T00:00:00.000Z",
+    "unix": 1773014400,
+    "flareBlock": 28027411,
+    "flareUnix": 1773014400,
+    "xrplLedger": 15510577,
+    "xrplUnix": 1773014400,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-03-11T00:00:00.000Z",
+    "unix": 1773187200,
+    "flareBlock": 28097854,
+    "flareUnix": 1773187200,
+    "xrplLedger": 15566198,
+    "xrplUnix": 1773187200,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-03-13T00:00:00.000Z",
+    "unix": 1773360000,
+    "flareBlock": 28166994,
+    "flareUnix": 1773359998,
+    "xrplLedger": 15621422,
+    "xrplUnix": 1773360000,
+    "skewSeconds": 2
+  },
+  {
+    "utc": "2026-03-15T00:00:00.000Z",
+    "unix": 1773532800,
+    "flareBlock": 28235032,
+    "flareUnix": 1773532800,
+    "xrplLedger": 15677417,
+    "xrplUnix": 1773532800,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-03-17T00:00:00.000Z",
+    "unix": 1773705600,
+    "flareBlock": 28303168,
+    "flareUnix": 1773705600,
+    "xrplLedger": 15733096,
+    "xrplUnix": 1773705600,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-03-19T00:00:00.000Z",
+    "unix": 1773878400,
+    "flareBlock": 28369908,
+    "flareUnix": 1773878399,
+    "xrplLedger": 15789330,
+    "xrplUnix": 1773878400,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-03-21T00:00:00.000Z",
+    "unix": 1774051200,
+    "flareBlock": 28437665,
+    "flareUnix": 1774051199,
+    "xrplLedger": 15845563,
+    "xrplUnix": 1774051200,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-03-23T00:00:00.000Z",
+    "unix": 1774224000,
+    "flareBlock": 28504519,
+    "flareUnix": 1774223999,
+    "xrplLedger": 15901389,
+    "xrplUnix": 1774224000,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-03-25T00:00:00.000Z",
+    "unix": 1774396800,
+    "flareBlock": 28575321,
+    "flareUnix": 1774396795,
+    "xrplLedger": 15956390,
+    "xrplUnix": 1774396800,
+    "skewSeconds": 5
+  },
+  {
+    "utc": "2026-03-27T00:00:00.000Z",
+    "unix": 1774569600,
+    "flareBlock": 28649700,
+    "flareUnix": 1774569600,
+    "xrplLedger": 16011690,
+    "xrplUnix": 1774569600,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-03-29T00:00:00.000Z",
+    "unix": 1774742400,
+    "flareBlock": 28724851,
+    "flareUnix": 1774742396,
+    "xrplLedger": 16067672,
+    "xrplUnix": 1774742400,
+    "skewSeconds": 4
+  },
+  {
+    "utc": "2026-03-31T00:00:00.000Z",
+    "unix": 1774915200,
+    "flareBlock": 28798722,
+    "flareUnix": 1774915199,
+    "xrplLedger": 16124134,
+    "xrplUnix": 1774915200,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-04-02T00:00:00.000Z",
+    "unix": 1775088000,
+    "flareBlock": 28875100,
+    "flareUnix": 1775087999,
+    "xrplLedger": 16180281,
+    "xrplUnix": 1775088000,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-04-04T00:00:00.000Z",
+    "unix": 1775260800,
+    "flareBlock": 28962554,
+    "flareUnix": 1775260790,
+    "xrplLedger": 16236176,
+    "xrplUnix": 1775260800,
+    "skewSeconds": 10
+  },
+  {
+    "utc": "2026-04-06T00:00:00.000Z",
+    "unix": 1775433600,
+    "flareBlock": 29037512,
+    "flareUnix": 1775433600,
+    "xrplLedger": 16292724,
+    "xrplUnix": 1775433600,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-04-08T00:00:00.000Z",
+    "unix": 1775606400,
+    "flareBlock": 29113098,
+    "flareUnix": 1775606398,
+    "xrplLedger": 16348932,
+    "xrplUnix": 1775606400,
+    "skewSeconds": 2
+  },
+  {
+    "utc": "2026-04-10T00:00:00.000Z",
+    "unix": 1775779200,
+    "flareBlock": 29191929,
+    "flareUnix": 1775779200,
+    "xrplLedger": 16404936,
+    "xrplUnix": 1775779200,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-04-12T00:00:00.000Z",
+    "unix": 1775952000,
+    "flareBlock": 29267868,
+    "flareUnix": 1775952000,
+    "xrplLedger": 16461492,
+    "xrplUnix": 1775952000,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-04-14T00:00:00.000Z",
+    "unix": 1776124800,
+    "flareBlock": 29343196,
+    "flareUnix": 1776124792,
+    "xrplLedger": 16517442,
+    "xrplUnix": 1776124800,
+    "skewSeconds": 8
+  },
+  {
+    "utc": "2026-04-16T00:00:00.000Z",
+    "unix": 1776297600,
+    "flareBlock": 29419517,
+    "flareUnix": 1776297600,
+    "xrplLedger": 16572477,
+    "xrplUnix": 1776297600,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-04-18T00:00:00.000Z",
+    "unix": 1776470400,
+    "flareBlock": 29498167,
+    "flareUnix": 1776470400,
+    "xrplLedger": 16627715,
+    "xrplUnix": 1776470400,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-04-20T00:00:00.000Z",
+    "unix": 1776643200,
+    "flareBlock": 29574344,
+    "flareUnix": 1776643200,
+    "xrplLedger": 16683364,
+    "xrplUnix": 1776643200,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-04-22T00:00:00.000Z",
+    "unix": 1776816000,
+    "flareBlock": 29650405,
+    "flareUnix": 1776815997,
+    "xrplLedger": 16738641,
+    "xrplUnix": 1776816000,
+    "skewSeconds": 3
+  },
+  {
+    "utc": "2026-04-24T00:00:00.000Z",
+    "unix": 1776988800,
+    "flareBlock": 29728222,
+    "flareUnix": 1776988793,
+    "xrplLedger": 16794249,
+    "xrplUnix": 1776988800,
+    "skewSeconds": 7
+  },
+  {
+    "utc": "2026-04-26T00:00:00.000Z",
+    "unix": 1777161600,
+    "flareBlock": 29805890,
+    "flareUnix": 1777161600,
+    "xrplLedger": 16850419,
+    "xrplUnix": 1777161600,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-04-28T00:00:00.000Z",
+    "unix": 1777334400,
+    "flareBlock": 29883746,
+    "flareUnix": 1777334399,
+    "xrplLedger": 16906387,
+    "xrplUnix": 1777334400,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-04-30T00:00:00.000Z",
+    "unix": 1777507200,
+    "flareBlock": 29961435,
+    "flareUnix": 1777507199,
+    "xrplLedger": 16961214,
+    "xrplUnix": 1777507200,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-05-02T00:00:00.000Z",
+    "unix": 1777680000,
+    "flareBlock": 30040122,
+    "flareUnix": 1777679997,
+    "xrplLedger": 17016818,
+    "xrplUnix": 1777680000,
+    "skewSeconds": 3
+  },
+  {
+    "utc": "2026-05-04T00:00:00.000Z",
+    "unix": 1777852800,
+    "flareBlock": 30115032,
+    "flareUnix": 1777852789,
+    "xrplLedger": 17073123,
+    "xrplUnix": 1777852800,
+    "skewSeconds": 11
+  },
+  {
+    "utc": "2026-05-06T00:00:00.000Z",
+    "unix": 1778025600,
+    "flareBlock": 30190730,
+    "flareUnix": 1778025600,
+    "xrplLedger": 17128448,
+    "xrplUnix": 1778025600,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-05-08T00:00:00.000Z",
+    "unix": 1778198400,
+    "flareBlock": 30267875,
+    "flareUnix": 1778198390,
+    "xrplLedger": 17183629,
+    "xrplUnix": 1778198400,
+    "skewSeconds": 10
+  },
+  {
+    "utc": "2026-05-10T00:00:00.000Z",
+    "unix": 1778371200,
+    "flareBlock": 30343815,
+    "flareUnix": 1778371200,
+    "xrplLedger": 17239636,
+    "xrplUnix": 1778371200,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-05-12T00:00:00.000Z",
+    "unix": 1778544000,
+    "flareBlock": 30423120,
+    "flareUnix": 1778543988,
+    "xrplLedger": 17295654,
+    "xrplUnix": 1778544000,
+    "skewSeconds": 12
+  },
+  {
+    "utc": "2026-05-14T00:00:00.000Z",
+    "unix": 1778716800,
+    "flareBlock": 30500322,
+    "flareUnix": 1778716800,
+    "xrplLedger": 17351149,
+    "xrplUnix": 1778716800,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-05-16T00:00:00.000Z",
+    "unix": 1778889600,
+    "flareBlock": 30577547,
+    "flareUnix": 1778889600,
+    "xrplLedger": 17406938,
+    "xrplUnix": 1778889600,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-05-18T00:00:00.000Z",
+    "unix": 1779062400,
+    "flareBlock": 30652922,
+    "flareUnix": 1779062400,
+    "xrplLedger": 17463109,
+    "xrplUnix": 1779062400,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-05-20T00:00:00.000Z",
+    "unix": 1779235200,
+    "flareBlock": 30728177,
+    "flareUnix": 1779235194,
+    "xrplLedger": 17518654,
+    "xrplUnix": 1779235200,
+    "skewSeconds": 6
+  },
+  {
+    "utc": "2026-05-22T00:00:00.000Z",
+    "unix": 1779408000,
+    "flareBlock": 30806552,
+    "flareUnix": 1779408000,
+    "xrplLedger": 17574837,
+    "xrplUnix": 1779408000,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-05-24T00:00:00.000Z",
+    "unix": 1779580800,
+    "flareBlock": 30882798,
+    "flareUnix": 1779580791,
+    "xrplLedger": 17630767,
+    "xrplUnix": 1779580800,
+    "skewSeconds": 9
+  },
+  {
+    "utc": "2026-05-26T00:00:00.000Z",
+    "unix": 1779753600,
+    "flareBlock": 30959433,
+    "flareUnix": 1779753600,
+    "xrplLedger": 17686489,
+    "xrplUnix": 1779753600,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-05-28T00:00:00.000Z",
+    "unix": 1779926400,
+    "flareBlock": 31057520,
+    "flareUnix": 1779926393,
+    "xrplLedger": 17741507,
+    "xrplUnix": 1779926400,
+    "skewSeconds": 7
+  },
+  {
+    "utc": "2026-05-30T00:00:00.000Z",
+    "unix": 1780099200,
+    "flareBlock": 31144927,
+    "flareUnix": 1780099197,
+    "xrplLedger": 17796643,
+    "xrplUnix": 1780099200,
+    "skewSeconds": 3
+  },
+  {
+    "utc": "2026-06-01T00:00:00.000Z",
+    "unix": 1780272000,
+    "flareBlock": 31222848,
+    "flareUnix": 1780272000,
+    "xrplLedger": 17852533,
+    "xrplUnix": 1780272000,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-06-03T00:00:00.000Z",
+    "unix": 1780444800,
+    "flareBlock": 31305168,
+    "flareUnix": 1780444800,
+    "xrplLedger": 17907850,
+    "xrplUnix": 1780444800,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-06-05T00:00:00.000Z",
+    "unix": 1780617600,
+    "flareBlock": 31386064,
+    "flareUnix": 1780617600,
+    "xrplLedger": 17962313,
+    "xrplUnix": 1780617600,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-06-07T00:00:00.000Z",
+    "unix": 1780790400,
+    "flareBlock": 31465015,
+    "flareUnix": 1780790400,
+    "xrplLedger": 18017632,
+    "xrplUnix": 1780790400,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-06-09T00:00:00.000Z",
+    "unix": 1780963200,
+    "flareBlock": 31543676,
+    "flareUnix": 1780963198,
+    "xrplLedger": 18073686,
+    "xrplUnix": 1780963200,
+    "skewSeconds": 2
+  },
+  {
+    "utc": "2026-06-11T00:00:00.000Z",
+    "unix": 1781136000,
+    "flareBlock": 31624721,
+    "flareUnix": 1781135985,
+    "xrplLedger": 18128069,
+    "xrplUnix": 1781136000,
+    "skewSeconds": 15
+  },
+  {
+    "utc": "2026-06-13T00:00:00.000Z",
+    "unix": 1781308800,
+    "flareBlock": 31721309,
+    "flareUnix": 1781308799,
+    "xrplLedger": 18182245,
+    "xrplUnix": 1781308800,
+    "skewSeconds": 1
+  },
+  {
+    "utc": "2026-06-15T00:00:00.000Z",
+    "unix": 1781481600,
+    "flareBlock": 31813800,
+    "flareUnix": 1781481589,
+    "xrplLedger": 18236747,
+    "xrplUnix": 1781481600,
+    "skewSeconds": 11
+  },
+  {
+    "utc": "2026-06-17T00:00:00.000Z",
+    "unix": 1781654400,
+    "flareBlock": 31908099,
+    "flareUnix": 1781654400,
+    "xrplLedger": 18291181,
+    "xrplUnix": 1781654400,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-06-19T00:00:00.000Z",
+    "unix": 1781827200,
+    "flareBlock": 31993583,
+    "flareUnix": 1781827195,
+    "xrplLedger": 18346839,
+    "xrplUnix": 1781827200,
+    "skewSeconds": 5
+  },
+  {
+    "utc": "2026-06-21T00:00:00.000Z",
+    "unix": 1782000000,
+    "flareBlock": 32055846,
+    "flareUnix": 1781999993,
+    "xrplLedger": 18402905,
+    "xrplUnix": 1782000000,
+    "skewSeconds": 7
+  },
+  {
+    "utc": "2026-06-23T00:00:00.000Z",
+    "unix": 1782172800,
+    "flareBlock": 32123081,
+    "flareUnix": 1782172796,
+    "xrplLedger": 18459161,
+    "xrplUnix": 1782172800,
+    "skewSeconds": 4
+  },
+  {
+    "utc": "2026-06-25T00:00:00.000Z",
+    "unix": 1782345600,
+    "flareBlock": 32193749,
+    "flareUnix": 1782345600,
+    "xrplLedger": 18515097,
+    "xrplUnix": 1782345600,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-06-27T00:00:00.000Z",
+    "unix": 1782518400,
+    "flareBlock": 32261384,
+    "flareUnix": 1782518389,
+    "xrplLedger": 18570990,
+    "xrplUnix": 1782518400,
+    "skewSeconds": 11
+  },
+  {
+    "utc": "2026-06-29T00:00:00.000Z",
+    "unix": 1782691200,
+    "flareBlock": 32324487,
+    "flareUnix": 1782691192,
+    "xrplLedger": 18626519,
+    "xrplUnix": 1782691200,
+    "skewSeconds": 8
+  },
+  {
+    "utc": "2026-07-01T00:00:00.000Z",
+    "unix": 1782864000,
+    "flareBlock": 32389642,
+    "flareUnix": 1782863993,
+    "xrplLedger": 18681979,
+    "xrplUnix": 1782864000,
+    "skewSeconds": 7
+  },
+  {
+    "utc": "2026-07-03T00:00:00.000Z",
+    "unix": 1783036800,
+    "flareBlock": 32456399,
+    "flareUnix": 1783036800,
+    "xrplLedger": 18736854,
+    "xrplUnix": 1783036800,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-07-05T00:00:00.000Z",
+    "unix": 1783209600,
+    "flareBlock": 32519270,
+    "flareUnix": 1783209600,
+    "xrplLedger": 18792952,
+    "xrplUnix": 1783209600,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-07-07T00:00:00.000Z",
+    "unix": 1783382400,
+    "flareBlock": 32585389,
+    "flareUnix": 1783382394,
+    "xrplLedger": 18849146,
+    "xrplUnix": 1783382400,
+    "skewSeconds": 6
+  },
+  {
+    "utc": "2026-07-09T00:00:00.000Z",
+    "unix": 1783555200,
+    "flareBlock": 32653698,
+    "flareUnix": 1783555200,
+    "xrplLedger": 18905047,
+    "xrplUnix": 1783555200,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-07-11T00:00:00.000Z",
+    "unix": 1783728000,
+    "flareBlock": 32719943,
+    "flareUnix": 1783727998,
+    "xrplLedger": 18960870,
+    "xrplUnix": 1783728000,
+    "skewSeconds": 2
+  },
+  {
+    "utc": "2026-07-13T00:00:00.000Z",
+    "unix": 1783900800,
+    "flareBlock": 32786227,
+    "flareUnix": 1783900792,
+    "xrplLedger": 19017096,
+    "xrplUnix": 1783900800,
+    "skewSeconds": 8
+  },
+  {
+    "utc": "2026-07-15T00:00:00.000Z",
+    "unix": 1784073600,
+    "flareBlock": 32867093,
+    "flareUnix": 1784073587,
+    "xrplLedger": 19072087,
+    "xrplUnix": 1784073600,
+    "skewSeconds": 13
+  },
+  {
+    "utc": "2026-07-17T00:00:00.000Z",
+    "unix": 1784246400,
+    "flareBlock": 32938804,
+    "flareUnix": 1784246398,
+    "xrplLedger": 19127617,
+    "xrplUnix": 1784246400,
+    "skewSeconds": 2
+  },
+  {
+    "utc": "2026-07-19T00:00:00.000Z",
+    "unix": 1784419200,
+    "flareBlock": 33006202,
+    "flareUnix": 1784419190,
+    "xrplLedger": 19182187,
+    "xrplUnix": 1784419200,
+    "skewSeconds": 10
+  },
+  {
+    "utc": "2026-07-21T00:00:00.000Z",
+    "unix": 1784592000,
+    "flareBlock": 33075724,
+    "flareUnix": 1784591991,
+    "xrplLedger": 19235407,
+    "xrplUnix": 1784592000,
+    "skewSeconds": 9
+  },
+  {
+    "utc": "2026-07-23T00:00:00.000Z",
+    "unix": 1784764800,
+    "flareBlock": 33147301,
+    "flareUnix": 1784764789,
+    "xrplLedger": 19287850,
+    "xrplUnix": 1784764800,
+    "skewSeconds": 11
+  },
+  {
+    "utc": "2026-07-25T00:00:00.000Z",
+    "unix": 1784937600,
+    "flareBlock": 33217122,
+    "flareUnix": 1784937586,
+    "xrplLedger": 19340522,
+    "xrplUnix": 1784937600,
+    "skewSeconds": 14
+  },
+  {
+    "utc": "2026-07-27T00:00:00.000Z",
+    "unix": 1785110400,
+    "flareBlock": 33283493,
+    "flareUnix": 1785110393,
+    "xrplLedger": 19394855,
+    "xrplUnix": 1785110400,
+    "skewSeconds": 7
+  },
+  {
+    "utc": "2026-07-29T00:00:00.000Z",
+    "unix": 1785283200,
+    "flareBlock": 33381782,
+    "flareUnix": 1785283200,
+    "xrplLedger": 19448912,
+    "xrplUnix": 1785283200,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-07-31T00:00:00.000Z",
+    "unix": 1785456000,
+    "flareBlock": 33453899,
+    "flareUnix": 1785456000,
+    "xrplLedger": 19503246,
+    "xrplUnix": 1785456000,
+    "skewSeconds": 0
+  },
+  {
+    "utc": "2026-08-02T00:00:00.000Z",
+    "unix": 1785628800,
+    "flareBlock": 33523515,
+    "flareUnix": 1785628789,
+    "xrplLedger": 19557825,
+    "xrplUnix": 1785628800,
+    "skewSeconds": 11
+  },
+  {
+    "utc": "2026-08-04T00:00:00.000Z",
+    "unix": 1785801600,
+    "flareBlock": 33597352,
+    "flareUnix": 1785801594,
+    "xrplLedger": 19612733,
+    "xrplUnix": 1785801600,
+    "skewSeconds": 6
+  }
+]
