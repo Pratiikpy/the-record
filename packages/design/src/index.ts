@@ -56,6 +56,16 @@ nav.top a:hover,nav.top a[aria-current]{color:var(--faint)}
 .themetoggle{font-family:var(--mono);font-size:13px;color:var(--ink);background:none;border:0;
 padding:0;cursor:pointer;transition:color .2s}
 .themetoggle:hover{color:var(--faint)}
+/* The tier sits with the subject it grades. Border and text carry it, never
+   colour alone -- these pages must survive greyscale printing. */
+/* align-self, not display: .reg is a column flex container, which blockifies
+   its children -- inline-block is ignored and align-items:stretch pulls the
+   badge to the full card width. */
+.tier{align-self:flex-start;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+padding:3px 8px;border:1px solid var(--rule-strong);margin:0 0 10px;color:var(--muted)}
+.tier.t3{border-color:var(--v-ok);color:var(--v-ok)}
+.tier.t2{border-color:var(--v-sim);color:var(--v-sim)}
+.tier.t1,.tier.t0{border-style:dashed;color:var(--v-unknown)}
 section{border-top:1px solid var(--rule);padding-block:64px}section:first-of-type{border-top:0}
 .marker{position:relative;display:inline-block;border:1px solid var(--rule-strong);padding:7px 16px}
 .marker b{position:absolute;font-family:var(--mono);font-size:12px;line-height:1;font-weight:400}

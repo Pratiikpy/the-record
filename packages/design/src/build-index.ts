@@ -11,6 +11,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { page, marker, esc } from "./index.js";
 import { hrefFromIndex, labelOf, REGISTERS } from "./nav.js";
+import { TIER_NAME, TIER_MEANING, SCALE_DISCLAIMER, FALSIFICATION_BUDGET_DAYS, type Tier } from "./grade.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..", "..", "..");
@@ -22,6 +23,8 @@ const read = <T,>(p: string): T | null =>
 
 interface Card {
   name: string;
+  /** matches the slug used by build-api, so the page reads the emitted grade */
+  slug?: string;
   proves: string;
   href: string;
   contract: string;
@@ -73,6 +76,7 @@ function buildCards(): Card[] {
     },
     {
       name: "Procedure",
+      slug: "core-vault",
       proves: "the books are the books",
       href: hrefFromIndex("procedure"),
       contract: "AssuranceRegistry.sol",
@@ -86,6 +90,7 @@ function buildCards(): Card[] {
     },
     {
       name: "Reprod",
+      slug: "tee-registry",
       proves: "the code is the code",
       href: hrefFromIndex("reprod"),
       contract: "ReproRegistry.sol",
@@ -103,12 +108,27 @@ function buildCards(): Card[] {
   ];
 }
 
+function tierOf(slug: string): { short: string; tier: number } | null {
+  try {
+    const g = JSON.parse(readFileSync(join(OUTDIR, "api", `${slug}.grade.json`), "utf8")) as {
+      tier: number;
+      name: string;
+    };
+    return { short: `V${g.tier} ${g.name}`, tier: g.tier };
+  } catch {
+    // No grade emitted yet. Showing nothing is correct; inventing a tier is not.
+    return null;
+  }
+}
+
 function card(c: Card): string {
+  const g = c.slug ? tierOf(c.slug) : null;
   return `<article class="reg">
     <div class="reg-head">
       <h2><a class="reg-link" href="${esc(c.href)}">${esc(c.name)}</a></h2>
       <span class="cap">${esc(c.contract)}</span>
     </div>
+    ${g ? `<p class="tier t${g.tier}">${esc(g.short)}</p>` : ""}
     <p class="proves">${esc(c.proves)}</p>
     <dl class="figs">
 ${c.figures.map(([k, v]) => `      <div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("\n")}
@@ -122,6 +142,21 @@ function main(): void {
   mkdirSync(OUTDIR, { recursive: true });
   const cards = buildCards();
 
+  // Built outside the template: nesting a backtick inside the page literal
+  // terminated it, and the resulting parse error pointed thirty lines away.
+  const tierRows = ([0, 1, 2, 3] as Tier[])
+    .map(
+      (t) =>
+        '          <tr><th scope="row">V' +
+        t +
+        "<small>" +
+        esc(TIER_NAME[t]) +
+        '</small></th><td class="l">' +
+        esc(TIER_MEANING[t]) +
+        "</td></tr>",
+    )
+    .join("\n");
+
   const body = `
   <section>
     ${marker("The Record")}
@@ -133,6 +168,36 @@ function main(): void {
 
     <div class="regs">
 ${cards.map(card).join("\n")}
+    </div>
+
+    <p class="cap" style="margin-top:30px">§ 0.1 — The scale</p>
+    <h2 style="margin-top:6px">How much can a stranger check?</h2>
+    <p class="lede">A verdict tells you what a check said today. It does not tell you how much of the
+      system you could establish for yourself. That is a different question, it is the one this project is
+      built to answer, and it needs its own scale.</p>
+
+    <div class="tablewrap" style="margin-top:18px">
+      <table style="min-width:560px">
+        <caption>The verifiability scale. Tiers are cumulative: a gap low down caps the subject regardless of what holds above it.</caption>
+        <thead><tr>
+          <th class="l" scope="col">Tier</th>
+          <th class="l" scope="col">Means</th>
+        </tr></thead>
+        <tbody>
+${tierRows}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note" style="margin-top:20px">
+      <p><span class="tag">Why V3 is the top</span>A reconciliation nobody has ever seen fail is
+      indistinguishable from one that <strong>cannot</strong> fail. This project shipped exactly that: an
+      identity between two figures derived from the same storage slot, green every period, incapable of
+      being anything else. V2 is where most good monitoring stops, and V2 is where that bug lived
+      comfortably. V3 requires a fault to have been injected and caught — and it
+      <strong>lapses after ${FALSIFICATION_BUDGET_DAYS} days</strong>, because a falsification from six
+      months ago says nothing about the code running today. The tier can go down, including ours.</p>
+      <p><strong>${esc(SCALE_DISCLAIMER)}</strong></p>
     </div>
 
     <div class="note">
