@@ -141,6 +141,9 @@ const g = (s: string): string => `<b class="ok">${esc(s)}</b>`;
 const b = (s: string): string => `<b class="bad">${esc(s)}</b>`;
 const h = (s: string): string => `<b class="hi">${esc(s)}</b>`;
 const d = (s: string): string => `<span class="dim">${esc(s)}</span>`;
+/** Grouped digits. A caption reading 2415 beside a screenshot reading 2,415
+ *  makes a reader check whether they are the same number. */
+const num = (n: number): string => n.toLocaleString("en-US");
 
 /** Render CV-1's controls exactly as the register recorded them. */
 function controlLines(c: Cv1 | null, indent = "  "): string {
@@ -177,7 +180,7 @@ function main(): void {
       shot: {
         src: "proof/tour-1-index.jpeg",
         alt: "The Record landing page showing the three registers with their current figures",
-        caption: `Fig. 1 &mdash; the live index. Covenant carries ${h(String(red_?.totals.redemptionsRequested ?? 0))}
+        caption: `Fig. 1 &mdash; the live index. Covenant carries ${h(num(red_?.totals.redemptionsRequested ?? 0))}
           indexed redemptions, Procedure an opinion of ${h(cv1?.opinion ?? "—")}, Reprod
           ${h(String(totalMachines))} registered machines.`,
       },
@@ -196,7 +199,7 @@ function main(): void {
       shot: {
         src: "proof/tour-2-covenant.jpeg",
         alt: "The Covenant register showing indexed redemptions and open positions",
-        caption: `Fig. 2 &mdash; ${h(String(red_?.totals.redemptionsRequested ?? 0))} redemptions indexed,
+        caption: `Fig. 2 &mdash; ${h(num(red_?.totals.redemptionsRequested ?? 0))} redemptions indexed,
           ${h(`${red_?.totals.withNamedExecutorPct ?? 0}%`)} named an executor,
           ${h(String(pastDue))} past deadline and unresolved.`,
       },
