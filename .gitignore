@@ -19,3 +19,6 @@ contracts/broadcast/
 contracts/lib/
 site/index.html
 _site/
+
+# Vercel project linkage, not source
+.vercel/

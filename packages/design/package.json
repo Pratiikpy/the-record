@@ -10,7 +10,7 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "build": "tsx src/build-index.ts && tsx src/build-api.ts",
+    "build": "tsx src/build-index.ts && tsx src/build-errata.ts && tsx src/build-api.ts",
     "build:api": "tsx src/build-api.ts"
   },
   "devDependencies": {

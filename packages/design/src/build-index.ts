@@ -201,6 +201,13 @@ ${tierRows}
     </div>
 
     <div class="note">
+      <p><span class="tag">Everything we got wrong</span>Six errata, three of which reached the public
+      before being withdrawn — including a claim that 93 redemption agents had defaulted when every one of
+      them had paid. Each entry names the exact wrong value, the mechanism, and the test that now makes it
+      unconstructable. <a class="cite" href="errata.html">[ Read the errata → ]</a></p>
+    </div>
+
+    <div class="note">
       <p><span class="tag">What these will not do</span>Say more than the evidence supports. Unresolved is
       not unpaid. Determinism is not verification. Unknown is not clean. Each register refuses to conclude
       where it cannot, and records that refusal rather than rounding it up to a pass.</p>
