@@ -246,7 +246,7 @@ URL, and a proxy serves one `/info`. Those comparisons are recorded as
 ```sh
 git clone https://github.com/Pratiikpy/the-record && cd the-record && pnpm install
 
-pnpm -r run test                                       # full suite, all packages
+pnpm -r run test                                       # 474 tests, all packages
 cd contracts && forge test                             # 70 Solidity tests
 
 pnpm --filter @therecord/procedure run run             # CV-1 against Flare MAINNET
@@ -254,8 +254,28 @@ pnpm --filter @therecord/procedure redrun              # the red run: CLEAN → 
 pnpm --filter @therecord/reprod provenance --registry  # the TEE measurement
 ```
 
-`provenance` runs against a committed snapshot — no network, no server, no trust
-in us.
+Four more that are worth your time, in descending order of how much they
+distrust us:
+
+```sh
+pnpm --filter @therecord/procedure verify              # re-derive an opinion with the network unplugged
+pnpm --filter @therecord/reprod drift                  # is our published snapshot still true of the chain?
+pnpm --filter @therecord/doctor doctor --worst 5       # the 5 worst-configured TEE machines, live-probed
+pnpm --filter @therecord/procedure spec                # emit the machine-readable fault spec
+```
+
+`verify` is the one to run if you only run one. It takes a published evidence
+pack, replaces `fetch` with a function that throws, and rebuilds the opinion from
+the recorded reads alone. If any read were missing the rebuild would fail rather
+than quietly substitute a default, so the pack is either sufficient or it is
+rejected. `provenance` likewise runs against a committed snapshot — no network,
+no server, no trust in us.
+
+`drift` is the one that can embarrass us, which is why it ships. It asks whether
+the chain has moved past the numbers on the site and prints `MATERIAL` if it has.
+We published `223` for twenty-nine hours while the registry held `250`; that is
+[E-008](https://the-record.vercel.app/errata), and this command exists so it
+cannot happen silently twice.
 
 End-to-end against a fork, so the real `FlareTeeManager` and `AssetManagerFXRP`
 are present at their real addresses:

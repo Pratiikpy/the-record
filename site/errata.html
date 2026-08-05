@@ -134,8 +134,8 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
       same care as the findings, and never quietly edited away.</p>
 
     <div class="stats">
-      <div class="stat"><div class="k">Errata</div><div class="v">7</div><div class="n">append-only; nothing is deleted</div></div>
-      <div class="stat"><div class="k">Reached the public</div><div class="v">3</div><div class="n">published, then withdrawn</div></div>
+      <div class="stat"><div class="k">Errata</div><div class="v">8</div><div class="n">append-only; nothing is deleted</div></div>
+      <div class="stat"><div class="k">Reached the public</div><div class="v">4</div><div class="n">published, then withdrawn</div></div>
       <div class="stat"><div class="k">Caught first</div><div class="v">4</div><div class="n">disclosed anyway, but not the same thing</div></div>
       <div class="stat"><div class="k">Found by machinery</div><div class="v">4</div><div class="n">2 by a control or fault injection, 2 by a written test</div></div>
     </div>
@@ -258,6 +258,21 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
       <dt>Now prevented by</dt><dd>Reads are pinned to a block number obtained first; accountLedgerState returns the ledger and close time it used; skew is computed from them and reports -1 when it cannot be established. The pack is self-describing, and tests assert the anchor matches the recorded evidence.</dd>
     </dl>
   </article>
+<article class="erratum">
+    <div class="erratum-head">
+      <h3>E-008</h3>
+      <span class="fate pub">PUBLISHED, THEN WITHDRAWN</span>
+      <span class="cap">2026-08-05</span>
+      <span class="cap disc">found by re-reading the evidence</span>
+    </div>
+    <dl class="err">
+      <dt>Claimed</dt><dd><s>223 TEE machines are registered, of which 95% carry one shared code hash — published under a freshness badge reporting the scan as current.</s></dd>
+      <dt>Actually</dt><dd><strong>The registry held 250 machines. The published figure was 12% wrong and had been for roughly twenty-nine hours, on the headline number of an entire register.</strong></dd>
+      <dt>Mechanism</dt><dd>The badge measures the AGE of a scan, and age was silently doing duty for correctness. Nothing ever compared the committed snapshot against the chain, so a scan could be hours old and already wrong while reporting itself fresh. The ratios the register actually concludes from were barely affected, which is what made it survive: the page looked right.</dd>
+      <dt>Caught by</dt><dd>Re-reading the live registry during an audit and comparing it by hand to the number on the page. No control caught this, and the tests were complicit rather than silent — they asserted the count equalled 223 while reading the same stale file the page did, so the whole suite agreed with the error. A test that reads the artefact under test cannot detect that the artefact is stale.</dd>
+      <dt>Now prevented by</dt><dd>checkDrift() reads the live registry total and classifies the gap CURRENT, IMMATERIAL, MATERIAL or UNKNOWN against a 2% materiality threshold; driftIsPublishable() blocks the publish on MATERIAL, and on UNKNOWN, because failing to check is not evidence nothing moved. A regression test pins 223-against-250 as MATERIAL. It is exposed as `pnpm --filter @therecord/reprod drift`, so the check is a command a stranger can run against us rather than a promise we make about ourselves.</dd>
+    </dl>
+  </article>
   </section>
 
   <section>
@@ -272,7 +287,7 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
     </div>
   </section>
   </main>
-  <footer>The Record · Covenant — Procedure — Reprod &nbsp;·&nbsp; 7 errata · 3 reached the public &nbsp;·&nbsp; every figure re-derivable from public RPC</footer>
+  <footer>The Record · Covenant — Procedure — Reprod &nbsp;·&nbsp; 8 errata · 4 reached the public &nbsp;·&nbsp; every figure re-derivable from public RPC</footer>
 </div>
 <script>(function(){var b=document.querySelector("[data-toggle-theme]");if(!b)return;
 b.addEventListener("click",function(){var r=document.documentElement;

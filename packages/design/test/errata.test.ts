@@ -65,3 +65,37 @@ describe("errata discipline", () => {
     expect(ERRATA.find((e) => e.id === "E-001")?.fate).toBe("PUBLISHED");
   });
 });
+
+/**
+ * The index must not restate the register from memory.
+ *
+ * The landing page carried the sentence "Six errata, three of which reached the
+ * public" while the errata register held seven. A hand-typed count, sitting
+ * directly above the very list that contradicts it — the same defect as a
+ * headline promising defaults above a count of zero, and the same defect this
+ * project files against other people. Numbers on a page that summarises a
+ * register have to be COUNTED from that register.
+ */
+describe("the index counts the errata rather than remembering them", () => {
+  const INDEX = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "site", "index.html");
+
+  it("states the true total", () => {
+    const html = readFileSync(INDEX, "utf8");
+    const m = /([0-9]+) errata, ([0-9]+) of which\s+reached the public/u.exec(html);
+    expect(m, 'index should carry "<n> errata, <m> of which reached the public"').toBeTruthy();
+    expect(Number(m![1]), "index errata total disagrees with ERRATA").toBe(ERRATA.length);
+  });
+
+  it("states the true published count", () => {
+    const html = readFileSync(INDEX, "utf8");
+    const m = /([0-9]+) errata, ([0-9]+) of which\s+reached the public/u.exec(html);
+    const published = ERRATA.filter((e) => e.fate === "PUBLISHED").length;
+    expect(Number(m![2]), "index published-errata count disagrees with ERRATA").toBe(published);
+  });
+
+  it("never spells a count as a word, because a word cannot be derived", () => {
+    // "Six errata" is only constructable by hand. Digits come from the register.
+    const html = readFileSync(INDEX, "utf8");
+    expect(html).not.toMatch(/\b(One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten) errata\b/u);
+  });
+});

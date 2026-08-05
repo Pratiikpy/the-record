@@ -193,6 +193,34 @@ export const ERRATA: readonly Erratum[] = [
       "time it used; skew is computed from them and reports -1 when it cannot be established. The pack is " +
       "self-describing, and tests assert the anchor matches the recorded evidence.",
   },
+  {
+    id: "E-008",
+    discovery: "REVIEW",
+    date: "2026-08-05",
+    fate: "PUBLISHED",
+    claimed:
+      "223 TEE machines are registered, of which 95% carry one shared code hash — published under a " +
+      "freshness badge reporting the scan as current.",
+    truth:
+      "The registry held 250 machines. The published figure was 12% wrong and had been for roughly " +
+      "twenty-nine hours, on the headline number of an entire register.",
+    mechanism:
+      "The badge measures the AGE of a scan, and age was silently doing duty for correctness. Nothing " +
+      "ever compared the committed snapshot against the chain, so a scan could be hours old and already " +
+      "wrong while reporting itself fresh. The ratios the register actually concludes from were barely " +
+      "affected, which is what made it survive: the page looked right.",
+    caughtBy:
+      "Re-reading the live registry during an audit and comparing it by hand to the number on the page. " +
+      "No control caught this, and the tests were complicit rather than silent — they asserted the count " +
+      "equalled 223 while reading the same stale file the page did, so the whole suite agreed with the " +
+      "error. A test that reads the artefact under test cannot detect that the artefact is stale.",
+    preventedBy:
+      "checkDrift() reads the live registry total and classifies the gap CURRENT, IMMATERIAL, MATERIAL or " +
+      "UNKNOWN against a 2% materiality threshold; driftIsPublishable() blocks the publish on MATERIAL, " +
+      "and on UNKNOWN, because failing to check is not evidence nothing moved. A regression test pins " +
+      "223-against-250 as MATERIAL. It is exposed as `pnpm --filter @therecord/reprod drift`, so the " +
+      "check is a command a stranger can run against us rather than a promise we make about ourselves.",
+  },
 ] as const;
 
 export interface ErrataSummary {

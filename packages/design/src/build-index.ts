@@ -12,6 +12,7 @@ import { dirname, join } from "node:path";
 import { page, marker, esc } from "./index.js";
 import { hrefFromIndex, labelOf, REGISTERS } from "./nav.js";
 import { TIER_NAME, TIER_MEANING, SCALE_DISCLAIMER, FALSIFICATION_BUDGET_DAYS, type Tier } from "./grade.js";
+import { ERRATA } from "./errata.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..", "..", "..");
@@ -158,6 +159,10 @@ function main(): void {
     )
     .join("\n");
 
+  // Counted from the register, never typed. The index said "Six errata" over a
+  // page of seven — a hand-written number above the very list it described.
+  const published = ERRATA.filter((e) => e.fate === "PUBLISHED").length;
+
   const body = `
   <section>
     ${marker("The Record")}
@@ -210,10 +215,10 @@ ${tierRows}
     </div>
 
     <div class="note">
-      <p><span class="tag">Everything we got wrong</span>Six errata, three of which reached the public
-      before being withdrawn — including a claim that 93 redemption agents had defaulted when every one of
-      them had paid. Each entry names the exact wrong value, the mechanism, and the test that now makes it
-      unconstructable. <a class="cite" href="errata.html">[ Read the errata → ]</a></p>
+      <p><span class="tag">Everything we got wrong</span>${ERRATA.length} errata, ${published} of which
+      reached the public before being withdrawn — including a claim that 93 redemption agents had defaulted
+      when every one of them had paid. Each entry names the exact wrong value, the mechanism, and the test
+      that now makes it unconstructable. <a class="cite" href="errata.html">[ Read the errata → ]</a></p>
     </div>
 
     <div class="note">
