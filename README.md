@@ -1,9 +1,34 @@
+<div align="center">
+
 # THE RECORD
 
-**Cross-chain infrastructure for facts that cannot be self-asserted.**
+### Facts that cannot be self-asserted.
 
-Three layers, built on Flare. The protocol is never the counterparty — it holds
-no float, seeds no liquidity and underwrites nothing.
+Three registers on Flare, each answering a question the interested party
+is not allowed to answer about itself.
+
+**did you pay** · **are the books real** · **is this the code you published**
+
+<br/>
+
+[![core vault](https://the-record.vercel.app/badge/core-vault.svg)](https://the-record.vercel.app/procedure/)
+[![tee registry](https://the-record.vercel.app/badge/tee-registry.svg)](https://the-record.vercel.app/reprod/)
+
+**[Live site](https://the-record.vercel.app)** ·
+**[Errata](https://the-record.vercel.app/errata)** ·
+**[API](https://the-record.vercel.app/api/status.json)**
+
+</div>
+
+---
+
+Running against **Flare mainnet**, over **140,000,000 XRP** of real escrowed
+value. Every figure is re-derivable from public RPC by anyone — no credentials,
+no client, nobody's permission. That is the whole wedge: continuous assurance
+that can start without being invited.
+
+The protocol is never the counterparty. It holds no float, seeds no liquidity
+and underwrites nothing.
 
 | Layer | Proves | Register | Contract |
 |---|---|---|---|
@@ -11,171 +36,189 @@ no float, seeds no liquidity and underwrites nothing.
 | **Procedure** | the books are the books | `packages/procedure` | `AssuranceRegistry.sol` |
 | **Reprod** | the code is the code | `packages/reprod` | `ReproRegistry.sol` |
 
-**Live:** [the-record.vercel.app](https://the-record.vercel.app) ·
-**Errata:** [everything we got wrong](https://the-record.vercel.app/errata) ·
-**API:** [`/api/status.json`](https://the-record.vercel.app/api/status.json)
-
-### Fixes sent upstream to Flare
-
-| PR | What |
-|---|---|
-| [developer-hub#1455](https://github.com/flare-foundation/developer-hub/pull/1455) | `RedemptionPerformed.requestId` documented as `uint64`, emitted as `uint256`. Different `topic0`, so an indexer written from the docs matches nothing and every redemption looks permanently open. |
-| [fce-extension-scaffold#3](https://github.com/flare-foundation/fce-extension-scaffold/pull/3) | The reproducible-build verification procedure cannot be followed: the clone step 404s, `-f Dockerfile` has no matching file, and Python/TypeScript cannot resolve `local/tee-node-base` under the `docker-container` driver the doc requires. |
-
-Both were found by using Flare's own documentation as a third party and having it fail.
-
-Plan: [`PRD-MASTER.md`](../PRD-MASTER.md) · Design: [`DESIGN.md`](../DESIGN.md) ·
-Findings: [`docs/EVIDENCE.md`](docs/EVIDENCE.md)
-
 ---
-
-## What each layer found, running against live Flare mainnet
-
-### Reprod — the code is the code
-
-Every confidential-compute project tells its users the same thing: *you do not
-have to trust us, check the code hash.* It is a good instruction, and it is
-currently unexecutable — because nothing turns 32 bytes into a fact. So we
-measured how much a code hash actually identifies:
-
-> **bits = −log₂( machines carrying this hash ÷ machines in the registry )**
-
-- **223** machines carry **8** distinct code hashes between them.
-- One value is carried by **215 machines under 44 independent owners** — it
-  identifies **0.05 bits**. A unique hash in this registry would carry **7.80**.
-  Checking it returns the same answer for every one of them.
-- **Not one machine** in the registry carries a hash that can be traced to
-  source today: the shared value identifies nothing, and every distinctive hash
-  has no claimed source revision. We rebuilt **5 of Flare's own images**
-  deterministically and **none of those digests appears on chain**.
-
-Nobody did anything wrong. Simulated attestation is **explicitly permitted** by
-Flare, and a shared constant is exactly what simulation is defined to emit. This
-measures the *hash*, not the operator — no machine owner is named anywhere in
-this repo, and `NOT_A_MEASUREMENT` is derived from how many owners share a
-value, never from a list of known constants. It would flag a shared hash nobody
-has ever seen, and it would clear the simulator's own constant the moment a
-single owner used it. The finding is about a registry three weeks into its life,
-not about anyone in it.
-
-```
-pnpm --filter @therecord/reprod provenance --registry
-pnpm --filter @therecord/reprod provenance <hash | extensionId | address | url>
-```
-
-Runs against a committed snapshot — no network, no server, no trust in us.
-
-- **86% of machines are unreachable right now.**
-- **5 of 5** Flare images rebuilt from source here, twice each, identical
-  digests. Only **2 of 5** are independently verifiable by anyone else.
-
-> **Flare's documented reproducible-build recipe cannot rebuild Flare's own
-> extension images.** `REPRODUCIBILITY.md` requires the `docker-container`
-> driver, because the default driver silently ignores `rewrite-timestamp`. But
-> every language Dockerfile begins `FROM local/tee-node-base:…`, and that driver
-> cannot see the host image store. Their CI only works because
-> `build-node-base.sh` uses the *other* driver — the one whose output is not
-> timestamp-normalised. Resolved here with a throwaway local registry and a
-> `--build-context` redirect.
-
-### Covenant — the promises were kept
-
-- **2,367** FXRP redemptions indexed, **2,274** settled, **0** defaults.
-- **85.4% already name an executor.** `redemptionPaymentDefault` is permissioned
-  to the redeemer, the agent, or an executor appointed at `redeem()` time, so
-  that number decides whether the layer has a market. It does.
-- Zero defaults is the other half of the answer: nothing to claim on testnet, so
-  the failure modes must be manufactured deliberately.
-
-> **A bug in Flare's published reference.** `IAssetManagerEvents.mdx` declares
-> `RedemptionPerformed(… uint64 indexed requestId …)`; the deployed contract
-> emits `uint256`. An indexer built faithfully from the docs decodes **zero**
-> completions and reports every redemption as permanently open.
-
-### Procedure — the books are the books
-
-- **CV-1** tests five Core Vault controls every period, from entirely public
-  data — the allowlist, custodian and balances from Flare, the payments and
-  escrow objects from XRPL. No client, no credentials, nobody's permission.
-- Live result on **Flare mainnet**: **CLEAN**, all five controls. C3 reconciles
-  Flare's `escrowedFunds` against the sum of the vault's XRPL Escrow objects —
-  **140,000,000 XRP on both sides, to the drop**, across 14 escrow objects.
-  Nothing is hardcoded but the contract registry; the asset manager and core
-  vault are resolved through it at run time, so a new FAsset is discovered
-  rather than missed.
-
-Coston2 is not the subject — it is the **fault laboratory**, and it has to be
-asked for by name (`NETWORK=coston2`) so a fault-injection run can never be
-mistaken for a reading of production.
-
-**History is a property of the chain, not of when you started.** CV-1 is a pure
-function of state at a height, so the register did not wait — it computed. 119
-Coston2 heights across 238 days and 23 mainnet heights, every row labelled
-`retrospective`, every candidate exception confirmed across a cross-chain skew
-bracket before being claimed.
-
-**The control has gone red, on purpose.** A monitor that has only ever printed
-CLEAN is indistinguishable from one that *cannot* print anything else — and this
-project shipped exactly that failure once. So the controls are tested the only
-way a control can be:
-
-```
-pnpm --filter @therecord/procedure redrun
-```
-
-Coston2 is forked, one storage slot is overwritten, and the identical procedure
-runs again. The XRP Ledger is left untouched and real — that asymmetry is the
-point. C3 flips **CLEAN → EXCEPTION**; the other four controls correctly do not
-move. The script **exits non-zero if C3 stays CLEAN**, so a control that stops
-being able to fail breaks the build. `FAULT_ESCROW_UBA=<true value>` makes the
-fault a no-op and the guard itself trips — verified.
-
-`packages/procedure/src/faults.ts` generalises this into a catalogue: each fault
-declares both `mustFire` **and** `mustNotMove`, because a check that fires on
-everything is no more informative than one that fires on nothing. It ships a
-published list of faults we inject and **do not** catch, because a suite that
-catches everything is measuring its own imagination.
-
-> **Three corrections we made to ourselves.** The cross-chain reconciliation has
-> been wrong three times. *(i)* It asserted `availableFunds + escrowedFunds ≤
-> totalAvailable` across two contracts and reported a 400 UBA **exception
-> against Flare** — figures never defined to relate. *(ii)* It asserted
-> `escrowedFunds = totalAvailable − immediatelyAvailable`, which held exactly
-> and **could never fail**, because both sides derive from one storage slot.
-> *(iii)* It asserted `availableFunds + escrowedFunds ≤ Balance` and produced a
-> 497,844,875,522 drop shortfall — **caught before publication**: XRPL escrow
-> *removes* XRP from the account balance, so that arithmetic double-counts every
-> escrow. All three are pinned by regression tests, and all six errata we have
-> are published in full at [/errata](https://the-record.vercel.app/errata).
 
 ## How much can a stranger check?
 
 A verdict says what a check found today. It does not say how much of the system
-you could establish yourself — so there is a scale for that, and it is
-deliberately **not** a safety rating.
+you could establish yourself. So there is a scale for that — deliberately **not**
+a safety rating.
 
-| Tier | Means |
-|---|---|
-| **V0** ASSERTED | the system states facts about itself; you take its word |
-| **V1** OBSERVABLE | the facts are public, a stranger can read them |
-| **V2** RECONCILED | two independent sources agree, and disagreement would show |
-| **V3** FALSIFIED | the check is proven able to fail, on the record, recently |
+| Tier | Means | Graded |
+|---|---|---|
+| **V0** `ASSERTED` | the system states facts about itself; you take its word | |
+| **V1** `OBSERVABLE` | the facts are public, a stranger can read them | **Flare TEE registry** |
+| **V2** `RECONCILED` | two independent sources agree, and disagreement would show | |
+| **V3** `FALSIFIED` | the check is proven able to fail, on the record, recently | **FXRP core vault** |
 
-**FXRP core vault: V3.** **Flare TEE registry: V1** — public, but nothing
-cross-checks the code hash, so there is no second source that could disagree.
-
-V3 exists because a reconciliation nobody has seen fail is indistinguishable
-from one that *cannot* fail, and V2 is exactly where the tautology we shipped
+**V3 exists because a reconciliation nobody has seen fail is indistinguishable
+from one that _cannot_ fail** — and V2 is exactly where the tautology we shipped
 lived comfortably. It **lapses after 30 days**. The tier can go down, ours
 included.
+
+---
+
+## Two findings
+
+### “Check the code hash” has no answer yet
+
+Every confidential-compute project tells its users the same thing: *you don't
+have to trust us, check the code hash.* Good instruction — currently
+unexecutable, because nothing turns 32 bytes into a fact.
+
+So we measured how much a hash actually identifies:
+
+> **bits = −log₂( machines carrying this hash ÷ machines in the registry )**
+
+```console
+$ pnpm --filter @therecord/reprod provenance --registry
+
+  machines                 223
+  distinct code hashes     8
+  mean identification      0.32 bits   (a unique hash here would carry 7.80)
+
+  most-shared hash
+  0x194844cf417dde867073e5ab7199fa4d21fd82b5dbe2bdea8b3d7fc18d10fdc2
+  carried by 215 machines (96.4%) under 44 independent owners → 0.05 bits
+
+  rebuilds we performed       5
+  that match an on-chain hash 0
+```
+
+**Not one machine** in the registry carries a hash traceable to source. We
+rebuilt **5 of Flare's own images** deterministically and **none of those digests
+appears on chain**.
+
+**Nobody did anything wrong.** Simulated attestation is explicitly permitted, and
+a shared constant is exactly what simulation is defined to emit. This measures
+the *hash*, not the operator — no machine owner is named anywhere in this repo,
+and `NOT_A_MEASUREMENT` derives from how many owners share a value, never from a
+list of known constants. It would flag a shared hash nobody has ever seen, and
+clear the simulator's own constant the moment one owner used it.
+
+### The Core Vault's allowlist was empty for three months
+
+CV-1 is a pure function of chain state at a height — so the register did not wait
+for history, it **computed** it. 119 Coston2 heights across 238 days plus 46
+mainnet heights, every row labelled `retrospective`.
+
+It reports **42 exceptions**. `getAllowedDestinationAddresses()` returned an
+**empty list** for the vault's first three months, so the outflow-destination
+control would have passed vacuously that entire window.
+
+```sh
+cast call --rpc-url https://coston2-api.flare.network/ext/C/rpc \
+  --block 27444811 0x4CB40b0dBfbF239eC60C9bE1496A6c1aA29e429b \
+  "getAllowedDestinationAddresses()(string[])"
+# []
+```
+
+Anyone whose monitoring began this summer sees a healthy allowlist and has no way
+to learn this happened.
+
+---
+
+## The control has gone red, on purpose
+
+```console
+$ pnpm --filter @therecord/procedure redrun
+
+  injecting fault: slot 26 [escrowed:high][available:low]
+    escrowedFunds 500000000000 → 999999999999
+
+  ─── RED — same procedure, corrupted escrow figure ───
+    CLEAN      C1  Outflow destination allowlist
+    CLEAN      C2  Control preconditions
+    EXCEPTION  C3  Escrow backing
+    CLEAN      C4  Liquid backing
+    CLEAN      C5  Available-funds wedge
+
+  ✓ the control fires. CLEAN → EXCEPTION on a single corrupted storage slot.
+```
+
+Coston2 is forked, one storage slot overwritten, the identical procedure rerun.
+The XRP Ledger is left untouched and real — that asymmetry is the point. **Four
+controls correctly do not move**, because a check that fires on everything is no
+more informative than one that fires on nothing.
+
+The script **exits non-zero if C3 stays CLEAN**, so a control that stops being
+able to fail breaks the build. `FAULT_ESCROW_UBA=<true value>` makes the fault a
+no-op and the guard itself trips — verified.
+
+`packages/procedure/src/faults.ts` generalises this into a catalogue: 8 faults,
+each declaring `mustFire` **and** `mustNotMove`, plus a published list of faults
+we inject and **do not** catch — because a suite that catches everything is
+measuring its own imagination.
+
+---
+
+## Everything we got wrong
+
+**[Read the errata →](https://the-record.vercel.app/errata)**
+
+Six entries, **three of which reached the public** before being withdrawn —
+including a claim that 93 redemption agents had defaulted when every one of them
+had paid, in full and on time.
+
+Each names the exact wrong value, the mechanism, how it was caught, and the test
+that now makes it unconstructable. A retraction is the cheapest thing to fake and
+the hardest thing to fake *precisely*.
+
+> Three of the six are the same error in different clothes: a comparison between
+> two numbers that were never defined to be equal, or that could never disagree.
+> That is the failure mode of assurance work, and it is invisible from the inside
+> — every one produced confident, well-formatted output that happened to be
+> meaningless.
+
+---
+
+## How it uses Flare
+
+| Primitive | How, not superficially |
+|---|---|
+| **FDC** `ReferencedPaymentNonexistence` | Covenant proves a payment *did not happen*, then requires the verifier to **refuse** redemptions the chain already recorded as performed. That refusal test caught our own false accusation. |
+| **FAssets / Core Vault** | CV-1 reconciles `escrowedFunds` against the vault's actual XRPL Escrow objects — two chains that cannot move each other. |
+| **Contract Registry** | Nothing hardcoded but the registry. Registry → `AssetManagerController` → `getAssetManagers()` → `getCoreVaultManager()`, resolved at run time; asset picked by the token's own symbol, so a new FAsset is discovered rather than missed. |
+| **FlareTeeManager** | Reprod enumerates all 223 registered TEE machines and measures what each code hash establishes. |
+| **Reproducible builds** | Rebuilt 5 of Flare's own OCI images as a third party — and fixed the published recipe when it didn't work. |
+
+### Fixes sent upstream to Flare
+
+| PR | What was wrong |
+|---|---|
+| [developer-hub#1455](https://github.com/flare-foundation/developer-hub/pull/1455) | `RedemptionPerformed.requestId` documented as `uint64`, emitted as `uint256`. It is **indexed**, so the type is part of `topic0` — an indexer written faithfully from the docs matches **nothing** and every redemption looks permanently open. Diffed all 25 documented events; the only mismatch. |
+| [fce-extension-scaffold#3](https://github.com/flare-foundation/fce-extension-scaffold/pull/3) | The reproducible-build verification procedure cannot be followed: the clone step **404s**, `-f Dockerfile` has no matching file, and Python/TypeScript cannot resolve `local/tee-node-base` under the `docker-container` driver the doc itself requires. |
+
+Both were found by using Flare's own documentation as a third party and having it
+fail.
+
+---
+
+## Deployment
+
+Reads **Flare Mainnet** (chain 14). Contracts on **Coston2**.
+
+| Contract | Coston2 |
+|---|---|
+| `AssuranceRegistry` | [`0x0D4ccD24cC8E2517d4C88a0739648a7ed4196439`](https://coston2.testnet.flarescan.com/address/0x0D4ccD24cC8E2517d4C88a0739648a7ed4196439) |
+| `ReproRegistry` | [`0x7EfCBb20DC125A8322FCF862C04AcF97b0c1f70B`](https://coston2.testnet.flarescan.com/address/0x7EfCBb20DC125A8322FCF862C04AcF97b0c1f70B) |
+| `FailRecord` | [`0x5f623912D4dFA8d4d702cA77754a3517B4FA4c56`](https://coston2.testnet.flarescan.com/address/0x5f623912D4dFA8d4d702cA77754a3517B4FA4c56) |
+
+CV-1 is registered **and concluded** on chain — procedure `0x72c9a9c2…11856564`,
+subject the **mainnet** Core Vault manager `0x6c8d96dE…4Fc21784`, opinion
+**CLEAN**, evidence digest `0x77377318`.
+
+Coston2 is not the subject — it is the **fault laboratory**, and must be asked
+for by name (`NETWORK=coston2`) so a fault-injection run can never be mistaken
+for a reading of production.
 
 ---
 
 ## Design decisions that are load-bearing
 
 **Determinism is not verification.** A rebuild with no on-chain hash to compare
-against proves `DETERMINISTIC`, never `REPRODUCED`. The type makes the
-overclaim impossible to construct.
+against proves `DETERMINISTIC`, never `REPRODUCED`. The type makes the overclaim
+impossible to construct.
 
 **One machine cannot settle reproducibility.** Building twice on one host proves
 same-host determinism only. Flare's Python and TypeScript images pass that and
@@ -187,7 +230,7 @@ rebuilders instead of storing a boolean.
 "never adjudicated" for "spotless".
 
 **Suppression, not forgery, is the attack.** Nothing compels a client to relay a
-conclusion it dislikes. So `lapse()` is permissionless: once grace closes,
+conclusion it dislikes. So `lapse()` is **permissionless**: once grace closes,
 anyone writes the adverse record. A subject can withhold a bad conclusion; it
 cannot manufacture a good one on time.
 
@@ -197,73 +240,71 @@ URL, and a proxy serves one `/info`. Those comparisons are recorded as
 
 ---
 
-## Run it
+## Run it yourself
 
-```bash
-pnpm install
+```sh
+git clone https://github.com/Pratiikpy/the-record && cd the-record && pnpm install
 
-# live registers — reads only, no keys, no permission
-pnpm -C packages/reprod    build     # scan the TEE register + render
-pnpm -C packages/covenant  build     # index redemptions + render
-pnpm -C packages/procedure build     # run CV-1 + render
+pnpm -r run test                                       # full suite, all packages
+cd contracts && forge test                             # 70 Solidity tests
 
-# independent rebuilds (needs Docker + a docker-container buildx builder)
-pnpm -C packages/reprod exec tsx src/verify.ts --targets
-
-# verification
-pnpm -r run typecheck
-pnpm -r run test
-cd contracts && forge test && forge coverage --report summary
+pnpm --filter @therecord/procedure run run             # CV-1 against Flare MAINNET
+pnpm --filter @therecord/procedure redrun              # the red run: CLEAN → EXCEPTION
+pnpm --filter @therecord/reprod provenance --registry  # the TEE measurement
 ```
 
-End-to-end against a fork, so the real `FlareTeeManager` and
-`AssetManagerFXRP` are present at their real addresses:
+`provenance` runs against a committed snapshot — no network, no server, no trust
+in us.
 
-```bash
+End-to-end against a fork, so the real `FlareTeeManager` and `AssetManagerFXRP`
+are present at their real addresses:
+
+```sh
 anvil --fork-url https://coston2-api.flare.network/ext/C/rpc --chain-id 114
 pnpm -C packages/covenant  e2e
 pnpm -C packages/procedure e2e
 ```
 
-## Test coverage
-
 | Suite | Tests |
 |---|---|
-| reprod | 81 |
+| design | 156 |
+| reprod | 105 |
+| procedure | 68 |
+| covenant | 45 |
+| doctor | 21 |
 | contracts | 70 — **100% lines, statements, branches, functions** |
-| covenant | 44 |
-| design | 29 |
-| procedure | 29 |
-| **Total** | **253** |
 
-Plus 1,536 Solidity fuzz runs across six fuzzed properties.
+Plus 1,536 Solidity fuzz runs across six fuzzed properties. CI re-runs daily
+against the real chain, because a green build on stale code is not evidence.
 
-## The executor
+---
 
-`packages/covenant/src/executor.ts` builds the complete claim for an unresolved
-obligation: the `ReferencedPaymentNonexistence` request body from real chain
-data, the ABI-encoded request, the target FDC round, and the
-`redemptionPaymentDefault` call that follows.
+## What this will not do
 
-Against the live chain right now: **94 obligations planned, 82 blocked on
-nothing but a funded key.** Every plan states its own blocker rather than
-assuming one away — `NOT_YET_DUE`, `PROOF_WINDOW_CLOSED`, `NOT_OUR_ROLE`,
-`NO_FUNDED_KEY` — and a plan is still built when blocked, because a proof we may
-not submit can be handed to whoever may.
+**Say more than the evidence supports.** Unresolved is not unpaid. Determinism is
+not verification. Unknown is not clean. Each register refuses to conclude where it
+cannot, and records that refusal rather than rounding it up to a pass.
 
-```bash
-pnpm -C packages/covenant exec tsx src/plan-claims.ts   # prepares, sends nothing
-PRIVATE_KEY=0x… pnpm -C packages/covenant exec tsx src/plan-claims.ts
-```
+Stated limits, in full:
 
-## Not done yet
-
-- Mainnet deployment needs a funded key.
-- Procedure's enclave execution needs FCC access; the control logic, registry
+- **Zero real defaults exist on FXRP today.** Covenant's failure path is
+  exercised by deliberate fault injection, not by live defaults.
+- **Covenant cannot be backfilled.** FDC proofs expire at `lutlimit` (~14 days),
+  so historical rounds cannot be re-proven at any price.
+- **The skew bracket has never suppressed anything** across 165 heights — which
+  is why it is a pure function with tests proving it *can*.
+- **Procedure's enclave execution needs FCC access.** The control logic, registry
   and page all run today without it.
-- Coston2 indexer credentials (email Flare support) remain the longest-lead
-  external dependency.
+- **No users yet.** The badge and API exist precisely because that is the gap.
 
-## Licence
+---
+
+<div align="center">
+
+Plan: [`PRD-MASTER.md`](../PRD-MASTER.md) ·
+Design: [`DESIGN.md`](../DESIGN.md) ·
+Findings: [`docs/EVIDENCE.md`](docs/EVIDENCE.md)
 
 MIT
+
+</div>
