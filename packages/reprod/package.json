@@ -9,7 +9,8 @@
     "render": "tsx src/render.ts",
     "build": "pnpm run scan && pnpm run render",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "provenance": "tsx src/provenance-cli.ts"
   },
   "dependencies": {
     "viem": "^2.21.0"

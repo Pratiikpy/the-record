@@ -14,6 +14,7 @@ import { page, marker, stat, esc, short } from "../../design/src/index.js";
 import { navFor } from "../../design/src/nav.js";
 import type { ScanResult, MachineRow } from "./scan.js";
 import type { RebuildOutcome, Scoped } from "./rebuild.js";
+import { indexRegistry, summarise, hashProvenance } from "./provenance.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const IN = join(HERE, "..", "out", "scan.json");
@@ -23,6 +24,8 @@ const OUT = join(HERE, "..", "out", "index.html");
 const VERDICT_GLYPH: Record<string, string> = {
   REPRODUCED: "✓",
   DETERMINISTIC: "=",
+  NOT_A_MEASUREMENT: "~",
+  UNKNOWN_HASH: "·",
   DIVERGED: "✗",
   UNREPRODUCIBLE: "?",
   SIMULATED: "~",
@@ -32,6 +35,9 @@ const VERDICT_GLYPH: Record<string, string> = {
 const VERDICT_CLASS: Record<string, string> = {
   REPRODUCED: "ok",
   DETERMINISTIC: "ok",
+  // Notable, not adverse: a shared hash is what simulation is defined to emit.
+  NOT_A_MEASUREMENT: "sim",
+  UNKNOWN_HASH: "none",
   DIVERGED: "bad",
   UNREPRODUCIBLE: "unknown",
   SIMULATED: "sim",
@@ -96,6 +102,108 @@ function rebuildRow(r: RebuildRecord): string {
   </tr>`;
 }
 
+/**
+ * § 1.0 — the measurement.
+ *
+ * This runs first because it is the finding. Every confidential-compute
+ * project on Flare tells its users the same thing — *you do not have to trust
+ * us, check the code hash* — and until now there was no instrument that turned
+ * that instruction into an answer.
+ *
+ * The section is deliberately registry-level. Per-machine cards would be
+ * equally accurate and would read as a list of accusations; a statistic over
+ * 223 machines is a property of the ecosystem. No operator is named anywhere
+ * on this page, and simulated attestation is stated as permitted every time it
+ * appears, because it is.
+ */
+function measurementSection(d: ScanResult, rebuilds: RebuildRecord[]): string {
+  const idx = indexRegistry(d.machines);
+  const s = summarise(idx);
+  const onChain = new Set([...idx.byHash.keys()]);
+  // Narrowed the same way rebuildRow does: only some RebuildOutcome variants
+  // carry a digest, and a rebuild without one can never match an on-chain hash.
+  const traceable = rebuilds.filter(
+    (r) => "digest" in r.outcome && onChain.has(r.outcome.digest.toLowerCase()),
+  ).length;
+  const maxBits = Math.round(-Math.log2(1 / s.total) * 100) / 100;
+
+  const rows = [...idx.byHash.entries()]
+    .map(([hash, entries]) => {
+      const owners = new Set(entries.map((e) => e.owner.toLowerCase())).size;
+      const p = hashProvenance(hash, idx, []);
+      const width = Math.max(1, Math.round((p.identifyingBits! / maxBits) * 100));
+      return { hash, n: entries.length, owners, p, width, platform: entries[0]!.platform };
+    })
+    .sort((a, b) => b.n - a.n)
+    .map(
+      (r) => `<tr>
+        <th scope="row"><code>${esc(short(r.hash, 14))}</code><small>${esc(r.platform)}</small></th>
+        <td>${r.n}</td>
+        <td>${r.owners}</td>
+        <td class="l bitscell">
+          <span class="bitsbar"><span style="width:${r.width}%"></span></span>
+          <span class="bitsnum">${r.p.identifyingBits!.toFixed(2)}</span>
+        </td>
+        <td class="l">${chip(r.p.verdict)}</td>
+      </tr>`,
+    )
+    .join("\n");
+
+  return `
+  <section>
+    <div class="eyebrow">§ 1.0 — The measurement</div>
+    <h2>&ldquo;Check the code hash&rdquo; has no answer yet.</h2>
+    <p class="lede">Confidential compute rests on one primitive: a machine registers a hash of the code it
+      runs, and you check it. That instruction is only as strong as the hash is <em>distinctive</em> — so
+      this asks the registry how much a hash actually identifies. If a value is carried by many independent
+      owners, learning that a machine carries it tells you almost nothing, because almost every machine
+      would have given you the same answer.</p>
+
+    <p class="cap" style="margin-top:14px">
+      bits = &minus;log<sub>2</sub>( machines carrying this hash &divide; machines in the registry )
+    </p>
+
+    <div class="stats">
+      ${stat("Machines", String(s.total), `${s.distinctHashes} distinct code hashes between them`)}
+      ${stat("Mean identification", `${s.meanIdentifyingBits} bits`, `a unique hash here would carry ${maxBits.toFixed(2)}`)}
+      ${stat("Most-shared hash", `${s.mostShared ? ((s.mostShared.registrations / s.total) * 100).toFixed(1) : "0"}%`, `${s.mostShared?.registrations ?? 0} machines, ${s.mostShared?.distinctOwners ?? 0} independent owners`)}
+      ${stat("Traceable to source", String(traceable), `of ${s.total} machines, from ${rebuilds.length} rebuilds we ran`)}
+    </div>
+
+    <div class="tablewrap" style="margin-top:20px">
+      <table style="min-width:640px">
+        <caption>Every distinct code hash in the registry, with how many machines and independent owners carry it, and how many bits it therefore identifies.</caption>
+        <thead><tr>
+          <th class="l" scope="col">Code hash</th>
+          <th scope="col">Machines</th>
+          <th scope="col">Owners</th>
+          <th class="l" scope="col">Identifies</th>
+          <th class="l" scope="col">Verdict</th>
+        </tr></thead>
+        <tbody>
+${rows}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <p><span class="tag">Nobody did anything wrong</span>Simulated attestation is <strong>explicitly
+      permitted</strong> by Flare, and a shared constant is precisely what simulation is defined to emit. A
+      developer running in simulation is doing the expected thing. This measures the <em>hash</em>, not the
+      operator &mdash; no machine owner is named anywhere on this page, and
+      <code>NOT&nbsp;A&nbsp;MEASUREMENT</code> is derived from how many owners share a value, not from a
+      list of known constants. It would flag a shared hash nobody has ever seen, and it would clear the
+      simulator's own constant the moment a single owner used it.</p>
+      <p><strong>The finding is the zero.</strong> ${traceable === 0 ? "Not one machine in this registry carries a code hash that can be traced to source today. The shared value identifies nothing; every distinctive hash has no claimed source revision. We rebuilt five of Flare's own images deterministically and not one of those digests appears on chain." : `${traceable} on-chain hash(es) rebuild from published source.`}
+      That is a statement about a registry three weeks into its life, not about anyone in it &mdash; and it
+      is exactly the gap this instrument exists to close.</p>
+      <p><strong>Check it yourself:</strong> <code>pnpm --filter @therecord/reprod provenance --registry</code>,
+      or pass any code hash, extension id, TEE address or machine URL. It runs against the committed
+      snapshot with no network and no server, so the answer does not depend on trusting us.</p>
+    </div>
+  </section>`;
+}
+
 function main(): void {
   const d = JSON.parse(readFileSync(IN, "utf8")) as ScanResult;
   const m = d.machines;
@@ -114,7 +222,7 @@ function main(): void {
       ? ""
       : `
   <section>
-    <div class="eyebrow">§ 1.2 — Independent rebuilds</div>
+    <div class="eyebrow">§ 1.1 — Independent rebuilds</div>
     <h2>Rebuilt from source, here, twice each</h2>
     <p class="lede">Flare's own recipe, run by a third party with no relationship to them:
       <code>buildx</code> on the docker-container driver, <code>--no-cache</code>,
@@ -189,9 +297,10 @@ ${rebuilds.map(rebuildRow).join("\n")}
       <strong>Zero mismatches found.</strong></p>
     </div>
   </section>
+${measurementSection(d, rebuilds)}
 ${rebuildSection}
   <section>
-    <div class="eyebrow">§ 1.1 — FlareTeeManager · getAllActiveTeeMachines</div>
+    <div class="eyebrow">§ 1.2 — FlareTeeManager · getAllActiveTeeMachines</div>
     <h2>The register</h2>
     <p class="lede">Sorted by how much attention each machine needs. Real confidential hardware outranks
       a simulator in every combination — 96% of this register is someone developing, and burying the eight
@@ -240,7 +349,13 @@ ${m.map(machineRow).join("\n")}
       meta: `chain 114 · block ${d.blockNumber} · ${scanned}Z`,
       nav: navFor("reprod"),
       body,
-      extraCss: ".host{max-width:280px;overflow-wrap:anywhere}",
+      extraCss: ".host{max-width:280px;overflow-wrap:anywhere}" +
+        // The bits bar has to read in greyscale on A4, so it carries a border
+        // and a printed number, never colour alone.
+        ".bitscell{white-space:nowrap}" +
+        ".bitsbar{display:inline-block;width:84px;height:8px;border:1px solid var(--rule-strong);vertical-align:middle;margin-right:8px}" +
+        ".bitsbar>span{display:block;height:100%;background:var(--ink);opacity:.55}" +
+        ".bitsnum{font-family:var(--mono);font-size:11px}",
     }),
     "utf8",
   );
@@ -248,4 +363,8 @@ ${m.map(machineRow).join("\n")}
 }
 
 main();
+
+
+
+
 
