@@ -179,3 +179,40 @@ describe("cross-page consistency", () => {
     }
   });
 });
+
+/**
+ * Grid tracks must be able to shrink.
+ *
+ * `.stats` used `repeat(N, 1fr)`. A bare `1fr` is `minmax(auto, 1fr)`, and
+ * `auto` floors at min-content — so one long unbreakable value (an evidence
+ * digest, a contract address) widened its own column past the container. At
+ * 390px the red-run panel measured 366px inside a 341px box and roughly 25px
+ * was simply clipped.
+ *
+ * Nothing caught it because the DOCUMENT never scrolled sideways: the overflow
+ * was contained and invisible, which is precisely why it needs a test rather
+ * than an eye.
+ */
+describe("grid tracks can shrink below their content", () => {
+  it.each(PAGES.map(([n]) => n))("%s uses minmax(0,1fr) for stat grids", (name) => {
+    const doc = html[name]!;
+    // Every stats grid declaration in the rendered stylesheet.
+    const decls = [...doc.matchAll(/\.stats\{[^}]*grid-template-columns:([^;}]+)/gu)].map(
+      (m) => m[1]!.trim(),
+    );
+    const media = [...doc.matchAll(/@media\([^)]*\)\{\.stats\{grid-template-columns:([^;}]+)/gu)].map(
+      (m) => m[1]!.trim(),
+    );
+    const all = [...decls, ...media];
+    expect(all.length, "no .stats grid declaration found").toBeGreaterThan(0);
+    for (const d of all) {
+      expect(d, `a bare 1fr cannot shrink: ${d}`).not.toMatch(/repeat\(\s*\d+\s*,\s*1fr\s*\)/u);
+      expect(d).toMatch(/minmax\(0\s*,\s*1fr\)/u);
+    }
+  });
+
+  it.each(PAGES.map(([n]) => n))("%s lets a long stat value break", (name) => {
+    // tabular-nums plus an unbreakable hex string is how the column got wide.
+    expect(html[name]!).toMatch(/\.stat \.v\{[^}]*overflow-wrap:anywhere/u);
+  });
+});

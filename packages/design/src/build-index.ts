@@ -249,7 +249,7 @@ ${tierRows}
       nav: REGISTERS.map((r) => ({ label: labelOf(r), href: hrefFromIndex(r) })),
       body,
       extraCss: `
-.regs{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule-strong);border:1px solid var(--rule-strong)}
+.regs{margin-top:44px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule-strong);border:1px solid var(--rule-strong)}
 @media(max-width:900px){.regs{grid-template-columns:1fr}}
 .reg{background:var(--paper);padding:26px 24px;display:flex;flex-direction:column}
 .reg-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
