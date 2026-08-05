@@ -25,6 +25,7 @@ PAGES=(
   "errata"
   "api/status.json"
   "badge/core-vault.svg"
+  "spec/faults.json"
 )
 
 say() { printf '%s\n' "$*" >&2; }
@@ -35,6 +36,7 @@ pnpm --filter @therecord/covenant  run render        >/dev/null
 pnpm --filter @therecord/procedure run render        >/dev/null
 pnpm --filter @therecord/procedure run render:backfill >/dev/null
 pnpm --filter @therecord/reprod    run render        >/dev/null
+pnpm --filter @therecord/procedure run spec          >/dev/null
 pnpm --filter @therecord/design    run build         >/dev/null
 
 say "── assemble ──"

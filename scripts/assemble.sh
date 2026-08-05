@@ -21,6 +21,7 @@ cp "$ROOT/site/index.html"                      "$OUT/index.html"
 cp "$ROOT/site/errata.html"                     "$OUT/errata.html"
 cp -r "$ROOT/site/api"                          "$OUT/api"
 cp -r "$ROOT/site/badge"                        "$OUT/badge"
+cp -r "$ROOT/site/spec"                         "$OUT/spec"
 cp "$ROOT/packages/covenant/out/index.html"     "$OUT/covenant/index.html"
 cp "$ROOT/packages/procedure/out/index.html"    "$OUT/procedure/index.html"
 cp "$ROOT/packages/procedure/out/backfill.html" "$OUT/procedure/backfill.html"
@@ -46,7 +47,7 @@ printf '{"cleanUrls":true}' > "$OUT/vercel.json"
 missing=0
 for f in index.html errata.html covenant/index.html procedure/index.html \
          procedure/backfill.html reprod/index.html api/status.json badge/core-vault.svg \
-         vercel.json; do
+         spec/faults.json vercel.json; do
   [ -s "$OUT/$f" ] || { printf '  MISSING %s\n' "$f" >&2; missing=1; }
 done
 [ "$missing" -eq 0 ] || { printf 'assembled tree is incomplete\n' >&2; exit 1; }

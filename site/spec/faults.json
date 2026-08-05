@@ -1,0 +1,157 @@
+{
+  "schema": "therecord.faults/v1",
+  "subject": "THE RECORD — procedure CV-1",
+  "reference": "https://github.com/Pratiikpy/the-record/blob/main/SPEC.md",
+  "faults": [
+    {
+      "id": "FAULT-00",
+      "title": "No fault at all",
+      "class": "null",
+      "proves": "that the harness fails loudly when nothing was actually broken",
+      "doesNotProve": "anything about the controls — this run exercises the guard, not the system",
+      "mustFire": [],
+      "mustNotMove": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5"
+      ]
+    },
+    {
+      "id": "FAULT-01",
+      "title": "Flare over-reports escrowed funds",
+      "class": "chain-state",
+      "proves": "that C3 detects Flare accounting for escrow the XRP Ledger does not hold, using two sources that cannot move each other",
+      "doesNotProve": "that C3 would catch a shortfall introduced on the XRPL side instead",
+      "mustFire": [
+        "C3"
+      ],
+      "mustNotMove": [
+        "C1",
+        "C2",
+        "C4",
+        "C5"
+      ]
+    },
+    {
+      "id": "FAULT-02",
+      "title": "Flare under-reports escrowed funds",
+      "class": "chain-state",
+      "proves": "that C3 is two-sided — unrecorded escrow is a breach, not a conservative rounding",
+      "doesNotProve": "that the direction of a real discrepancy could be inferred from the exception alone",
+      "mustFire": [
+        "C3"
+      ],
+      "mustNotMove": [
+        "C1",
+        "C2",
+        "C4",
+        "C5"
+      ]
+    },
+    {
+      "id": "FAULT-03",
+      "title": "Flare claims more spendable XRP than the vault holds",
+      "class": "chain-state",
+      "proves": "that C4 detects a liquid shortfall after the ledger's own reserve",
+      "doesNotProve": "that a surplus is safe — C4 deliberately treats excess as an observation",
+      "mustFire": [
+        "C4"
+      ],
+      "mustNotMove": [
+        "C1",
+        "C2",
+        "C3",
+        "C5"
+      ]
+    },
+    {
+      "id": "FAULT-04",
+      "title": "XRPL silently drops one escrow object",
+      "class": "transport",
+      "proves": "that C3 catches a data source that returns a well-formed, plausible, incomplete answer — the failure mode that produces a confident wrong verdict rather than an error",
+      "doesNotProve": "that a dropped object would be noticed if Flare's figure were stale in the same direction",
+      "mustFire": [
+        "C3"
+      ],
+      "mustNotMove": [
+        "C1",
+        "C2",
+        "C5"
+      ]
+    },
+    {
+      "id": "FAULT-05",
+      "title": "XRPL replays a stale balance",
+      "class": "transport",
+      "proves": "that C4 does not accept a balance that is plausible but too small to cover the claim",
+      "doesNotProve": "that a stale balance LARGER than the truth would be detected — it would not",
+      "mustFire": [
+        "C4"
+      ],
+      "mustNotMove": [
+        "C1",
+        "C2",
+        "C3",
+        "C5"
+      ]
+    },
+    {
+      "id": "FAULT-06",
+      "title": "XRPL is unreachable",
+      "class": "transport",
+      "proves": "that losing the independent source produces DISCLAIMER rather than CLEAN — the single easiest way for an assurance product to become dishonest is to score missing evidence as a pass",
+      "doesNotProve": "that partial evidence is handled correctly; this is the total-loss case",
+      "mustFire": [],
+      "mustNotMove": [
+        "C1",
+        "C2",
+        "C5"
+      ]
+    },
+    {
+      "id": "FAULT-07",
+      "title": "An escrow is denominated in something other than XRP",
+      "class": "transport",
+      "proves": "that an un-summable escrow disclaims instead of counting as zero, which would manufacture a shortfall the moment a newer amendment ships",
+      "doesNotProve": "that the non-XRP amount could be reconciled — only that we refuse to guess it",
+      "mustFire": [],
+      "mustNotMove": [
+        "C1",
+        "C2",
+        "C4",
+        "C5"
+      ]
+    },
+    {
+      "id": "FAULT-08",
+      "title": "The destination allowlist is emptied",
+      "class": "chain-state",
+      "proves": "that C2 catches a precondition failure that would make C1 pass vacuously",
+      "doesNotProve": "that C1 itself is correct — only that its preconditions are checked",
+      "mustFire": [
+        "C2"
+      ],
+      "mustNotMove": [
+        "C3",
+        "C4",
+        "C5"
+      ]
+    }
+  ],
+  "knownUncaught": [
+    {
+      "title": "XRPL reports a balance LARGER than the truth",
+      "why": "C4 only breaches when the claim exceeds spendable, so an inflated balance makes the vault look healthier and is not detected. Catching it needs a third source we do not have."
+    },
+    {
+      "title": "Flare and XRPL are BOTH wrong in the same direction",
+      "why": "A cross-source reconciliation cannot detect a discrepancy that does not exist between its two sources. This is the structural limit of the method, not an implementation gap."
+    },
+    {
+      "title": "A control asserts the wrong invariant entirely",
+      "why": "Fault injection proves a control CAN fire, never that it is asking the right question. Our own 93 retracted defaults fired correctly against a request that asked for the wrong amount."
+    }
+  ]
+}
