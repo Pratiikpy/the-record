@@ -116,6 +116,19 @@ function rebuildRow(r: RebuildRecord): string {
  * on this page, and simulated attestation is stated as permitted every time it
  * appears, because it is.
  */
+/**
+ * The simulated share of the register, as a percentage.
+ *
+ * This sentence used to read "96% of this register is someone developing" with
+ * the figure typed in. A later scan read 243 of 256 and the claim was simply
+ * wrong -- the same defect as E-008, in prose rather than a stat tile. Prose is
+ * where stale numbers hide best, because nothing downstream ever checks it.
+ */
+function simPct(d: ScanResult): string {
+  const sim = d.machines.filter((m) => m.attestation === "SIMULATED").length;
+  return d.totalActiveMachines ? `${((sim / d.totalActiveMachines) * 100).toFixed(0)}%` : "—";
+}
+
 function measurementSection(d: ScanResult, rebuilds: RebuildRecord[]): string {
   const idx = indexRegistry(d.machines);
   const s = summarise(idx);
@@ -303,8 +316,9 @@ ${rebuildSection}
     <div class="eyebrow">§ 1.2 — FlareTeeManager · getAllActiveTeeMachines</div>
     <h2>The register</h2>
     <p class="lede">Sorted by how much attention each machine needs. Real confidential hardware outranks
-      a simulator in every combination — 96% of this register is someone developing, and burying the eight
-      rows that carry weight beneath them would make the page useless.</p>
+      a simulator in every combination — ${esc(simPct(d))} of this register is someone developing, and
+      burying the ${esc(String(real))} rows that carry weight beneath them would make the page
+      useless.</p>
 
     <div class="tablewrap">
       <table style="min-width:940px">

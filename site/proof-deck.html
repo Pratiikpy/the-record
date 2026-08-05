@@ -159,7 +159,7 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
         pages they link to.</p>
     <figure><img src="proof/tour-1-index.jpeg" alt="The Record landing page showing the three registers with their current figures" loading="lazy" width="1280" height="880"><figcaption>Fig. 1 &mdash; the live index. Covenant carries <b class="hi">2415</b>
           indexed redemptions, Procedure an opinion of <b class="hi">CLEAN</b>, Reprod
-          <b class="hi">250</b> registered machines.</figcaption></figure>
+          <b class="hi">256</b> registered machines.</figcaption></figure>
     
     
     <p class="go"><a class="cite" href="index.html">[ Open the live index ]</a></p>
@@ -254,14 +254,14 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
     <p class="lead">Every confidential-compute project says <em>don't trust us, check the code hash</em>. It
         is a good instruction and it is currently unexecutable, because nothing turns 32 bytes into a
         fact. Reprod measures how much a hash actually identifies, in bits.</p>
-    <figure><img src="proof/tour-4-reprod.jpeg" alt="The Reprod register showing the TEE machine population and code-hash analysis" loading="lazy" width="1280" height="880"><figcaption>Fig. 4 &mdash; <b class="hi">250</b> machines,
-          <b class="hi">67%</b> unreachable,
+    <figure><img src="proof/tour-4-reprod.jpeg" alt="The Reprod register showing the TEE machine population and code-hash analysis" loading="lazy" width="1280" height="880"><figcaption>Fig. 4 &mdash; <b class="hi">256</b> machines,
+          <b class="hi">63%</b> unreachable,
           <b class="hi">95%</b> attested to a simulator.</figcaption></figure>
     <pre class="term"><code><span class="dim">$</span> <b class="ok">pnpm --filter @therecord/reprod provenance --registry</b>
 
   most-shared hash
   0x194844cf417dde867073e5ab7199fa4d21fd82b5dbe2bdea8b3d7fc18d10fdc2
-  carried by <b class="hi">238 machines (95.2%)</b> under <b class="hi">46 independent owners</b> to <b class="bad">0.07 bits</b>
+  carried by <b class="hi">243 machines (94.9%)</b> under <b class="hi">46 independent owners</b> to <b class="bad">0.08 bits</b>
 
   rebuilds we performed       <b class="hi">5</b>
   that match an on-chain hash <b class="bad">0</b></code></pre>
@@ -326,7 +326,7 @@ footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:cente
         check is not evidence that nothing moved.</p>
     
     <pre class="term"><code><span class="dim">$</span> <b class="ok">pnpm --filter @therecord/reprod drift</b>
-  <b class="hi">IMMATERIAL</b>  snapshot <b class="hi">250</b> - live <b class="hi">252</b>
+  <b class="hi">IMMATERIAL</b>  snapshot <b class="hi">256</b> - live <b class="hi">258</b>
 
   <span class="dim">2 added since the snapshot was taken, 0.8% of the fleet. The register&#39;s</span>
   <span class="dim">claims are ratios and do not turn on this, so it is disclosed rather</span>

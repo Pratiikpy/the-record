@@ -204,9 +204,18 @@ describe("against the real Coston2 registry snapshot", () => {
     expect(s.mostShared!.bits).toBeLessThan(0.2);
   });
 
-  it("96% of the fleet carries a hash that identifies almost nothing", () => {
+  it("the overwhelming majority of the fleet carries a hash that identifies almost nothing", () => {
+    // REGRESSION. This pinned 0.95 in the threshold and "96%" in its own name.
+    // A later scan read 243 of 256 — 94.9% — and the suite went red over a
+    // registry that had simply grown, while the finding it guards was entirely
+    // unchanged. That is the E-008 mistake one level down: a test asserting the
+    // value a snapshot happened to have rather than the property being claimed.
+    //
+    // The claim is "almost the whole fleet, identifying almost nothing". The
+    // bound is loose enough to survive the registry moving and tight enough
+    // that a fleet of genuinely distinct hashes would still fail it.
     const s = summarise(idx);
-    expect(s.machinesOnSharedHashes / s.total).toBeGreaterThan(0.95);
+    expect(s.machinesOnSharedHashes / s.total).toBeGreaterThan(0.9);
     expect(s.meanIdentifyingBits).toBeLessThan(0.5);
   });
 
