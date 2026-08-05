@@ -20,6 +20,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { badge, statusDocument, type BadgeState, type StatusDocument } from "./badge.js";
+import { grade, shortGrade, SCALE_DISCLAIMER, type Grade } from "./grade.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..", "..", "..");
@@ -34,6 +35,8 @@ interface Subject {
   source: string;
   href: string;
   read: (raw: unknown) => { state: BadgeState; generatedAt: string; evidenceDigest?: string } | null;
+  /** the verifiability tier, graded from evidence we actually hold */
+  gradeOf: (now: Date) => Grade;
 }
 
 interface Cv1Shape {
@@ -71,6 +74,27 @@ const SUBJECTS: Subject[] = [
         evidenceDigest: r.evidence?.evidenceDigest,
       };
     },
+    gradeOf: (now) => {
+      const red = readJson(join(ROOT, "packages", "procedure", "out", "cv1-fork-red.json")) as
+        | { generatedAt?: string; opinion?: string }
+        | null;
+      // V3 rests on a falsification that actually happened and actually fired.
+      // A red run that did not go EXCEPTION is not a falsification.
+      const falsified = red?.opinion === "EXCEPTION" ? red.generatedAt : undefined;
+      return grade({
+        subject: "FXRP core vault",
+        publiclyReadable: true,
+        publicEvidence:
+          "read from Flare's public contract registry and public XRP Ledger servers, with no credentials",
+        independentSources: 2,
+        independentEvidence: "Flare CoreVaultManager and the XRP Ledger; neither determines what the other reports",
+        disagreementDetectable: true,
+        disagreementEvidence: "C3 reconciles escrowedFunds against XRPL Escrow objects and reports EXCEPTION on a mismatch",
+        lastFalsifiedAt: falsified,
+        falsificationEvidence: "storage slot corrupted on a Coston2 fork; C3 went CLEAN to EXCEPTION and four controls held",
+        now,
+      });
+    },
   },
   {
     slug: "tee-registry",
@@ -87,14 +111,43 @@ const SUBJECTS: Subject[] = [
       // wrong.
       return { state: "DISCLAIMER", generatedAt: r.scannedAt };
     },
+    gradeOf: (now) => {
+      const scan = readJson(join(ROOT, "packages", "reprod", "out", "scan.json")) as
+        | { machines?: Array<{ codeHash: string; owner: string }> }
+        | null;
+      const machines = scan?.machines ?? [];
+      // A second source would be a claimed source revision to rebuild against.
+      // Today no machine in the registry has one, so there is nothing to
+      // reconcile the on-chain hash with -- one source, however public it is.
+      const traceable = 0;
+      return grade({
+        subject: "Flare TEE registry",
+        publiclyReadable: machines.length > 0,
+        publicEvidence: `all ${machines.length} machines readable from FlareTeeManager without permission`,
+        independentSources: traceable > 0 ? 2 : 1,
+        independentEvidence:
+          "the registry states a code hash; no machine declares a source revision to rebuild against, so nothing cross-checks it",
+        disagreementDetectable: false,
+        disagreementEvidence: "with one source there is nothing that could disagree",
+        now,
+      });
+    },
   },
 ];
+
+function readJson(path: string): unknown {
+  try {
+    return JSON.parse(readFileSync(path, "utf8"));
+  } catch {
+    return null;
+  }
+}
 
 function main(): void {
   mkdirSync(join(SITE, "api"), { recursive: true });
   mkdirSync(join(SITE, "badge"), { recursive: true });
 
-  const all: StatusDocument[] = [];
+  const all: Array<StatusDocument & { grade: { tier: number; name: string; short: string } }> = [];
   const now = new Date();
 
   for (const s of SUBJECTS) {
@@ -117,8 +170,16 @@ function main(): void {
       ...(parsed.evidenceDigest ? { evidenceDigest: parsed.evidenceDigest } : {}),
     };
 
-    const doc = statusDocument(input);
+    const g = s.gradeOf(now);
+    const doc = { ...statusDocument(input), grade: { tier: g.tier, name: g.name, short: shortGrade(g) } };
     all.push(doc);
+
+    writeFileSync(
+      join(SITE, "api", `${s.slug}.grade.json`),
+      `${JSON.stringify({ schema: "therecord.grade/v1", scaleDisclaimer: SCALE_DISCLAIMER, ...g }, null, 2)}
+`,
+      "utf8",
+    );
 
     writeFileSync(join(SITE, "api", `${s.slug}.json`), `${JSON.stringify(doc, null, 2)}\n`, "utf8");
     writeFileSync(join(SITE, "badge", `${s.slug}.svg`), badge(input).svg, "utf8");
@@ -132,6 +193,7 @@ function main(): void {
         schema: "therecord.status-index/v1",
         generatedAt: now.toISOString(),
         site: SITE_URL,
+        scaleDisclaimer: SCALE_DISCLAIMER,
         subjects: all,
       },
       null,

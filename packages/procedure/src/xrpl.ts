@@ -31,8 +31,19 @@ export interface XrplTx {
 const MAINNET_ENDPOINTS = ["https://xrplcluster.com", "https://s2.ripple.com:51234"] as const;
 const TESTNET_ENDPOINTS = ["https://s.altnet.rippletest.net:51234", "https://testnet.xrpl-labs.com"] as const;
 
-const ENDPOINTS: readonly string[] =
-  (process.env.NETWORK ?? "flare").toLowerCase() === "coston2" ? TESTNET_ENDPOINTS : MAINNET_ENDPOINTS;
+/**
+ * Resolved per call, NOT at module load.
+ *
+ * A module-level constant here was read when this file was first imported.
+ * ESM hoists imports above every statement in the importing module, so a
+ * caller that sets NETWORK at the top of its own file -- as the red run does --
+ * had already lost: the endpoints were fixed to the default before its
+ * assignment ran. The red run would then have forked Coston2 and reconciled it
+ * against the real XRP Ledger. Verified empirically before fixing.
+ */
+function endpoints(): readonly string[] {
+  return (process.env.NETWORK ?? "flare").toLowerCase() === "coston2" ? TESTNET_ENDPOINTS : MAINNET_ENDPOINTS;
+}
 
 /** XRPL epoch is 2000-01-01T00:00:00Z, 946684800s after the Unix epoch. */
 export const XRPL_EPOCH_OFFSET = 946_684_800;
@@ -149,7 +160,7 @@ export interface XrplAccountState {
 
 async function firstEndpoint<T>(fn: (url: string) => Promise<T>, what: string, account: string): Promise<T> {
   let lastErr: unknown;
-  for (const url of ENDPOINTS) {
+  for (const url of endpoints()) {
     try {
       return await fn(url);
     } catch (e) {
@@ -248,7 +259,7 @@ export function totalEscrowedDrops(escrows: readonly XrplEscrow[]): bigint {
 /** Fetch recent transactions for an account, newest first. */
 export async function accountTx(account: string, limit = 200): Promise<XrplTx[]> {
   let lastErr: unknown;
-  for (const url of ENDPOINTS) {
+  for (const url of endpoints()) {
     try {
       const body = {
         method: "account_tx",

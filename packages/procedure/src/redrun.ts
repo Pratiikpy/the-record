@@ -33,6 +33,21 @@ import { CORE_VAULT_MANAGER, ASSET_MANAGER_FXRP } from "./addresses.js";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const OUTDIR = join(HERE, "..", "out");
 
+/**
+ * The fault laboratory is Coston2, always.
+ *
+ * Without this the default (mainnet) applies, and the run would fork Coston2,
+ * corrupt a Coston2 storage slot, then reconcile the result against the REAL
+ * XRP Ledger vault -- two unrelated systems, compared with total confidence.
+ * The controls would have "fired" and the red run would have proven nothing.
+ *
+ * Setting it here only works because xrpl.ts resolves its endpoints per call
+ * rather than at module load. ESM hoists imports above this statement, so a
+ * module-level constant there would already have been fixed to the default
+ * before this line ran -- which was the original bug.
+ */
+process.env.NETWORK = "coston2";
+
 const UPSTREAM = process.env.FORK_RPC_URL ?? "https://coston2-api.flare.network/ext/C/rpc";
 const PORT = Number(process.env.ANVIL_PORT ?? 8545);
 const FORK = `http://127.0.0.1:${PORT}`;
