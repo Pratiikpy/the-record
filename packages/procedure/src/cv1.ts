@@ -46,6 +46,21 @@ export interface CoreVaultState {
   immediatelyAvailableUBA?: string;
   /** AssetManager.coreVaultAvailableAmount().totalAvailableUBA */
   reportedTotalUBA?: string;
+  /**
+   * The XRP Ledger's own account of the vault address — the independent source.
+   * Absent when XRPL could not be read, which must DISCLAIM, never pass.
+   */
+  onLedger?: {
+    /** account_data.Balance: LIQUID drops. Escrowed XRP is NOT included here. */
+    balanceDrops: string;
+    /** sum of the account's Escrow ledger objects, in drops */
+    escrowedDrops: string;
+    escrowCount: number;
+    /** base + owner reserve, read from the ledger */
+    reserveDrops: string;
+    /** escrows denominated in something other than XRP, which cannot be summed */
+    nonXrpEscrows: number;
+  };
 }
 
 export interface Cv1Report {
@@ -139,73 +154,166 @@ export function controlAllowlistIntegrity(s: CoreVaultState): ControlResult {
 }
 
 /**
- * C3 — escrow reconciles between the two contracts that report it.
+ * C3 — Flare's escrow ledger against the XRP Ledger's escrow objects.
  *
- * ⚠ This control was WRONG on its first run and produced a false exception
- * against Flare. It originally asserted
- *   `availableFunds + escrowedFunds <= totalAvailableUBA`
- * across two contracts, and flagged a 400 UBA breach.
+ * ⚠ THE CROSS-CHAIN RECONCILIATION HAS BEEN WRONG THREE TIMES. EACH FAILURE
+ * TAUGHT SOMETHING, AND ONLY THE THIRD WAS CAUGHT BEFORE PUBLICATION.
  *
- * The relationship that actually holds — exactly, delta zero — is
- *   `escrowedFunds == totalAvailableUBA - immediatelyAvailableUBA`
- * The 400 UBA sits entirely between `CoreVaultManager.availableFunds` (the raw
- * balance) and `AssetManager.immediatelyAvailableUBA` (net of a fee). Those two
- * were never defined to be equal, so asserting it manufactured a breach.
+ * 1. `availableFunds + escrowedFunds <= totalAvailableUBA` across two contracts
+ *    reported a 400 UBA EXCEPTION against Flare. Those figures were never
+ *    defined to relate — the 400 UBA is a fee the asset manager nets off. A
+ *    false accusation, published.
  *
- * Testing an undocumented relationship and reporting EXCEPTION is the exact
- * failure that destroys an assurance product: a false accusation is far more
- * damaging than a missed finding. The control now tests only the identity that
- * is actually defined, and reports the fee delta as an observation.
+ * 2. `escrowedFunds == totalAvailable − immediatelyAvailable` held exactly, and
+ *    could NEVER FAIL. Fault injection on a forked chain moved `escrowedFunds`
+ *    from 500,000,000,000 to 999,999,999,999 and the control stayed green,
+ *    because `coreVaultAvailableAmount()` DERIVES both of its outputs from that
+ *    same storage slot. Both sides of the identity moved together. A tautology
+ *    wearing the costume of a reconciliation.
+ *
+ * 3. `availableFunds + escrowedFunds <= account_data.Balance` looked like the
+ *    fix — two genuinely independent chains at last — and on live data it
+ *    reported a 497,844,875,522 drop shortfall. It was wrong. **XRPL escrow
+ *    removes XRP from `Balance` and holds it in Escrow ledger objects**, so
+ *    adding Flare's escrowed figure to a balance that already excludes it
+ *    double-counts every escrow. Publishing it would have accused Flare of a
+ *    half-million-XRP hole that does not exist.
+ *
+ * The recurring lesson, now three times over: an assertion is only a control if
+ * the two sides were *defined* to be equal. Otherwise it is a coincidence that
+ * either flatters or defames.
+ *
+ * So this control reconciles the two things that genuinely must agree:
+ * `CoreVaultManager.escrowedFunds()` on Flare, and the sum of the vault
+ * address's Escrow objects on XRPL. Flare cannot move XRPL's number and XRPL
+ * knows nothing of Flare's, so the equality is a real constraint — and it fails
+ * under the same fault injection the tautology sailed through.
+ *
+ * Both directions are breaches. Flare recording more escrow than exists means
+ * unbacked accounting; Flare recording less means XRP left the liquid balance
+ * without being booked.
  */
-export function controlEscrowReconciliation(s: CoreVaultState): ControlResult {
-  if (s.reportedTotalUBA === undefined || s.immediatelyAvailableUBA === undefined) {
+export function controlEscrowBacking(s: CoreVaultState): ControlResult {
+  const ID = "C3";
+  const TITLE = "Escrow backing";
+  const ASSERTION =
+    "Every UBA Flare records as escrowed is matched by XRP sitting in an Escrow object on the XRP Ledger.";
+
+  if (!s.onLedger) {
     return {
-      id: "C3",
-      title: "Escrow reconciliation",
-      assertion:
-        "Escrowed funds equal the difference between the asset manager's total and immediately available amounts.",
+      id: ID,
+      title: TITLE,
+      assertion: ASSERTION,
       opinion: "DISCLAIMER",
       tested: 0,
       exceptions: [],
-      disclaimer:
-        "the asset manager's reported amounts were not obtained, so no reconciliation is possible",
+      disclaimer: "the XRP Ledger state of the vault address was not obtained, so no reconciliation is possible",
+    };
+  }
+  if (s.onLedger.nonXrpEscrows > 0) {
+    return {
+      id: ID,
+      title: TITLE,
+      assertion: ASSERTION,
+      opinion: "DISCLAIMER",
+      tested: s.onLedger.escrowCount,
+      exceptions: [],
+      disclaimer: `${s.onLedger.nonXrpEscrows} escrow object(s) are not denominated in XRP and cannot be summed against a UBA figure — treating them as zero would manufacture a shortfall`,
     };
   }
 
-  const escrowed = BigInt(s.escrowedFundsUBA);
-  const available = BigInt(s.availableFundsUBA);
-  const total = BigInt(s.reportedTotalUBA);
-  const immediate = BigInt(s.immediatelyAvailableUBA);
+  const flare = BigInt(s.escrowedFundsUBA);
+  const ledger = BigInt(s.onLedger.escrowedDrops);
   const exceptions: string[] = [];
 
-  if (escrowed !== total - immediate) {
+  if (flare > ledger) {
     exceptions.push(
-      `escrowed (${escrowed}) does not equal total − immediate (${total - immediate})`,
+      `Flare records ${flare} UBA escrowed but the XRP Ledger holds only ${ledger} drops across ${s.onLedger.escrowCount} escrow objects at ${s.coreVaultAddress} — ${flare - ledger} unbacked`,
     );
-  }
-
-  // The manager's raw balance should never be LESS than what the asset manager
-  // advertises as immediately available — that direction would mean the system
-  // is offering funds the vault does not hold, and is a genuine breach.
-  if (available < immediate) {
+  } else if (ledger > flare) {
     exceptions.push(
-      `manager availableFunds (${available}) is below asset manager immediatelyAvailable (${immediate})`,
+      `the XRP Ledger holds ${ledger} drops in ${s.onLedger.escrowCount} escrow objects at ${s.coreVaultAddress} but Flare records only ${flare} UBA escrowed — ${ledger - flare} left the liquid balance unrecorded`,
     );
   }
 
   return {
-    id: "C3",
-    title: "Escrow reconciliation",
-    assertion:
-      "Escrowed funds equal total minus immediately available, and the raw balance is never below what is advertised.",
+    id: ID,
+    title: TITLE,
+    assertion: ASSERTION,
     opinion: exceptions.length === 0 ? "CLEAN" : "EXCEPTION",
-    tested: 2,
+    tested: s.onLedger.escrowCount,
     exceptions,
+    observation:
+      exceptions.length === 0
+        ? `${s.onLedger.escrowCount} escrow objects totalling ${ledger} drops match Flare's escrowedFunds exactly`
+        : undefined,
   };
 }
 
 /**
- * C4 — the fee wedge between the two available-fund figures is disclosed.
+ * C4 — Flare's spendable claim against the vault's liquid XRP.
+ *
+ * `availableFunds` is what Flare believes it can move today. On XRPL that money
+ * is the account balance minus the reserve the ledger will not let it spend —
+ * and minus nothing else, because escrowed XRP already left the balance (see
+ * the third failure documented on C3).
+ *
+ * Only one direction is a breach. Flare claiming MORE than the ledger can pay
+ * is a solvency exception. The ledger holding more than Flare claims is normal:
+ * inbound deposits are backed before they are credited. That surplus is
+ * disclosed as an observation, because a sudden change in it is informative
+ * even though its existence is not a fault.
+ *
+ * The reserve is read from the ledger's own `server_state`, not assumed. A
+ * hardcoded reserve would silently become a false accusation the day Ripple
+ * changes it — which they have, twice.
+ */
+export function controlLiquidBacking(s: CoreVaultState): ControlResult {
+  const ID = "C4";
+  const TITLE = "Liquid backing";
+  const ASSERTION =
+    "What Flare can spend today does not exceed the vault's spendable XRP after the ledger's reserve.";
+
+  if (!s.onLedger) {
+    return {
+      id: ID,
+      title: TITLE,
+      assertion: ASSERTION,
+      opinion: "DISCLAIMER",
+      tested: 0,
+      exceptions: [],
+      disclaimer: "the XRP Ledger state of the vault address was not obtained, so no reconciliation is possible",
+    };
+  }
+
+  const claimed = BigInt(s.availableFundsUBA);
+  const balance = BigInt(s.onLedger.balanceDrops);
+  const reserve = BigInt(s.onLedger.reserveDrops);
+  const spendable = balance - reserve;
+  const exceptions: string[] = [];
+
+  if (claimed > spendable) {
+    exceptions.push(
+      `Flare records ${claimed} UBA available but ${s.coreVaultAddress} holds ${balance} drops liquid, of which ${reserve} is locked as reserve — a shortfall of ${claimed - spendable}`,
+    );
+  }
+
+  return {
+    id: ID,
+    title: TITLE,
+    assertion: ASSERTION,
+    opinion: exceptions.length === 0 ? "CLEAN" : "EXCEPTION",
+    tested: 1,
+    exceptions,
+    observation:
+      exceptions.length === 0
+        ? `${spendable} drops spendable covers Flare's ${claimed} UBA with ${spendable - claimed} to spare (reserve ${reserve} over ${s.onLedger.escrowCount + 1} owned objects)`
+        : undefined,
+  };
+}
+
+/**
+ * C5 — the fee wedge between the two available-fund figures is disclosed.
  *
  * Not a pass/fail control. `availableFunds` (raw) minus `immediatelyAvailable`
  * (net) is a real, expected quantity, and publishing it every period is how a
@@ -215,7 +323,7 @@ export function controlEscrowReconciliation(s: CoreVaultState): ControlResult {
 export function observeFeeWedge(s: CoreVaultState): ControlResult {
   if (s.immediatelyAvailableUBA === undefined) {
     return {
-      id: "C4",
+      id: "C5",
       title: "Available-funds wedge",
       assertion: "The difference between the raw and advertised available balances is disclosed.",
       opinion: "DISCLAIMER",
@@ -226,7 +334,7 @@ export function observeFeeWedge(s: CoreVaultState): ControlResult {
   }
   const wedge = BigInt(s.availableFundsUBA) - BigInt(s.immediatelyAvailableUBA);
   return {
-    id: "C4",
+    id: "C5",
     title: "Available-funds wedge",
     assertion: "The difference between the raw and advertised available balances is disclosed.",
     opinion: "CLEAN",
@@ -259,6 +367,12 @@ export function evidenceDigest(txs: readonly XrplTx[], s: CoreVaultState): strin
     [...s.allowedDestinations].sort().join(","),
     s.availableFundsUBA,
     s.escrowedFundsUBA,
+    // The XRPL side is evidence too. Omitting it would let a run over a
+    // different ledger state carry an identical digest, which is precisely the
+    // comparison this hash exists to make possible.
+    s.onLedger
+      ? `${s.onLedger.balanceDrops}/${s.onLedger.escrowedDrops}/${s.onLedger.escrowCount}/${s.onLedger.reserveDrops}/${s.onLedger.nonXrpEscrows}`
+      : "no-ledger",
     ...txs.map((t) => `${t.hash}:${t.destination ?? ""}:${t.amountDrops ?? ""}:${t.successful}`),
   ].join("|");
 
@@ -273,9 +387,10 @@ export function evidenceDigest(txs: readonly XrplTx[], s: CoreVaultState): strin
 export function runCv1(txs: readonly XrplTx[], s: CoreVaultState, period: string): Cv1Report {
   const outflows = outflowsOf(txs, s.coreVaultAddress);
   const controls = [
-    controlAllowlistIntegrity(s),
     controlAllowlist(outflows, s),
-    controlEscrowReconciliation(s),
+    controlAllowlistIntegrity(s),
+    controlEscrowBacking(s),
+    controlLiquidBacking(s),
     observeFeeWedge(s),
   ];
   const ledgers = txs.map((t) => t.ledgerIndex).filter((n) => n > 0);
@@ -294,3 +409,4 @@ export function runCv1(txs: readonly XrplTx[], s: CoreVaultState, period: string
     },
   };
 }
+

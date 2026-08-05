@@ -1,6 +1,6 @@
 {
   "procedureId": "CV-1",
-  "period": "2026-08-04",
+  "period": "fork-green",
   "state": {
     "coreVaultAddress": "rDhpmiPq4BVBDWMVdSrmkgt8thKyRzGV1p",
     "custodianAddress": "r3GhxcaM4f9BJXEu1JLRgDXZpHJw6ugkH4",
@@ -10,12 +10,12 @@
       "rDYeqGVc8M3Se9wowvRDbURGYGZ5i5VF6r",
       "r4GHJwGSaGmJy9BBXS9osFXqRjqdSm7v83"
     ],
-    "availableFundsUBA": "3629372261854",
+    "availableFundsUBA": "3629444161854",
     "escrowedFundsUBA": "500000000000",
-    "immediatelyAvailableUBA": "3629372261454",
-    "reportedTotalUBA": "4129372261454",
+    "immediatelyAvailableUBA": "3629444161454",
+    "reportedTotalUBA": "4129444161454",
     "onLedger": {
-      "balanceDrops": "3631083941795",
+      "balanceDrops": "3631135041795",
       "escrowedDrops": "500000000000",
       "escrowCount": 50,
       "reserveDrops": "11200000",
@@ -55,7 +55,7 @@
       "opinion": "CLEAN",
       "tested": 1,
       "exceptions": [],
-      "observation": "3631072741795 drops spendable covers Flare's 3629372261854 UBA with 1700479941 to spare (reserve 11200000 over 51 owned objects)"
+      "observation": "3631123841795 drops spendable covers Flare's 3629444161854 UBA with 1679679941 to spare (reserve 11200000 over 51 owned objects)"
     },
     {
       "id": "C5",
@@ -72,9 +72,9 @@
     "xrplTransactions": 200,
     "outflows": 11,
     "ledgerRange": [
-      19608031,
-      19627365
+      19608794,
+      19627531
     ],
-    "evidenceDigest": "0x521c5023"
+    "evidenceDigest": "0xb06b49bc"
   }
 }

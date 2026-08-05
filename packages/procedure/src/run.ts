@@ -8,22 +8,27 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { createPublicClient, http, defineChain, type Address } from "viem";
 
-import { accountTx } from "./xrpl.js";
+import { accountTx, accountLedgerState, totalEscrowedDrops } from "./xrpl.js";
 import { runCv1, type CoreVaultState } from "./cv1.js";
+import { CORE_VAULT_MANAGER, ASSET_MANAGER_FXRP } from "./addresses.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const OUTDIR = join(HERE, "..", "out");
-const OUT = join(OUTDIR, "cv1.json");
+const OUT = join(OUTDIR, process.env.CV1_OUT ?? "cv1.json");
 
-/** Resolved from AssetManagerFXRP.getCoreVaultManager() on Coston2. */
-export const CORE_VAULT_MANAGER: Address = "0x4CB40b0dBfbF239eC60C9bE1496A6c1aA29e429b";
-export const ASSET_MANAGER_FXRP: Address = "0xc1Ca88b937d0b528842F95d5731ffB586f4fbDFA";
+/**
+ * RPC_URL is overridable so the identical procedure can be pointed at a forked
+ * chain with a deliberately corrupted Core Vault. A control that has only ever
+ * printed CLEAN is indistinguishable from a control that cannot fail, and there
+ * is no sentence that fixes that — only a red run.
+ */
+const RPC = process.env.RPC_URL ?? "https://coston2-api.flare.network/ext/C/rpc";
 
 const coston2 = defineChain({
   id: 114,
   name: "Flare Coston2",
   nativeCurrency: { name: "C2FLR", symbol: "C2FLR", decimals: 18 },
-  rpcUrls: { default: { http: ["https://coston2-api.flare.network/ext/C/rpc"] } },
+  rpcUrls: { default: { http: [RPC] } },
 });
 
 const cvmAbi = [
@@ -57,7 +62,7 @@ const log = (m: string): void => void process.stderr.write(`${m}\n`);
 
 async function main(): Promise<void> {
   mkdirSync(OUTDIR, { recursive: true });
-  const client = createPublicClient({ chain: coston2, transport: http(undefined, { batch: true }) });
+  const client = createPublicClient({ chain: coston2, transport: http(RPC, { batch: true }) });
 
   log("reading Core Vault state from Coston2…");
   const [coreVaultAddress, custodianAddress, availableFunds, escrowedFunds, allowedDestinations, amounts] =
@@ -94,9 +99,21 @@ async function main(): Promise<void> {
   log(`  available  ${state.availableFundsUBA} UBA`);
   log(`  escrowed   ${state.escrowedFundsUBA} UBA`);
 
-  log("reading Core Vault payments from XRPL testnet…");
-  const txs = await accountTx(state.coreVaultAddress, 200);
+  log("reading Core Vault payments and ledger state from XRPL testnet…");
+  const [txs, ledger] = await Promise.all([
+    accountTx(state.coreVaultAddress, 200),
+    accountLedgerState(state.coreVaultAddress),
+  ]);
+  state.onLedger = {
+    balanceDrops: ledger.balanceDrops.toString(),
+    escrowedDrops: totalEscrowedDrops(ledger.escrows).toString(),
+    escrowCount: ledger.escrows.length,
+    reserveDrops: ledger.reserveDrops.toString(),
+    nonXrpEscrows: ledger.nonXrpEscrows,
+  };
   log(`  ${txs.length} transactions`);
+  log(`  liquid     ${state.onLedger.balanceDrops} drops (reserve ${state.onLedger.reserveDrops})`);
+  log(`  escrowed   ${state.onLedger.escrowedDrops} drops in ${state.onLedger.escrowCount} objects`);
 
   const period = new Date().toISOString().slice(0, 10);
   const report = runCv1(txs, state, period);
@@ -119,3 +136,6 @@ main().catch((e: unknown) => {
   log(`CV-1 failed: ${e instanceof Error ? e.stack : String(e)}`);
   process.exit(1);
 });
+
+
+

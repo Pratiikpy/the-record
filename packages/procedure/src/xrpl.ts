@@ -98,6 +98,143 @@ function normalise(entry: NonNullable<NonNullable<AccountTxResult["result"]>["tr
   };
 }
 
+/** One XRPL Escrow ledger object owned by the account. */
+export interface XrplEscrow {
+  index: string;
+  /** drops, as a string — only XRP escrows have a string Amount */
+  amountDrops: string;
+  destination?: string;
+  cancelAfter?: number;
+  /** crypto-condition; the Core Vault's escrows are all PREIMAGE-SHA256 */
+  condition?: string;
+}
+
+/**
+ * What the XRP Ledger itself says about the account.
+ *
+ * This is the only evidence in CV-1 that Flare does not produce. Every other
+ * number — available, escrowed, total — originates from the same Flare
+ * contracts, so reconciling them against each other proves nothing. The red run
+ * demonstrated exactly that: corrupting `escrowedFunds` moved both sides of the
+ * old C3 identity together and the control stayed green.
+ *
+ * A reconciliation needs two independent sources. This is the second one.
+ */
+export interface XrplAccountState {
+  /** account_data.Balance — LIQUID drops only; escrowed XRP is not in here */
+  balanceDrops: bigint;
+  /** number of ledger objects the account owns, which sets its reserve */
+  ownerCount: number;
+  /** base + owner reserve, in drops, read from the ledger rather than assumed */
+  reserveDrops: bigint;
+  escrows: XrplEscrow[];
+  /**
+   * Escrow objects whose Amount is not a plain drops string — an IOU or MPT
+   * escrow under a newer amendment. Counting these as zero would understate
+   * what the ledger holds and manufacture a shortfall, so they are surfaced and
+   * the control disclaims rather than guessing.
+   */
+  nonXrpEscrows: number;
+}
+
+async function firstEndpoint<T>(fn: (url: string) => Promise<T>, what: string, account: string): Promise<T> {
+  let lastErr: unknown;
+  for (const url of ENDPOINTS) {
+    try {
+      return await fn(url);
+    } catch (e) {
+      lastErr = e;
+    }
+  }
+  throw new Error(
+    `no XRPL endpoint served ${what} for ${account}: ${lastErr instanceof Error ? lastErr.message : String(lastErr)}`,
+  );
+}
+
+/**
+ * Read balance, reserve and every escrow object in one consistent snapshot.
+ *
+ * Pinned to a single validated ledger index: balance and escrows must be read
+ * at the same instant or an escrow finishing between the two calls would look
+ * like a shortfall. Pagination is followed to exhaustion — stopping at a marker
+ * would undercount escrowed XRP and produce exactly the kind of false
+ * accusation this procedure has already made twice.
+ */
+export async function accountLedgerState(account: string): Promise<XrplAccountState> {
+  return firstEndpoint(
+    async (url) => {
+      const state = (await rpc(url, { method: "server_state", params: [{}] })) as {
+        result?: { state?: { validated_ledger?: { seq?: number; reserve_base?: number; reserve_inc?: number } } };
+      };
+      const vl = state.result?.state?.validated_ledger;
+      if (!vl || typeof vl.seq !== "number" || typeof vl.reserve_base !== "number" || typeof vl.reserve_inc !== "number") {
+        throw new Error("server_state did not report a validated ledger with reserves");
+      }
+      const ledgerIndex = vl.seq;
+
+      const info = (await rpc(url, {
+        method: "account_info",
+        params: [{ account, ledger_index: ledgerIndex }],
+      })) as { result?: { account_data?: { Balance?: string; OwnerCount?: number }; status?: string } };
+      const bal = info.result?.account_data?.Balance;
+      const ownerCount = info.result?.account_data?.OwnerCount;
+      if (typeof bal !== "string" || typeof ownerCount !== "number") {
+        throw new Error(`account_info gave no balance/OwnerCount (status ${info.result?.status})`);
+      }
+
+      const escrows: XrplEscrow[] = [];
+      let nonXrpEscrows = 0;
+      let marker: unknown = undefined;
+      for (let page = 0; page < 50; page++) {
+        const objs = (await rpc(url, {
+          method: "account_objects",
+          params: [
+            { account, ledger_index: ledgerIndex, type: "escrow", limit: 400, ...(marker === undefined ? {} : { marker }) },
+          ],
+        })) as {
+          result?: {
+            account_objects?: Array<Record<string, unknown>>;
+            marker?: unknown;
+            status?: string;
+          };
+        };
+        if (objs.result?.status !== "success") throw new Error(`account_objects status ${objs.result?.status}`);
+        for (const o of objs.result.account_objects ?? []) {
+          if (typeof o.Amount !== "string") {
+            nonXrpEscrows++;
+            continue;
+          }
+          escrows.push({
+            index: String(o.index ?? ""),
+            amountDrops: o.Amount,
+            destination: typeof o.Destination === "string" ? o.Destination : undefined,
+            cancelAfter: typeof o.CancelAfter === "number" ? o.CancelAfter : undefined,
+            condition: typeof o.Condition === "string" ? o.Condition : undefined,
+          });
+        }
+        marker = objs.result.marker;
+        if (marker === undefined || marker === null) {
+          return {
+            balanceDrops: BigInt(bal),
+            ownerCount,
+            reserveDrops: BigInt(vl.reserve_base) + BigInt(vl.reserve_inc) * BigInt(ownerCount),
+            escrows,
+            nonXrpEscrows,
+          };
+        }
+      }
+      throw new Error("account_objects did not terminate within 50 pages");
+    },
+    "ledger state",
+    account,
+  );
+}
+
+/** Total XRP held in the account's escrow objects, in drops. */
+export function totalEscrowedDrops(escrows: readonly XrplEscrow[]): bigint {
+  return escrows.reduce((sum, e) => sum + BigInt(e.amountDrops), 0n);
+}
+
 /** Fetch recent transactions for an account, newest first. */
 export async function accountTx(account: string, limit = 200): Promise<XrplTx[]> {
   let lastErr: unknown;

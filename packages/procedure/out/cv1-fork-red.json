@@ -1,6 +1,6 @@
 {
   "procedureId": "CV-1",
-  "period": "2026-08-04",
+  "period": "fork-red",
   "state": {
     "coreVaultAddress": "rDhpmiPq4BVBDWMVdSrmkgt8thKyRzGV1p",
     "custodianAddress": "r3GhxcaM4f9BJXEu1JLRgDXZpHJw6ugkH4",
@@ -10,12 +10,12 @@
       "rDYeqGVc8M3Se9wowvRDbURGYGZ5i5VF6r",
       "r4GHJwGSaGmJy9BBXS9osFXqRjqdSm7v83"
     ],
-    "availableFundsUBA": "3629372261854",
-    "escrowedFundsUBA": "500000000000",
-    "immediatelyAvailableUBA": "3629372261454",
-    "reportedTotalUBA": "4129372261454",
+    "availableFundsUBA": "3629444161854",
+    "escrowedFundsUBA": "999999999999",
+    "immediatelyAvailableUBA": "3629444161454",
+    "reportedTotalUBA": "4629444161453",
     "onLedger": {
-      "balanceDrops": "3631083941795",
+      "balanceDrops": "3631135041795",
       "escrowedDrops": "500000000000",
       "escrowCount": 50,
       "reserveDrops": "11200000",
@@ -43,10 +43,11 @@
       "id": "C3",
       "title": "Escrow backing",
       "assertion": "Every UBA Flare records as escrowed is matched by XRP sitting in an Escrow object on the XRP Ledger.",
-      "opinion": "CLEAN",
+      "opinion": "EXCEPTION",
       "tested": 50,
-      "exceptions": [],
-      "observation": "50 escrow objects totalling 500000000000 drops match Flare's escrowedFunds exactly"
+      "exceptions": [
+        "Flare records 999999999999 UBA escrowed but the XRP Ledger holds only 500000000000 drops across 50 escrow objects at rDhpmiPq4BVBDWMVdSrmkgt8thKyRzGV1p — 499999999999 unbacked"
+      ]
     },
     {
       "id": "C4",
@@ -55,7 +56,7 @@
       "opinion": "CLEAN",
       "tested": 1,
       "exceptions": [],
-      "observation": "3631072741795 drops spendable covers Flare's 3629372261854 UBA with 1700479941 to spare (reserve 11200000 over 51 owned objects)"
+      "observation": "3631123841795 drops spendable covers Flare's 3629444161854 UBA with 1679679941 to spare (reserve 11200000 over 51 owned objects)"
     },
     {
       "id": "C5",
@@ -67,14 +68,14 @@
       "observation": "raw availableFunds exceeds advertised immediatelyAvailable by 400 UBA (expected: the asset manager nets a fee)"
     }
   ],
-  "opinion": "CLEAN",
+  "opinion": "EXCEPTION",
   "evidence": {
     "xrplTransactions": 200,
     "outflows": 11,
     "ledgerRange": [
-      19608031,
-      19627365
+      19608794,
+      19627531
     ],
-    "evidenceDigest": "0x521c5023"
+    "evidenceDigest": "0x7bbf9f1b"
   }
 }

@@ -3,7 +3,8 @@ import {
   outflowsOf,
   controlAllowlist,
   controlAllowlistIntegrity,
-  controlEscrowReconciliation,
+  controlEscrowBacking,
+  controlLiquidBacking,
   observeFeeWedge,
   rollUp,
   evidenceDigest,
@@ -24,6 +25,19 @@ const ALLOWED = [
   "r4GHJwGSaGmJy9BBXS9osFXqRjqdSm7v83",
 ];
 
+/**
+ * The XRP Ledger's own view of the vault, read at ledger validation on the same
+ * day. 50 escrow objects, 51 owned objects in total (the extra is the SignerList),
+ * reserve 1,000,000 base + 200,000 × 51.
+ */
+const ON_LEDGER = {
+  balanceDrops: "3631062341795",
+  escrowedDrops: "500000000000",
+  escrowCount: 50,
+  reserveDrops: "11200000",
+  nonXrpEscrows: 0,
+};
+
 const STATE: CoreVaultState = {
   coreVaultAddress: VAULT,
   custodianAddress: CUSTODIAN,
@@ -32,7 +46,11 @@ const STATE: CoreVaultState = {
   escrowedFundsUBA: "500000000000",
   immediatelyAvailableUBA: "3628907216917",
   reportedTotalUBA: "4128907216917",
+  onLedger: ON_LEDGER,
 };
+
+/** The same period with XRPL unreachable — must disclaim, never pass. */
+const NO_LEDGER: CoreVaultState = { ...STATE, onLedger: undefined };
 
 const tx = (o: Partial<XrplTx>): XrplTx => ({
   hash: "H",
@@ -122,61 +140,108 @@ describe("C2 — control preconditions", () => {
   });
 });
 
-describe("C3 — escrow reconciliation", () => {
-  it("is CLEAN on the live state", () => {
-    expect(controlEscrowReconciliation(STATE).opinion).toBe("CLEAN");
-  });
-
-  it("REGRESSION: does not manufacture a breach from the fee wedge", () => {
-    // The original control asserted `available + escrowed <= total` across two
-    // contracts and flagged a 400 UBA "breach" against Flare. Those figures
-    // were never defined to relate. A false accusation is far more damaging
-    // than a missed finding, so this must stay CLEAN.
-    const r = controlEscrowReconciliation(STATE);
+describe("C3 — escrow backing", () => {
+  it("is CLEAN on live data, where the two chains agree exactly", () => {
+    // Flare's escrowedFunds is 500,000,000,000 UBA; the vault owns 50 Escrow
+    // objects on XRPL totalling 500,000,000,000 drops. Not an approximation.
+    const r = controlEscrowBacking(STATE);
     expect(r.opinion).toBe("CLEAN");
-    expect(r.exceptions).toEqual([]);
-
-    const available = BigInt(STATE.availableFundsUBA);
-    const escrowed = BigInt(STATE.escrowedFundsUBA);
-    const total = BigInt(STATE.reportedTotalUBA!);
-    expect(available + escrowed).toBeGreaterThan(total); // the old assertion WOULD fire
+    expect(r.tested).toBe(50);
   });
 
-  it("tests the identity that actually holds", () => {
-    const escrowed = BigInt(STATE.escrowedFundsUBA);
+  it("REGRESSION: the old identity was a tautology and could never fail", () => {
+    // `escrowed == total - immediate` compared two outputs of one function that
+    // both derive from escrowedFunds. Fault injection moved the storage slot
+    // from 500,000,000,000 to 999,999,999,999 and the identity STILL held,
+    // because both sides moved together. Evaluated by hand here, the old
+    // assertion passes on the live figures — which is exactly the problem: it
+    // passes on every figure.
     const total = BigInt(STATE.reportedTotalUBA!);
     const immediate = BigInt(STATE.immediatelyAvailableUBA!);
-    expect(escrowed).toBe(total - immediate);
+    expect(BigInt(STATE.escrowedFundsUBA)).toBe(total - immediate);
+    // The replacement, given the same corruption, does not pass.
+    expect(controlEscrowBacking({ ...STATE, escrowedFundsUBA: "999999999999" }).opinion).toBe("EXCEPTION");
   });
 
-  it("raises an EXCEPTION when escrow genuinely does not reconcile", () => {
-    const r = controlEscrowReconciliation({ ...STATE, escrowedFundsUBA: "123" });
+  it("FIRES when Flare records more escrow than XRPL holds, and names the gap", () => {
+    const r = controlEscrowBacking({ ...STATE, escrowedFundsUBA: "999999999999" });
     expect(r.opinion).toBe("EXCEPTION");
+    expect(r.exceptions[0]).toContain("499999999999");
+    expect(r.exceptions[0]).toMatch(/unbacked/u);
   });
 
-  it("raises an EXCEPTION if the vault advertises more than it holds", () => {
-    // The direction that IS a real breach: the system offering funds the vault
-    // does not have.
-    const r = controlEscrowReconciliation({
-      ...STATE,
-      availableFundsUBA: "1",
-      escrowedFundsUBA: (BigInt(STATE.reportedTotalUBA!) - BigInt(STATE.immediatelyAvailableUBA!)).toString(),
-    });
+  it("FIRES in the other direction too — unrecorded escrow is also a breach", () => {
+    // XRP leaving the liquid balance without Flare booking it is a real fault,
+    // not a conservative rounding. A one-sided control would miss it.
+    const r = controlEscrowBacking({ ...STATE, escrowedFundsUBA: "400000000000" });
     expect(r.opinion).toBe("EXCEPTION");
-    expect(r.exceptions.join()).toMatch(/below/u);
+    expect(r.exceptions[0]).toContain("100000000000");
+    expect(r.exceptions[0]).toMatch(/unrecorded/u);
   });
 
-  it("DISCLAIMS when the asset manager figures were not obtained", () => {
-    const r = controlEscrowReconciliation({
+  it("DISCLAIMS rather than guessing when an escrow is not XRP-denominated", () => {
+    // Summing a non-XRP escrow as zero would understate the ledger and
+    // manufacture a shortfall — the same false accusation, one amendment later.
+    const r = controlEscrowBacking({
       ...STATE,
-      reportedTotalUBA: undefined,
-      immediatelyAvailableUBA: undefined,
+      onLedger: { ...ON_LEDGER, nonXrpEscrows: 1 },
     });
     expect(r.opinion).toBe("DISCLAIMER");
+    expect(r.disclaimer).toMatch(/manufacture a shortfall/u);
+  });
+
+  it("DISCLAIMS when XRPL could not be read", () => {
+    expect(controlEscrowBacking(NO_LEDGER).opinion).toBe("DISCLAIMER");
   });
 });
 
-describe("C4 — fee wedge is disclosed, not judged", () => {
+describe("C4 — liquid backing", () => {
+  it("is CLEAN on live data", () => {
+    expect(controlLiquidBacking(STATE).opinion).toBe("CLEAN");
+  });
+
+  it("REGRESSION: escrowed XRP must not be added to the balance", () => {
+    // XRPL escrow REMOVES XRP from account_data.Balance and holds it in Escrow
+    // objects. An earlier version asserted `available + escrowed <= Balance`
+    // and reported a 497,844,875,522 drop shortfall against live Flare. That
+    // shortfall was double-counting, not a hole. This asserts the arithmetic
+    // that would have produced the false accusation, so it can never quietly
+    // return.
+    const wrong = BigInt(STATE.availableFundsUBA) + BigInt(STATE.escrowedFundsUBA);
+    expect(wrong - BigInt(ON_LEDGER.balanceDrops)).toBe(497_844_875_522n);
+    expect(controlLiquidBacking(STATE).opinion).toBe("CLEAN");
+  });
+
+  it("FIRES when Flare claims more than the ledger can pay", () => {
+    const r = controlLiquidBacking({ ...STATE, availableFundsUBA: "3631062341795" });
+    expect(r.opinion).toBe("EXCEPTION");
+    // claimed equals the full balance, so the shortfall is exactly the reserve
+    expect(r.exceptions[0]).toContain("11200000");
+  });
+
+  it("counts the reserve as unspendable, not as cover", () => {
+    // One drop below the reserve boundary passes; one drop above does not.
+    const edge = BigInt(ON_LEDGER.balanceDrops) - BigInt(ON_LEDGER.reserveDrops);
+    expect(controlLiquidBacking({ ...STATE, availableFundsUBA: edge.toString() }).opinion).toBe("CLEAN");
+    expect(controlLiquidBacking({ ...STATE, availableFundsUBA: (edge + 1n).toString() }).opinion).toBe(
+      "EXCEPTION",
+    );
+  });
+
+  it("treats a ledger surplus as an observation, not a fault", () => {
+    // Deposits are backed before they are credited, so XRPL routinely holds
+    // more than Flare claims. Flagging that would cry wolf every day.
+    const r = controlLiquidBacking(STATE);
+    expect(r.opinion).toBe("CLEAN");
+    expect(r.observation).toMatch(/to spare/u);
+  });
+
+  it("DISCLAIMS when XRPL could not be read", () => {
+    expect(controlLiquidBacking(NO_LEDGER).opinion).toBe("DISCLAIMER");
+  });
+});
+
+describe("C5 — fee wedge is disclosed, not judged", () => {
   it("reports the wedge as an observation with a CLEAN opinion", () => {
     const r = observeFeeWedge(STATE);
     expect(r.opinion).toBe("CLEAN");
@@ -225,6 +290,12 @@ describe("evidenceDigest", () => {
     expect(evidenceDigest(base, STATE)).not.toBe(
       evidenceDigest(base, { ...STATE, escrowedFundsUBA: "1" }),
     );
+    // The XRPL side is evidence too — a run over a different ledger state must
+    // not carry an identical digest.
+    expect(evidenceDigest(base, STATE)).not.toBe(
+      evidenceDigest(base, { ...STATE, onLedger: { ...ON_LEDGER, balanceDrops: "1" } }),
+    );
+    expect(evidenceDigest(base, STATE)).not.toBe(evidenceDigest(base, NO_LEDGER));
   });
 
   it("does not depend on allowlist ordering", () => {
@@ -239,7 +310,7 @@ describe("runCv1 — full report", () => {
     const txs = ALLOWED.map((d, i) => tx({ hash: `h${i}`, destination: d, ledgerIndex: 100 + i }));
     const r = runCv1(txs, STATE, "2026-08-04");
     expect(r.opinion).toBe("CLEAN");
-    expect(r.controls).toHaveLength(4);
+    expect(r.controls).toHaveLength(5);
     expect(r.evidence.outflows).toBe(4);
     expect(r.evidence.ledgerRange).toEqual([100, 103]);
   });
@@ -252,6 +323,20 @@ describe("runCv1 — full report", () => {
   it("no evidence yields a DISCLAIMER, never a clean period", () => {
     expect(runCv1([], STATE, "d").opinion).toBe("DISCLAIMER");
   });
+
+  it("an unreachable XRP Ledger DISCLAIMS the period rather than passing it", () => {
+    // Half the evidence is off-chain. If XRPL is down, two of five controls
+    // cannot conclude, and the period must say so.
+    const txs = [tx({ hash: "a", destination: ALLOWED[0] })];
+    expect(runCv1(txs, NO_LEDGER, "d").opinion).toBe("DISCLAIMER");
+  });
+
+  it("a cross-chain shortfall turns the period into an EXCEPTION", () => {
+    const txs = [tx({ hash: "a", destination: ALLOWED[0] })];
+    const r = runCv1(txs, { ...STATE, escrowedFundsUBA: "999999999999" }, "d");
+    expect(r.opinion).toBe("EXCEPTION");
+    expect(r.controls.find((c) => c.id === "C3")?.opinion).toBe("EXCEPTION");
+  });
 });
 
 describe("xrplTimeToUnix", () => {
@@ -261,3 +346,5 @@ describe("xrplTimeToUnix", () => {
     expect(xrplTimeToUnix(1)).toBe(946_684_801);
   });
 });
+
+
