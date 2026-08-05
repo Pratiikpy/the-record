@@ -1,0 +1,17 @@
+{
+  "schema": "therecord.status/v1",
+  "subject": "FXRP core vault",
+  "state": "CLEAN",
+  "reportedState": "CLEAN",
+  "generatedAt": "2026-08-05T10:49:19.773Z",
+  "ageHours": 0.15,
+  "stale": false,
+  "freshnessHours": 36,
+  "href": "https://the-record.vercel.app/procedure/",
+  "evidenceDigest": "0x2d712cea",
+  "grade": {
+    "tier": 3,
+    "name": "FALSIFIED",
+    "short": "V3 FALSIFIED"
+  }
+}

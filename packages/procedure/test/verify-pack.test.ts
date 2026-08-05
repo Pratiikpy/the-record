@@ -66,6 +66,47 @@ describe("offline verification", () => {
   });
 });
 
+describe("the anchors describe the state in the pack", () => {
+  // REGRESSION. Three bugs shipped together, all the same class: an anchor
+  // that does not identify the state it is attached to.
+  //   1. flareBlock was read AFTER the contract reads, naming a later height
+  //   2. xrplLedger was max(tx.ledgerIndex) -- the newest of 200 transactions,
+  //      not the ledger the balance and escrows were read at
+  //   3. skewSeconds was hardcoded 0, asserting simultaneity never measured
+  // The spec says "a pack means nothing without its anchors", so an anchor
+  // pointing somewhere else is worse than no anchor at all.
+  it("xrplLedger equals the ledger the XRPL state was actually read at", () => {
+    for (const env of packs) {
+      const read = env.pack.reads.find((r) => r.method === "xrpl.accountLedgerState");
+      expect(read, "pack has no XRPL state read").toBeDefined();
+      const state = read!.result as { ledgerIndex?: number } | null;
+      expect(state?.ledgerIndex).toBe(env.pack.anchors.xrplLedger);
+    }
+  });
+
+  it("skewSeconds is measured, never assumed to be zero", () => {
+    for (const env of packs) {
+      // -1 means "could not be established", which is honest. A plain 0 that
+      // was never computed is not.
+      const s = env.pack.anchors.skewSeconds;
+      expect(typeof s).toBe("number");
+      expect(Number.isFinite(s)).toBe(true);
+      const read = env.pack.reads.find((r) => r.method === "xrpl.accountLedgerState");
+      const state = read!.result as { closeTimeUnix?: number } | null;
+      // If a close time was obtained, the skew must have come from it.
+      if ((state?.closeTimeUnix ?? 0) > 0) expect(s).toBeGreaterThanOrEqual(0);
+      else expect(s).toBe(-1);
+    }
+  });
+
+  it("both anchors are real heights, not placeholders", () => {
+    for (const env of packs) {
+      expect(env.pack.anchors.flareBlock).toBeGreaterThan(0);
+      expect(env.pack.anchors.xrplLedger).toBeGreaterThan(0);
+    }
+  });
+});
+
 describe("tamper detection", () => {
   it("REPORTS a mismatch when a recorded answer is altered", () => {
     const env = packs[0]!;

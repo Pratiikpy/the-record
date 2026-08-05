@@ -141,6 +141,30 @@ export const ERRATA: readonly Erratum[] = [
       "behaviour was then reproduced in a five-line test rather than assumed.",
     preventedBy: "Endpoints resolve per call, so the caller's network selection is honoured.",
   },
+  {
+    id: "E-007",
+    date: "2026-08-05",
+    fate: "CAUGHT_BEFORE_PUBLICATION",
+    claimed:
+      "Evidence packs were anchored to a Flare block, an XRPL ledger and a cross-chain skew of 0 seconds.",
+    truth:
+      "None of the three anchors described the state in the pack. The block was read AFTER the contract " +
+      "reads, so it named a later height. The XRPL ledger was the newest of the last 200 transactions, " +
+      "not the ledger the balance and escrows were read at. The skew was hardcoded, never measured.",
+    mechanism:
+      "Each anchor was taken from whatever value was conveniently to hand rather than from the read " +
+      "itself. A replayer at the stated Flare block could legitimately compute a different opinion, and " +
+      "the stated XRPL ledger was simply unrelated to the balances beside it.",
+    caughtBy:
+      "Writing a regression test that asserted the anchor equals the height the state was read at. The " +
+      "first version of that test failed twice, and the second failure exposed a deeper form of the same " +
+      "bug: the recorded XRPL evidence did not carry its own ledger, so a replayer could not confirm the " +
+      "anchor from the pack at all.",
+    preventedBy:
+      "Reads are pinned to a block number obtained first; accountLedgerState returns the ledger and close " +
+      "time it used; skew is computed from them and reports -1 when it cannot be established. The pack is " +
+      "self-describing, and tests assert the anchor matches the recorded evidence.",
+  },
 ] as const;
 
 export interface ErrataSummary {

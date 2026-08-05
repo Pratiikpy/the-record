@@ -1,6 +1,6 @@
 {
-  "packHash": "0x5859d793a4919449088b3be20a97cba7a24b7aefdf8d13480e0e681b9e3416fc",
-  "capturedAt": "2026-08-05T10:49:19.755Z",
+  "packHash": "0x23a7d63dbcf5a0eba2add9c06e1a849ff2c834e5a4ffbc340a55ea84d209b971",
+  "capturedAt": "2026-08-05T12:03:51.265Z",
   "pack": {
     "schema": "therecord.pack/v1",
     "procedureId": "CV-1",
@@ -9,15 +9,15 @@
       "chainId": 14
     },
     "anchors": {
-      "flareBlock": 66699979,
-      "xrplLedger": 106085499,
-      "skewSeconds": 0
+      "flareBlock": 66703822,
+      "xrplLedger": 106087138,
+      "skewSeconds": 5
     },
     "reads": [
       {
         "method": "flare.availableFunds",
         "params": "{\"at\":\"0x6c8d96dEfE4cbEE05FA969Fc0Ac436d94Fc21784\"}",
-        "result": "7526733384234"
+        "result": "7527356716731"
       },
       {
         "method": "flare.coreVaultAddress",
@@ -28,8 +28,8 @@
         "method": "flare.coreVaultAvailableAmount",
         "params": "{\"at\":\"0x2a3Fe068cD92178554cabcf7c95ADf49B4B0B6A8\"}",
         "result": [
-          "7526733383834",
-          "147526733383834"
+          "7527356716331",
+          "147527356716331"
         ]
       },
       {
@@ -58,17 +58,83 @@
         "method": "xrpl.accountLedgerState",
         "params": "{\"account\":\"rfkXSaCZKTg1EZzec2rLDyrWHxRVJdtVXj\"}",
         "result": {
-          "balanceDrops": "7527121794528",
+          "balanceDrops": "7527745127031",
           "escrowedDrops": "140000000000000",
           "escrowCount": 14,
           "reserveDrops": "4000000",
-          "nonXrpEscrows": 0
+          "nonXrpEscrows": 0,
+          "ledgerIndex": 106087138,
+          "closeTimeUnix": 1785931421
         }
       },
       {
         "method": "xrpl.accountTx",
         "params": "{\"account\":\"rfkXSaCZKTg1EZzec2rLDyrWHxRVJdtVXj\",\"limit\":200}",
         "result": [
+          {
+            "hash": "03069520DEF47A40008FE12440E284929E266A306FBEFB18A95C5EA6E5AD3C19",
+            "type": "Payment",
+            "destination": "rfkXSaCZKTg1EZzec2rLDyrWHxRVJdtVXj",
+            "destinationTag": 802641,
+            "amountDrops": "2",
+            "account": "rBadHTPHCN8LqYXJsws6ooPBWGS2KsTC9o",
+            "ledgerIndex": 106086751,
+            "date": 1785929930,
+            "successful": true
+          },
+          {
+            "hash": "47B660964BCB05B902655781BE85E70FEECB206ECD984DF364EA58A779FDC80F",
+            "type": "Payment",
+            "destination": "rfkXSaCZKTg1EZzec2rLDyrWHxRVJdtVXj",
+            "destinationTag": 272,
+            "amountDrops": "400000000",
+            "account": "rBuZfn1m4tA6znziHsRp9AyC1M3qg6rgbF",
+            "ledgerIndex": 106086747,
+            "date": 1785929912,
+            "successful": true
+          },
+          {
+            "hash": "B832A2E6AEE36D35227A38D91355F2A8AB1B68D494F56DB7E5283B3A5FB0066C",
+            "type": "Payment",
+            "destination": "rfkXSaCZKTg1EZzec2rLDyrWHxRVJdtVXj",
+            "destinationTag": 697038,
+            "amountDrops": "2",
+            "account": "rss7Vw3oNN6qheasqV4ErJRYE8hEwwFcq6",
+            "ledgerIndex": 106086436,
+            "date": 1785928702,
+            "successful": true
+          },
+          {
+            "hash": "38F23A8C2EC8768AB9054525499E3B7FD9ED474AEB03BA5FF222BE1DED2B8063",
+            "type": "Payment",
+            "destination": "rfkXSaCZKTg1EZzec2rLDyrWHxRVJdtVXj",
+            "destinationTag": 272,
+            "amountDrops": "22932097",
+            "account": "rs2dgzYeqYqsk8bvkQR5YPyqsXYcA24MP2",
+            "ledgerIndex": 106086431,
+            "date": 1785928690,
+            "successful": true
+          },
+          {
+            "hash": "075FD0DDA838FE18CA6151F6C227EA67E62C6AC739F1D4F8C00C735F6362A0AC",
+            "type": "Payment",
+            "destination": "rfkXSaCZKTg1EZzec2rLDyrWHxRVJdtVXj",
+            "amountDrops": "2",
+            "account": "rf7QoGcRk2aFMSQNY3zt6FsADavoVucLni",
+            "ledgerIndex": 106086266,
+            "date": 1785928050,
+            "successful": true
+          },
+          {
+            "hash": "487E3214CD6DC45870BD0F0E4D099C497DD1AB204D92A692EDD3CD6182BC9C7E",
+            "type": "Payment",
+            "destination": "rfkXSaCZKTg1EZzec2rLDyrWHxRVJdtVXj",
+            "amountDrops": "200400400",
+            "account": "rf3aRyyfcnSDGgANx3CRjmK2qcrfsdy8uC",
+            "ledgerIndex": 106086262,
+            "date": 1785928032,
+            "successful": true
+          },
           {
             "hash": "BE2091FCB239790ADA3553991B6C46C99D60C64FBA52E292B957DBA0F708507B",
             "type": "Payment",
@@ -2033,66 +2099,6 @@
             "account": "rnrA8GW4yppdh4z9Uv323WZZo8HuXceb4g",
             "ledgerIndex": 106059358,
             "date": 1785823830,
-            "successful": true
-          },
-          {
-            "hash": "D1307BB57F816FFEE92FCADAAFD70C66786B7485B75874B6B68708E6383F961C",
-            "type": "Payment",
-            "destination": "rfkXSaCZKTg1EZzec2rLDyrWHxRVJdtVXj",
-            "amountDrops": "2",
-            "account": "raiodoR7rRvm5ZxEB2VyNnPHjQkxwagmdr",
-            "ledgerIndex": 106059142,
-            "date": 1785822991,
-            "successful": true
-          },
-          {
-            "hash": "D16469816431CECFA6A64281ED7765DE3E36FB26744128A24CDA36A97ADB5E93",
-            "type": "Payment",
-            "destination": "rfkXSaCZKTg1EZzec2rLDyrWHxRVJdtVXj",
-            "amountDrops": "91300000",
-            "account": "ra2qdgs4sCu4Ri7SiHYeZsGtKsc914bTTR",
-            "ledgerIndex": 106059137,
-            "date": 1785822972,
-            "successful": true
-          },
-          {
-            "hash": "5C3DA60E80B4F05B7819687000161EEBEF607E86FB3B04ABF2E2957A0B2B6496",
-            "type": "Payment",
-            "destination": "rfkXSaCZKTg1EZzec2rLDyrWHxRVJdtVXj",
-            "amountDrops": "2",
-            "account": "r9d7SBJAcfjzhP87CJb4aWrK7Z7dXj73TT",
-            "ledgerIndex": 106058920,
-            "date": 1785822140,
-            "successful": true
-          },
-          {
-            "hash": "65DB7F17295ACCA02F48B6A110968AF7A07347E799C3B1CA48E3553D535F9CEE",
-            "type": "Payment",
-            "destination": "rfkXSaCZKTg1EZzec2rLDyrWHxRVJdtVXj",
-            "amountDrops": "5589972",
-            "account": "r9dh8si61sKz7HVs1JaCt2Cfjg3WTjHL28",
-            "ledgerIndex": 106058916,
-            "date": 1785822121,
-            "successful": true
-          },
-          {
-            "hash": "001498659F790BF0795F1E52D2333D2F6C8804591AC70940297C37DDF3A5B7B0",
-            "type": "Payment",
-            "destination": "rfkXSaCZKTg1EZzec2rLDyrWHxRVJdtVXj",
-            "amountDrops": "2",
-            "account": "rnXZ876yGEhoATQSYegtD8bg8wpA8TTX5a",
-            "ledgerIndex": 106058563,
-            "date": 1785820761,
-            "successful": true
-          },
-          {
-            "hash": "D7ACF8A765B4C687D4BCF2D76D558843C4E026824FD1B5ED905BB2D54C4E79FB",
-            "type": "Payment",
-            "destination": "rfkXSaCZKTg1EZzec2rLDyrWHxRVJdtVXj",
-            "amountDrops": "10010210210",
-            "account": "rnXDw3BosY5ZgPAXBD8k6ZsvsmwbAm4qSg",
-            "ledgerIndex": 106058559,
-            "date": 1785820750,
             "successful": true
           }
         ]

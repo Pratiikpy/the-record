@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A permanent, append-only record of every claim this project got wrong, how it was caught, and what now prevents it.">
+<meta name="color-scheme" content="light">
+<title>The Record — errata</title>
+<style>
+:root{--ink:#1F1E1D;--ink-soft:#2C2A28;--paper:#FAF9F5;--muted:#4A4742;--graphite:#6E6A64;--faint:#757068;
+--rule:rgb(31 30 29/.15);--rule-strong:rgb(31 30 29/.25);--rule-dashed:rgb(31 30 29/.30);--wash:rgb(31 30 29/.04);
+--v-ok:#3F6F4B;--v-bad:#8C3A2E;--v-unknown:#757068;--v-sim:#7A6A3F;
+--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+--mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+:root[data-theme="dark"]{--ink:#EDEAE3;--ink-soft:#D9D5CC;--paper:#161512;--muted:#B3AEA3;--graphite:#918B80;--faint:#8C867A;
+--rule:rgb(237 234 227/.15);--rule-strong:rgb(237 234 227/.26);--rule-dashed:rgb(237 234 227/.32);--wash:rgb(237 234 227/.05);
+--v-ok:#7FA98A;--v-bad:#CE8272;--v-unknown:#8C867A;--v-sim:#B7A06A}
+:root[data-theme="light"]{--ink:#1F1E1D;--paper:#FAF9F5;--muted:#4A4742;--graphite:#6E6A64;--faint:#757068;
+--rule:rgb(31 30 29/.15);--rule-strong:rgb(31 30 29/.25);--rule-dashed:rgb(31 30 29/.30);--wash:rgb(31 30 29/.04);
+--v-ok:#3F6F4B;--v-bad:#8C3A2E;--v-unknown:#757068;--v-sim:#7A6A3F}
+*{box-sizing:border-box}
+/* Keyboard users should not have to tab the whole register nav on every page.
+   Off-screen until focused, then it lands in the flow rather than over it. */
+.skip{position:absolute;left:-9999px;top:0;font-family:var(--mono);font-size:13px;
+  background:var(--ink);color:var(--paper);padding:10px 16px;z-index:10;text-decoration:none}
+.skip:focus{left:8px;top:8px}
+main{display:block}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.shell{max-width:1180px;margin-inline:auto;padding-inline:24px}
+.masthead{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px}
+.brand{display:flex;align-items:center;gap:10px}
+.mark{position:relative;width:20px;height:20px;flex:none}
+.mark span{position:absolute;width:8px;height:8px;border-radius:2px;background:var(--ink)}
+.mark span:nth-child(1){top:0;left:0}.mark span:nth-child(2){top:0;right:0;opacity:.55}
+.mark span:nth-child(3){bottom:0;left:0;opacity:.55}.mark span:nth-child(4){bottom:0;right:0;opacity:.25}
+.wordmark{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.02em}
+nav.top{display:flex;gap:20px;font-family:var(--mono);font-size:13px}
+nav.top a{color:var(--ink);text-decoration:none;transition:color .2s}
+nav.top a:hover,nav.top a[aria-current]{color:var(--faint)}
+/* A choice, not an accident of the viewer's operating system. The paper
+   palette is the design — it is what the pages were proportioned and
+   contrast-checked for, and what they print as. */
+.themetoggle{font-family:var(--mono);font-size:13px;color:var(--ink);background:none;border:0;
+padding:0;cursor:pointer;transition:color .2s}
+.themetoggle:hover{color:var(--faint)}
+/* The tier sits with the subject it grades. Border and text carry it, never
+   colour alone -- these pages must survive greyscale printing. */
+/* align-self, not display: .reg is a column flex container, which blockifies
+   its children -- inline-block is ignored and align-items:stretch pulls the
+   badge to the full card width. */
+.tier{align-self:flex-start;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+padding:3px 8px;border:1px solid var(--rule-strong);margin:0 0 10px;color:var(--muted)}
+.tier.t3{border-color:var(--v-ok);color:var(--v-ok)}
+.tier.t2{border-color:var(--v-sim);color:var(--v-sim)}
+.tier.t1,.tier.t0{border-style:dashed;color:var(--v-unknown)}
+section{border-top:1px solid var(--rule);padding-block:64px}section:first-of-type{border-top:0}
+.marker{position:relative;display:inline-block;border:1px solid var(--rule-strong);padding:7px 16px}
+.marker b{position:absolute;font-family:var(--mono);font-size:12px;line-height:1;font-weight:400}
+.marker b:nth-of-type(1){left:-5px;top:-9px}.marker b:nth-of-type(2){right:-5px;top:-9px}
+.marker b:nth-of-type(3){left:-5px;bottom:-9px}.marker b:nth-of-type(4){right:-5px;bottom:-9px}
+.marker span{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.16em}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(30px,6vw,48px);line-height:1.08;letter-spacing:-.015em;text-wrap:balance;margin:24px 0 0}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(23px,4vw,32px);line-height:1.18;letter-spacing:-.01em;margin:20px 0 0}
+.lede{max-width:660px;margin:20px 0 0;color:var(--muted);text-wrap:pretty}
+.cap{font-family:var(--mono);font-size:11px;color:var(--faint)}
+.eyebrow{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.04em}
+.stats{margin-top:40px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule-strong);border:1px solid var(--rule-strong)}
+@media(max-width:820px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--paper);padding:22px 20px}
+.stat .k{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--faint)}
+.stat .v{font-family:var(--serif);font-weight:300;font-size:clamp(26px,4.4vw,36px);line-height:1.05;letter-spacing:-.02em;margin-top:10px;font-variant-numeric:tabular-nums}
+.stat .n{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:8px}
+.tablewrap{overflow-x:auto;margin-top:18px;border:1px solid var(--rule-strong)}
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12.5px}
+caption{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+thead th{text-align:right;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);padding:11px 13px;border-bottom:1px solid var(--rule-strong);white-space:nowrap}
+thead th:first-child,thead th.l{text-align:left}
+tbody th,tbody td{padding:11px 13px;border-bottom:1px dashed var(--rule-dashed);vertical-align:top}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+tbody th{text-align:left;font-weight:400}
+tbody td{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody td.l{text-align:left;white-space:normal}
+tbody small{display:block;color:var(--faint);font-size:10.5px;margin-top:3px}
+tbody tr:hover th,tbody tr:hover td{background:var(--wash)}
+code{font-family:var(--mono)}
+abbr{text-decoration:underline dotted;text-underline-offset:2px;cursor:help}
+.verdict{display:inline-block;font-size:11.5px;padding:2px 8px;white-space:nowrap}
+.verdict.ok{color:var(--v-ok);border:1px solid var(--v-ok)}
+.verdict.bad{color:var(--v-bad);border:3px double var(--v-bad)}
+.verdict.unknown{color:var(--v-unknown);border:1px dashed var(--v-unknown)}
+.verdict.sim{color:var(--v-sim);border:1px dotted var(--v-sim)}
+.verdict.none{color:var(--faint);border:1px solid var(--rule-strong)}
+.cite{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--rule-dashed)}
+.cite:hover{color:var(--ink);border-bottom-color:var(--ink)}
+a:focus-visible,.cite:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.legend{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:20px}
+.legend div{font-family:var(--mono);font-size:11px;color:var(--faint);display:flex;align-items:center;gap:8px}
+.note{margin-top:34px;border:1px dashed var(--rule-dashed);padding:18px 22px}
+.note p{margin:0;font-size:14px;color:var(--muted);max-width:70ch}
+.note p+p{margin-top:10px}
+.tag{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.14em;border:1px solid var(--rule-strong);padding:3px 9px;margin-right:10px}
+footer{border-top:1px solid var(--rule);padding-block:36px 52px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--faint)}
+@media(max-width:720px){
+  .shell{padding-inline:16px}
+  .masthead{flex-direction:column;align-items:flex-start;gap:6px}
+  nav.top{gap:14px;flex-wrap:wrap}
+  section{padding-block:44px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .legend{gap:8px 16px}
+  .stat .k{min-height:3.4em}
+}
+@media print{body{background:#fff;color:#000}.tablewrap{overflow:visible;border:0}table{font-size:9px}}
+@media(prefers-reduced-motion:reduce){*,::before,::after{transition-duration:.001ms!important;animation-duration:.001ms!important;animation-iteration-count:1!important}}.erratum{border-top:1px solid var(--rule);padding:22px 0}.erratum-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}.erratum-head h3{margin:0;font-family:var(--mono);font-size:13px;letter-spacing:.06em}.fate{font-family:var(--mono);font-size:10px;letter-spacing:.07em;padding:2px 7px;border:1px solid var(--rule-strong)}.fate.pub{color:var(--v-bad);border-color:var(--v-bad)}.fate.caught{color:var(--v-sim);border-style:dashed}.err{display:grid;grid-template-columns:minmax(120px,150px) 1fr;gap:8px 18px;margin:0}.err dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}.err dd{margin:0;font-size:14px;line-height:1.65;max-width:62ch}.err s{color:var(--faint)}@media (max-width:640px){.err{grid-template-columns:1fr;gap:2px 0}.err dd{margin-bottom:10px}}</style>
+<script>(function(){try{var t=localStorage.getItem("record-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}})()</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <header class="masthead">
+    <div class="brand">
+      <div class="mark" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      <span class="wordmark">the record · errata</span>
+    </div>
+    <nav class="top" aria-label="Registers"><a href="../packages/covenant/out/index.html">[Covenant]</a><a href="../packages/procedure/out/index.html">[Procedure]</a><a href="../packages/reprod/out/index.html">[Reprod]</a><button class="themetoggle" type="button" data-toggle-theme aria-label="Toggle light or dark">[◐]</button></nav>
+  </header>
+  <main id="main">
+
+  <section>
+    <div class="marker"><b aria-hidden="true">+</b><b aria-hidden="true">+</b><b aria-hidden="true">+</b><b aria-hidden="true">+</b><span>The Record · errata</span></div>
+    <h1>Everything we got wrong.</h1>
+    <p class="lede">Every register here makes claims about somebody else's system. The only thing that
+      makes that defensible is a permanent, specific account of the times we were wrong — kept with the
+      same care as the findings, and never quietly edited away.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="k">Errata</div><div class="v">6</div><div class="n">append-only; nothing is deleted</div></div>
+      <div class="stat"><div class="k">Reached the public</div><div class="v">3</div><div class="n">published, then withdrawn</div></div>
+      <div class="stat"><div class="k">Caught first</div><div class="v">3</div><div class="n">disclosed anyway, but not the same thing</div></div>
+      <div class="stat"><div class="k">Found by our own tests</div><div class="v">2</div><div class="n">rather than by re-reading</div></div>
+    </div>
+
+    <div class="note">
+      <p><span class="tag">Why this page is specific</span>A retraction is the cheapest thing to fake and
+      the hardest thing to fake <em>precisely</em>. Every entry below names the exact wrong value, the
+      exact mechanism, and the test that now makes it unconstructable. That is checkable.
+      &ldquo;We take accuracy seriously&rdquo; is not.</p>
+      <p><strong>Two kinds, never blurred.</strong> Errors that reached the public are marked separately
+      from errors caught before anyone saw them. We are not owed credit for the ones that never got out.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">§ 0.2 — The record of corrections</div>
+    <h2>Entries, oldest first</h2>
+<article class="erratum">
+    <div class="erratum-head">
+      <h3>E-001</h3>
+      <span class="fate pub">PUBLISHED, THEN WITHDRAWN</span>
+      <span class="cap">2026-08-04</span>
+    </div>
+    <dl class="err">
+      <dt>Claimed</dt><dd><s>93 FXRP redemptions were proven defaults — agents that took a fee and never delivered XRP.</s></dd>
+      <dt>Actually</dt><dd><strong>Zero of them were defaults. All 91 agents examined had paid, in full, on time.</strong></dd>
+      <dt>Mechanism</dt><dd>The FDC request asked whether a payment of valueUBA existed. An agent owes valueUBA − feeUBA. The amount we asked about had never existed, so the oracle truthfully attested its absence for every redemption. The attestation was correct; the question was wrong.</dd>
+      <dt>Caught by</dt><dd>A control test that required the verifier to REFUSE redemptions the chain already recorded as performed. It refused none of them, which meant the request could not distinguish paid from unpaid.</dd>
+      <dt>Now prevented by</dt><dd>amountOwed() is now the single place the obligation is computed, verified against settled redemption 43128188 whose real XRPL payment delivered exactly valueUBA − feeUBA.</dd>
+    </dl>
+  </article>
+<article class="erratum">
+    <div class="erratum-head">
+      <h3>E-002</h3>
+      <span class="fate pub">PUBLISHED, THEN WITHDRAWN</span>
+      <span class="cap">2026-08-04</span>
+    </div>
+    <dl class="err">
+      <dt>Claimed</dt><dd><s>Control C3 reported a 400 UBA exception against Flare, asserting availableFunds + escrowedFunds ≤ totalAvailableUBA.</s></dd>
+      <dt>Actually</dt><dd><strong>Those figures were never defined to relate. The 400 UBA is a fee the asset manager nets off.</strong></dd>
+      <dt>Mechanism</dt><dd>Two numbers from two contracts were compared because they looked comparable. Nothing in the protocol says they should be equal, so the difference was not a finding.</dd>
+      <dt>Caught by</dt><dd>Reading the asset manager&#39;s own accounting after the exception was published.</dd>
+      <dt>Now prevented by</dt><dd>The wedge is now disclosed as an observation (C5) rather than judged, and the regression is pinned by a test asserting the exact 400 UBA gap is expected.</dd>
+    </dl>
+  </article>
+<article class="erratum">
+    <div class="erratum-head">
+      <h3>E-003</h3>
+      <span class="fate pub">PUBLISHED, THEN WITHDRAWN</span>
+      <span class="cap">2026-08-04</span>
+    </div>
+    <dl class="err">
+      <dt>Claimed</dt><dd><s>Control C3 asserted escrowedFunds = totalAvailable − immediatelyAvailable, and reported CLEAN every period.</s></dd>
+      <dt>Actually</dt><dd><strong>The control could not fail. It had been printing CLEAN for reasons unrelated to the vault&#39;s health.</strong></dd>
+      <dt>Mechanism</dt><dd>coreVaultAvailableAmount() derives both of its outputs from the same escrowedFunds storage slot. Corrupting that slot from 500,000,000,000 to 999,999,999,999 moved both sides of the identity together and the control stayed green — a tautology wearing the costume of a reconciliation.</dd>
+      <dt>Caught by</dt><dd>Deliberate fault injection on a forked chain. Nothing else would have surfaced it.</dd>
+      <dt>Now prevented by</dt><dd>C3 now reconciles Flare&#39;s escrowedFunds against XRPL Escrow objects — two chains that cannot move each other — and the red run fails the build if C3 survives its own fault.</dd>
+    </dl>
+  </article>
+<article class="erratum">
+    <div class="erratum-head">
+      <h3>E-004</h3>
+      <span class="fate caught">CAUGHT BEFORE PUBLICATION</span>
+      <span class="cap">2026-08-04</span>
+    </div>
+    <dl class="err">
+      <dt>Claimed</dt><dd><s>A draft of C3 asserted availableFunds + escrowedFunds ≤ account balance, producing a 497,844,875,522 drop shortfall against Flare.</s></dd>
+      <dt>Actually</dt><dd><strong>There was no shortfall. The arithmetic double-counted every escrow.</strong></dd>
+      <dt>Mechanism</dt><dd>XRPL escrow REMOVES XRP from account_data.Balance and holds it in Escrow ledger objects. Adding Flare&#39;s escrowed figure to a balance that already excludes it counts the same XRP twice.</dd>
+      <dt>Caught by</dt><dd>Checking the live XRPL account objects before publishing the exception.</dd>
+      <dt>Now prevented by</dt><dd>A regression test asserts the exact bad arithmetic still produces 497,844,875,522 and that the current control reports CLEAN on the same data.</dd>
+    </dl>
+  </article>
+<article class="erratum">
+    <div class="erratum-head">
+      <h3>E-005</h3>
+      <span class="fate caught">CAUGHT BEFORE PUBLICATION</span>
+      <span class="cap">2026-08-05</span>
+    </div>
+    <dl class="err">
+      <dt>Claimed</dt><dd><s>The status badge reported a verdict as fresh.</s></dd>
+      <dt>Actually</dt><dd><strong>The badge could never go stale. Its computed age was −21 hours, because freshness was derived from the day under test rather than when the report ran.</strong></dd>
+      <dt>Mechanism</dt><dd>CV-1 recorded a period, not a timestamp. Anchoring the period to end-of-day dated every report into the future, and a negative age passed the freshness budget trivially.</dd>
+      <dt>Caught by</dt><dd>Reading the emitted JSON instead of trusting that the badge rendered.</dd>
+      <dt>Now prevented by</dt><dd>CV-1 records generatedAt, and a future-dated report renders UNKNOWN rather than vouching indefinitely.</dd>
+    </dl>
+  </article>
+<article class="erratum">
+    <div class="erratum-head">
+      <h3>E-006</h3>
+      <span class="fate caught">CAUGHT BEFORE PUBLICATION</span>
+      <span class="cap">2026-08-05</span>
+    </div>
+    <dl class="err">
+      <dt>Claimed</dt><dd><s>The red run forked Coston2 and reconciled it against the Coston2 XRPL testnet vault.</s></dd>
+      <dt>Actually</dt><dd><strong>It would have reconciled a Coston2 fork against the REAL XRP Ledger — two unrelated systems, compared with complete confidence. The controls would have &#39;fired&#39; and proven nothing.</strong></dd>
+      <dt>Mechanism</dt><dd>xrpl.ts chose its XRPL cluster at module load. ESM hoists imports above the importing module&#39;s statements, so the red run setting NETWORK at the top of its own file ran too late.</dd>
+      <dt>Caught by</dt><dd>Grading the subjects, which forced the question of what evidence V3 actually rests on. The hoisting behaviour was then reproduced in a five-line test rather than assumed.</dd>
+      <dt>Now prevented by</dt><dd>Endpoints resolve per call, so the caller&#39;s network selection is honoured.</dd>
+    </dl>
+  </article>
+  </section>
+
+  <section>
+    <div class="note">
+      <p><span class="tag">The pattern</span>Three of these are the same error wearing different clothes:
+      a comparison between two numbers that were never defined to be equal, or that could never disagree.
+      That is the failure mode of assurance work, and it is invisible from the inside — every one of them
+      produced confident, well-formatted output that happened to be meaningless.</p>
+      <p>Only a deliberate fault distinguishes a control that holds from one that cannot fail. That is why
+      the red run exists, why it runs in CI, and why V3 on the
+      <a class="cite" href="index.html">verifiability scale</a> requires it.</p>
+    </div>
+  </section>
+  </main>
+  <footer>The Record · Covenant — Procedure — Reprod &nbsp;·&nbsp; 6 errata · 3 reached the public &nbsp;·&nbsp; every figure re-derivable from public RPC</footer>
+</div>
+<script>(function(){var b=document.querySelector("[data-toggle-theme]");if(!b)return;
+b.addEventListener("click",function(){var r=document.documentElement;
+var next=r.getAttribute("data-theme")==="dark"?"light":"dark";
+r.setAttribute("data-theme",next);try{localStorage.setItem("record-theme",next)}catch(e){}})})()</script>
+</body>
+</html>

@@ -70,21 +70,32 @@ async function main(): Promise<void> {
   log(`core vault ${CORE_VAULT_MANAGER}`);
   log("");
   log(`reading Core Vault state from ${net.label}…`);
+
+  // Pinned BEFORE the reads, and every read pinned TO it. Reading the block
+  // number afterwards named a later height than the state came from, so the
+  // pack's anchor pointed at a block whose state might already differ -- a
+  // replayer at that height would legitimately compute something else.
+  const anchorBlock = await client.getBlockNumber();
+  const pinned = { blockNumber: anchorBlock } as const;
+  const anchorBlockTs = Number((await client.getBlock({ blockNumber: anchorBlock })).timestamp);
+
   const [coreVaultAddress, custodianAddress, availableFunds, escrowedFunds, allowedDestinations, amounts] =
     await Promise.all([
-      client.readContract({ address: CORE_VAULT_MANAGER, abi: cvmAbi, functionName: "coreVaultAddress" }),
-      client.readContract({ address: CORE_VAULT_MANAGER, abi: cvmAbi, functionName: "custodianAddress" }),
-      client.readContract({ address: CORE_VAULT_MANAGER, abi: cvmAbi, functionName: "availableFunds" }),
-      client.readContract({ address: CORE_VAULT_MANAGER, abi: cvmAbi, functionName: "escrowedFunds" }),
+      client.readContract({ address: CORE_VAULT_MANAGER, abi: cvmAbi, functionName: "coreVaultAddress", ...pinned }),
+      client.readContract({ address: CORE_VAULT_MANAGER, abi: cvmAbi, functionName: "custodianAddress", ...pinned }),
+      client.readContract({ address: CORE_VAULT_MANAGER, abi: cvmAbi, functionName: "availableFunds", ...pinned }),
+      client.readContract({ address: CORE_VAULT_MANAGER, abi: cvmAbi, functionName: "escrowedFunds", ...pinned }),
       client.readContract({
         address: CORE_VAULT_MANAGER,
         abi: cvmAbi,
         functionName: "getAllowedDestinationAddresses",
+        ...pinned,
       }),
       client.readContract({
         address: ASSET_MANAGER_FXRP,
         abi: amAbi,
         functionName: "coreVaultAvailableAmount",
+        ...pinned,
       }),
     ]);
 
@@ -132,17 +143,27 @@ async function main(): Promise<void> {
     state.immediatelyAvailableUBA,
     state.reportedTotalUBA,
   ]);
-  rec.record("xrpl.accountLedgerState", { account: state.coreVaultAddress }, state.onLedger);
+  // Record the ledger and close time alongside the state, so the pack is
+  // SELF-DESCRIBING: a replayer can confirm the anchor from the evidence
+  // itself rather than trusting the envelope that wraps it.
+  rec.record("xrpl.accountLedgerState", { account: state.coreVaultAddress }, {
+    ...state.onLedger,
+    ledgerIndex: ledger.ledgerIndex,
+    closeTimeUnix: ledger.closeTimeUnix,
+  });
   rec.record("xrpl.accountTx", { account: state.coreVaultAddress, limit: 200 }, txs);
 
-  const blockNumber = Number(await client.getBlockNumber());
   const pack = rec.build({
     procedureId: "CV-1",
     network: { name: net.name, chainId: net.chainId },
     anchors: {
-      flareBlock: blockNumber,
-      xrplLedger: txs.length > 0 ? Math.max(...txs.map((t) => t.ledgerIndex)) : 0,
-      skewSeconds: 0,
+      flareBlock: Number(anchorBlock),
+      // The ledger the balance and escrows were actually read at -- not the
+      // newest of the last 200 transactions, which is an unrelated height.
+      xrplLedger: ledger.ledgerIndex,
+      // Measured, not assumed. This was hardcoded to 0, which asserted the two
+      // chains were sampled at the same instant without ever checking.
+      skewSeconds: ledger.closeTimeUnix > 0 ? Math.abs(anchorBlockTs - ledger.closeTimeUnix) : -1,
     },
   });
   const env = envelope(pack);

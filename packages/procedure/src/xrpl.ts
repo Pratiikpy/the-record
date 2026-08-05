@@ -142,6 +142,17 @@ export interface XrplEscrow {
  * A reconciliation needs two independent sources. This is the second one.
  */
 export interface XrplAccountState {
+  /**
+   * The validated ledger every field below was read at.
+   *
+   * Returned, not internal. An evidence pack anchored to some other ledger --
+   * say the newest of the last 200 transactions -- names a height whose state
+   * is not the state in the pack, and a replayer would legitimately compute
+   * something else. The anchor has to be the height the read happened at.
+   */
+  ledgerIndex: number;
+  /** that ledger's close time, unix seconds — the other half of cross-chain skew */
+  closeTimeUnix: number;
   /** account_data.Balance — LIQUID drops only; escrowed XRP is not in here */
   balanceDrops: bigint;
   /** number of ledger objects the account owns, which sets its reserve */
@@ -193,6 +204,19 @@ export async function accountLedgerState(account: string): Promise<XrplAccountSt
       }
       const ledgerIndex = vl.seq;
 
+      // The close time of the exact ledger being read, so cross-chain skew is
+      // measured rather than assumed. It was previously hardcoded to zero.
+      const closed = (await rpc(url, { method: "ledger", params: [{ ledger_index: ledgerIndex }] })) as {
+        result?: { ledger?: { close_time_iso?: string; close_time?: number } };
+      };
+      const iso = closed.result?.ledger?.close_time_iso;
+      const closeTimeUnix =
+        typeof iso === "string"
+          ? Math.floor(Date.parse(iso) / 1000)
+          : typeof closed.result?.ledger?.close_time === "number"
+            ? closed.result.ledger.close_time + XRPL_EPOCH_OFFSET
+            : 0;
+
       const info = (await rpc(url, {
         method: "account_info",
         params: [{ account, ledger_index: ledgerIndex }],
@@ -236,6 +260,8 @@ export async function accountLedgerState(account: string): Promise<XrplAccountSt
         marker = objs.result.marker;
         if (marker === undefined || marker === null) {
           return {
+            ledgerIndex,
+            closeTimeUnix,
             balanceDrops: BigInt(bal),
             ownerCount,
             reserveDrops: BigInt(vl.reserve_base) + BigInt(vl.reserve_inc) * BigInt(ownerCount),

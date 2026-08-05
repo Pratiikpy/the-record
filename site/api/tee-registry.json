@@ -1,0 +1,16 @@
+{
+  "schema": "therecord.status/v1",
+  "subject": "Flare TEE registry",
+  "state": "DISCLAIMER",
+  "reportedState": "DISCLAIMER",
+  "generatedAt": "2026-08-04T07:17:33.562Z",
+  "ageHours": 27.68,
+  "stale": false,
+  "freshnessHours": 36,
+  "href": "https://the-record.vercel.app/reprod/",
+  "grade": {
+    "tier": 1,
+    "name": "OBSERVABLE",
+    "short": "V1 OBSERVABLE"
+  }
+}

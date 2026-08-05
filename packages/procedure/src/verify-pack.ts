@@ -62,9 +62,15 @@ export function verifyPack(env: PackEnvelope): VerifyResult {
   const amounts = reader.get<[string, string]>("flare.coreVaultAvailableAmount", {
     at: addressOf(reader, "flare.coreVaultAvailableAmount"),
   });
-  const onLedger = reader.get<CoreVaultState["onLedger"]>("xrpl.accountLedgerState", {
+  // The recorded XRPL evidence carries its own anchor (ledgerIndex,
+  // closeTimeUnix) so the pack is self-describing. Those are provenance, not
+  // inputs to the opinion, so they are stripped before the state is rebuilt --
+  // otherwise a future field would silently change what CV-1 sees.
+  const recorded = reader.get<Record<string, unknown>>("xrpl.accountLedgerState", {
     account: coreVaultAddress,
   });
+  const { ledgerIndex: _l, closeTimeUnix: _c, ...rest } = recorded;
+  const onLedger = rest as CoreVaultState["onLedger"];
   const txs = reader.get<XrplTx[]>("xrpl.accountTx", { account: coreVaultAddress, limit: 200 });
 
   const state: CoreVaultState = {
