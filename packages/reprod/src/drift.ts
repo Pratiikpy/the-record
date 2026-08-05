@@ -41,12 +41,31 @@ const abi = [
 ] as const;
 
 export type DriftState =
-  /** the snapshot still matches the registry */
+  /** the snapshot still matches the registry exactly */
   | "CURRENT"
-  /** the registry has moved; the published figures no longer describe it */
-  | "DRIFTED"
+  /** it moved, but not enough to change anything the register concludes */
+  | "IMMATERIAL"
+  /** it moved enough that the published figures no longer describe it */
+  | "MATERIAL"
   /** the registry could not be read, so drift is unknown — never "current" */
   | "UNKNOWN";
+
+/**
+ * How far the registry may move before the published figures stop describing it.
+ *
+ * A strict equality gate looked rigorous and was unusable: this registry grew
+ * from 250 to 251 within twenty minutes of a scan, so equality would block
+ * essentially every publish. A gate that cries wolf gets switched off, and then
+ * it protects nothing.
+ *
+ * Materiality is the auditor's answer and it is the right one here. The
+ * question is not "did anything change" but "would a reader reach a different
+ * conclusion". The headline claims are ratios — what share of the fleet carries
+ * one hash, how many bits that identifies — and those are stable against a
+ * handful of machines. So a drift under this threshold is DISCLOSED rather than
+ * suppressed, and never silently ignored.
+ */
+export const MATERIALITY_RATIO = 0.02;
 
 export interface DriftReport {
   state: DriftState;
@@ -103,15 +122,33 @@ export async function checkDrift(snapshotTotal: number, rpc = COSTON2_RPC): Prom
     };
   }
 
+  const ratio = snapshotTotal > 0 ? Math.abs(delta) / snapshotTotal : 1;
+  const moved = `${Math.abs(delta)} ${delta > 0 ? "added" : "removed"} since the snapshot was taken`;
+
+  if (ratio <= MATERIALITY_RATIO) {
+    return {
+      state: "IMMATERIAL",
+      snapshotTotal,
+      liveTotal,
+      delta,
+      checkedAt,
+      because:
+        `the registry now holds ${liveTotal} machines against the snapshot's ${snapshotTotal} — ${moved}, ` +
+        `${(ratio * 100).toFixed(1)}% of the fleet. The register's claims are ratios and do not turn on this, ` +
+        `so it is disclosed rather than treated as an error`,
+    };
+  }
+
   return {
-    state: "DRIFTED",
+    state: "MATERIAL",
     snapshotTotal,
     liveTotal,
     delta,
     checkedAt,
     because:
       `the registry now holds ${liveTotal} machines but the published snapshot describes ${snapshotTotal} — ` +
-      `${Math.abs(delta)} ${delta > 0 ? "added" : "removed"} since it was taken, so every figure derived from it is out of date`,
+      `${moved}, ${(ratio * 100).toFixed(1)}% of the fleet, past the ${(MATERIALITY_RATIO * 100).toFixed(0)}% ` +
+      `threshold at which the published figures stop describing it`,
   };
 }
 
@@ -123,5 +160,7 @@ export async function checkDrift(snapshotTotal: number, rpc = COSTON2_RPC): Prom
  * world is publishing history as if it were news.
  */
 export function driftIsPublishable(r: DriftReport): boolean {
-  return r.state === "CURRENT";
+  // UNKNOWN is not publishable: failing to check is not evidence that nothing
+  // moved, the same reason a DISCLAIMER never rolls up as a pass.
+  return r.state === "CURRENT" || r.state === "IMMATERIAL";
 }

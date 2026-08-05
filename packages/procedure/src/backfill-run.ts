@@ -367,6 +367,7 @@ async function main(): Promise<void> {
   const tally = rows.reduce<Record<string, number>>((a, r) => ({ ...a, [r.opinion]: (a[r.opinion] ?? 0) + 1 }), {});
   const out = {
     generatedAt: new Date().toISOString(),
+    network: { name: net.name, label: net.label, chainId: net.chainId, isMainnet: net.isMainnet },
     derivation: "retrospective" as const,
     scope: SCOPE,
     scopeNote:

@@ -1,5 +1,11 @@
 {
-  "generatedAt": "2026-08-05T02:52:14.952Z",
+  "generatedAt": "2026-08-05T12:43:30.873Z",
+  "network": {
+    "name": "flare",
+    "label": "Flare mainnet",
+    "chainId": 14,
+    "isMainnet": true
+  },
   "derivation": "retrospective",
   "scope": [
     "C2",
@@ -17,8 +23,7 @@
   "covenantReason": "FDC attestation proofs expire at lutlimit (~14 days), so historical rounds cannot be re-proven at any price",
   "slots": 46,
   "tally": {
-    "CLEAN": 45,
-    "DISCLAIMER": 1
+    "CLEAN": 46
   },
   "rows": [
     {
@@ -1647,9 +1652,35 @@
       "flareBlock": 66589067,
       "xrplLedger": 106053603,
       "skewSeconds": 0,
-      "opinion": "DISCLAIMER",
-      "controls": [],
-      "disclaimer": "no public XRPL server retained this ledger for the vault account"
+      "opinion": "CLEAN",
+      "controls": [
+        {
+          "id": "C1",
+          "opinion": "DISCLAIMER"
+        },
+        {
+          "id": "C2",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C3",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C4",
+          "opinion": "CLEAN"
+        },
+        {
+          "id": "C5",
+          "opinion": "CLEAN"
+        }
+      ],
+      "availableFundsUBA": "7674363273841",
+      "escrowedFundsUBA": "140000000000000",
+      "onLedgerEscrowedDrops": "140000000000000",
+      "escrowCount": 14,
+      "wedgeUBA": "400",
+      "evidenceDigest": "0x2fedcd97"
     }
   ]
 }

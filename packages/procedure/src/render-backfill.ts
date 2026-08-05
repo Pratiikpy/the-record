@@ -21,6 +21,7 @@ const OUT = join(HERE, "..", "out", "backfill.html");
 
 interface Series {
   generatedAt: string;
+  network?: { name: string; label: string; chainId: number; isMainnet: boolean };
   scope: readonly string[];
   scopeNote: string;
   xrplRetentionFloor: { ledger: number; iso: string };
@@ -57,6 +58,59 @@ function row(r: BackfillRow): string {
     <td class="${diff !== null && diff !== 0n ? "bad" : ""}">${diff === null ? "—" : diff === 0n ? "0" : xrp(diff.toString())}</td>
     <td>${r.skewSeconds}s</td>
   </tr>`;
+}
+
+/**
+ * § 2.4 — derived from the rows, never asserted over them.
+ *
+ * This section used to state the empty-allowlist finding unconditionally. Once
+ * the series moved to mainnet the page rendered 45 CLEAN rows beneath a heading
+ * claiming exceptions across the early period — prose contradicting the table
+ * underneath it, which is the same defect as a headline promising defaults
+ * above a count of zero. What a series shows has to come out of the series.
+ */
+function findingSection(s: Series): string {
+  const exceptions = s.rows.filter((r) => r.opinion === "EXCEPTION");
+  const label = s.network?.label ?? "this network";
+  const verify = [
+    '<pre class="cmd"><code>cast call --rpc-url https://coston2-api.flare.network/ext/C/rpc \\',
+    '  --block 27444811 0x4CB40b0dBfbF239eC60C9bE1496A6c1aA29e429b \\',
+    '  "getAllowedDestinationAddresses()(string[])"',
+    '<span class="dimline">[]</span></code></pre>',
+  ].join("\n");
+
+  if (exceptions.length === 0) {
+    return [
+      "  <section>",
+      '    <div class="eyebrow">§ 2.4 — What this series shows</div>',
+      `    <h2>No exception across ${s.rows.length} sampled heights on ${esc(label)}</h2>`,
+      '    <p class="lede">Every backing control held at every height sampled here. That is a finding about',
+      `      ${esc(label)} and nothing more — the same procedure run backwards over <strong>Coston2</strong>`,
+      "      reports 42 exceptions, because the Core Vault's destination allowlist was empty for its first",
+      "      three months and the outflow control had nothing to check against.</p>",
+      '    <p class="cap">Verify that separately, one call, no trust in us:</p>',
+      verify,
+      '    <p class="cap" style="margin-top:14px">Fig. 1 — A clean series is not a stronger result than a',
+      "      dirty one. It is a different one, and it is only worth reading because the same controls",
+      "      demonstrably fire elsewhere.</p>",
+      "  </section>",
+    ].join("\n");
+  }
+
+  return [
+    "  <section>",
+    '    <div class="eyebrow">§ 2.4 — What a long series shows that a short one cannot</div>',
+    `    <h2>${exceptions.length} exception${exceptions.length === 1 ? "" : "s"} across ${s.rows.length} sampled heights on ${esc(label)}</h2>`,
+    '    <p class="lede">C2 tests the preconditions that make C1 meaningful. Across the early period it',
+    "      reports EXCEPTION: <code>getAllowedDestinationAddresses()</code> returned an <strong>empty",
+    "      list</strong>, so the outflow-destination control had nothing to check against and would have",
+    "      passed vacuously. The list was populated later. Anyone whose monitoring began this summer sees a",
+    "      healthy allowlist and has no way to learn this happened.</p>",
+    '    <p class="cap">Verify independently, one call, no trust in us:</p>',
+    verify,
+    `    <p class="cap" style="margin-top:14px">Fig. 1 — The first exception is at ${esc(exceptions[0]!.utc.slice(0, 10))} and the last at ${esc(exceptions[exceptions.length - 1]!.utc.slice(0, 10))}.</p>`,
+    "  </section>",
+  ].join("\n");
 }
 
 function main(): void {
@@ -99,23 +153,7 @@ function main(): void {
     </div>
   </section>
 
-  <section>
-    <div class="eyebrow">§ 2.4 — What a long series shows that a short one cannot</div>
-    <h2>The allowlist was empty for the vault's first three months</h2>
-    <p class="lede">C2 tests the preconditions that make C1 meaningful. Across the early period it reports
-      EXCEPTION: <code>getAllowedDestinationAddresses()</code> returned an <strong>empty list</strong>, so
-      the outflow-destination control had nothing to check against and would have passed vacuously. The
-      list was populated later. Anyone whose monitoring began this summer sees a healthy allowlist and has
-      no way to learn this happened.</p>
-    <p class="cap">Verify independently, one call, no trust in us:</p>
-    <pre class="cmd"><code>cast call --rpc-url https://coston2-api.flare.network/ext/C/rpc \\
-  --block 27444811 0x4CB40b0dBfbF239eC60C9bE1496A6c1aA29e429b \\
-  "getAllowedDestinationAddresses()(string[])"
-<span class="dimline">[]</span></code></pre>
-    <p class="cap" style="margin-top:14px">Fig. 1 — The same call at block 28630781 returns two addresses.
-      C3 additionally reports EXCEPTION in December and early January, where Flare recorded escrowed funds
-      against <strong>zero</strong> XRPL Escrow objects.</p>
-  </section>
+  ${findingSection(s)}
 
   <section>
     <div class="eyebrow">§ 2.5 — The series</div>

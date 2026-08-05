@@ -50,6 +50,21 @@ function controlRow(c: ControlResult): string {
   </tr>`;
 }
 
+/**
+ * A short form for the headline slot.
+ *
+ * The full figure is 140,000,000 XRP, which wrapped onto a second line and
+ * made its card taller than the three beside it. The exact number moves to
+ * the subline rather than being lost — a stat that rounds without saying so
+ * is the kind of small dishonesty this project should not ship.
+ */
+function compactXrp(uba: string): string {
+  const whole = Number(BigInt(uba) / 1_000_000n);
+  if (whole >= 1_000_000) return `${(whole / 1_000_000).toFixed(whole % 1_000_000 === 0 ? 0 : 1)}M XRP`;
+  if (whole >= 1_000) return `${(whole / 1_000).toFixed(whole % 1_000 === 0 ? 0 : 1)}k XRP`;
+  return `${whole.toLocaleString("en-US")} XRP`;
+}
+
 /** XRP is 6 decimals in UBA. */
 const xrp = (uba: string): string =>
   (Number(BigInt(uba) / 1000n) / 1000).toLocaleString("en-US", { maximumFractionDigits: 2 });
@@ -166,7 +181,11 @@ function main(): void {
     <div class="stats">
       ${stat("Opinion", r.opinion, `${r.controls.length} controls · ${esc(r.network?.label ?? "Flare")}`)}
       ${stat("Outflows tested", String(r.evidence.outflows), `of ${r.evidence.xrplTransactions} XRPL txs`)}
-      ${stat("Under test", `${xrp(s.escrowedFundsUBA)} XRP`, `escrowed · ${xrp(s.availableFundsUBA)} available${r.network?.isMainnet ? " · real value on mainnet" : ""}`)}
+      ${stat(
+        "Under test",
+        compactXrp(s.escrowedFundsUBA),
+        `${xrp(s.escrowedFundsUBA)} XRP escrowed · ${xrp(s.availableFundsUBA)} available${r.network?.isMainnet ? " · real value on mainnet" : ""}`,
+      )}
       ${stat("Allowlist", String(s.allowedDestinations.length), "permitted destinations")}
     </div>
 
@@ -196,6 +215,8 @@ function main(): void {
       against the sum of the vault's Escrow objects on XRPL, which on live data match to the drop — and C4
       compares Flare's spendable claim against the liquid balance after the ledger's own reserve. A false
       accusation is far more damaging to an assurance register than a missed finding.</p>
+      <p>Every correction this project has ever made is published in full, including the ones that reached
+      the public before being withdrawn. <a class="cite" href="../errata">[ Read the errata → ]</a></p>
     </div>
   </section>
 
