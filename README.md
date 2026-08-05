@@ -296,6 +296,10 @@ Stated limits, in full:
   is why it is a pure function with tests proving it *can*.
 - **Procedure's enclave execution needs FCC access.** The control logic, registry
   and page all run today without it.
+- **Covenant reads Coston2, not mainnet.** Proving a payment did *not* happen
+  needs an FDC verifier; the testnet one accepts the documented public key and
+  the mainnet one answers `403`. That is a credential we do not have, not a
+  design choice.
 - **No users yet.** The badge and API exist precisely because that is the gap.
 
 ---

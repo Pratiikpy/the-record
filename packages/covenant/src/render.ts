@@ -179,11 +179,19 @@ function main(): void {
   const body = `
   <section>
     ${marker("Covenant · Fail Record")}
-    <h1>Obligations that were owed, and provably were not performed.</h1>
+    <h1>Zero recorded defaults is a gap in the record, not a clean bill of health.</h1>
     <p class="lede">Every FXRP redemption on Coston2 over the last ${esc(blocks)} blocks, joined to its
       terminal event. A redemption an agent accepted and did not settle by its deadline becomes a row
       in the record, citing the attestation round that established it. Re-derivable by anyone from
       public RPC.</p>
+
+    <p class="cap" style="margin-top:12px">
+      <strong>Why this register reads Coston2 while Procedure reads mainnet.</strong> Proving a payment
+      did <em>not</em> happen needs an FDC verifier. The testnet verifier accepts the documented public
+      key; the mainnet verifier answers <code>403</code> to it. So this layer is bounded by a credential
+      we do not have, not by a design choice — and it says so rather than implying the coverage is wider
+      than it is.
+    </p>
 
     <div class="stats">
       ${stat("Redemptions tracked", t.redemptionsRequested.toLocaleString("en-US"), `${t.distinctAgents} agents · ${t.distinctRedeemers} redeemers`)}
