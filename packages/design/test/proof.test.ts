@@ -176,3 +176,56 @@ describe("declared image dimensions match the files on disk", () => {
     }
   });
 });
+
+/**
+ * DESIGN.md commits to "every page must be legible printed in greyscale on A4",
+ * and the proof deck is the page most likely to be printed — it exists for the
+ * reader who wants the whole product in one pass.
+ *
+ * Browsers do not print background colours by default. The deck's terminal
+ * blocks are light text on a near-black ground, so without an explicit print
+ * rule every command transcript printed as pale grey on white: the evidence,
+ * invisible, on the page whose entire job is showing evidence.
+ */
+describe("it survives being printed", () => {
+  /**
+   * Everything from the first `@media print` onward.
+   *
+   * The page carries TWO print blocks — one from the shared design system, one
+   * from this page's own CSS — and a lazy `(.*?)` matched only the first, so
+   * the rules under test were never examined. Nested braces make a precise
+   * regex a losing game here; taking the tail is enough, because every
+   * declaration asserted below is unique to a print context.
+   */
+  const printCss = (): string => (/@media print\{[\s\S]*/u.exec(html)?.[0] ?? "");
+
+  it("finds the deck's own print block, not just the design system's", () => {
+    // Guards the helper above: if this stops matching, every test below is vacuous.
+    expect(printCss()).toContain(".term{background:#fff!important");
+  });
+
+  it("forces the terminal blocks back to ink-on-paper", () => {
+    const print = printCss();
+    expect(print).toMatch(/\.term\{[^}]*background:#fff/u);
+    expect(print).toMatch(/\.term\{[^}]*color:#000/u);
+  });
+
+  it("re-inks the coloured spans inside a transcript", () => {
+    // .ok and .bad are chosen for a dark ground; on white they are unreadable.
+    const print = printCss();
+    for (const cls of ["ok", "bad", "hi", "dim"]) {
+      expect(print, `.term .${cls} keeps its screen colour in print`).toContain(`.term .${cls}`);
+    }
+  });
+
+  it("does not rely on colour alone once printed", () => {
+    // Weight and slant have to carry what hue no longer can.
+    const print = printCss();
+    expect(print).toMatch(/font-weight:700/u);
+    expect(print).toMatch(/font-style:italic/u);
+  });
+
+  it("keeps a step and its evidence on one page", () => {
+    expect(printCss()).toMatch(/break-inside:avoid/u);
+  });
+});

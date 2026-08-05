@@ -578,6 +578,11 @@ ${steps.join("\n")}
         // string literal -- an unescaped \201C is an octal escape and a type error.
         'q.was{font-style:italic;color:var(--faint)}' +
         'q.was::before{content:"\\201C"}q.was::after{content:"\\201D"}' +
+        // DESIGN.md commits to "legible printed in greyscale on A4", and this is the
+        // page most likely to be printed. Browsers do not print background
+        // colours by default, so the dark terminal blocks would have rendered as
+        // pale text on white -- the evidence, invisible, on the proof deck.
+        "@media print{.term{background:#fff!important;color:#000!important;border:1px solid #000!important}.term .ok,.term .bad,.term .hi,.term .dim{color:#000!important}.term .hi{font-weight:700}.term .dim{font-style:italic}.step{break-inside:avoid;page-break-inside:avoid}figure img{max-height:none}.go{display:none}}" +
         "@media(max-width:640px){.step-head{gap:8px}.kind{font-size:9px}}",
     }),
     "utf8",

@@ -254,8 +254,8 @@ URL, and a proxy serves one `/info`. Those comparisons are recorded as
 ```sh
 git clone https://github.com/Pratiikpy/the-record && cd the-record && pnpm install
 
-pnpm -r run test                                       # 491 tests, all packages
-cd contracts && forge test                             # 70 Solidity tests (561 in total)
+pnpm -r run test                                       # 497 tests, all packages
+cd contracts && forge test                             # 70 Solidity tests (567 in total)
 
 pnpm --filter @therecord/procedure run run             # CV-1 against Flare MAINNET
 pnpm --filter @therecord/procedure redrun              # the red run: CLEAN → EXCEPTION
