@@ -48,11 +48,20 @@ interface Diagnosed {
   verdict: Severity | "OK";
 }
 
-/** How many machines each distinct finding affects — the fleet's actual problems. */
+/**
+ * How many machines each distinct finding affects — the fleet's actual problems.
+ *
+ * HEALTHY is excluded. It is a real finding and it belongs on a machine's own
+ * diagnosis, but a table headed "the fleet's problems" that lists "No faults
+ * found" as one of them is a category error, and this page shipped with it.
+ */
+const NOT_A_PROBLEM = new Set(["HEALTHY"]);
+
 function byFinding(rows: readonly Diagnosed[]): Array<{ f: Finding; count: number }> {
   const seen = new Map<string, { f: Finding; count: number }>();
   for (const r of rows) {
     for (const f of r.findings) {
+      if (NOT_A_PROBLEM.has(f.id)) continue;
       const hit = seen.get(f.id);
       if (hit) hit.count += 1;
       else seen.set(f.id, { f, count: 1 });

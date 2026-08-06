@@ -4,8 +4,16 @@
  * AB-1's tests prove the adjudicator fires on constructed inputs. That is not
  * the same claim as "the control fires against a real chain", and our own scale
  * says V3 FALSIFIED means a fault was injected and caught — not that a unit
- * test passed. So this forks Flare mainnet, corrupts the storage slot holding
- * one agent's `underlyingBalanceUBA`, and reruns the identical reconciliation.
+ * test passed. So this forks a chain, corrupts the storage slot holding one
+ * agent's `underlyingBalanceUBA`, and reruns the identical reconciliation.
+ *
+ * It targets COSTON2, not mainnet, for the same reason CV-1's red run does:
+ * anvil fetches forked state lazily, one slot at a time, and Flare's public
+ * mainnet RPC rate-limits that hard enough that a single `getAgentInfo` went
+ * from 25 seconds to over 200 under load. Coston2 answers fast, carries real
+ * FXRP agents with real XRPL testnet addresses, and the control being tested is
+ * identical. A falsification that cannot be re-run is not much of a
+ * falsification.
  *
  * The XRP Ledger is left untouched and real. That asymmetry is the whole point:
  * the fault moves exactly one side of a two-chain comparison, so a control that
@@ -21,7 +29,7 @@
  * Exits non-zero if the control does NOT fire.
  */
 import { createPublicClient, http, defineChain, encodeFunctionData, pad, toHex } from "viem";
-import { writeFileSync, mkdirSync, readFileSync } from "node:fs";
+import { writeFileSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { managerAbi } from "./fassets-abi.js";
@@ -33,12 +41,13 @@ const OUT = join(OUTDIR, "agents-fork-red.json");
 
 const PORT = process.env.ANVIL_PORT ?? "8545";
 const RPC = `http://127.0.0.1:${PORT}`;
-const MANAGER = "0x2a3Fe068cD92178554cabcf7c95ADf49B4B0B6A8" as const;
-const XRPL = "https://s1.ripple.com:51234/";
+/** Coston2's FXRP AssetManager. Its agents settle on the XRP Ledger TESTNET. */
+const MANAGER = "0xc1Ca88b937d0b528842F95d5731ffB586f4fbDFA" as const;
+const XRPL = "https://s.altnet.rippletest.net:51234/";
 
 const fork = defineChain({
-  id: 14,
-  name: "Flare fork",
+  id: 114,
+  name: "Coston2 fork",
   nativeCurrency: { name: "FLR", symbol: "FLR", decimals: 18 },
   rpcUrls: { default: { http: [RPC] } },
 });
@@ -120,43 +129,86 @@ async function touchedSlots(vault: `0x${string}`): Promise<`0x${string}`[]> {
   return out;
 }
 
-async function findSlot(vault: `0x${string}`, target: bigint): Promise<`0x${string}` | null> {
-  const probe = target + 1_000_000n;
+interface Field {
+  slot: `0x${string}`;
+  /** bit offset of the field inside the 32-byte slot */
+  offset: number;
+  /** field width in bits */
+  width: number;
+  /** the slot's original 32-byte word */
+  original: bigint;
+}
+
+/** Rebuild a slot word with `value` written into the located field. */
+function pack(f: Field, value: bigint): bigint {
+  const mask = ((1n << BigInt(f.width)) - 1n) << BigInt(f.offset);
+  return (f.original & ~mask) | ((value << BigInt(f.offset)) & mask);
+}
+
+/**
+ * Locate the field, not just the slot.
+ *
+ * `underlyingBalanceUBA` is packed alongside its neighbours, so writing a whole
+ * slot never reproduces the probe value exactly and the first version of this
+ * search concluded — wrongly — that no slot backed the field. The fix is to find
+ * the slot by detecting ANY change, then recover the field's offset and width by
+ * writing a known value into each candidate position and keeping the one the
+ * getter reads back exactly.
+ *
+ * Everything is restored after every probe, so a wrong guess leaves the fork as
+ * it was, and a field we cannot locate exactly is reported rather than
+ * approximated.
+ */
+async function findField(vault: `0x${string}`, target: bigint): Promise<Field | null> {
   const slots = await touchedSlots(vault);
   log(`  getAgentInfo touches ${slots.length} storage slots on the manager`);
+  const ALL_ONES = (1n << 256n) - 1n;
 
-  for (const [i, slot] of slots.entries()) {
-    // A probe that errors tells us nothing about this slot and must not abort
-    // the run: the point of the search is to survive wrong guesses. The slot is
-    // always restored, including when the probe throws.
-    let current: `0x${string}` | undefined;
+  for (const slot of slots) {
+    let original: bigint;
     try {
-      current = await client.getStorageAt({ address: MANAGER, slot });
+      const raw = await client.getStorageAt({ address: MANAGER, slot });
+      if (raw === undefined) continue;
+      original = BigInt(raw);
     } catch {
       continue;
     }
-    if (current === undefined) continue;
 
-    let moved = false;
+    // Does this slot influence the field at all?
+    let influences = false;
     try {
-      // The field is packed with its neighbours, so an exact match is not
-      // required — only that changing this slot changes the getter.
-      await setStorage(slot, probe);
+      await setStorage(slot, ALL_ONES);
       const after = await infoOf(vault);
-      moved = BigInt(after.underlyingBalanceUBA) === probe;
+      influences = BigInt(after.underlyingBalanceUBA) !== target;
     } catch {
-      moved = false;
+      influences = false;
     } finally {
-      try {
-        await setStorage(slot, BigInt(current));
-      } catch {
-        log(`  warning: could not restore slot ${i}; the fork is now dirty`);
+      await setStorage(slot, original).catch(() => log("  warning: restore failed; fork is dirty"));
+    }
+    if (!influences) continue;
+
+    // It does. Recover exactly where the field sits.
+    const probe = target + 12_345n;
+    for (const width of [64, 128, 96, 256]) {
+      for (let offset = 0; offset + width <= 256; offset += 32) {
+        const f: Field = { slot, offset, width, original };
+        let hit = false;
+        try {
+          await setStorage(slot, pack(f, probe));
+          const after = await infoOf(vault);
+          hit = BigInt(after.underlyingBalanceUBA) === probe;
+        } catch {
+          hit = false;
+        } finally {
+          await setStorage(slot, original).catch(() => log("  warning: restore failed; fork is dirty"));
+        }
+        if (hit) {
+          log(`  field located: slot ${slot}, offset ${offset}, width ${width}`);
+          return f;
+        }
       }
     }
-    if (moved) {
-      log(`  slot located: ${slot}`);
-      return slot;
-    }
+    log(`  slot ${slot} influences the field but its layout could not be recovered`);
   }
   return null;
 }
@@ -178,29 +230,25 @@ async function main(): Promise<void> {
   mkdirSync(OUTDIR, { recursive: true });
 
   const block = await client.getBlockNumber();
-  log(`forked Flare mainnet at block ${block}`);
+  log(`forked Coston2 at block ${block}`);
 
-  // The subject comes from the published AB-1 report rather than from a fresh
-  // sweep of the fleet. Cold state on a fork is fetched from upstream one slot
-  // at a time, and reading all six agents just to pick one timed out before the
-  // run could start. The choice is still verified against the fork below.
-  const report = JSON.parse(readFileSync(join(OUTDIR, "agents.json"), "utf8")) as {
-    agents: Array<{ vault: `0x${string}`; underlyingAddress: string; readings: Array<{ flareUnderlyingUBA: string }> }>;
-  };
-  const biggest = report.agents
-    .map((a) => ({ a, u: BigInt(a.readings[a.readings.length - 1]?.flareUnderlyingUBA ?? "0") }))
-    .sort((x, y) => (y.u > x.u ? 1 : y.u < x.u ? -1 : 0))[0];
-  if (!biggest || biggest.u <= 0n) throw new Error("no agent with a positive underlying balance in agents.json");
+  const [vaults] = (await client.readContract({
+    address: MANAGER,
+    abi: managerAbi,
+    functionName: "getAllAgents",
+    args: [0n, 50n],
+  })) as readonly [readonly `0x${string}`[], bigint];
 
-  const live = await infoOf(biggest.a.vault);
-  const chosen = {
-    vault: biggest.a.vault,
-    account: live.underlyingAddressString as string,
-    // Read from the fork, not from the report: the report may be minutes old and
-    // the fault has to be injected against the value the fork actually holds.
-    underlying: BigInt(live.underlyingBalanceUBA),
-  };
-  if (chosen.underlying <= 0n) throw new Error("chosen agent has no underlying balance on the fork");
+  // The agent with the most underlying, so the fault is unambiguous.
+  let chosen: { vault: `0x${string}`; account: string; underlying: bigint } | null = null;
+  for (const v of vaults) {
+    const i = await infoOf(v);
+    const u = BigInt(i.underlyingBalanceUBA);
+    if (u > 0n && (chosen === null || u > chosen.underlying)) {
+      chosen = { vault: v, account: i.underlyingAddressString as string, underlying: u };
+    }
+  }
+  if (!chosen) throw new Error("no agent with a positive underlying balance to test against");
   log(`subject: ${chosen.account} (${XRP(chosen.underlying)} XRP recorded on Flare)`);
 
   log("\n─── GREEN — forked chain, no fault ───");
@@ -211,13 +259,13 @@ async function main(): Promise<void> {
   log(`  OPINION: ${greenVerdict.opinion}`);
 
   log("\ninjecting fault: agent underlyingBalanceUBA");
-  const slot = await findSlot(chosen.vault, chosen.underlying);
-  if (!slot) throw new Error("could not locate the storage slot; refusing to claim a falsification");
+  const field = await findField(chosen.vault, chosen.underlying);
+  if (!field) throw new Error("could not locate the storage field; refusing to claim a falsification");
 
   // Overstate Flare's record of the backing. The XRP Ledger is untouched, so a
   // real reconciliation must now report a shortfall.
-  const corrupted = chosen.underlying * 2n;
-  await setStorage(slot, corrupted);
+  const corrupted = chosen.underlying * 3n;
+  await setStorage(field.slot, pack(field, corrupted));
   const confirm = await infoOf(chosen.vault);
   if (BigInt(confirm.underlyingBalanceUBA) !== corrupted) throw new Error("fault did not take");
   log(`  underlyingBalanceUBA ${chosen.underlying} → ${corrupted}`);
@@ -238,10 +286,11 @@ async function main(): Promise<void> {
         procedureId: "AB-1",
         kind: "fork-red",
         generatedAt: new Date().toISOString(),
-        network: { name: "flare-fork", label: "Flare mainnet fork", chainId: 14 },
+        network: { name: "coston2-fork", label: "Coston2 fork", chainId: 114 },
         forkedAtBlock: block.toString(),
         subject: { agentVault: chosen.vault, underlyingAddress: chosen.account },
-        slot,
+        slot: field.slot,
+        field: { offset: field.offset, width: field.width },
         fault: { field: "underlyingBalanceUBA", from: chosen.underlying.toString(), to: corrupted.toString() },
         green: { opinion: greenVerdict.opinion, because: greenVerdict.because },
         red: { opinion: redVerdict.opinion, because: redVerdict.because },
