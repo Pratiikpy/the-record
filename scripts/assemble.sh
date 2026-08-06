@@ -21,6 +21,7 @@ cp "$ROOT/site/index.html"                      "$OUT/index.html"
 cp "$ROOT/site/errata.html"                     "$OUT/errata.html"
 cp "$ROOT/site/proof-deck.html"                 "$OUT/proof-deck.html"
 cp -r "$ROOT/site/proof"                        "$OUT/proof"
+cp -r "$ROOT/site/film"                         "$OUT/film"
 cp -r "$ROOT/site/api"                          "$OUT/api"
 cp -r "$ROOT/site/badge"                        "$OUT/badge"
 cp -r "$ROOT/site/spec"                         "$OUT/spec"
@@ -49,7 +50,7 @@ printf '{"cleanUrls":true}' > "$OUT/vercel.json"
 missing=0
 for f in index.html errata.html proof-deck.html covenant/index.html procedure/index.html \
          procedure/backfill.html reprod/index.html api/status.json badge/core-vault.svg \
-         spec/faults.json vercel.json proof/tour-1-index.jpeg; do
+         spec/faults.json vercel.json proof/tour-1-index.jpeg film/the-record.mp4; do
   [ -s "$OUT/$f" ] || { printf '  MISSING %s\n' "$f" >&2; missing=1; }
 done
 [ "$missing" -eq 0 ] || { printf 'assembled tree is incomplete\n' >&2; exit 1; }

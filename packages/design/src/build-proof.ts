@@ -492,6 +492,9 @@ ${d("$")} ${g("cd contracts && forge test")}
       page is read from the register that produced it, so if a register moves, this page moves with
       it. Including this sentence: writing the count by hand is how the index came to say
       <q class="was">Six errata</q> over a register of seven.</p>
+    <p class="lede" style="margin-top:14px">Prefer to watch? The
+      <a class="cite" href="film/the-record.mp4">66-second film</a> covers the same argument, and is
+      rendered from these same figures rather than narrated over them.</p>
 
     <div class="stats">
       <div class="stat"><div class="k">Surfaces</div><div class="v">17</div><div class="n">6 pages, 7 JSON endpoints, 3 badges, 1 spec</div></div>

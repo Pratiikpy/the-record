@@ -15,6 +15,7 @@ is not allowed to answer about itself.
 [![tee registry](https://the-record.vercel.app/badge/tee-registry.svg)](https://the-record.vercel.app/reprod/)
 
 **[Live site](https://the-record.vercel.app)** ·
+**[Film (66s)](https://the-record.vercel.app/film/the-record.mp4)** ·
 **[Proof deck](https://the-record.vercel.app/proof-deck)** ·
 **[Errata](https://the-record.vercel.app/errata)** ·
 **[API](https://the-record.vercel.app/api/status.json)** ·

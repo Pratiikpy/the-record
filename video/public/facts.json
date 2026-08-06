@@ -1,0 +1,124 @@
+{
+  "generatedAt": "2026-08-06T00:21:49.511Z",
+  "network": "Flare mainnet",
+  "cv1": {
+    "opinion": "CLEAN",
+    "controls": [
+      {
+        "id": "C1",
+        "title": "Outflow destination allowlist",
+        "opinion": "CLEAN"
+      },
+      {
+        "id": "C2",
+        "title": "Control preconditions",
+        "opinion": "CLEAN"
+      },
+      {
+        "id": "C3",
+        "title": "Escrow backing",
+        "opinion": "CLEAN"
+      },
+      {
+        "id": "C4",
+        "title": "Liquid backing",
+        "opinion": "CLEAN"
+      },
+      {
+        "id": "C5",
+        "title": "Available-funds wedge",
+        "opinion": "CLEAN"
+      }
+    ],
+    "flareBlock": null,
+    "xrplLedger": null
+  },
+  "redrun": {
+    "greenOpinion": "CLEAN",
+    "redOpinion": "EXCEPTION",
+    "controls": [
+      {
+        "id": "C1",
+        "title": "Outflow destination allowlist",
+        "opinion": "CLEAN"
+      },
+      {
+        "id": "C2",
+        "title": "Control preconditions",
+        "opinion": "CLEAN"
+      },
+      {
+        "id": "C3",
+        "title": "Escrow backing",
+        "opinion": "EXCEPTION"
+      },
+      {
+        "id": "C4",
+        "title": "Liquid backing",
+        "opinion": "CLEAN"
+      },
+      {
+        "id": "C5",
+        "title": "Available-funds wedge",
+        "opinion": "CLEAN"
+      }
+    ],
+    "firedDetail": ""
+  },
+  "reprod": {
+    "count": 243,
+    "owners": 46,
+    "bits": 0.08,
+    "pct": "94.9",
+    "total": 256
+  },
+  "covenant": {
+    "indexed": 2415,
+    "namedExecutorPct": 85.92,
+    "pastDue": 91
+  },
+  "backfill": {
+    "slots": 46,
+    "clean": 45,
+    "disclaimers": 1,
+    "exceptions": 0,
+    "label": "Flare mainnet"
+  },
+  "errata": {
+    "total": 8,
+    "published": 4
+  },
+  "faults": {
+    "total": 9,
+    "knownUncaught": 3
+  },
+  "suite": {
+    "schema": "therecord.suite/v1",
+    "recordedAt": "2026-08-05T17:47:14.087Z",
+    "typescript": 527,
+    "solidity": 70,
+    "total": 597,
+    "packages": [
+      {
+        "package": "covenant",
+        "passed": 45
+      },
+      {
+        "package": "design",
+        "passed": 211
+      },
+      {
+        "package": "doctor",
+        "passed": 26
+      },
+      {
+        "package": "procedure",
+        "passed": 116
+      },
+      {
+        "package": "reprod",
+        "passed": 129
+      }
+    ]
+  }
+}

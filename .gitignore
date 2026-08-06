@@ -22,3 +22,7 @@ _site/
 
 # Vercel project linkage, not source
 .vercel/
+
+# Video: video/out is a build artefact (`pnpm -C video build` regenerates it).
+# The published copy lives at site/film/the-record.mp4 and is the one that ships.
+video/out/

@@ -207,9 +207,10 @@ ${tierRows}
     </div>
 
     <div class="note">
-      <p><span class="tag">No time for a demo</span>The proof deck walks every surface this project
-      offers — each page, each instrument, each contract — with the evidence beside it, in the time a
-      demo video would take. <a class="cite" href="proof-deck.html">[ Open the proof deck → ]</a></p>
+      <p><span class="tag">Two ways in</span>The <a class="cite" href="film/the-record.mp4">66-second
+      film</a> states the argument; the <a class="cite" href="proof-deck.html">proof deck</a> walks every
+      surface this project offers — each page, each instrument, each contract — with the evidence beside
+      it. Every figure in both is read from the register that produced it.</p>
     </div>
 
     <div class="note">
