@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="THE RECORD">
+  <title>THE RECORD</title>
+  <!--
+    The mark is the verifiability scale, not decoration.
+
+    Four squares, each fainter than the last: V0 ASSERTED, V1 OBSERVABLE,
+    V2 RECONCILED, V3 FALSIFIED. Opacity falls as the claim gets harder for a
+    stranger to establish for themselves, which is the one idea the whole
+    project turns on. The corner ticks are the register's own frame — the same
+    device the pages use to mark a section as evidence rather than copy.
+  -->
+  <rect width="512" height="512" fill="#FAF9F5"/>
+
+  <!-- register frame -->
+  <rect x="56.5" y="56.5" width="399" height="399" fill="none" stroke="#1F1E1D" stroke-opacity="0.25" stroke-width="1"/>
+
+  <!-- corner ticks -->
+  <g fill="none" stroke="#1F1E1D" stroke-width="1.5" stroke-opacity="0.55">
+    <path d="M56 84 V56 H84"/>
+    <path d="M428 56 H456 V84"/>
+    <path d="M56 428 V456 H84"/>
+    <path d="M428 456 H456 V428"/>
+  </g>
+
+  <!-- the scale: four tiers, decreasing establishability -->
+  <g fill="#1F1E1D">
+    <rect x="140" y="140" width="106" height="106" rx="6"/>
+    <rect x="266" y="140" width="106" height="106" rx="6" fill-opacity="0.55"/>
+    <rect x="140" y="266" width="106" height="106" rx="6" fill-opacity="0.55"/>
+    <rect x="266" y="266" width="106" height="106" rx="6" fill-opacity="0.25"/>
+  </g>
+
+  <text x="256" y="418" text-anchor="middle"
+        font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        font-size="30" font-weight="500" letter-spacing="3.4" fill="#1F1E1D">THE RECORD</text>
+</svg>
