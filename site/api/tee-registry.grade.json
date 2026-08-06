@@ -11,7 +11,7 @@
       "tier": 1,
       "requires": "The facts can be read from public sources by someone with no relationship to the subject.",
       "met": true,
-      "because": "all 256 machines readable from FlareTeeManager without permission"
+      "because": "all 268 machines readable from FlareTeeManager without permission"
     },
     {
       "id": "V2.independent",

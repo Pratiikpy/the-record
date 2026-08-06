@@ -76,15 +76,15 @@ So we measured how much a hash actually identifies:
 ```console
 $ pnpm --filter @therecord/reprod provenance --registry
 
-  Flare TEE registry  chain 114 · block 33658305 · 2026-08-05
+  Flare TEE registry  chain 114 · block 33682349 · 2026-08-06
 
-  machines                 256
-  distinct code hashes     13
-  mean identification      0.47 bits  (a unique hash here would carry 8.00)
+  machines                 268
+  distinct code hashes     14
+  mean identification      0.49 bits  (a unique hash here would carry 8.07)
 
   most-shared hash
   0x194844cf417dde867073e5ab7199fa4d21fd82b5dbe2bdea8b3d7fc18d10fdc2
-  carried by 243 machines (94.9%) under 46 independent owners → 0.08 bits
+  carried by 254 machines (94.8%) under 47 independent owners → 0.08 bits
 
   rebuilds we performed       5
   that match an on-chain hash 0
