@@ -6,8 +6,11 @@ Running against **Flare mainnet**, over **140,000,000 XRP** of real escrowed val
 
 | | |
 |---|---|
+| **Full write-up** — the complete submission, requirement by requirement | **https://comfortable-goal-205.notion.site/THE-RECORD-Flare-Summer-Signal-submission-3b39c0ce787681518236e914f2decc49** |
 | Proof deck — every feature beside its evidence | https://the-record.vercel.app/proof-deck |
 | Errata — everything we got wrong | https://the-record.vercel.app/errata |
+
+*Everything below is the short version. The write-up above has the full detail.*
 
 ---
 
@@ -202,3 +205,8 @@ pnpm --filter @therecord/reprod drift                  # is our snapshot still t
 The hard part of assurance is not producing output. It is producing output that **could have come out differently**. That is why the red run exists, why it runs in CI, and why the top tier of our own scale requires it.
 
 **Open the errata page first.** It is the part nobody else can copy, because copying it requires having been wrong in public.
+
+---
+
+**Full submission, requirement by requirement:**
+https://comfortable-goal-205.notion.site/THE-RECORD-Flare-Summer-Signal-submission-3b39c0ce787681518236e914f2decc49
