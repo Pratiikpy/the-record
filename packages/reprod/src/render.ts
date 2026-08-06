@@ -351,6 +351,18 @@ ${m.map(machineRow).join("\n")}
       ${esc(String(d.summary.uniqueUrls))} proxy URLs are on hosts whose addresses rotate by design
       (quick tunnels, free ngrok, Codespaces) — those registrations are expected to rot.
     </p>
+  </section>
+
+  <section>
+    <div class="eyebrow">§ 5 — The clinic</div>
+    <h2>Measuring a hash is not the same as fixing a machine</h2>
+    <p class="lede">This register answers what a code hash establishes. It does not tell an operator what
+      to <em>do</em>, and most of this fleet has something to do: the diagnosis finds a blocker on the
+      large majority of registered machines, almost all of them URLs that have rotated away from what is
+      registered on chain.</p>
+    <p class="cap" style="margin-top:14px">
+      <a class="cite" href="clinic.html">[ Every machine, diagnosed, with the fix &rarr; ]</a>
+    </p>
   </section>`;
 
   writeFileSync(

@@ -21,6 +21,7 @@ const PAGES: Array<[string, string]> = [
   ["covenant", join(ROOT, "packages", "covenant", "out", "index.html")],
   ["procedure", join(ROOT, "packages", "procedure", "out", "index.html")],
   ["reprod", join(ROOT, "packages", "reprod", "out", "index.html")],
+  ["clinic", join(ROOT, "packages", "doctor", "out", "index.html")],
 ];
 
 const html: Record<string, string> = {};

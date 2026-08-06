@@ -16,7 +16,8 @@
     "render:backfill": "tsx src/render-backfill.ts",
     "verify": "tsx src/verify-pack.ts",
     "spec": "tsx src/emit-faults.ts",
-    "agents": "tsx src/agents-scan.ts"
+    "agents": "tsx src/agents-scan.ts",
+    "agents:redrun": "tsx src/agents-redrun.ts"
   },
   "dependencies": {
     "viem": "^2.21.0"

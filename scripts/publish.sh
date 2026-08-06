@@ -23,6 +23,7 @@ PAGES=(
   "procedure/backfill"
   "reprod/"
   "errata"
+  "reprod/clinic"
   "api/status.json"
   "badge/core-vault.svg"
   "api/redemptions.json"

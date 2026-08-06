@@ -7,7 +7,7 @@
     "test": "pnpm -r run test && pnpm run test:contracts",
     "test:contracts": "cd contracts && forge test",
     "build": "pnpm -r run build",
-    "render:all": "pnpm --filter @therecord/covenant run render && pnpm --filter @therecord/procedure run render && pnpm --filter @therecord/procedure run render:backfill && pnpm --filter @therecord/reprod run render && pnpm --filter @therecord/design run build"
+    "render:all": "pnpm --filter @therecord/covenant run render && pnpm --filter @therecord/procedure run render && pnpm --filter @therecord/procedure run render:backfill && pnpm --filter @therecord/reprod run render && pnpm --filter @therecord/doctor run render && pnpm --filter @therecord/design run build"
   },
   "devDependencies": {
     "typescript": "^5.9.3"

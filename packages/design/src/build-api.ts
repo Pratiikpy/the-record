@@ -134,6 +134,41 @@ const SUBJECTS: Subject[] = [
     },
   },
   {
+    slug: "agent-backing",
+    label: "FXRP agent backing",
+    source: join(ROOT, "packages", "procedure", "out", "agents.json"),
+    href: `${SITE_URL}/procedure/`,
+    read: (raw) => {
+      const r = raw as { opinion?: string; generatedAt?: string };
+      // No timestamp means no freshness, and a badge that invents one is worse
+      // than no badge. Refusing to emit is the honest failure here.
+      if (!r.opinion || !r.generatedAt) return null;
+      return { state: asState(r.opinion), generatedAt: r.generatedAt };
+    },
+    gradeOf: (now) => {
+      const a = readJson(join(ROOT, "packages", "procedure", "out", "agents.json")) as
+        | { fleet?: { agents?: number }; bracket?: { readings?: number } }
+        | null;
+      const agents = a?.fleet?.agents ?? 0;
+      const readings = a?.bracket?.readings ?? 0;
+      // No V3 claim here yet. AB-1's ability to fire is proven by written tests,
+      // not by a fault injected into a forked chain, and the scale says
+      // FALSIFIED means a fault was injected and caught. Asserting V3 from unit
+      // tests would be the grade inflation this project exists to catch.
+      return grade({
+        subject: "FXRP agent backing",
+        publiclyReadable: agents > 0,
+        publicEvidence: `all ${agents} FXRP agents read from Flare's AssetManager and public XRP Ledger servers, no credentials`,
+        independentSources: 2,
+        independentEvidence:
+          "Flare's AssetManager records underlyingBalanceUBA; the XRP Ledger holds the balance. Neither determines what the other reports",
+        disagreementDetectable: true,
+        disagreementEvidence: `a shortfall surviving all ${readings} readings of the settle bracket is published as EXCEPTION; one that resolves is a DISCLAIMER naming the skew`,
+        now,
+      });
+    },
+  },
+  {
     slug: "redemptions",
     label: "FXRP redemptions",
     source: join(ROOT, "packages", "covenant", "out", "control.json"),

@@ -29,6 +29,7 @@ cp "$ROOT/packages/covenant/out/index.html"     "$OUT/covenant/index.html"
 cp "$ROOT/packages/procedure/out/index.html"    "$OUT/procedure/index.html"
 cp "$ROOT/packages/procedure/out/backfill.html" "$OUT/procedure/backfill.html"
 cp "$ROOT/packages/reprod/out/index.html"       "$OUT/reprod/index.html"
+cp "$ROOT/packages/doctor/out/index.html"       "$OUT/reprod/clinic.html"
 
 # Cross-register links are written relative to each package's out/ directory;
 # the published tree is flatter.
