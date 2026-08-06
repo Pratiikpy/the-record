@@ -1,0 +1,35 @@
+{
+  "procedureId": "AB-1",
+  "kind": "fork-red",
+  "generatedAt": "2026-08-06T05:55:00.451Z",
+  "network": {
+    "name": "coston2-fork",
+    "label": "Coston2 fork",
+    "chainId": 114
+  },
+  "forkedAtBlock": "33686752",
+  "subject": {
+    "agentVault": "0x55c815260cBE6c45Fe5bFe5FF32E3C7D746f14dC",
+    "underlyingAddress": "r4uKJRy9mjxGHw1yzS1SrtaKCUwT66MCcP"
+  },
+  "slot": "0x5bebac05c036f50fd895da366d24a1434b32c41967eda8cb774635de9b7d796b",
+  "field": {
+    "offset": 64,
+    "width": 64
+  },
+  "fault": {
+    "field": "underlyingBalanceUBA",
+    "from": "46639362140",
+    "to": "139918086420"
+  },
+  "green": {
+    "opinion": "CLEAN",
+    "because": "the XRP Ledger holds 4426081546 UBA more than Flare records, at every height in the bracket"
+  },
+  "red": {
+    "opinion": "EXCEPTION",
+    "because": "the XRP Ledger held less than Flare records at all 3 heights in the settle bracket, so this is not settlement lag"
+  },
+  "opinion": "EXCEPTION",
+  "fired": true
+}

@@ -1,6 +1,6 @@
 {
   "schema": "therecord.status-index/v1",
-  "generatedAt": "2026-08-06T05:49:08.777Z",
+  "generatedAt": "2026-08-06T05:57:19.894Z",
   "site": "https://the-record.vercel.app",
   "scaleDisclaimer": "A tier measures how much an outsider can check, not whether the system is safe, solvent or well-run. V3 means the check has been proven able to fail — not that nothing will.",
   "subjects": [
@@ -10,7 +10,7 @@
       "state": "CLEAN",
       "reportedState": "CLEAN",
       "generatedAt": "2026-08-05T12:03:51.268Z",
-      "ageHours": 17.75,
+      "ageHours": 17.89,
       "stale": false,
       "freshnessHours": 36,
       "href": "https://the-record.vercel.app/procedure/",
@@ -27,7 +27,7 @@
       "state": "DISCLAIMER",
       "reportedState": "DISCLAIMER",
       "generatedAt": "2026-08-06T02:51:33.703Z",
-      "ageHours": 2.96,
+      "ageHours": 3.1,
       "stale": false,
       "freshnessHours": 36,
       "href": "https://the-record.vercel.app/reprod/",
@@ -43,14 +43,14 @@
       "state": "CLEAN",
       "reportedState": "CLEAN",
       "generatedAt": "2026-08-06T05:31:55.708Z",
-      "ageHours": 0.29,
+      "ageHours": 0.42,
       "stale": false,
       "freshnessHours": 36,
       "href": "https://the-record.vercel.app/procedure/",
       "grade": {
-        "tier": 2,
-        "name": "RECONCILED",
-        "short": "V2 RECONCILED"
+        "tier": 3,
+        "name": "FALSIFIED",
+        "short": "V3 FALSIFIED"
       }
     },
     {
@@ -59,7 +59,7 @@
       "state": "DISCLAIMER",
       "reportedState": "DISCLAIMER",
       "generatedAt": "2026-08-05T12:15:10.206Z",
-      "ageHours": 17.57,
+      "ageHours": 17.7,
       "stale": false,
       "freshnessHours": 36,
       "href": "https://the-record.vercel.app/covenant/",

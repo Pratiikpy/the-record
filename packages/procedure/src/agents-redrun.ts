@@ -146,69 +146,65 @@ function pack(f: Field, value: bigint): bigint {
 }
 
 /**
- * Locate the field, not just the slot.
+ * Locate the field by arithmetic, then confirm it with exactly one mutation.
  *
- * `underlyingBalanceUBA` is packed alongside its neighbours, so writing a whole
- * slot never reproduces the probe value exactly and the first version of this
- * search concluded — wrongly — that no slot backed the field. The fix is to find
- * the slot by detecting ANY change, then recover the field's offset and width by
- * writing a known value into each candidate position and keeping the one the
- * getter reads back exactly.
+ * Two earlier versions failed on cost, not on logic. The first derived
+ * candidate slots from keccak256(vault, p) — 19,200 storage reads. The second
+ * probed every (offset, width) pair by writing the slot and re-calling
+ * `getAgentInfo`, which decodes forty fields across twenty-seven slots; several
+ * hundred of those degrade an anvil fork until a single call exceeds three
+ * minutes.
  *
- * Everything is restored after every probe, so a wrong guess leaves the fork as
- * it was, and a field we cannot locate exactly is reported rather than
- * approximated.
+ * The value is already known, so the search does not need the chain at all.
+ * Read each touched slot's raw word once, then find locally which slot, offset
+ * and width hold exactly that value. Only the winner is confirmed against the
+ * contract, and only once. Twenty-nine calls instead of several hundred.
  */
 async function findField(vault: `0x${string}`, target: bigint): Promise<Field | null> {
   const slots = await touchedSlots(vault);
   log(`  getAgentInfo touches ${slots.length} storage slots on the manager`);
-  const ALL_ONES = (1n << 256n) - 1n;
 
+  const candidates: Field[] = [];
   for (const slot of slots) {
-    let original: bigint;
+    let word: bigint;
     try {
       const raw = await client.getStorageAt({ address: MANAGER, slot });
       if (raw === undefined) continue;
-      original = BigInt(raw);
+      word = BigInt(raw);
     } catch {
       continue;
     }
-
-    // Does this slot influence the field at all?
-    let influences = false;
-    try {
-      await setStorage(slot, ALL_ONES);
-      const after = await infoOf(vault);
-      influences = BigInt(after.underlyingBalanceUBA) !== target;
-    } catch {
-      influences = false;
-    } finally {
-      await setStorage(slot, original).catch(() => log("  warning: restore failed; fork is dirty"));
-    }
-    if (!influences) continue;
-
-    // It does. Recover exactly where the field sits.
-    const probe = target + 12_345n;
-    for (const width of [64, 128, 96, 256]) {
-      for (let offset = 0; offset + width <= 256; offset += 32) {
-        const f: Field = { slot, offset, width, original };
-        let hit = false;
-        try {
-          await setStorage(slot, pack(f, probe));
-          const after = await infoOf(vault);
-          hit = BigInt(after.underlyingBalanceUBA) === probe;
-        } catch {
-          hit = false;
-        } finally {
-          await setStorage(slot, original).catch(() => log("  warning: restore failed; fork is dirty"));
-        }
-        if (hit) {
-          log(`  field located: slot ${slot}, offset ${offset}, width ${width}`);
-          return f;
+    // Solidity packs on byte boundaries, so an 8-bit stride covers every
+    // layout it can actually produce.
+    for (const width of [64, 96, 128, 160, 256]) {
+      const mask = (1n << BigInt(width)) - 1n;
+      for (let offset = 0; offset + width <= 256; offset += 8) {
+        if (((word >> BigInt(offset)) & mask) === target) {
+          candidates.push({ slot, offset, width, original: word });
         }
       }
     }
-    log(`  slot ${slot} influences the field but its layout could not be recovered`);
+  }
+  log(`  ${candidates.length} slot/offset/width candidates hold that exact value`);
+
+  for (const f of candidates) {
+    const probe = target + 12_345n;
+    let hit = false;
+    try {
+      await setStorage(f.slot, pack(f, probe));
+      const after = await infoOf(vault);
+      hit = BigInt(after.underlyingBalanceUBA) === probe;
+    } catch {
+      hit = false;
+    } finally {
+      await setStorage(f.slot, f.original).catch(() => {
+        log("  warning: restore failed; the fork is now dirty");
+      });
+    }
+    if (hit) {
+      log(`  field confirmed: slot ${f.slot}, offset ${f.offset}, width ${f.width}`);
+      return f;
+    }
   }
   return null;
 }

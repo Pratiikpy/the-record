@@ -1,4 +1,7 @@
 import { describe, it, expect } from "vitest";
+import { existsSync, readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
 import {
   classifyReading,
   adjudicateBacking,
@@ -122,5 +125,52 @@ describe("the fleet roll-up", () => {
 
   it("an empty fleet is not CLEAN", () => {
     expect(rollUpFleet([])).toBe("DISCLAIMER");
+  });
+});
+
+/**
+ * The falsification evidence must be real.
+ *
+ * A tier is a claim like any other, and V3 is the strongest one this project
+ * makes about itself. It is worth exactly as much as the artefact behind it, so
+ * these assert the shape of that artefact rather than trusting that a file
+ * called `agents-fork-red.json` means what its name suggests.
+ */
+describe("the AB-1 red run evidence", () => {
+  const RED = join(dirname(fileURLToPath(import.meta.url)), "..", "out", "agents-fork-red.json");
+
+  it("exists, or there is no V3 claim to make", () => {
+    expect(existsSync(RED), "run `pnpm --filter @therecord/procedure agents:redrun` first").toBe(true);
+  });
+
+  it("records a green run that was CLEAN and a red run that was EXCEPTION", () => {
+    const r = JSON.parse(readFileSync(RED, "utf8")) as {
+      green: { opinion: string };
+      red: { opinion: string };
+      fired: boolean;
+    };
+    expect(r.green.opinion).toBe("CLEAN");
+    expect(r.red.opinion).toBe("EXCEPTION");
+    expect(r.fired).toBe(true);
+  });
+
+  it("moved the Flare side only, so the XRP Ledger cannot have caused the exception", () => {
+    // If the fault had moved both sides the control could be comparing a number
+    // to itself, which is E-003 exactly.
+    const r = JSON.parse(readFileSync(RED, "utf8")) as {
+      fault: { field: string; from: string; to: string };
+    };
+    expect(r.fault.field).toBe("underlyingBalanceUBA");
+    expect(BigInt(r.fault.to)).toBeGreaterThan(BigInt(r.fault.from));
+  });
+
+  it("names the exact storage field it corrupted, so the run can be repeated", () => {
+    const r = JSON.parse(readFileSync(RED, "utf8")) as {
+      slot: string;
+      field: { offset: number; width: number };
+    };
+    expect(r.slot).toMatch(/^0x[0-9a-f]{64}$/u);
+    expect(r.field.width).toBeGreaterThan(0);
+    expect(r.field.offset + r.field.width).toBeLessThanOrEqual(256);
   });
 });

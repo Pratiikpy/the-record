@@ -151,10 +151,13 @@ const SUBJECTS: Subject[] = [
         | null;
       const agents = a?.fleet?.agents ?? 0;
       const readings = a?.bracket?.readings ?? 0;
-      // No V3 claim here yet. AB-1's ability to fire is proven by written tests,
-      // not by a fault injected into a forked chain, and the scale says
-      // FALSIFIED means a fault was injected and caught. Asserting V3 from unit
-      // tests would be the grade inflation this project exists to catch.
+      const red = readJson(join(ROOT, "packages", "procedure", "out", "agents-fork-red.json")) as
+        | { generatedAt?: string; opinion?: string; fired?: boolean }
+        | null;
+      // V3 rests on a fault that was actually injected and actually caught. A
+      // red run that did not go EXCEPTION is not a falsification, and unit
+      // tests are not one either.
+      const falsified = red?.fired === true && red.opinion === "EXCEPTION" ? red.generatedAt : undefined;
       return grade({
         subject: "FXRP agent backing",
         publiclyReadable: agents > 0,
@@ -164,6 +167,9 @@ const SUBJECTS: Subject[] = [
           "Flare's AssetManager records underlyingBalanceUBA; the XRP Ledger holds the balance. Neither determines what the other reports",
         disagreementDetectable: true,
         disagreementEvidence: `a shortfall surviving all ${readings} readings of the settle bracket is published as EXCEPTION; one that resolves is a DISCLAIMER naming the skew`,
+        lastFalsifiedAt: falsified,
+        falsificationEvidence:
+          "an agent's underlyingBalanceUBA was overstated in a packed storage field on a Coston2 fork while the XRP Ledger was left untouched; the reconciliation went CLEAN to EXCEPTION",
         now,
       });
     },

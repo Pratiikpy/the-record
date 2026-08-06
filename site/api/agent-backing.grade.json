@@ -2,9 +2,9 @@
   "schema": "therecord.grade/v1",
   "scaleDisclaimer": "A tier measures how much an outsider can check, not whether the system is safe, solvent or well-run. V3 means the check has been proven able to fail — not that nothing will.",
   "subject": "FXRP agent backing",
-  "tier": 2,
-  "name": "RECONCILED",
-  "meaning": "Two independent sources are compared, and a disagreement between them would be detected.",
+  "tier": 3,
+  "name": "FALSIFIED",
+  "meaning": "The comparison has been proven capable of failing — a fault was injected and it fired.",
   "criteria": [
     {
       "id": "V1.public",
@@ -31,9 +31,9 @@
       "id": "V3.falsified",
       "tier": 3,
       "requires": "A fault has been deliberately injected and the check caught it, within 30 days.",
-      "met": false,
-      "because": "no falsification on record — the check has never been shown able to fail"
+      "met": true,
+      "because": "an agent's underlyingBalanceUBA was overstated in a packed storage field on a Coston2 fork while the XRP Ledger was left untouched; the reconciliation went CLEAN to EXCEPTION"
     }
   ],
-  "nextStep": "A fault has been deliberately injected and the check caught it, within 30 days."
+  "nextStep": null
 }
