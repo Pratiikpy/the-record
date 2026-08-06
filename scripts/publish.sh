@@ -35,6 +35,17 @@ say() { printf '%s\n' "$*" >&2; }
 say "── drift: does the snapshot still describe the chain? ──"
 pnpm --filter @therecord/reprod run drift
 
+# A publish that ships a failing suite is a publish that ships whatever the
+# suite was protecting. This gate exists because one went out: the README's
+# own test count had gone stale, every test said so, and the deploy proceeded
+# anyway because nothing here was looking.
+say "── suite: does everything still pass? ──"
+if ! pnpm -r run test >/dev/null 2>&1; then
+  say ""
+  say "refusing to publish: the test suite is failing. Run \`pnpm -r run test\` and fix it."
+  exit 1
+fi
+
 say "── render ──"
 cd "$ROOT"
 pnpm --filter @therecord/covenant  run render        >/dev/null
