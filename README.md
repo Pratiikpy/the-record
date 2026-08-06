@@ -61,7 +61,7 @@ included.
 
 ---
 
-## Two findings
+## Three findings
 
 ### “Check the code hash” has no answer yet
 
@@ -125,6 +125,43 @@ cast call --rpc-url https://coston2-api.flare.network/ext/C/rpc \
 
 Anyone whose monitoring began this summer sees a healthy allowlist and has no way
 to learn this happened.
+
+### A naive FXRP backing check accuses honest agents
+
+CV-1 reconciles the Core Vault. Nobody reconciles the **agents** — and the agents
+are where a redemption is actually paid from. So AB-1 asks the same question one
+level down, for every FXRP agent: does the XRP Ledger hold what Flare says it
+holds?
+
+Do it the obvious way and you will accuse a solvent agent of insolvency, on
+mainnet, with real money. We measured it happening:
+
+```console
+$ pnpm --filter @therecord/procedure agents
+
+t1  flare 408,410.89 | xrpl 394,344.37 | diff -14,066.52   <- false shortfall
+t2  flare 393,423.10 | xrpl 394,344.37 | diff    +921.27   <- truth, 45s later
+```
+
+An agent pays a redemption on the XRP Ledger **first**. Flare's
+`underlyingBalanceUBA` only falls once that payment is confirmed back on Flare.
+Inside that window the agent appears short by exactly the payment in flight —
+here Flare fell by **14,987.784 XRP** between the two readings, matching to the
+drop the payment already made at XRP Ledger **106,099,993**. That equality is
+what makes it settlement lag rather than coincidence.
+
+So a shortfall is never published from one observation. It is a candidate,
+re-read across a **settle bracket**, and confirmed only if every reading is
+short. Anything that resolves is a `DISCLAIMER` naming the skew, because that is
+what we actually know — [E-001](https://the-record.vercel.app/errata) is what
+happens when we say more.
+
+Two structural facts fall out of the same scan, and neither is published
+anywhere else:
+
+- **98.75% of FXRP is not backed by agents.** The six agents back 1.86M XRP of a
+  149.2M supply; the rest is the Core Vault — which is exactly what CV-1 tests.
+- Every agent is currently **over**-backed, and the fleet opinion is `CLEAN`.
 
 ---
 
@@ -255,8 +292,8 @@ URL, and a proxy serves one `/info`. Those comparisons are recorded as
 ```sh
 git clone https://github.com/Pratiikpy/the-record && cd the-record && pnpm install
 
-pnpm -r run test                                       # 527 tests, all packages
-cd contracts && forge test                             # 70 Solidity tests (597 in total)
+pnpm -r run test                                       # 543 tests, all packages
+cd contracts && forge test                             # 70 Solidity tests (613 in total)
 
 pnpm --filter @therecord/procedure run run             # CV-1 against Flare MAINNET
 pnpm --filter @therecord/procedure redrun              # the red run: CLEAN → EXCEPTION
@@ -299,12 +336,12 @@ pnpm -C packages/procedure e2e
 |---|---|
 | design | 211 |
 | reprod | 129 |
-| procedure | 116 |
+| procedure | 132 |
 | covenant | 45 |
 | doctor | 26 |
 | contracts | 70 — **100% lines, statements, branches, functions** |
 
-**597 in total**, and the figures above are measured by `scripts/record-suite.sh` into [`/api/suite.json`](https://the-record.vercel.app/api/suite.json)
+**613 in total**, and the figures above are measured by `scripts/record-suite.sh` into [`/api/suite.json`](https://the-record.vercel.app/api/suite.json)
 rather than typed — a README that hand-counts its own suite goes stale on the next commit,
 and this one did.
 

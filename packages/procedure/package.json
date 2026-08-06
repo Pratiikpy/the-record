@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Procedure \u00e2\u20ac\u201d the practitioner is a reproducible program, and it can refuse to sign.",
+  "description": "Procedure â€” the practitioner is a reproducible program, and it can refuse to sign.",
   "scripts": {
     "run": "tsx src/run.ts",
     "render": "tsx src/render.ts",
@@ -15,7 +15,8 @@
     "backfill": "tsx src/backfill-run.ts",
     "render:backfill": "tsx src/render-backfill.ts",
     "verify": "tsx src/verify-pack.ts",
-    "spec": "tsx src/emit-faults.ts"
+    "spec": "tsx src/emit-faults.ts",
+    "agents": "tsx src/agents-scan.ts"
   },
   "dependencies": {
     "viem": "^2.21.0"

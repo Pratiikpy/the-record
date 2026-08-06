@@ -14,6 +14,7 @@ import type { Cv1Report, ControlResult } from "./cv1.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const IN = join(HERE, "..", "out", "cv1.json");
+const AGENTS = join(HERE, "..", "out", "agents.json");
 const FORK_GREEN = join(HERE, "..", "out", "cv1-fork-green.json");
 const FORK_RED = join(HERE, "..", "out", "cv1-fork-red.json");
 const OUT = join(HERE, "..", "out", "index.html");
@@ -165,6 +166,119 @@ ${rows}
   </section>`;
 }
 
+
+/**
+ * AB-1 — the agents, not the vault.
+ *
+ * Rendered from the report, never retyped, and it prints the settle bracket
+ * because the bracket is the whole reason the number below is trustworthy.
+ */
+interface AgentsReport {
+  generatedAt: string;
+  opinion: string;
+  bracket: { readings: number; gapSeconds: number };
+  asset: { symbol: string; totalSupplyUBA: string };
+  fleet: { agents: number; mintedUBA: string; agentBackedShareBps: number };
+  agents: Array<{
+    underlyingAddress: string;
+    mintedUBA: string;
+    opinion: string;
+    differenceUBA: string | null;
+    because: string;
+    readings: Array<{ flareUnderlyingUBA: string; onLedgerUBA: string | null }>;
+  }>;
+}
+
+const xrpOf = (uba: string | null): string =>
+  uba === null ? "—" : (Number(BigInt(uba)) / 1e6).toLocaleString("en-US", { maximumFractionDigits: 2 });
+
+function agentsSection(a: AgentsReport): string {
+  const CLASS: Record<string, string> = { CLEAN: "ok", EXCEPTION: "bad", DISCLAIMER: "unknown" };
+  const GLYPH: Record<string, string> = { CLEAN: "✓", EXCEPTION: "✗", DISCLAIMER: "?" };
+  const chip = (o: string): string =>
+    `<span class="verdict ${CLASS[o] ?? "none"}">[ ${GLYPH[o] ?? "·"} ] ${esc(o)}</span>`;
+
+  const rows = a.agents
+    .map((g) => {
+      const spread = g.readings
+        .map((r) => {
+          const d = r.onLedgerUBA === null ? null : BigInt(r.onLedgerUBA) - BigInt(r.flareUnderlyingUBA);
+          return d === null
+            ? '<span class="cc unknown">?</span>'
+            : `<span class="cc ${d < 0n ? "bad" : "ok"}">${d < 0n ? "−" : "+"}</span>`;
+        })
+        .join("");
+      return `<tr>
+        <th scope="row"><code>${esc(g.underlyingAddress)}</code></th>
+        <td class="l">${chip(g.opinion)}</td>
+        <td>${xrpOf(g.mintedUBA)}</td>
+        <td class="${g.differenceUBA !== null && BigInt(g.differenceUBA) < 0n ? "bad" : ""}">${
+          g.differenceUBA === null ? "—" : xrpOf(g.differenceUBA)
+        }</td>
+        <td class="l mono">${spread}</td>
+      </tr>`;
+    })
+    .join("\n");
+
+  const agentPct = (a.fleet.agentBackedShareBps / 100).toFixed(2);
+  const vaultPct = (100 - a.fleet.agentBackedShareBps / 100).toFixed(2);
+
+  return `
+  <section>
+    <div class="eyebrow">§ 3.4 — AB-1 · the agents, not the vault</div>
+    <h2>A backing check that accuses honest agents is worse than none.</h2>
+    <p class="lede">CV-1 reconciles the Core Vault. Nobody reconciles the <em>agents</em> — and the agents
+      are where a redemption is actually paid from. AB-1 asks the same question one level down, for every
+      FXRP agent: does the XRP Ledger hold what Flare says it holds?</p>
+
+    <div class="stats">
+      ${stat("Agents reconciled", String(a.fleet.agents), `every FXRP agent on Flare mainnet`)}
+      ${stat("Fleet opinion", esc(a.opinion), `settle bracket of ${a.bracket.readings} readings, ${a.bracket.gapSeconds}s apart`)}
+      ${stat("Backed by agents", `${agentPct}%`, `the other ${vaultPct}% of ${esc(a.asset.symbol)} is the Core Vault`)}
+      ${stat("Minted by agents", xrpOf(a.fleet.mintedUBA), "XRP, against their own underlying addresses")}
+    </div>
+
+    <div class="note">
+      <p><span class="tag">The false accusation we measured</span>Read both chains once, and an honest
+      agent looks insolvent. An agent pays a redemption on the XRP Ledger <strong>first</strong>; Flare's
+      <code>underlyingBalanceUBA</code> only falls once that payment is confirmed back on Flare. Inside
+      that window the agent appears short by exactly the payment in flight.</p>
+      <pre class="cmd"><code>t1  flare 408,410.89 | xrpl 394,344.37 | <span class="dimline">diff</span> −14,066.52   <span class="dimline">&lt;- false shortfall</span>
+t2  flare 393,423.10 | xrpl 394,344.37 | <span class="dimline">diff</span>   +921.27   <span class="dimline">&lt;- truth, 45s later</span></code></pre>
+      <p>Flare fell by <strong>14,987.784 XRP</strong> between those readings — matching, to the drop, the
+      payment this agent had already made at XRP Ledger <strong>106,099,993</strong>. That equality is what
+      makes it settlement lag rather than a coincidence, and it is why a shortfall here is never published
+      from a single observation.</p>
+    </div>
+
+    <div class="tablewrap">
+      <table style="min-width:700px">
+        <caption>Every FXRP agent, its minted supply, and what the XRP Ledger actually holds against it.</caption>
+        <thead><tr>
+          <th class="l" scope="col">Agent underlying address</th>
+          <th class="l" scope="col">Opinion</th>
+          <th scope="col">Minted (XRP)</th>
+          <th scope="col">Ledger − Flare</th>
+          <th class="l" scope="col">Bracket</th>
+        </tr></thead>
+        <tbody>
+${rows}
+        </tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <div><span class="cc ok">+</span> ledger holds at least what Flare records</div>
+      <div><span class="cc bad">−</span> candidate shortfall at that reading</div>
+      <div><span class="cc unknown">?</span> address unreadable — never counted as backed</div>
+    </div>
+    <p class="cap" style="margin-top:18px">
+      Fig. 4 — A single <span class="cc bad">−</span> is a candidate, not a finding. An exception is
+      published only if every reading in the bracket is short; anything that resolves is a DISCLAIMER
+      naming the skew, because that is what we actually know.
+    </p>
+  </section>`;
+}
+
 function main(): void {
   const r = JSON.parse(readFileSync(IN, "utf8")) as Cv1Report;
   const s = r.state;
@@ -273,6 +387,7 @@ ${s.allowedDestinations.map((a) => `          <tr><th scope="row"><code>${esc(a)
       allowlist; C2 tests that both are actually set, so C1 cannot pass for the wrong reason.
     </p>
   </section>
+${existsSync(AGENTS) ? agentsSection(JSON.parse(readFileSync(AGENTS, "utf8")) as AgentsReport) : ""}
 ${
   existsSync(FORK_GREEN) && existsSync(FORK_RED)
     ? redRunSection(

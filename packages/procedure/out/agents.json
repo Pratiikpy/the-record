@@ -1,0 +1,214 @@
+{
+  "procedureId": "AB-1",
+  "generatedAt": "2026-08-06T02:43:50.410Z",
+  "completedAt": "2026-08-06T02:46:13.069Z",
+  "network": {
+    "name": "flare",
+    "label": "Flare mainnet",
+    "chainId": 14
+  },
+  "asset": {
+    "symbol": "FXRP",
+    "address": "0xAd552A648C74D49E10027AB8a618A3ad4901c5bE",
+    "totalSupplyUBA": "149186362914265"
+  },
+  "manager": "0x2a3Fe068cD92178554cabcf7c95ADf49B4B0B6A8",
+  "bracket": {
+    "readings": 3,
+    "gapSeconds": 45
+  },
+  "opinion": "CLEAN",
+  "fleet": {
+    "agents": 6,
+    "mintedUBA": "1857184287961",
+    "agentBackedShareBps": 124
+  },
+  "agents": [
+    {
+      "vault": "0x8eA74D78A03F20597cEE115176f7f8b65271c87A",
+      "underlyingAddress": "rs6q5K4RrVbrymieYjx9TFzTW24Rv9BekL",
+      "status": 0,
+      "mintedUBA": "348371421261",
+      "redeemingUBA": "0",
+      "vaultCollateralRatioBIPS": "27132",
+      "opinion": "CLEAN",
+      "differenceUBA": "131288657",
+      "because": "the XRP Ledger holds 131288657 UBA more than Flare records, at every height in the bracket",
+      "readings": [
+        {
+          "flareBlock": "66750793",
+          "xrplLedger": 106100740,
+          "flareUnderlyingUBA": "348375580610",
+          "onLedgerUBA": "348506869267"
+        },
+        {
+          "flareBlock": "66750849",
+          "xrplLedger": 106100756,
+          "flareUnderlyingUBA": "348375580610",
+          "onLedgerUBA": "348506869267"
+        },
+        {
+          "flareBlock": "66750895",
+          "xrplLedger": 106100771,
+          "flareUnderlyingUBA": "348375580610",
+          "onLedgerUBA": "348506869267"
+        }
+      ]
+    },
+    {
+      "vault": "0x09011d2A11A40DB855Cb00B3AA5a0F5F3bd485FD",
+      "underlyingAddress": "rGWGTbxqmpLJ3TYGjoCFDqY9mPQ4T1GTGb",
+      "status": 0,
+      "mintedUBA": "130060000000",
+      "redeemingUBA": "0",
+      "vaultCollateralRatioBIPS": "58670",
+      "opinion": "CLEAN",
+      "differenceUBA": "79614827454",
+      "because": "the XRP Ledger holds 79614827454 UBA more than Flare records, at every height in the bracket",
+      "readings": [
+        {
+          "flareBlock": "66750793",
+          "xrplLedger": 106100741,
+          "flareUnderlyingUBA": "148822864536",
+          "onLedgerUBA": "228527781990"
+        },
+        {
+          "flareBlock": "66750849",
+          "xrplLedger": 106100756,
+          "flareUnderlyingUBA": "148912954536",
+          "onLedgerUBA": "228527781990"
+        },
+        {
+          "flareBlock": "66750895",
+          "xrplLedger": 106100772,
+          "flareUnderlyingUBA": "148912954536",
+          "onLedgerUBA": "228527781990"
+        }
+      ]
+    },
+    {
+      "vault": "0x0F6AB40fE44aA3AB15B8ff96Df98C6F5865F048E",
+      "underlyingAddress": "rGK7w4oK5x4ncCZyjYEH4QpCZSkKSMrUV2",
+      "status": 0,
+      "mintedUBA": "301542905320",
+      "redeemingUBA": "0",
+      "vaultCollateralRatioBIPS": "31465",
+      "opinion": "CLEAN",
+      "differenceUBA": "1102116512",
+      "because": "the XRP Ledger holds 1102116512 UBA more than Flare records, at every height in the bracket",
+      "readings": [
+        {
+          "flareBlock": "66750793",
+          "xrplLedger": 106100741,
+          "flareUnderlyingUBA": "308085014454",
+          "onLedgerUBA": "309187130966"
+        },
+        {
+          "flareBlock": "66750849",
+          "xrplLedger": 106100757,
+          "flareUnderlyingUBA": "308085014454",
+          "onLedgerUBA": "309187130966"
+        },
+        {
+          "flareBlock": "66750900",
+          "xrplLedger": 106100773,
+          "flareUnderlyingUBA": "308085014454",
+          "onLedgerUBA": "309187130966"
+        }
+      ]
+    },
+    {
+      "vault": "0xA69bF2eC0eF91A29B5da634BD4958AA32BaD9fe3",
+      "underlyingAddress": "rEUvL6uJ1NYqa81tGxjH6BnLCQRzqT1aR7",
+      "status": 0,
+      "mintedUBA": "389912046002",
+      "redeemingUBA": "0",
+      "vaultCollateralRatioBIPS": "24363",
+      "opinion": "CLEAN",
+      "differenceUBA": "1751958685",
+      "because": "the XRP Ledger holds 1751958685 UBA more than Flare records, at every height in the bracket",
+      "readings": [
+        {
+          "flareBlock": "66750799",
+          "xrplLedger": 106100742,
+          "flareUnderlyingUBA": "389916261225",
+          "onLedgerUBA": "391668219910"
+        },
+        {
+          "flareBlock": "66750856",
+          "xrplLedger": 106100758,
+          "flareUnderlyingUBA": "389916261225",
+          "onLedgerUBA": "391668219910"
+        },
+        {
+          "flareBlock": "66750900",
+          "xrplLedger": 106100773,
+          "flareUnderlyingUBA": "389916261225",
+          "onLedgerUBA": "391668219910"
+        }
+      ]
+    },
+    {
+      "vault": "0x7CeC6EC27F3A0f0a37B1847E5Af3E99A7499A0bC",
+      "underlyingAddress": "raDZBXEKsBtgcRsWjq6bg2DVRkCXknJ4Kq",
+      "status": 0,
+      "mintedUBA": "307066607786",
+      "redeemingUBA": "0",
+      "vaultCollateralRatioBIPS": "31084",
+      "opinion": "CLEAN",
+      "differenceUBA": "111178214",
+      "because": "the XRP Ledger holds 111178214 UBA more than Flare records, at every height in the bracket",
+      "readings": [
+        {
+          "flareBlock": "66750804",
+          "xrplLedger": 106100743,
+          "flareUnderlyingUBA": "307564997040",
+          "onLedgerUBA": "307676175254"
+        },
+        {
+          "flareBlock": "66750856",
+          "xrplLedger": 106100758,
+          "flareUnderlyingUBA": "307564997040",
+          "onLedgerUBA": "307676175254"
+        },
+        {
+          "flareBlock": "66750900",
+          "xrplLedger": 106100774,
+          "flareUnderlyingUBA": "307564997040",
+          "onLedgerUBA": "307676175254"
+        }
+      ]
+    },
+    {
+      "vault": "0xe56f464c23760d563dd4c73dADA05159aE71FC50",
+      "underlyingAddress": "rU3KcE1fqgn7Qm8dA3DSnefNoUnsYF31Wr",
+      "status": 0,
+      "mintedUBA": "380231307592",
+      "redeemingUBA": "890000000",
+      "vaultCollateralRatioBIPS": "25034",
+      "opinion": "CLEAN",
+      "differenceUBA": "921268698",
+      "because": "the XRP Ledger holds 921268698 UBA more than Flare records, at every height in the bracket",
+      "readings": [
+        {
+          "flareBlock": "66750804",
+          "xrplLedger": 106100744,
+          "flareUnderlyingUBA": "384710074971",
+          "onLedgerUBA": "384743123657"
+        },
+        {
+          "flareBlock": "66750856",
+          "xrplLedger": 106100758,
+          "flareUnderlyingUBA": "383821854959",
+          "onLedgerUBA": "384743123657"
+        },
+        {
+          "flareBlock": "66750904",
+          "xrplLedger": 106100774,
+          "flareUnderlyingUBA": "383821854959",
+          "onLedgerUBA": "384743123657"
+        }
+      ]
+    }
+  ]
+}
