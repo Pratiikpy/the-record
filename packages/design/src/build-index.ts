@@ -207,7 +207,7 @@ ${tierRows}
     </div>
 
     <div class="note">
-      <p><span class="tag">Two ways in</span>The <a class="cite" href="film/the-record.mp4">66-second
+      <p><span class="tag">Two ways in</span>The <a class="cite" href="https://youtu.be/W-KmIFQ6P9s" target="_blank" rel="noopener">66-second
       film</a> states the argument; the <a class="cite" href="proof-deck.html">proof deck</a> walks every
       surface this project offers — each page, each instrument, each contract — with the evidence beside
       it. Every figure in both is read from the register that produced it.</p>

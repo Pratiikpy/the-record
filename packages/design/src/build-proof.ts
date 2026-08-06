@@ -493,7 +493,7 @@ ${d("$")} ${g("cd contracts && forge test")}
       it. Including this sentence: writing the count by hand is how the index came to say
       <q class="was">Six errata</q> over a register of seven.</p>
     <p class="lede" style="margin-top:14px">Prefer to watch? The
-      <a class="cite" href="film/the-record.mp4">66-second film</a> covers the same argument, and is
+      <a class="cite" href="https://youtu.be/W-KmIFQ6P9s" target="_blank" rel="noopener">66-second film</a> covers the same argument, and is
       rendered from these same figures rather than narrated over them.</p>
 
     <div class="stats">
